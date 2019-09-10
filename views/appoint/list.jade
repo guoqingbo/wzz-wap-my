@@ -1,0 +1,33 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title= title
+        link(rel='stylesheet', href='/stylesheets/reset.css')
+        link(rel='stylesheet', href='/stylesheets/appoint/list.css')
+        script(type='text/javascript', src="/lib/jquery-1.8.3.min.js")
+        script(type='text/javascript', src="/javascripts/appoint/list.js")
+    body
+        .project-wap
+            .bg-mask
+                .bg-ele
+                .header
+                    img.logo(src="/images/appoint/logo.png")
+                    strong.pname
+                        span.project-name 项目名
+                    img.heder-icon(src="/images/appoint/icon2.png")
+                .appoint-list-box#appoint
+                    ul.time-list#timelist
+
+    script.
+        $(function () {
+            $('.project-wap').addClass('size_'+rsize);
+            var winh= $(window).height(),
+                itemH= Math.floor(winh / (Number(rsize) + 1.5));
+            $('.header').css( {'height':itemH, 'font-size': (itemH * 0.4).toFixed(0)+'px', 'line-height': itemH+'px' });
+            $('.bg-mask').css({'padding-top': itemH*1.5 });
+            $('#timelist').laikySlide({
+                itemHeight: itemH,
+                time: 6500
+            })
+        })

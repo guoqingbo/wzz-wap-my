@@ -1,0 +1,122 @@
+mixin formatDate(date)
+    -var year=date.getFullYear()
+    -var month=date.getMonth()+1
+    -var day=date.getDate()
+    =year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day)
+
+mixin formatDT(date,num)
+    -var bd=date.setDate(date.getDate()+num)
+    -var y=date.getFullYear()
+    -var m=date.getMonth()+1
+    -var d=date.getDate()
+    =y + '-' + (m < 10 ? '0' + m : m) + '-' + (d < 10 ? '0' + d : d)
+
+mixin getModule(m)
+    -var _m='景区'
+    -var _c='icon-iconfont-menpiao'
+    case m
+        when 'hotel'
+            -_m='酒店'
+            -_c='icon-iconfont-jiudian'
+        when 'amuse'
+            -_m='娱乐'
+            -_c='icon-iconfont-amuse'
+        when 'combo'
+            -_m='自由行'
+            -_c='icon-iconfont-ziyouxing'
+        when 'goods'
+            -_m='商品'
+            -_c='icon-iconfont-shouji3'
+        when 'repast'
+            -_m='餐饮'
+            -_c='icon-iconfont-canting'
+        when 'traffic'
+            -_m='交通'
+            -_c='icon-iconfont-gongjiao'
+    i(class='font-icon mold-type ' + _c)
+    =_m
+
+mixin payStatus(m,type)
+    -var _m='其他',s = typeof m === 'string' ? parseInt(m) : s
+    case s
+        when 0
+            -_m='待支付'
+        when 1
+            -_m=type=='shop'?'已发货':'待消费'
+        when 2
+            -_m='交易成功'
+        when 3
+            -_m='已退款'
+        when 4
+            -_m='交易取消'
+        when 5
+            -_m='待确认'
+    =_m
+mixin refundStatus(m)
+    -var _m='其他',s = typeof m === 'string' ? parseInt(m) : s
+    case s
+        when 0
+            -_m='待审核'
+        when 1
+            -_m='等待审核'
+        when 2
+            -_m='退款中'
+        when 3
+            -_m='退款失败'
+        when 4
+            -_m='退票中'
+        when 5
+            -_m='退票失败'
+        when 6
+            -_m='退单成功'
+        when 7
+            -_m='退款成功'
+        when 8
+            -_m='第三方退单失败'
+        when 9
+            -_m='退单失败'
+        when 10
+            -_m='退单申请成功,等待平台返回'
+    =_m
+
+mixin sendStatus(statusCode)
+    - var sendName = ''
+    case statusCode
+        when '0'
+            - sendName = '未发货'
+        when '1'
+            - sendName = '已发货'
+        when '2'
+            - sendName = '已收货'
+        when '3'
+            - sendName = '自提'
+        default
+            - sendName = statusCode
+    = sendName
+
+mixin getdate(num,goodsCode,classifyId,date1)
+    - var dayarray = ["天","一","二","三","四","五","六"]
+    - var curDate = new Date()
+    - var date = new Date(curDate.getTime() + num*24*60*60*1000)
+    - var year=date.getFullYear()
+    - var month=date.getMonth()+1
+    - var day=date.getDate()
+    - var currDate= month+'-'+day
+    - var tiemdate = year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day)
+    - var className = tiemdate === date1 ? "cur" : "yhLabel"
+    - var currDateMonth=curDate.getMonth()+1
+    - var currGetDate=curDate.getDate()
+    - var currNowDate=currDateMonth+'-'+ currGetDate
+    if(num === 3 && date1 > tiemdate)
+        a(href="/detail/ticket/" + goodsCode + "?" + (classifyId ? "classifyId=" + classifyId : "") + "&date=" + date1, class="cur")
+            - var newDate= new Date(date1)
+            =newDate.getMonth() + 1 + "月" + newDate.getDate() + "日"
+            br
+            ="星期" + dayarray[newDate.getDay()]
+            span.yh(class=currNowDate != currDate ? "yhLabelNone":"") 惠
+    else
+        a(href="/detail/ticket/" + goodsCode + "?" + (classifyId ? "classifyId=" + classifyId : "") + "&date=" + tiemdate, class=className)
+            =month + "月" + day + "日"
+            br
+            ="星期" + dayarray[date.getDay()]
+            span.yh(class=currNowDate != currDate ? "yhLabelNone":"") 惠

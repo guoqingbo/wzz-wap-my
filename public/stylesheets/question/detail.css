@@ -1,0 +1,81 @@
+body{
+    background-color: #fff;
+    color: #484848;
+    margin-bottom: 1rem;
+}
+/*自定义复选框样式*/
+.checkbox{
+    box-sizing: border-box;
+    height: 17px;
+    width: 17px;
+    display: inline-block;
+    border: 1px solid #999999;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+input[type="radio"]+ .checkbox{
+    border-radius: 100%;
+}
+input[type="radio"]:checked + .checkbox,input[type="checkbox"]:checked + .checkbox{
+    background: url("../../images/common/checked.png") no-repeat;
+    background-size: 100% 100%;
+    border: 0;
+}
+
+.question-title-name{
+    font-size: 1rem;
+    text-align: center;
+    padding: .5rem;
+}
+.question-sub-title{
+    color: #999;
+    font-size: .7rem;
+    text-align: center;
+}
+.question-list{
+    padding: .5rem;
+}
+.question-item-query{
+    font-size: .8rem;
+    padding: .3rem 0;
+}
+.question-type{
+    color: #999;
+    font-size: .6rem;
+}
+.question-item-option{
+    /*padding: 0 .5rem;*/
+}
+.question-option-box{
+    font-size: .7rem;
+}
+.question-input{
+    vertical-align: middle;
+}
+.question-option-name{
+    vertical-align: middle;
+}
+.question-option-box{
+    padding: .3rem;
+    border: solid 1px #dde5ed;
+    margin-bottom: .3rem;
+    border-radius: .2rem;
+}
+.question-item-option .active{
+    background-color: rgba(132,187,218,0.2);
+    box-shadow: 0 2px 4px 0 rgba(132,187,218,0.2);
+    border-color: #84BBDA
+}
+.button-bottom{
+    padding: 0 .5rem;
+}
+.submit-btn{
+    width: 100%;
+    border-radius: .2rem;
+    background-color: #84BBDA;
+    text-align: center;
+    padding: .3rem 0;
+    border:0;
+    font-size: .8rem;
+    color:#fff;
+}

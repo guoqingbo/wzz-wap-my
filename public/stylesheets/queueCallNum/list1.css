@@ -1,0 +1,58 @@
+body{
+    background: url('../../images/queueCallNum/bg.jpg') no-repeat;
+    background-size: 100% 100%;
+}
+.project-name{
+    height: 1.23rem;
+    line-height: 1.23rem;
+    /*background: url('../../images/queueCallNum/project-name-bg.png') no-repeat;*/
+    /*background-size: 100% 100%;*/
+    text-align: center;
+    font-size: .8rem;
+    color: #fff;
+    font-weight: bold;
+    margin-top: .6rem;
+}
+.project-name-icon{
+    width: .4rem;
+    margin: .3rem;
+}
+.project-list{
+    padding: .5rem;
+}
+.project-item{
+    background: url('../../images/queueCallNum/li-bg.png') no-repeat;
+    background-size: 100% 100%;
+    margin-bottom: .1rem;
+    color: #fff;
+    font-size: .5rem;
+}
+.project-item-name{
+    font-weight: bold;
+    display: inline-block;
+    width: 40%;
+    box-sizing: border-box;
+    padding: .3rem 1rem;
+}
+.now-num-box{
+    width: 30%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    padding: .4rem 1rem;
+}
+.queue-num-box{
+    box-sizing: border-box;
+    width: 30%;
+    display: inline-block;
+    vertical-align: middle;
+    border-left: 1px solid #22c0f9;
+    text-align: center;
+}
+.now-num-text {
+    font-size: .3rem;
+}
+.now-num,.queue-num {
+    font-size: .6rem;
+    font-weight: bold;
+}

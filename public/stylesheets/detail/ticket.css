@@ -1,0 +1,495 @@
+.no-data{
+    text-align: center;
+    padding: .5rem;
+    font-size: .6rem;
+}
+/*头部信息*/
+.top-header {
+    background-color: #fff;
+}
+
+.top-header-left {
+    width: 48%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ticket-name-a {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: .7rem;
+    padding: .2rem .5rem;
+    border-right: 1px solid #ddd;
+
+}
+
+.top-header-right {
+    position: relative;
+    width: 52%;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    padding: .5rem;
+}
+
+/*评论*/
+.comment-score-icon i {
+    font-size: .75rem;
+    margin-right: .1rem;
+    vertical-align: middle;
+    color: #f63;
+}
+
+.comment-score-icon i.not-light {
+    color: #ccc;
+}
+
+.comment-score-num {
+    font-size: .6rem;
+    display: inline-block;
+    vertical-align: middle;
+    color: #f63
+}
+
+.comment-more {
+    position: absolute;
+    right: .5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: .6rem;
+}
+
+/*搜索*/
+.searchBoxDetail {
+    background: #fff;
+    padding: 0.5rem;
+    position: relative;
+}
+
+.searchBoxDetail .search {
+    box-sizing: border-box;
+    width: 100%;
+    background: #f2f2f2;
+    border: 0;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    text-align: center;
+    border-radius: .3rem;
+    padding: 0 .5rem;
+}
+
+.searchBoxDetail img {
+    position: absolute;
+    right: 1rem;
+    width: 0.8rem;
+    top: 0.75rem;
+}
+
+.searchBoxDetail .icon-search {
+    position: absolute;
+    top: .7rem;
+    left: .8rem;
+    font-size: .6rem;
+}
+
+/*日历*/
+.calendar-box {
+    background-color: #fff;
+    position: relative;
+}
+
+.calendar-day-list {
+    padding: .5rem;
+}
+
+.calendar-day-item {
+    padding: .1rem 0;
+    display: inline-block;
+    width: 2.75rem;
+    height: 1.5rem;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: .25rem;
+    position: relative;
+    margin-right: .35rem;
+}
+
+.calendar-day-value {
+    font-size: .5rem;
+}
+
+.calendar-label {
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    background: #ff7a50;
+    color: #fff;
+    padding: 0 .1rem;
+    font-size: .5rem;
+    border-radius: .1rem;
+}
+
+.calendar-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    line-height: 1.5rem;
+    position: absolute;
+    background-color: #f2f2f2;
+    border-radius: .25rem;
+    font-size: .75rem;
+    right: .5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.calendar-day-item.active {
+    background-color: #cbdeff;
+    color: #3b76de;
+    border: 1px solid #3b76de;
+}
+
+/*门票类型*/
+.ticket-type-box{
+    height: 1.9rem;
+}
+#swiperType {
+    background-color: #fff;
+    padding: 0 0.5rem;
+}
+#swiperType .swiper-wrapper {
+    height: 1.9rem;
+    background-color: #fff;
+    text-align: center;
+}
+#swiperType .swiper-wrapper .swiper-slide {
+    /*width: 2.4rem;*/
+    margin-right: .8rem;
+}
+#swiperType .swiper-wrapper a {
+    text-align: center;
+    display: block;
+    /*width: 2.4rem;*/
+    height: 1rem;
+    line-height: 1rem;
+    margin-top: 0.45rem;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+}
+#swiperType .swiper-wrapper a.cur {
+    color: #3b76de;
+    border: 1px solid #3b76de;
+    background-color: #cbdeff;
+}
+#swiperType .ticket-type-slide.active a{
+    color: #3b76de;
+    border: 1px solid #3b76de;
+    background-color: #cbdeff;
+}
+#swiperType.fixed{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+}
+/*票型列表*/
+.ticket-list-box{
+    border-top: 1px solid #e5e5e5;
+    margin-bottom: 4rem;
+}
+.ticket-type-header{
+    padding: .5rem;
+    font-size: .6rem;
+    background-color: #fff;
+    /*border-bottom: 1px solid #e5e5e5;*/
+}
+.ticket-type-name{
+    border-left: 2px solid #3b76dd;
+    padding-left: .5rem;
+}
+.ticket-type-list{
+    margin-bottom: .5rem;
+    background-color: #fff;
+}
+.ticket-type-item{
+    border-top: 1px solid #e5e5e5;
+    padding: .5rem;
+}
+.ticket-type-left{
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+}
+.ticket-type-right{
+    display: inline-block;
+    width: 50%;
+    overflow: hidden;
+    vertical-align: middle;
+    color: #999;
+}
+.ticket-info-name{
+    font-size: .65rem;
+}
+.ticket-info-icon{
+    background: #ff7a50;
+    color: #fff;
+    padding: .1rem;
+    font-size: .6rem;
+    border-radius: .1rem;
+}
+.ticket-price-box{
+    color: #f63;
+    margin: .2rem 0;
+}
+.price-num{
+    font-size: .6rem;
+}
+.info-more-default{
+    color: #15bea1;
+    margin-right: .5rem;
+    font-size: .6rem;
+}
+.sale-num{
+    font-size: .6rem;
+    display: inline-block;
+    max-width: 4rem;
+}
+.changge-num-box{
+    display: inline-block;
+    float: right;
+    font-size: .6rem;
+}
+.default-icon{
+    box-sizing: border-box;
+    display: inline-block;
+    border: 1px solid #e5e5e5;
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    border-radius: 2rem;
+    text-align: center;
+}
+.default-icon i{
+    font-weight: bolder;
+}
+.buy-num {
+    margin: 0 .5rem;
+    font-size: .7rem;
+    color: #f63;
+}
+
+/*底部合计*/
+.footer-shop-box{
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    overflow: hidden;
+    /*padding: .3rem 0;*/
+    height: 2.5rem;
+    z-index: 10;
+    border-top: 1px solid #e5e5e5;
+}
+.footer-left{
+    display: inline-block;
+    width: 30%;
+    vertical-align: middle;
+    padding-top: .3rem;
+}
+.footer-nav{
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    color: #3b76dd;
+    font-size: .6rem;
+    width: 50%;
+    text-align: center;
+}
+.footer-nav i{
+    font-size: .9rem;
+}
+.footer-nav-name{
+    color: #999;
+}
+.ticket-shop-num{
+    position: absolute;
+    display: inline-block;
+    background-color: #ff6d4d;
+    color: #fff;
+    width: .8rem;
+    height: .8rem;
+    text-align: center;
+    line-height: .8rem;
+    border-radius: .8rem;
+    top: 0;
+    left: 50%;
+    /*transform: translateX(-.5rem);*/
+}
+.footer-right{
+    width: 70%;
+    height: 100%;
+    display: inline-block;
+    text-align: right;
+    vertical-align: middle;
+}
+.total-pirce{
+    display: inline-block;
+    font-size: .7rem;
+    height: 100%;
+}
+.total-price-icon{
+    color: #ff6d4d;
+    font-size: .6rem;
+}
+.total-price-value{
+    color: #ff6d4d;
+    font-size: .75rem;
+    margin-right: .5rem;
+}
+.pay-btn{
+    border: 0;
+    outline: 0;
+    color: #fff;
+    text-align: center;
+    background-color:#ffa200;
+    height: 100%;
+    font-size: .7rem;
+    padding: 0 1rem;
+}
+.pay-btn:disabled{
+    background-color:#ccc;
+}
+/*购物车弹框*/
+.shop-car-box{
+    position: fixed;
+    width: 100%;
+    /*top: 100%;*/
+    background-color: #fff;
+    padding-bottom: .5rem;
+    z-index: 10;
+    max-height: 8rem;
+    overflow: auto;
+    border-bottom: 1px solid #e5e5e5;
+}
+.shop-car-box.show{
+}
+.shop-car-header{
+    font-size: .65rem;
+    color: #999;
+    padding: .5rem;
+}
+.clear-shop-car{
+    float: right;
+}
+.clear-shop-car i{
+    margin-right: .2rem;
+    font-size: .7rem;
+    vertical-align: middle;
+    margin-top: -.1rem;
+}
+.shop-car-box .ticket-type-item{
+    border: 0;
+}
+.shop-car-box .ticket-price-box{
+    margin-left: .5rem;
+    display: inline-block;
+}
+/*查看详情*/
+.ticket-detail-box{
+    box-sizing: border-box;
+    padding: 0 .5rem;
+    width: 100%;
+    position: fixed;
+    bottom: -16.5rem;
+    /*height: 15rem;*/
+    background-color: #fff;
+    z-index: 11;
+    transition: bottom .4s;
+}
+.ticket-detail-box.show{
+    bottom: 0;
+}
+.ticket-detail-header{
+    padding: .5rem 0;
+}
+.ticket-detail-name{
+    font-size: .7rem;
+}
+.ticket-close{
+    position: absolute;
+    right: .5rem;
+    top: .25rem;
+    font-size: .8rem;
+}
+.ticket-detail-content{
+    border-bottom: 1px solid #e5e5e5;
+    border-top:  1px solid #e5e5e5;;
+    box-sizing: border-box;
+    overflow-y: auto;
+    line-height: 1.4;
+    height: 12rem;
+    font-size: .6rem;
+    padding: .5rem 0;
+}
+.ticket-detail-bottom{
+    padding: .5rem 0;
+}
+.ticket-detail-price{
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+}
+.ticket-detail-price{
+    font-size: .65rem;
+}
+.ticket-detail-btn{
+    display: inline-block;
+    width: 50%;
+    text-align: right;
+    vertical-align: middle;
+}
+.detail-price-icon{
+    margin-left: .5rem;
+    color: #f66;
+    font-size: .5rem;
+}
+.detail-price-value{
+    color: #f66;
+}
+
+.order-btn{
+    display: inline-block;
+    text-align: center;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    font-size: .55rem;
+    width: 2.5rem;
+    vertical-align: top;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #f63;
+}
+.gray_btn{
+    background-color: #ccc;
+}
+/*视频弹框*/
+.video-pop-box{
+    z-index: 11;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 94%;
+    background-color: transparent;
+}
+.video-pop-box .close-icon{
+    position: absolute;
+    right: 0;
+    top: -1.2rem;
+    width: 1.2rem;
+    z-index: 10;
+}

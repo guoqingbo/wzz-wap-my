@@ -1,0 +1,46 @@
+label.error{
+    display: block;
+    padding-top: .2rem;
+}
+.suggest-list{
+    padding: .5rem;
+}
+.suggest-item{
+    padding: .5rem;
+    margin-bottom: .5rem;
+    background-color: #fff;
+}
+.lab-title{
+    display: inline-block;
+    vertical-align: middle;
+    width: 2.5rem;
+
+}
+.suggest-input{
+    border: 0;
+    outline: none;
+    width: 10rem;
+}
+.textarea-area .lab-title{
+    width: 100%;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: .3rem;
+}
+.textarea-area .suggest-input{
+    width: 100%;
+    margin-top: .3rem;
+    height: 4rem;
+}
+.suggest-btn-box{
+    padding: .5rem;
+}
+.submit-btn{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    background: #feab08;
+    font-size: 0.7rem;
+    height: 2rem;
+    line-height: 2rem;
+    color: #fff;
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /html/baoting/
+Disallow: /html/kuaisu/
+Disallow: /html/yanxueying/

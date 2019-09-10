@@ -1,0 +1,27 @@
+mixin footer()
+  .hs-footer
+    ul
+      li
+        a(href='/', class= module === 'index'? 'on': '')
+          i.icon-ihome
+          p 首页
+      li
+        a(href='/list/order', class= module === 'order'? 'on': '')
+          i.icon-iorder
+          p 订单
+      li
+        a(href='/list/strategy', class= module === 'strategy'? 'on': '')
+          i.icon-nav-order
+          p 玩家手册
+      li
+        a(href='https://wzzdlyq.qiyukf.com/client?k=9043442f1a44a1780180c5459734227c&wp=1')
+          i.icon-italk
+          p 客服
+      li
+        a(href='/member', class= module === 'member' ? 'on': '')
+          i.icon-imember
+          p 我的
+
+
+
+

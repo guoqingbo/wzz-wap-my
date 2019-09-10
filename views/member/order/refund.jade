@@ -1,0 +1,140 @@
+extends ../../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/order.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/validate/jquery.validate.min.js')
+    script(type='text/javascript', src='/javascripts/validate/messages_zh.min.js')
+    script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
+    script(type='text/javascript', src='/javascripts/pageItem.js')
+    script(type='text/javascript', src='/javascripts/member/refund.js')
+    script.
+        var module = '#{data[0].data.orderType}';
+        orderNo = '#{data[0].data.orderNo}'
+block content
+    form#form(action= '/member/refund/#{module}', method= 'post')
+        - var datas = data[0].data;
+        input(type="hidden" name='orderNo' value=datas.orderNo)
+        input(type="hidden" name='isRealName' value=Boolean(datas.linkManDTOList).toString() class="isRealName")
+        input(type="hidden" name='idNo' value=JSON.stringify(datas.linkManDTOList))
+        input(type="hidden" name='refundSum' value=JSON.stringify(datas.orderDetails) class="refundSum")
+        ul.order-list.myorder-list.refund-list
+            //-li
+              label.lab-title(for='') 退款原因
+              .order-item
+                input.order-text(type='text', name='reason', value='', placeholder='请说明您需要退款的原因')
+            li
+                label.lab-title 退款商品
+                .order-item= datas.orderInfo
+            li
+                label.lab-title 退款金额
+                .order-item
+                    span.price
+                        em ￥
+                        //span#refundPrice(data-price=datas.price)= datas.paySum
+                        span#refundPrice(data-price=datas.price)
+                    //span.refund-price(data-oay=datas.paySum)
+                        | 最多可退
+                        em ￥
+                        = datas.paySum
+            //-li
+              label.lab-title(for='') 退款方式
+              .order-item
+                input.order-text(type='tel', name='idCard', value='', placeholder='请输入您的支付宝或者银行卡帐号，方便我们\
+                为您即时退款')
+        //- .page-line
+        ul.order-list.myorder-list
+            if module==="combo"
+                li.refund-items
+                    label.lab-title(for="") 退订票型
+                    .order-item
+                        span(style='width:60%')= datas.orderInfo
+                        span.fr #{datas.amount}
+                            //input.refundNum(name='refundAmount', type="tel", value=datas.amount, data-max=datas.amount, data-min=datas.amount)
+                each item in datas.orderDetails
+                    li.refund-item(data-id= item.id style="display:none")
+                        label.lab-title(for="") 退订票型
+                        .order-item
+                            span(style='width:60%')= item.orderInfo
+                            span.fr
+                                input.refundNum.refundNums(name='refundAmount', type="tel", value= item.leftAmount, data-max=item.leftAmount, data-min= item.leftAmount < 1 ? '0' : '1')
+
+            else
+                each item in datas.orderDetails
+                    li.refund-item(data-id= item.id)
+                        label.lab-title(for="") 退订票型
+                        .order-item
+                            span(style='width:60%')= item.orderInfo
+                            span.fr
+                                if datas.linkManDTOList
+                                    input.refundNums(data-max=item.leftAmount value=item.leftAmount readonly)
+                                else
+                                    input.refundNum.refundNums(name='refundAmount', type="tel", value= item.leftAmount < 1 ? '0' : item.leftAmount, data-max=item.leftAmount, data-min= item.leftAmount < 1 ? '0' : '1')
+
+            //-li
+                label.lab-title(for='') 备注
+                .order-item
+                    textarea.order-txtarea(placeholder='请输入退款原因', name='reason')
+            //-if datas.orderType === 'park' && datas.linkManDTOList
+                each item in datas.linkManDTOList
+                    if item.telephone
+                        li
+                            label.lab-title(for='') 联系人
+                            .order-item=item.linkMan
+                        li
+                            label.lab-title(for='') 手机号
+                            .order-item=item.telephone
+                    else
+                        li
+                            label.lab-title(for='') 姓&ensp;&ensp;名
+                            .order-item=item.linkMan
+                    li
+                        label.lab-title(for='') 身份证
+                        .order-item=item.idNo
+                        input(name='idNo', type='hidden', value=item.idNo)
+            if datas.orderType === 'park' && datas.linkManDTOList
+                ul.nameSMZ
+                    li
+                        label.lab-title(for='') 实名制信息：
+                    each item in datas.linkManDTOList
+                        li.smz-li
+                            span.order-item=item.linkMan
+                            span.order-item=item.idNo
+                            input(name='idNo', type='hidden', value=item.idNo)
+                            input(type='checkbox' class="smzCheck" data-idno=item.idNo data-id=item.id  data-price=datas.price checked)
+            li
+                label.lab-title(for='') 备注
+                .order-item
+                    textarea.order-txtarea(placeholder='请输入退款原因', name='reason')
+        .btn-handle
+            a.btn(href='javascript:;') 提交申请
+    .mask#mask
+    .tips
+        p
+        a(href="javascript:;").queding 确定
+    script.
+        //@ sourceURL=111
+        $(function () {
+            if(module!="combo"){
+                var tp = $('.refundNums').data('max') * $('#refundPrice').data('price');
+               // $('.refund-price').html('最多可退 ￥' + tp.toFixed(2));
+                $(".smzCheck").click(function(){
+                    var price,refundNums;
+                    if($(this).is(":checked")){
+                        price = $(this).data("price");
+                        tp = operation.accAdd(price,tp);
+                        refundNums = $(".smzCheck:checked").length;
+                        $("#refundPrice").html(tp);
+                        $(".refundNums").val(refundNums)
+                    }else{
+                        price = $(this).data("price");
+                        tp = operation.accSub(price, tp);
+                        refundNums = $(".smzCheck:checked").length;
+                        $("#refundPrice").html(tp);
+                        $(".refundNums").val(refundNums)
+                    }
+
+                })
+            }
+
+        });

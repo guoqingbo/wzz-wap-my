@@ -1,0 +1,104 @@
+extends ../layout
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/product.css")
+    link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
+    style.
+        .total-price {
+            width: 5rem;
+            display: inline-block;
+            float: left;
+            margin-right: 0;
+        }
+        .nav-pro{
+            display: inline-block;
+            float: left;
+            width: 7rem;
+        }
+        .nav-pro li{
+            width: 40%;
+            height: 100%;
+            float: left;
+            display: block;
+        }
+        .nav-pro li a.on {
+            color: #3b76dd;
+        }
+        .nav-pro li a {
+            display: block;
+            text-align: center;
+            color: #999;
+        }
+        .nav-pro  li a i {
+            font-size: 1rem;
+        }
+        .nav-pro li a p {
+            padding-top: 0;
+            font-size: .45rem;
+            margin-top: -1.4rem;
+        }
+block javascripts
+    script(type='text/javascript', src='/lib/swiper/swiper-3.4.2.jquery.min.js')
+    script(type='text/javascript', src='/javascripts/product.js')
+block content
+    a.back-bar(href='javascript:window.history.back(-1);')
+    //-#product_swiper.swiper-container
+        ul.swiper-wrapper
+            each banner in data[0].data['carousel']
+                li.swiper-slide.product-li
+                    a
+                        img(src=banner.wapUrl)
+        .swiper-pagination
+
+    .details-info
+        h3.details-title #{data[0].data['parkName']}
+        //-.detail-content
+            .detail-intrd
+                a( href="/detail/location")
+                    .detail-cnt1
+                        label.lab-title.lab-dib(for='')
+                            i.font-icon.icon-dib
+                        span.address-txt 长沙市开福区侯家塘路
+            .detail-comment
+                a(href='/list/commentList?modelCode=递四方速递&commentLevel=0')
+                    .det-score.fl
+                        span.comment-score.c-base
+                            i.font-icon.icon-iconfont-aixin
+                            i.font-icon.icon-iconfont-aixin.not-light
+                            em 5分
+                        p 36条评论
+                    i.font-icon.fr.icon-iconfont-jiantou.fr
+
+    +detailTab(data[0].data,module)
+
+    .order-footer
+        .order-total.float-layer
+            a.btn-order.background-base(href='/order/'+module+'/'+data[0].data['rateCode']+'?parkId='+data[0].data['parkId']+ '&date=' +date+'&classifyId='+classifyId+'&productCode='+productCode ) 立即预订
+            ul.nav-pro
+                li.nav-lipro
+                    a.on(href='/')
+                        //i.icon-ihome
+                        img(src='/images/common/nav-icon1-on.png' style='height: 1rem;vertical-align: unset;')
+                        p 首页
+                li.nav-lipro
+                    a(href='https://wzzdlyq.qiyukf.com/client?k=9043442f1a44a1780180c5459734227c&wp=1')
+                        //i.icon-italk
+                        img(src='/images/common/nav-icon4.png' style='height: 1rem;vertical-align: unset;')
+                        p 客服
+            p.total-price
+                | 单价:
+                span.price
+                    em ￥
+                    strong#totalprice #{data[0].data['currentPrice']}
+    //- 详情切换
+    mixin detailTab(data,module)
+        ul#details-tab.tours-details-tab.tab.clearfix.details-tab
+            li
+                a.active(href='javascript:;', data-div='book') #{data.aliasName}
+            //-li
+                a(href='javascript:;', data-div='scenic')='预订须知'
+        .details-tab-panel
+            #tab-panel.ticket-details-tabs(style='margin-left: 0%;')
+                #book.details-tab-item(style='height: auto;')
+                    .tab-article!=data.modelExplain
+                //-#scenic.details-tab-item
+                    .tab-article!=data.orderNotice

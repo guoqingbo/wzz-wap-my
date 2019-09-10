@@ -1,0 +1,116 @@
+extends layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/myTrip.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/myTrip.js')
+    script(type='text/javascript', src='/lib/layer_mobile/layer.js')
+
+block content
+    input.leaguerId(type="hidden" value=leaguerId )
+    input#ticketPark(type="hidden" value=ticketPark )
+    .tripTitle
+        .tripMsg.on
+            label 我的行程
+        .tripMsg
+            label 行程规划
+    .trip-tab
+        .trip-con
+            .trip-history
+                ul.trip-my
+                    //li
+                    //   span.trip-l 海底漫步
+                    //   span.trip-r
+                    //      a 马上预约
+                    //li
+                    //    span.trip-l 摩托艇
+                    //    span.trip-r
+                    //        a 去购票
+                    //li
+                    //    span.trip-l 滑翔伞
+                    //    span.trip-r.trip-gray  已预约 / 08:00—09:00
+            p.no-my-trip
+               span 暂无行程
+               span.my-tripGo 去规划行程
+
+
+        .trip-con.even-nav
+            each even in data[0].data
+                .trip-even
+                    p.trip-p #{even.proName}
+                    ul.hdUl(data-category='#{even.proName}')
+                        each hd in even.projectManageInfos
+                            li(data-projectId=hd.projectId)
+                                .trip-choose
+                                    img.planimg(src=hd.projectLogo?hd.projectLogo:" ")
+                                    img.planright(src='images/index/planright.png')
+                                p.trip-hdName #{hd.projectName}
+
+    .plan-foot
+        .foot-con
+        span.plan-foot-btn 规划行程
+
+    script.
+        //@ sourceURL=114
+        $(function(){
+            var leaguerId=$(".leaguerId").val();
+            var ticketPark = $("#ticketPark").val();
+            $.ajax({
+                type: "post",
+                url: "/myPlanList",
+                data: {leaguerCode:leaguerId},
+                success: function (data) {
+                    console.log(data[0].data);
+                    var len=data[0].data;
+                    if(data[0].status===200){
+                       if(len.length<=0){
+                          $(".no-my-trip").css("display","block");
+                       }else{
+                           $(".no-my-trip").css("display","none");
+                          var html="";
+                          for (let i=0;i<len.length; i++){
+                              html+='<li><span class="trip-l">'+(len[i].projectName===""||len[i].projectName===undefined ? "": len[i].projectName)+'</span>'+
+                                    '<span class="trip-r '+(len[i].status==='2' || len[i].status==='3' ?'trip-gray trip-rows':'')+'">'+(len[i].times?tripStatus(len[i].status,len[i].projectId,len[i].times):tripStatus(len[i].status,len[i].projectId))+'</span>'+
+                                    '</li>';
+
+                          }
+                           $(".trip-my").html(html);
+                           $(".trip-tab .trip-con").eq(0).css("display","block");
+                           $(".trip-tab .trip-con").eq(1).css("display", "none");
+                           $(".tripTitle .tripMsg").eq(0).addClass("on");
+                           $(".tripTitle .tripMsg").eq(1).removeClass("on");
+                           $(".plan-foot").css("display", "none");
+                       }
+                    }else {
+                        layer.open({
+                            content: data[0].message
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+                        });
+                    }
+                },
+                error: function (err) {
+                    layer.open({
+                        content: data[0].message
+                        , skin: 'msg'
+                        , time: 2 //2秒后自动关闭
+                    });
+                }
+            })
+
+            function tripStatus(status, projectId, times) {
+                var html;
+                switch (status) {
+                    case "0":
+                        html = '<a href="/myGuide?projectId=' + projectId + '">马上预约</a>';
+                        break;
+                    case "1":
+                        html = '<a href="/detail/ticket/'+ticketPark+'" style="background: #01355c">去购票</a>';
+                        break;
+                    case "2":
+                        html = '已预约' + times;
+                        break;
+                }
+                return html;
+            }
+        })

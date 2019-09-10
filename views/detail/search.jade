@@ -1,0 +1,94 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/detail/search.css")
+block javascripts
+block content
+    // 搜索框
+    .search-box(data-productcode = productcode)
+        .search-input-box
+            i.iconfont.icon-search
+            input.search-input(type="text" name='searchName' placeholder="门船票/套票/项目票" data-classifyid=classifyId,data-productcode=productCode value=searchName)
+            i.icon-shanchu1
+        button.search-cancel-btn 取消
+    // 历史搜索
+    .rol-box
+        .rol-top
+            span.rol-name 历史搜索
+            i.icon-iconfont-shanchu.delete-icon
+        ul.rol-list.search-history-list
+            // - var searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]')
+            // if searchHistory.length
+            //     each item in searchHistory
+            //         li.rol-item
+            //             a(href='/detail/ticket/' + productcode + '?searchName=' + item)=item
+    // 热门搜索
+    .rol-box
+        .rol-top
+            span.rol-name 热门搜索
+        ul.rol-list
+            if data[0].data
+                each item in data[0].data
+                    if item
+                        li.rol-item
+                            a(href='/detail/ticket/' + productcode + '?searchName=' + item)=item
+    script.
+        $(function () {
+            // 搜索
+            $('.icon-search').click(function () {
+                var productcode = $('.search-box').data('productcode')
+                    searchName = $("input[name='searchName']").val();
+                // window.location.href='/detail/ticket/'+productcode+'?classifyId='+classifyid+'&searchName='+searchName;
+                if(searchName){
+                    // 获取历史纪录
+                    var searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]')
+                    var index = searchHistory.indexOf(searchName)
+                    if(index>-1){
+                        searchHistory.splice(index,1)
+                    }
+                    searchHistory.push(searchName)
+                    // 最多存储10条记录
+                    if(searchHistory.length>10){
+                        searchHistory.shift()
+                    }
+                    // 存储历史纪录
+                    localStorage.setItem('searchHistory',JSON.stringify(searchHistory))
+                }
+                window.location.href = '/detail/ticket/' + productcode + '?searchName=' + searchName;
+            })
+            // 历史纪录
+            function getSearchHistory() {
+                var searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]').reverse()
+                var productcode = $('.search-box').data('productcode')
+                var html = ''
+                if(searchHistory.length){
+                    for (var i=0;i<searchHistory.length;i++) {
+                        html+='<li class="rol-item"><a href="/detail/ticket/'+productcode+'?searchName='+searchHistory[i]+'">'+searchHistory[i]+'</a></li>'
+                    }
+                }
+                $(".search-history-list").html(html)
+            }
+            getSearchHistory()
+            // 删除记录
+            $('.delete-icon').click(function (e) {
+                localStorage.removeItem('searchHistory')
+                $(".search-history-list").html('')
+            })
+            // 取消
+            $('.search-cancel-btn').click(function () {
+                history.go(-1)
+            })
+            // 回车搜索门票
+            $(document).keyup(function (event) {
+                if (event.keyCode == 13) {
+                    $('.icon-search').trigger("click");
+                }
+            });
+            // 输入框获取焦点
+            $("input[name='searchName']").focus()
+            // 清空输入框
+            $(".icon-shanchu1").click(function () {
+                $("input[name='searchName']").val('')
+                $("input[name='searchName']").focus()
+            })
+        })

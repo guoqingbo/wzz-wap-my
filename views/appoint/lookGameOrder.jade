@@ -1,0 +1,38 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/appoint/lookGameOrder.css")
+    link(rel="stylesheet", href="/stylesheets/order.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/appoint/lookGameOrder.js')
+block content
+    //include ./mixin/periodList
+    if flag
+        .pay-results
+            img.font-icon(src='/images/member/error.png', alt='')
+            p 此项目不可预约！
+    else
+        input(name="projectId" type="hidden" value=projectId)
+        input(name="orderNo" type="hidden" value=orderNo)
+        .appoint-ticket-box
+            span.appoint-ticket-name=data[0].data.productName
+            span.appoint-ticket-num x#{data[0].data.amount}
+        table.appoint-period-table
+            //+periodList(data[1].projectDetail)
+            tr.table-first-tr
+                th 时段
+                th 普通
+                th VIP
+                th
+            each item,index in data[1].projectDetail
+                tr
+                    td #{item.beginTime + "-" + item.endTime}
+                    td
+                        if data[1].order && data[1].order.projectdetailId==item.id
+                            span(class="green") 已预约
+                        else
+                            span(class=item.leftStock >= item.stock ? "red" : "") #{(item.leftStock||'0')}
+                    td(class=item.leftVipstock >= item.vipstock ? "red" : "") #{(item.leftVipstock||"0")}
+                    td
+                        if data[1].order && data[1].order.projectdetailId==item.id
+                            button.cancel-appont-btn(data-ticketno=data[1].order.ticketNo data-projectid = data[1].order.projectinfoId ) 取消

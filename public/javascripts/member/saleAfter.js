@@ -1,0 +1,137 @@
+$(function () {
+    var upload = {
+        init:function () {
+            $(".upload-btn").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).next().trigger("click")
+            })
+            $(".ipnut-file").change(function () {
+                var file =$(this).prop("files")[0];
+                var field = $(this).attr("name") || "image";
+                if(!file){
+                    return
+                }
+               if(upload.checkFileSize(file)){
+                   upload.readAndPreview($(this))
+               }
+            })
+        },
+        files:{},
+        checkFileSize:function(file){
+            var checkRes = true
+            var fileSize = file.size/1024/1024
+            var maxFileSize = 10
+            if(fileSize>maxFileSize){
+                new ErrLayer({
+                    message: '您上传的身份证图片大小为'+fileSize.toFixed(2)+'M，请选择小于'+maxFileSize+'M的图片'
+                })
+                checkRes = false
+            }
+            return checkRes
+        },
+        readAndPreview: function ($ele) {
+            // 图片预览
+            var file = $ele.prop("files")[0];
+            var field = $(".preview-box img").length;
+            // 支持的图片类型（可自定义）
+            if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                var reader = new FileReader();
+                reader.addEventListener("load", function () {
+                    var deleteHtml='<div class="deleteImg"><image src="'+this.result+'"></image><span>删除</span></div>';
+                    $ele.parent().find(".upload-btn").before(deleteHtml);
+                }, false);
+                reader.readAsDataURL(file);
+                // 上传图片
+                upload.files[field] = file
+            }else{
+                new ErrLayer({
+                    message:"请选择正确的图片格式"
+                });
+            }
+
+        },
+        sendFiles:function () {
+            if(Object.keys(upload.files).length<=0){
+                 new ErrLayer({
+                    message:"请先上传凭证"
+                });
+                 return false
+            }
+            // 上传图片
+            var formData = new FormData()
+            for(var key in upload.files){
+                formData.append(key, upload.files[key])
+            }
+            return $.ajax({
+                url: '/upload/filesList',
+                type: 'post',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: "JSON",
+            });
+        },
+        sendSuccess:function (res) {
+            //图片上传
+        }
+    }
+    upload.init()
+    $(".confirm-button").click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        var content = $("textarea[name='content']").val()
+        var orderNo = $("input[name='orderNo']").val()
+        if(!content){
+            return new ErrLayer({
+                message:"请先填写退单原因"
+            });
+        }
+        var sendFilesRes = upload.sendFiles()
+        if(sendFilesRes){
+            sendFilesRes.done(function (imgs) {
+                if(!imgs){
+                    return new ErrLayer({
+                        message:"图片上传失败"
+                    });
+                }
+                var imgsArr = []
+                for(var i=0;i<imgs.length;i++){
+                    var url = imgs[i].prefix+imgs[i].url
+                    imgsArr.push(url)
+                }
+                var params = {
+                    orderImg:imgsArr.join(","),
+                    reason:content,
+                    orderNo:orderNo,
+                    amount:$(".refundNums").val()
+                }
+                $.post("/member/saleAfterConfirm",params).done(function (res) {
+                    if(res[0].status == 200){
+                        new TipLayer({
+                            message: '提交成功',
+                            confirmCallBack: function () {
+                                window.location.href = "/member/order/"+orderNo
+                            }
+                        })
+                    }else{
+                        new ErrLayer({
+                            message:res[0].message
+                        });
+                    }
+                })
+            })
+        }
+
+    })
+    $(".refundNums").numSpinner({
+        min: 1,
+        max: $(".refundNums").data("max"),
+    })
+    $(".preview-box").on('click','.deleteImg span',function(){
+        var index  = $(this).parent().index();
+        $(this).parent().remove();
+        delete upload.files[index]
+    })
+})

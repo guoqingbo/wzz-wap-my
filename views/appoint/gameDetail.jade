@@ -1,0 +1,49 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/appoint/gameDetail.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/appoint/gameDetail.js')
+    script(type='text/javascript', src='/lib/layer_mobile/layer.js')
+block content
+    include ./mixin/gameDetail
+    include ./mixin/periodList
+    .appoint-ticket-box
+        //- 票型列表
+        p.appoint-ticket-tip 预约后项目可在预约时间内直接游玩不需要排队</br>预约先通过扫订单身份证，或纸质二维码获取可预约票型
+        ul.appoint-ticket-list
+            +ticketList(data[0].data)
+        //ul.appoint-ticket-list
+        //    each item,index in [1,2,3,4]
+        //        li.appoint-ticket-item
+        //            span.appoint-ticket-no E125656
+        //            if index == 2
+        //                //- 未预约
+        //                input.appoint-ticket-input(type="checkbox")
+        //                label.checkbox
+        //            else
+        //                //- 已预约
+        //                span.appoint-ticket-time 09:00-09:30
+        //                button.cancel-appont-btn(data-ticketno="E12333") 取消
+        .appoint-ticket-bottom
+            input(name="projectId" type='hidden' value=projectId)
+            button.appoint-ticket-btn.scan-card-btn 扫身份证
+            //input.ipnut-file(type="file" name="image" capture="camera" accept="image/*" hidden)
+            input.ipnut-file(type="file" name="image" accept="image/*" hidden)
+
+            button.appoint-ticket-btn.scan-code-btn 扫纸质票二维码
+    table.appoint-period-table
+        +periodList(data[1].data,nowTime)
+        //tr
+        //    th 时段
+        //    th 剩余
+        //    th VIP
+        //    th
+        //each item,index in data[1].data
+        //    tr
+        //        td #{item.beginTime +"-" + item.endTime}
+        //        td(class=item.leftStock>=item.stock?"red":"") #{item.leftStock+"/"+item.stock}
+        //        td(class=item.leftVipstock>=item.vipstock?"red":"") #{item.leftVipstock+"/"+item.vipstock}
+        //        td
+        //            button.appoint-btn(data-id =item.id) 预约
+

@@ -1,0 +1,49 @@
+.yh-box{
+    text-align: center;
+}
+.yh-box .yh-name{
+    font-size: 0.6rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    float: left;
+    color: #3b76dd;
+}
+.yh-box .yh-code{
+    padding: 0;
+    margin: 0;
+    border: 1px solid #eee;
+    height: 1.5rem;
+    width: 74%;
+    text-align: center;
+    border-radius: 0.2rem;
+    margin-left: 0.5rem;
+    font-size: 0.6rem;
+    color: #333;
+}
+.yh-goNow{
+    margin-top: 2rem;
+}
+.yh-goNow .yh-now,.yh-goNow .yh-useBtn{
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    border: 1px solid #eee;
+    background: #fff;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border-radius: 50rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 0.6rem;
+}
+.yh-goNow .yh-useBtn{
+    color: #fff;
+    background: #3b76dd;
+    display: none;
+}
+.yh-allBox{
+    padding: 0.5rem;
+}
+
+

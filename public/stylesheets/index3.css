@@ -1,0 +1,15 @@
+.index-icon{width: 2rem; height: 2rem; float: left;}
+.index-text{text-align: center; color:#666; height: 2rem; line-height: 2rem;  float:left; margin-left: 0.75rem; font-size: 0.55rem;}
+.index-smailltext{font-size: 0.4rem; color: #666; margin-left:0.75rem;}
+.index-pic{ width: 100%;}
+
+.index-bg{ background-color: #fff;}
+.index-bg li{ border-bottom: 1px solid #eee; padding: 0.5rem 0.75rem; font-size: 0.6rem; color: #999; overflow: hidden;}
+.index-bg li > a{ display: block; color: #333; overflow: hidden;}
+.index-bg li input{ background: none; border: none; height: 0.8rem; font-size: 0.6rem; padding: 0;}
+
+.index-tab{ border-top: 1px solid #eee;  }
+.index-tab li{ width: 50%; padding-left:0.75rem; padding-right: 0.75rem; }
+.index-tab li a{ height: 2rem; line-height: 2rem; }
+
+em{color: #e1244e; font-size: 0.4rem;}

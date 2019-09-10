@@ -1,0 +1,115 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/question/detail.css")
+block javascripts
+block content
+    .question-title
+        h3.question-title-name=data[0].data.title
+        h4.question-sub-title=data[0].data.info
+    ul.question-list
+        each item,index in data[0].data.surveyItems
+            li.question-item(data-id=item.id)
+                .question-item-query
+                    span.question-query-name #{index+1}.#{item.itemTitle}
+                    span.question-type (#{item.type==1?"单选":"多选"})
+                .question-item-option
+                    if item.value && item.value.split(",").length
+                        each sitem,sindex in item.value.split(",")
+                            .question-option-box
+                                input.question-input(type=item.type==1?"radio":"checkbox" name='' hidden)
+                                label.checkbox(for="")
+                                span.question-option-name=sitem
+                    else
+                        .no-data 暂无数据
+    .button-bottom
+        input(name="id" type="hidden" value=data[0].data.id)
+        button.submit-btn 提交
+    script.
+        $(function () {
+            // 点击选项
+            $(".question-option-box").click(function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+                // $(this).find("input").trigger("click")
+                console.log($(this).find("input").is(':checked'))
+                var type = $(this).find("input").attr("type")
+                if(type == 'radio'){
+                    // 如果是单选
+                    $(this).siblings().removeClass("active")
+                    $(this).siblings().find("input").removeAttr("checked")
+                }
+                if ($(this).find("input").is(':checked')) {
+                    $(this).find("input").removeAttr("checked")
+                    $(this).removeClass("active")
+                } else {
+                    $(this).find("input").attr("checked", " checked")
+                    $(this).addClass("active")
+                }
+            })
+            // 提交
+            $(".submit-btn").click(function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+                var params = {
+                    id:$("input[name='id']").val(),
+                }
+
+                // 检查是否有未选择的项
+                var checkRes = checkQuestion()
+                if (checkRes.message) {
+                   return new ErrLayer({
+                        message: checkRes.message
+                    })
+                }
+                params.result = JSON.stringify(getParams())
+                console.log(params)
+                $.post("/question/save",params)
+                    .success(function (res) {
+                        if (res[0].status !== 200) {
+                            new ErrLayer({
+                                message: res[0].message
+                            })
+                        } else {
+                            new TipLayer({
+                                message: '提交成功',
+                                confirmCallBack: function () {
+                                    window.location.href = '/question/list';
+                                }
+                            })
+                        }
+                })
+            })
+            // 检查问题是否选择
+            function checkQuestion() {
+                var checkRes= {}
+                $(".question-item").each(function () {
+                    var index = $(this).index()
+                    var optionList = $(this).find(".question-item-option .active .question-option-name")
+                    if (optionList.length<=0) {
+                        checkRes = {message: "问题" + (index+1) + "尚未选择，请选择后提交"}
+                        return false
+                    }
+                })
+                return checkRes
+            }
+            // 获取文件选择的餐顺
+            function getParams(){
+                var questionSel = {}
+                $(".question-item").each(function () {
+                    var index = $(this).index()
+                    var qustionObj = {}
+                    var questionId = $(this).data("id");
+                    qustionObj.key = questionId
+                    qustionObj.value = []
+                    var optionList = $(this).find(".question-item-option .active .question-option-name")
+                    if(optionList.length){
+                        optionList.each(function () {
+                            qustionObj.value.push($(this).text())
+                        })
+                        questionSel[index]=qustionObj
+                    }
+                })
+                return questionSel
+            }
+        })

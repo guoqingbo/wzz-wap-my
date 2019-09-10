@@ -1,0 +1,39 @@
+extends ../../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/member/saleAfter.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/pageItem.js')
+    script(type='text/javascript', src='/javascripts/member/saleAfter.js')
+block content
+    input(name='orderNo' value=orderNo type="hidden")
+    .lable-item-group
+        span.lable-item-name 退款商品
+        span.lable-item-value=data[0].data.productName
+    .lable-item-group
+        span.lable-item-name 退订票型
+        span.lable-item-value=data[0].data.orderInfo
+        span.num-spinner-box
+            //a.sub(href='javascript:void(0);')
+            //    i.icon-iconfont-jian
+            input.refundNums(readonly='', data-max=max, value=1)
+            //a.add(href='javascript:void(0);')
+            //    i.icon-iconfont-jia
+
+    .lable-group
+        .lable-name 退单原因：
+        .lable-value
+            textarea.refund-reason(placeholder="请输入退单原因" name="content")
+    .lable-group
+        .lable-name 上传凭证：
+            span.upload-img-tip (小于10M的 jpeg、jpg、png、gif格式的图片)
+        .lable-value
+            .preview-box
+                //.deleteImg
+                //    img(src="/images/demo/foods1.jpg")
+                //    span 删除
+                button.upload-btn
+                    i.iconfont.icon-iconfont-jia
+                input.ipnut-file(type="file" name="image" accept="image/*" hidden)
+    .lable-btn-box
+        button.confirm-button 确认

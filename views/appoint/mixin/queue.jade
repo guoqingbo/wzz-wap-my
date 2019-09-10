@@ -1,0 +1,18 @@
+mixin queueList(data)
+    .queue-list-box
+        ul.queue-list
+            if data.length
+                each item in data
+                    li.queue-item
+                        .game-name=item.projectName
+                        .queue-item-label.now-number 当前叫号:#{item.currentNo}号
+                        .queue-item-label.your-number
+                            span 您的号码:#{item.queueUpNo}号，
+                            if item.num
+                                span 前面还剩#{item.num}位
+                            else
+                                span 已经轮到您了，请准备
+            else
+                li.no-data 暂无数据
+if method === "ajax"
+    +queueList(data)

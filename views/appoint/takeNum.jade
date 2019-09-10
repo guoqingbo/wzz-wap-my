@@ -1,0 +1,39 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/appoint/takeNum.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/appoint/takeNum.js')
+block content
+    .top-box
+        p.now-project-text 当前项目
+        .now-project-box
+            .project-seletct-show
+                span.project-seletct-text=data[0].data[0]?data[0].data[0].projectName:'暂无项目'
+                i.iconfont.icon-drop-down
+            ul.project-seletct
+                each item,index in data[0].data
+                    li.project-option(data-projectid=item.projectId data-waitnum=item.waitNum class=index==0?"selected":'')=item.projectName
+        p.project-tip
+            span 当前有
+            span.queue-num=data[0].data[0]?data[0].data[0].waitNum:0
+            span 人正在排队
+    .bottom-box
+        button.scan-code-btn
+        p.scan-text 扫码排号
+        p.scan-text-tip 扫票型上二维码排号
+    script.
+        $(function () {
+            var projectId = '#{projectId}'
+            if(projectId){
+                var optionEle = $(".project-option[data-projectid="+projectId+"]")
+                var projectName = optionEle.text()
+                var waitNum = optionEle.data('waitnum')
+                optionEle.addClass('selected').siblings('.project-option').removeClass('selected')
+                // 项目名称
+                $(".project-seletct-text").text(projectName)
+                // 排队人数
+                $(".queue-num").text(waitNum)
+            }
+        })
+

@@ -1,0 +1,316 @@
+extends layout
+
+block stylesheets
+    link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
+    link(rel="stylesheet", href="/stylesheets/myTrip.css")
+    style.
+        .spinner {
+            display: none
+        }
+        html {
+            height: 100%;
+        }
+block javascripts
+    script(type='text/javascript', src='/lib/swiper/swiper-3.4.2.jquery.min.js')
+    script(type='text/javascript', src="/javascripts/callNum.js")
+
+
+block content
+    input(type="hidden" value=screenCode class="projectId")
+    .callNum-box
+         .callNum-title
+             .call-top
+                 img(src="../images/index/callLogo.png")
+                 span
+         //ul.callNum-ul
+         #callNumTitle
+             ul.callTitle
+                 each item in [1,2,3,4,5]
+                     li
+                        span
+                            label.xh 序号
+                            label.px 票号
+         ul.callNum-ul
+         //#lunxunBanner.swiper-container
+         //   .swiper-wrapper
+         //       .callNum-ul.swiper-slide
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 1
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 2
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 3
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 4
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 5
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 6
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 7
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 8
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         //           .callNum-li
+         //               .callNumLine
+         //                   span.queueUpNo 9
+         //                   span.modelCode.noneNmae  085218
+         .call-footer
+             .call-foot
+                 span 技术支持：深大智能
+
+    //-.callNum-box
+        -var projectName=data[0].data[0]
+        .callNum-title #{projectName.projectName}
+        ul.callNum-ul
+            each queues in data[0].data
+                li.callNum-li.on #{queues.queueUpNo} #{queues.projectName}
+    //-.callNum-box
+        -var projectName=data[0].data[0]
+        .callNum-title #{projectName.projectName}
+        ul.callNum-ul
+            each queues in data[0].data
+                li.callNum-li.on #{queues.queueUpNo} #{queues.projectName}
+
+    //-script.
+        //@ sourceURL=111
+        //-$(function () {
+            var screenCode = $(".projectId").val();
+            var index = 1, dataLen = 1, settime, settime2, timeTrue = true;
+
+            $.ajax({
+                type: "POST",
+                url: "/callNum",
+                data: {screenCode: screenCode},
+                success: function (data) {
+                    var len = data[0].data;
+                    dataLen = len.length;
+                    if (data[0].status === 200) {
+                        dataOne(len);
+                        settime = setInterval(function () {
+                            dataTwo(len);
+                        }, 10000)
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+
+            function dataOne(len) {
+                $(".callNum-title span").text(len[0].projectName);
+                var html = "", list = len[0].upInfoList,subName;
+                //console.log(list);
+
+                for (var j = 0; j < list.length; j++) {
+                    var modelCode=(list[j].modelCode).toString();
+                    var modelCodeText=modelCode.substring(modelCode.length - 8, modelCode.length-2).toLowerCase();
+                    if (list[j].userName) {
+                        var nameLen = list[j].userName;
+                        for (var i = 0; i < nameLen.length; i++) {
+                            var str = nameLen;
+                            var subStr = str.substring(0, 4);
+                            subName = (subStr + (str.length > 4 ? '...' : ''));
+                        }
+                    }
+                    html += '<li class="callNum-li"><div><span class="queueUpNo">' + list[j].queueUpNo + '</span><span class="modelCode '+(list[j].userName? "userName":"noneNmae")+'">' +(list[j].userName?subName: modelCodeText) + '</span></div></li>';
+                }
+                $(".callNum-ul").html(html);
+                settime2 = setInterval(function () {
+                    getNum(function (datas) {
+                        console.log(111, index);
+                        if (datas[0].status === 200) {
+                            $(".callNum-title span").text(datas[0].data[0].projectName);
+                            var html2 = "", list2 = datas[0].data[0].upInfoList,subName;
+                            console.log(list2);
+                            for (var j = 0; j < list.length; j++) {
+                                var modelCode = (list[j].modelCode).toString();
+                                var modelCodeText = modelCode.substring(modelCode.length - 8, modelCode.length-2).toLowerCase();
+                                if(list2[j].userName){
+                                    var nameLen = list2[j].userName;
+                                    for (var i = 0; i < nameLen.length; i++) {
+                                        var str = nameLen;
+                                        var subStr = str.substring(0, 4);
+                                        subName = (subStr + (str.length > 4 ? '...' : ''));
+                                    }
+                                }
+                                html2 += '<li class="callNum-li"><div><span class="queueUpNo">' + list2[j].queueUpNo + '</span><span class="modelCode '+(list2[j].userName? "userName":"noneNmae")+'">' + (list2[j].userName? subName : modelCodeText) + '</span></div></li>';
+                            }
+
+                            $(".callNum-ul").html(html2);
+                        }
+                    });
+                }, 2000);
+            }
+
+            function dataTwo(len) {
+                clearInterval(settime2);
+                $(".callNum-title span").text(len[index].projectName);
+                var html = "", list = len[index].upInfoList,subName;
+                //console.log(list);
+
+                for (var j = 0; j < list.length; j++) {
+                    if (list[j].userName) {
+                        var nameLen = list[j].userName;
+                        for (var i = 0; i < nameLen.length; i++) {
+                            var str = nameLen;
+                            var subStr = str.substring(0, 4);
+                            subName = (subStr + (str.length > 4 ? '...' : ''));
+                        }
+                    }
+                    var modelCode = (list[j].modelCode).toString();
+                    var modelCodeText = modelCode.substring(modelCode.length - 8, modelCode.length-2).toLowerCase();
+                    html += '<li class="callNum-li"><div><span class="queueUpNo">' + list[j].queueUpNo + '</span><span class="modelCode '+(list[j].userName? "userName":"noneNmae")+'">' + (list[j].userName?subName: modelCodeText) + '</span></div></li>';
+                }
+                $(".callNum-ul").html(html);
+
+                settime2 = setInterval(function () {
+                    getNum(function (datas) {
+                        console.log(111, index);
+                        if (datas[0].status === 200) {
+                            $(".callNum-title span").text(datas[0].data[index].projectName);
+                            var html2 = "", list2 = datas[0].data[index].upInfoList,subName;
+                            console.log(list2);
+                            for (var j = 0; j < list2.length; j++) {
+                                if (list2[j].userName) {
+                                    var nameLen=list2[j].userName;
+                                    for(var i=0; i<nameLen.length; i++){
+                                        var str = nameLen;
+                                        var subStr = str.substring(0, 4);
+                                        subName = (subStr + (str.length > 4 ? '...' : ''));
+                                    }
+                                }
+                                var modelCode = (list2[j].modelCode).toString();
+                                var modelCodeText = modelCode.substring(modelCode.length - 8, modelCode.length-2).toLowerCase();
+                                html2 += '<li class="callNum-li"><div><span class="queueUpNo">' + list2[j].queueUpNo + '</span><span class="modelCode '+(list2[j].userName? "userName":"noneNmae")+'">' + (list2[j].userName?subName:modelCodeText) + '</span></div></li>';
+                            }
+                            $(".callNum-ul").html(html2);
+                        }
+                    });
+                }, 2000);
+                if (timeTrue) {
+                    setTimeout(function () {
+                        index = 1;
+                        timeTrue = false;
+                    }, 2000);
+                } else {
+                    index++;
+                }
+                if (index >= dataLen) {
+                    index = 0;
+                }
+            }
+
+            function getNum(cb) {
+                $.ajax({
+                    type: "POST",
+                    url: "/callNum",
+                    data: {screenCode: screenCode},
+                    success: function (data) {
+                        cb(data);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            }
+        })

@@ -1,0 +1,81 @@
+mixin navList(ticketPark,projectNameCode)
+    if projectNameCode
+        -var projectNameCodePath = '/'+projectNameCode
+    ul.clearfix
+        li
+            a(href=projectNameCodePath+'/detail/ticket/' + ticketPark + '?classifyId=0')
+                img(src='images/index/nav-icon2.png', alt='门票预订')
+                p 门票预订
+        li
+            a(href=projectNameCodePath+'/detail/ticket/' + ticketPark + '?classifyId=2')
+                img(src='images/index/nav-icon3.png', alt='娱乐预订')
+                p 娱乐预订
+        li
+            a(href=projectNameCodePath+'/list/hotel')
+                img(src='images/index/nav-icon4.png', alt='酒店预订')
+                p 酒店预订
+        li
+            a(href=projectNameCodePath+'/list/repast')
+                img(src='images/index/nav-icon5.png', alt='餐饮预订')
+                p 餐饮预订
+        li
+            a(href=projectNameCodePath+'/product/ticket/park2018092913241026745?fromBy=indexicon')
+                img(src='images/index/nav-icon6.png', alt='海岛玩家')
+                p 海岛玩家
+        li
+            a(href=projectNameCodePath+'/detail/ticket/' + ticketPark + '?classifyId=3')
+                img(src='images/index/nav-icon7.png', alt='特惠套餐')
+                p 特惠套餐
+        li
+            //a(href='/myTrip')
+            //a(href='https://daoyou.worldmaipu.com/upload_resource/2018/company/pure/map.html?hid=17390')
+            a(href='http://daoyou.worldmaipu.com/upload_resource/2019/project/wuzhizh/map.html?hid=17390')
+                img(src='images/index/nav-icon8.png', alt='电子导览')
+                p 电子导览
+        //-lihttp://daoyou.worldmaipu.com/upload_resource/2018/company/pure/map.html?hid=17390
+          a(href='/list/shop')
+            img(src='images/index/nav-icon1.png', alt='...')
+            p 商品预订
+        li
+            a(href=projectNameCodePath+'/list/strategy')
+                img(src='images/index/nav-icon1.png', alt='...')
+                p 玩家手册
+        //li
+        //  a(href='/list/combo')
+        //    img(src='images/index/nav-icon1.png', alt='...')
+        //    p 套票
+        //li
+        //  a(href='/appoint/gameList')
+        //    img(src='images/index/nav-icon1.png', alt='...')
+        //    p 项目预约
+    style.
+        .hs-nav ul {
+            display: block;
+            width: 100%
+        }
+
+        .hs-nav ul li {
+            width: 25%;
+            float: left;
+            padding-bottom: .75rem
+        }
+
+        .hs-nav ul li a {
+            display: block;
+            text-align: center;
+            color: #fff;
+            font-size: .55rem
+        }
+
+        .hs-nav ul li a img {
+            width: 2rem;
+            height: 2rem;
+            margin: 0 auto
+        }
+
+        .hs-nav ul li a p {
+            padding-top: .5rem;
+            width: 100%;
+            text-align: center;
+            overflow: hidden
+        }

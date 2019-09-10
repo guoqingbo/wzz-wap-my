@@ -1,0 +1,33 @@
+mixin ticketTypeList(data)
+    if data.length
+        each item in data
+            .ticket-type(data-classifyid=item.classifyId)
+                .ticket-type-header
+                    span.ticket-type-name=item.classifyName
+                ul.ticket-type-list
+                    if item.ticketList
+                        each sitem in item.ticketList
+                            //if sitem.enabled == "T"
+                            li.ticket-type-item(data-item=sitem data-id=sitem.id)
+                                .ticket-type-left
+                                    .ticket-info-name=sitem.aliasName
+                                        if sitem.recommend == "T"
+                                            span.ticket-info-icon 荐
+                                    .ticket-price-box
+                                        span.price-icon ￥
+                                        span.price-num=sitem.currentPrice
+                                    .ticket-info-bottom
+                                        span.info-more-default.look-detail 查看详情
+                                        span.info-more-default.video-intro 视频介绍
+                                .ticket-type-right
+                                    span.sale-num 售量：#{sitem.salesNum}
+                                    .changge-num-box
+                                        span.default-icon.sub-icon
+                                            i.icon-iconfont-jian
+                                        span.buy-num 0
+                                        span.default-icon.add-icon(data-maxOrder=sitem.maxOrder||"")
+                                            i.icon-iconfont-jia
+                    else
+                        li.no-data 暂无数据
+if method === "ajax"
+    +ticketTypeList(data)

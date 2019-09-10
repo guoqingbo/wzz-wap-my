@@ -1,0 +1,94 @@
+-
+    function bedType(num) {
+        var str = "";
+        switch (num) {
+            case '0':
+            str = "大床";
+            break;
+        case '1':
+            str = "双床";
+            break;
+        case '2':
+            str = "三床";
+            break;
+        }
+        return str;
+    }
+mixin roomList(data,beginDate,endDate,productCode)
+    if data.length
+        each item in data
+            li
+                .pro-info
+                    .pro-img
+                        img(alt='', src=item.linkMobileImg)
+                    .hotel-info
+                        h4.pro-info-title=item.modelName
+                        p.pro-info-explian
+                            span=bedType(item.bedType)
+                            span #{item.buildingArea}m²
+                            span
+                                i.font-icon
+                                i.font-icon
+                        p.pro-info-explian
+                            a.showDetail(href='javascript:;', data-module='hotel', data-modelcode=item.modelCode) 房型介绍>
+                .pro-price.c-base
+                    span.price
+                        em ￥
+                        strong=item.currPrice.toFixed(2)
+                    span.original-price
+                        em ￥#{item.priceShow.toFixed(2)}
+
+                if item.ratecodes && item.ratecodes.length
+                    .pro-price(style='width:unset')
+                        a.price-code-btn.down(href='javascript:;')
+                            i.font-icon.icon-iconfont-jiantou
+                else
+                    .pro-price
+                        if item.enabled
+                            a(href='/order/hotel/' + item.rateCode + '?beginDate=' + beginDate + '&endDate=' + endDate + '&productCode=' + productCode) 预订
+                        else
+                            a.gray_btn 预订
+                .ticket-layer
+                    a.close-ticket.font-icon.icon-iconfont-pxchaxian(href='javascript:;')
+                    h3.notice-tit=item.modelName
+                    .ht-pic
+                    .article-info.bgf
+                        .article-main
+                            ul.order-list.myorder-list
+                                li
+                                    label.lab-title(for='') 床型
+                                    .order-item=bedType(item.bedType)
+                                li
+                                    label.lab-title(for='') 建筑面积
+                                    .order-item
+                                        span #{item.buildingArea}m²
+                                li
+                                    label.lab-title(for='') 房型描述
+                                    .order-item=item.modelDetail
+                    .room-handle
+                        if item.ratecodes && item.ratecodes.length
+                            -var sitem = item.ratecodes[0]
+                            a.fr(href='/order/hotel/'+sitem.rateCode+'?beginDate='+beginDate+'&endDate='+endDate+'&productCode='+productCode) 预订
+                            p
+                                | 价格
+                                span.price
+                                    em ￥
+                                    strong=sitem.currentPrice?sitem.currentPrice.toFixed(2):0
+
+            if item.ratecodes
+                each sitem in item.ratecodes
+                    li.price-code(style="display: none")
+                        h4=sitem.aliasName
+                        .pro-price.c-base
+                            span.price
+                                em ￥
+                                strong=sitem.currentPrice?sitem.currentPrice.toFixed(2):0
+                            span.original-price
+                                em ￥#{sitem.priceShow}
+                        .pro-price
+                            a(href='/order/hotel/'+sitem.rateCode+'?beginDate='+beginDate+'&endDate='+endDate+'&productCode='+productCode) 预订
+
+
+
+if method === "ajax"
+    +roomList(data,beginDate,endDate,productCode)

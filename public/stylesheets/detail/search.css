@@ -1,0 +1,69 @@
+.search-box{
+    font-size: .6rem;
+    padding: .5rem;
+    background-color: #ccc;
+    margin-bottom: 1rem;
+}
+.search-input-box{
+    display: inline-block;
+    position: relative;
+    width: 86%;
+    padding: .2rem 1.5rem;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: .3rem;
+
+}
+.icon-search{
+    position: absolute;
+    left: .3rem;
+    top: .15rem;
+}
+.search-input{
+    /*padding: 0 1.5rem;*/
+    width: 80%;
+    background: transparent;
+    border: 0;
+    outline: none;
+}
+.icon-shanchu1{
+    position: absolute;
+    right: .3rem;
+    top: .15rem;
+    color: #999;
+}
+.search-cancel-btn{
+    background-color: transparent;
+    float: right;
+    border: 0;
+    outline: none;
+    margin-top: .1rem;
+    color: #1a81ea;
+}
+
+.rol-top{
+    padding:0 .5rem;
+}
+.rol-list{
+    padding:0 0 1rem .5rem;
+    font-size: .6rem;
+}
+.rol-item{
+    box-sizing: border-box;
+    display: inline-block;
+    background-color: #ccc;
+    width: 31%;
+    margin-right: 2.3333%;
+    border-radius: .3rem;
+    padding: .2rem .1rem;
+    margin-bottom: .5rem;
+    text-align: center;
+}
+.rol-top{
+    padding-bottom: .5rem;
+    font-size: .6rem;
+}
+.rol-top .delete-icon{
+    float: right;
+    font-size: .7rem;
+}

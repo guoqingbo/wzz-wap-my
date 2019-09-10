@@ -1,0 +1,32 @@
+extends ../../layout
+
+block stylesheets
+  link(rel="stylesheet", href="/stylesheets/order.css")
+block javascripts
+  script(type='text/javascript', src='/javascripts/validate/jquery.validate.min.js')
+  script(type='text/javascript', src='/javascripts/validate/messages_zh.min.js')
+  script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
+  script(type='text/javascript', src='/javascripts/member/modify.js')
+
+block content
+  form(action="")#form
+    input(type="hidden",name="id",value=data.id)
+    ul.order-list.myorder-list
+      li
+        label.lab-title(for='')="游玩人"
+        .order-item
+            input.order-text(type='text', name='name', value=data.name placeholder='请填写姓名')
+      li
+        label.lab-title(for='') 手机号
+        .order-item
+            input.order-text(type='tel', name='phone', value=data.phone placeholder='请填写手机号')
+      li
+          label.lab-title(for='') 身份证
+          .order-item
+              input.order-text.card_box(type='text', name='charNo', value=data.charNo placeholder='请填写身份证')
+    .member-handle.linkMan-modify-btn
+      a.btn(href='javascript:;') 保存
+    .mask#mask
+    .tips
+      p
+      a(href="javascript:;").queding 确定

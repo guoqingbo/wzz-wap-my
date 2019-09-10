@@ -1,0 +1,18 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/appoint/addGameOrder.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/appoint/addGameOrder.js')
+block content
+    include ./mixin/periodList
+    input(name="ticketNo" type="hidden" value=data[0].data.checkCode)
+    input(name="projectId" type="hidden" value=projectId)
+    input(name="orderNo" type="hidden" value=orderNo)
+    input(name="ticketNum" type="hidden" value=data[0].data.amount||1)
+    .appoint-ticket-box
+        span.appoint-ticket-name=data[0].data.productName
+        span.appoint-ticket-num x#{data[0].data.amount}
+    table.appoint-period-table
+        +periodList(data[1].data,nowTime)
+

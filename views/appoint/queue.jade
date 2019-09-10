@@ -1,0 +1,12 @@
+extends ../layout
+
+block stylesheets
+       link(rel="stylesheet", href="/stylesheets/appoint/queue.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/appoint/queue.js')
+block content
+    .scan-code-box
+        .queue-tip-box 请扫您对应的票上的二维码查看排队情况
+        button.scan-code-btn 点我扫码
+    .scan-code-result
+

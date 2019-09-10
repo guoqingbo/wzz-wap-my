@@ -1,0 +1,19 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/exchange.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/exchange.js')
+    script(type='text/javascript', src='/lib/layer_mobile/layer.js')
+block content
+    .yh-allBox
+        .yh-box
+            label.yh-name 优惠码
+            input.yh-code(type="text" placeholder="请输入优惠券编码")
+
+        .yh-goNow
+            a.yh-now 立即兑换
+            a.yh-useBtn(href="/") 使用优惠券
+
+
+

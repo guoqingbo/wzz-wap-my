@@ -1,0 +1,12 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/lib/dropload/dropload.css")
+    link(rel="stylesheet", href="/stylesheets/appoint/gameList.css")
+block javascripts
+    script(type='text/javascript', src='/lib/dropload/dropload.min.js')
+    script(type='text/javascript', src='/javascripts/appoint/gameList.js')
+block content
+    .drop-box
+        ul.game-list
+

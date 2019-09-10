@@ -1,0 +1,15 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/question/list.css")
+block javascripts
+block content
+    ul.question-list
+        if data[0].data.length
+            each item in data[0].data
+                li.question-item
+                    a(href="/question/detail/"+item.id)
+                        .question-title-name=item.title
+                        .question-sub-title=item.info
+        else
+            li.no-data 暂无数据

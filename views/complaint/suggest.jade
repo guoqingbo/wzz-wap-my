@@ -1,0 +1,66 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/complaint/suggest.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/validate/jquery.validate.min.js')
+    script(type='text/javascript', src='/javascripts/validate/messages_zh.min.js')
+    script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
+block content
+    include ../common/index
+    form(action="/", method="post")#cop-form.suggest-form
+        ul.suggest-list
+            li.suggest-item.textarea-area
+                label.lab-title 问题描述
+                textarea.suggest-input#question
+            li.suggest-item
+                label.lab-title 姓名
+                input.suggest-input(type='text', value='', name='name', placeholder='')
+            li.suggest-item
+                label.lab-title 手机
+                input.suggest-input(type='tel', value='', name='phone', placeholder='')
+        .suggest-btn-box
+            a.submit-btn(href='javascript:;') 提交
+
+    script(type='text/javascript').
+        $(function () {
+            var validator = $('#cop-form').validate({
+                rules: {
+                    info: {
+                        required: true,
+                        isCode: true
+                    },
+                    name: {
+                        required: true,
+                        maxlength: 8,
+                        han: true
+                    },
+                    phone: {
+                        isMobile: true,
+                        required: true
+                    }
+                }
+            });
+            $('.submit-btn').click(function () {
+                if (validator.form()) {
+                    var params = {
+                        question: $('#question').val(),
+                        linkName: $('input[name="name"]').val(),
+                        linkMobile: $('input[name="phone"]').val()
+                    }
+                    $.post('/complaint/suggest',params)
+                        .success(function (data) {
+                            if (data[0].status === 200) {
+                                alert('提交成功');
+                                window.location.href = '/member';
+                            } else if (data[0].status === 402) {
+                                alert(data[0].message);
+                            }
+                        })
+                        .error(function (err) {
+                            window.location.href = '/error';
+                        });
+                }
+            });
+        })
+

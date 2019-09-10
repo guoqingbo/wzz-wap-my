@@ -1,0 +1,79 @@
+body{
+    background-color: #fff;
+}
+.top-box{
+    box-sizing: border-box;
+    background: url('../../images/appoint/top-bg.jpg') no-repeat;
+    background-size: 100% 100%;
+    height: 9.1rem;
+    text-align: center;
+    color: #fff;
+    font-size: .6rem;
+    padding-top: 2.2rem;
+}
+.now-project-text{
+    color: #b8d6ed;
+}
+.now-project-box{
+    position: relative;
+}
+.project-seletct-show{
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: transparent;
+    padding-bottom: .7rem;
+}
+.project-seletct{
+    display: none;
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border-radius: 5px;
+    padding: .5rem;
+    max-height: 9rem;
+    overflow-y: auto;
+}
+.project-seletct.show{
+    display: block;
+}
+.project-option{
+    color: #666;
+    border: 0;
+    outline: none;
+    font-size: .6rem;
+    /*background-color: #4f45ff;*/
+    /*margin-bottom: .3rem;*/
+    padding: .2rem 0;
+}
+.project-tip{
+    color: #b8d6ed;
+}
+.queue-num{
+    font-weight: bold;
+    color: #fff;
+}
+.bottom-box{
+    text-align: center;
+    padding-top: 2rem;
+}
+.scan-code-btn{
+    box-sizing: border-box;
+    background: url('../../images/appoint/btn-bg.jpg') no-repeat;
+    background-size: 100% 100%;
+    width: 7.5rem;
+    height: 7.5rem;
+    border: 0;
+    outline: 0;
+}
+.scan-text{
+    font-weight: bold;
+    color: #0090f7;
+    font-size: .7rem;
+    margin: .5rem 0;
+}
+.scan-text-tip{
+    color: #999;
+}

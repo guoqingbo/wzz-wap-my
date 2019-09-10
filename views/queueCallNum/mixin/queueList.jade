@@ -1,0 +1,24 @@
+mixin queueList(data,col)
+    if data.length
+        each item,index in data
+            //li.project-item(class='col-'+data.length)
+            li.project-item(style='width:'+projectWidth[index])
+                .project-item-box
+                    .project-title
+                        img.project-title-icon(src='/images/queueCallNum/col-top-icon.png')
+                        span.project-title-name=item.projectName
+                    ul.project-person-list(class=item.isShowtime == "T" && item.avgQueueTime?"project-person-list2":'')
+                        if item.upInfoList
+                            each sitem,sindex in item.upInfoList
+                                // each ssitem in [1,2,3,4,5,6,7,8,9,99,9,9,9,9,9,9]
+                                li.project-person-item(class='col-'+col[index])
+                                    span.project-person-num=sitem.queueUpNo
+                                    -var modelCode = sitem.modelCode
+                                    span.project-person-name #{sitem.userName || modelCode.substring(modelCode.length - 8, modelCode.length-2).toLowerCase()}
+                    if item.isShowtime == "T" && item.avgQueueTime
+                        .avg-queue-time(class=item.avgQueueTime>=30?'avg-queue-time2':'')
+                            p 预计时间
+                            p #{item.avgQueueTime} 分钟
+
+if method === "ajax"
+    +queueList(data,col)

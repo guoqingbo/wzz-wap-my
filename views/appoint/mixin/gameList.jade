@@ -1,0 +1,31 @@
+mixin gameList(data,isAppoint,orderNo)
+    each item in data
+        li.game-item
+            img.game-item-img(src=item.projectLogo||"/images/demo/no-img.jpg")
+            p.game-name=item.projectName
+            .game-item-bottom
+                span.game-status-text 状态：
+                +busyStatus(item.busyStatus)
+                //span.game-status.busy=item.busyStatus
+                if isAppoint&&item.appointStatus==='T'
+                    a.appoint-btn(href='/appoint/lookGameOrder?orderNo=' + orderNo+"&projectId="+item.projectId) 查看预约
+                else if item.appointStatus == "T"
+                    //- 未预约
+                    if orderNo
+                        //- 订单预约
+                        a.appoint-btn(href='/appoint/addGameOrder?orderNo=' + orderNo+"&projectId="+item.projectId) 预约
+                    else
+                        a.appoint-btn(href='/appoint/gameDetail/'+item.projectId) 预约
+
+mixin busyStatus(busyStatus)
+    case busyStatus
+        when "0"
+            span.game-status.easy 空闲
+        when "1"
+            span.game-status.normal 正常
+        when "2"
+            span.game-status.busy 繁忙
+
+
+if method === "ajax"
+    +gameList(data,isAppoint,orderNo)

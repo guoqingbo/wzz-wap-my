@@ -1,0 +1,97 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
+    link(rel="stylesheet", href="/stylesheets/main/coralHotel.css")
+block javascripts
+    script(type='text/javascript', src='/lib/swiper/swiper-3.4.2.jquery.min.js')
+    script(type='text/javascript', src='/javascripts/main/coralHotel.js')
+block content
+    include ../common/footer
+    include ../common/main
+    //-input.promoteSrcCode(type="hidden" value=promoteSrcCode)
+    //- 头部轮播
+    .hs-banner.coral-hotel
+        .bg-banner
+            #banner_swiper.swiper-container
+                .swiper-wrapper
+                    each item,i in data[0].data.many_mig
+                        .swiper-slide
+                            a(href=item.url)
+                                img(src=item.mig||'/images/demo/no-img.jpg')
+                                .coral-banner-box
+                                    .title(data-title=data[0].data.many_mig)=item.title
+                                    .total=(i+1)
+                                        | /#{data[0].data.many_mig.length}
+
+                .swiper-pagination
+
+    // 导航
+    .hs-nav
+        //+navList(ticketPark,projectNameCode)
+        if projectNameCode
+            -var projectNameCodePath = '/'+projectNameCode
+        ul.clearfix
+            li
+                a(href=projectNameCodePath + '/detail/ticket/' + ticketPark + '?classifyId=0')
+                    img(src='images/coralHotel/main/hotel.png', alt='门票预订')
+                    p 门票预订
+            li
+                a(href=projectNameCodePath + '/detail/ticket/' + ticketPark + '?classifyId=2')
+                    img(src='images/coralHotel/main/cabin.png', alt='娱乐预订')
+                    p 娱乐预订
+            li
+                a(href=projectNameCodePath + '/list/hotel')
+                    img(src='images/coralHotel/main/preference.png', alt='酒店预订')
+                    p 酒店预订
+            li
+                a(href=projectNameCodePath + '/list/repast')
+                    img(src='images/coralHotel/main/comboBooking.png', alt='餐饮预订')
+                    p 餐饮预订
+            li
+                a(href=projectNameCodePath + '/product/ticket/park2018092913241026745?fromBy=indexicon')
+                    img(src='images/coralHotel/main/recreation.png', alt='海岛玩家')
+                    p 海岛玩家
+            li
+                a(href=projectNameCodePath + '/detail/ticket/' + ticketPark + '?classifyId=3')
+                    img(src='images/coralHotel/main/catering.png', alt='特惠套餐')
+                    p 特惠套餐
+            li
+                a(href='http://daoyou.worldmaipu.com/upload_resource/2019/project/wuzhizh/map.html?hid=17390')
+                    img(src='images/coralHotel/main/island.png', alt='电子导览')
+                    p 电子导览
+            li
+                a(href=projectNameCodePath + '/list/strategy')
+                    img(src='images/coralHotel/main/combo.png', alt='...')
+                    p 玩家手册
+    //h4.index-title.title-yellow
+    //    span.index-title-line.title-line-yellow
+    //    ="本周热销"
+    ul.index-list.clearfix
+        each item in data[0].data.hot_product
+            li
+                a(href=item.url)
+                    .index-list-img
+                        img(src=item.mig||'/images/demo/no-img.jpg')
+                        //.tag.tag-one 超值爆款
+                        //.tag.tag-two 限时购
+                    .index-list-content.index-list-rxcontent
+                        h4.index-list-rxtitle=item.name
+                        //.index-content=item.name
+                        p
+                            span.price="￥"
+                            em=item.price
+                            del ￥
+                                |#{item.beforePrice}
+                            //span.index-list-rxbtn="立即购买"
+                        //p
+                        //    span="销量:"
+                        //    em=item.sale_num
+                        //    ="|"
+                        //    span="评论:"
+                        //    em=item.comment_num
+                        //    ="|"
+                        //    span="热度:"
+                        //    em=item.heat
+    //- a(href="#").more-btn="查看更多"
+    +footer

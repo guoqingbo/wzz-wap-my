@@ -1,0 +1,13 @@
+mixin periodList(data,nowTime)
+    tr
+        th 时段
+        th 剩余名额
+        //th VIP名额
+        th
+    each item,index in data
+        tr
+            td #{item.beginTime + "-" + item.endTime}
+            td(class=item.leftStock >= item.stock ? "red" : "") #{item.leftStock}
+            //td(class=item.leftVipstock >= item.vipstock ? "red" : "") #{(item.leftVipstock || '0')}
+            td
+               button.appoint-btn(data-id =item.id disabled= (item.beginTime<nowTime)||(item.leftStock<=0&&item.leftVipstock<=0)?true:false) 预约

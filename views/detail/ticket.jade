@@ -1,0 +1,162 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/calendar.css")
+    link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
+    link(rel="stylesheet", href="/stylesheets/detail/ticket.css")
+
+block javascripts
+    script(type='text/javascript', src='/javascripts/jquery.calendar.js')
+    script(type='text/javascript', src='/lib/swiper/swiper-3.4.2.jquery.min.js')
+    // 引入编译后的jade模板
+    script(type='text/javascript', src='/templates/ticket.js')
+    script(type='text/javascript', src='/javascripts/detail/ticket.js')
+block content
+    include ./mixin/ticketTypeList
+    // 头部信息
+    .top-header
+        .top-header-left
+            a.ticket-name-a(href="/detail/content?module=ticket")
+                span.ticket-name-text=data[0].data.aliasName
+                i.icon-iconfont-jiantou
+        .top-header-right
+            a(href="/list/commentList?type=park&commentLevel=0")
+                .comment-score-box
+                    span.comment-score-icon
+                        - var score = parseInt(data[1].data.avgScore||0)
+                        - for(var i=0;i<score;i++)
+                            i.icon-iconfont-aixin
+                        - for(var j=score;j<5;j++)
+                            i.icon-iconfont-aixin.not-light
+                    span.comment-score-num #{data[1].data.avgScore||0} 分
+                    .comment-num #{data[1].data.count||0}条评论
+                i.icon-iconfont-jiantou.comment-more
+    .page-line
+
+    // 搜索
+    .searchBoxDetail
+        i.iconfont.icon-search
+        input.search(type="text" name='searchName' placeholder="门船票/套票/项目票" value=searchName)
+    .page-line
+
+    // 日历
+    .calendar-box
+        ul.calendar-day-list
+            each item,index in dayList
+                li.calendar-day-item(class=index == 0 ? 'active' : '' data-today=item.today)
+                    p.calendar-day-value=item.day
+                    p.calendar-week=item.week
+                    // 当天无优惠
+                    if index > 0
+                        span.calendar-label 惠
+
+        a(href="javascript:;").calendar-btn
+            i.icon-calendar
+    .page-line
+
+    // 门票类型
+    .ticket-type-box
+        .swiper-container#swiperType
+            .swiper-wrapper
+                each item in data[2].classifyKindsVos
+                    .swiper-slide.ticket-type-slide(data-classifyid=item.classifyId)
+                        a(href='javascript:;')=item.classifyName
+                //.swiper-slide
+                //    a(class= classifyId === '0' ? 'cur' : '') 门票船
+                //.swiper-slide
+                //    a(class= classifyId === '3' ? 'cur' : '') 套票
+                //.swiper-slide
+                //    a(class= classifyId === '1' ? 'cur' : '') 潜水类
+                //.swiper-slide
+                //    a(class= classifyId === '2' ? 'cur' : '') 海上娱乐
+                //.swiper-slide
+                //    a(class= classifyId === '4' ? 'cur' : '') 陆地玩乐
+
+    //  票型列表
+    .ticket-list-box
+        +ticketTypeList(data[2].data)
+        // each item in ticketType
+            //.ticket-type(data-classifyid=item.classifyId)
+            //    .ticket-type-header
+            //        span.ticket-type-name=item.name
+            //    ul.ticket-type-list
+            //        each item in [1,2]
+            //            li.ticket-type-item(data-item="{}")
+            //                .ticket-type-left
+            //                    .ticket-info-name 门船票（淡季）
+            //                        span.ticket-info-icon 荐
+            //                    .ticket-price-box
+            //                        span.price-icon ￥
+            //                        span.price-num 0.002
+            //                    .ticket-info-bottom
+            //                        span.info-more-default.look-detail 查看详情
+            //                        span.info-more-default.video-intro 视频介绍
+            //                .ticket-type-right
+            //                    span.sale-num 售量：1000
+            //                    .changge-num-box
+            //                        span.default-icon.sub-icon
+            //                            i.icon-iconfont-jian
+            //                        span.buy-num 2
+            //                        span.default-icon.add-icon
+            //                            i.icon-iconfont-jia
+    // 购物车
+    .shop-car-box
+        .shop-car-header
+            span 已选商品
+            .clear-shop-car
+                i.icon-iconfont-shanchu
+                span.clear-shop-car-text 清空购物车
+        ul.shop-car-list
+            // each item in [1,2]
+            //     li.ticket-type-item
+            //         .ticket-type-left
+            //             .ticket-info-name 门船票（淡季）
+            //         .ticket-type-right
+            //             span.ticket-price-box
+            //                 span.price-icon ￥
+            //                 span.price-num 0.002
+            //             .changge-num-box
+            //                 span.default-icon.sub-icon
+            //                     i.icon-iconfont-jian
+            //                 span.buy-num 2
+            //                 span.default-icon.add-icon
+            //                     i.icon-iconfont-jia
+            //li.no-data 暂未选择商品
+    // 查看详情弹框
+    .ticket-detail-box
+        //.ticket-detail-header
+        //    span.ticket-detail-name 测试票
+        //    i.ticket-close.font-icon.icon-iconfont-pxchaxian
+        //.ticket-detail-content 内容
+        //.ticket-detail-bottom
+        //    .ticket-detail-price
+        //        span.detail-price-text 价格
+        //        span.detail-price-icon ￥
+        //        span.detail-price-value 0.01
+        //    .ticket-detail-btn
+        //        a.order-btn.gray_btn 预定
+    // 视频弹框
+    .video-pop-box
+        img.close-icon(src="/images/detail/close.png")
+        video(controls="controls" style="width: 100%;object-fit: fill;height:8rem")
+            //source(src=voice type="video/mp4")
+    // 底部购物车
+    .footer-shop-box
+        .footer-left
+            a.footer-nav
+                i.icon-nav-onlinekf
+                p.footer-nav-name 客服
+            a.footer-nav.shop-car-nav
+                i.icon-gouwuche
+                p.footer-nav-name 购物车
+                span.ticket-shop-num 0
+        .footer-right
+            .total-pirce
+                span.total-price-text 合计:
+                span.total-price-icon ￥
+                span.total-price-value 0
+            button.pay-btn(disabled=true) 预订
+    // 日历
+    #ticketcalendar.calendar
+    //- 蒙层
+    #mask.mask

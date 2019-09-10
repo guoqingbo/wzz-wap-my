@@ -1,0 +1,44 @@
+body{
+    background-color: #fff;
+}
+/*扫码页面*/
+.queue-tip-box{
+    width: 100%;
+    position: fixed;
+    top: 35%;
+    text-align: center;
+    font-size: .6rem;
+}
+
+.scan-code-btn{
+    width: 4rem;
+    height: 4rem;
+    border-radius: 100%;
+    outline: none;
+    border: 0;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #3b76de;
+    color: #fff;
+}
+
+/*排队列表*/
+.queue-list-box{
+    padding: .5rem;
+}
+.queue-item{
+    background-color: #fff;
+    margin-bottom: .5rem;
+    padding-bottom: .5rem;
+}
+.game-name{
+    padding: .5rem;
+    font-size: .6rem;
+    border-bottom: 1px solid #e5e5e5;
+}
+.queue-item-label{
+    padding: .5rem .5rem 0;
+    color: #999;
+}

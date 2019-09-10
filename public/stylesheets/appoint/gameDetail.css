@@ -1,0 +1,138 @@
+.no-data {
+    padding: .5rem;
+    font-size: .6rem;
+    color: #999;
+    text-align: center;
+}
+/*自定义复选框样式*/
+.checkbox{
+    background-color: #fff;
+    outline: none;
+    float: right;
+    box-sizing: border-box;
+    height: .8rem;
+    width: .8rem;
+    /*display: block;*/
+    border: 1px solid #e5e5e5;
+    vertical-align: middle;
+    padding: 0;
+}
+.appoint-ticket-item .selected{
+    background: url("../../images/common/checked.png") no-repeat;
+    background-size: 100% 100%;
+    border: 0;
+}
+.cannot-apooint{
+    float: right;
+}
+/*input[type="checkbox"]:checked + .checkbox{*/
+    /*background: url("../../images/common/checked.png") no-repeat;*/
+    /*background-size: 100% 100%;*/
+    /*border: 0;*/
+/*}*/
+
+/*.appoint-ticket-list{*/
+    /*padding:0 .5rem;*/
+/*}*/
+.appoint-ticket-box{
+    background-color: #fff;
+    margin-bottom: .5rem;
+}
+.appoint-ticket-list{
+    max-height: 10rem;
+    overflow: auto;
+}
+.appoint-ticket-item{
+    overflow: hidden;
+    padding: .5rem;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: .6rem;
+}
+.appoint-ticket-item:last-child{
+    border-bottom: 0;
+}
+.cancel-appont-btn{
+    border: 0;
+    outline: none;
+    float: right;
+    padding: .2rem .8rem;
+    color: #fff;
+    border-radius: .2rem;
+    background-color: #3b76de;
+    margin-top: -.3rem;
+}
+.appoint-ticket-time{
+    color: #999;
+    padding-left: .6rem;
+}
+.appoint-ticket-bottom{
+    padding: .5rem;
+}
+.appoint-ticket-btn{
+    width: 47%;
+    background-color: #fff;
+    border: 1px solid #3b76de;
+    color: #3b76de;
+    text-align: center;
+    padding: .2rem 0;
+    border-radius: .2rem;
+}
+.scan-code-btn{
+    float: right;
+}
+.appoint-period-table{
+    background-color: #fff;
+    width: 100%;
+}
+.appoint-period-table th,.appoint-period-table td{
+    text-align: center;
+    height: 1.5rem;
+    width: 25%;
+    font-size: .6rem;
+}
+.appoint-period-table tr{
+    border-bottom: 1px solid #e5e5e5;
+}
+.appoint-period-table tr:last-child{
+    border-bottom: 0;
+}
+.appoint-btn{
+    border: 0;
+    background-color: #01355c;
+    color: #fff;
+    padding: .2rem .5rem;
+    outline: none;
+    border-radius: .2rem;
+}
+button:disabled{
+    background-color: #e4e4e4;
+}
+.red{
+    color: #fe0002;
+}
+/*ajax发送前的加载状态*/
+.up-loading{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 5rem;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    margin: -0.5rem 0 0 -2.5rem;
+    opacity: 0;
+    transition: 400ms;
+}
+.up-loading.show{
+    opacity: 1;
+    transition: 400ms;
+}
+.appoint-ticket-tip{
+    text-align: center;
+    color: #999;
+    padding: .5rem;
+    border-bottom: 1px solid #e5e5e5;
+}

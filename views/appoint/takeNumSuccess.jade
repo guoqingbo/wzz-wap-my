@@ -1,0 +1,33 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/appoint/takeNumSuccess.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/appoint/takeNumSuccess.js')
+block content
+    .top-box
+        img.img-icon(src='/images/appoint/icon.png')
+        span.take-text 排号成功
+    .project-info-box
+        .top-line
+        .project-num
+            span.project-num-value=data[0].data.queueUpNo
+            span.project-num-text 号
+        img.img-line(src='/images/appoint/line.jpg')
+        .project-group-box
+            .project-group
+                span.project-group-lable 排号项目
+                span.project-group-value=data[0].data.projectName
+            .project-group
+                span.project-group-lable 排号时间
+                span.project-group-value=data[0].data.createTime
+            .project-group
+                span.project-group-lable 等待人数
+                span.project-group-value #{data[0].data.num}人
+            .project-group
+                span.project-group-lable 预计排队
+                span.project-group-value #{data[0].data.estimatedTime}分钟
+    .bottom-btn-box
+        button.btn-default.scan-code-btn 继续扫码
+        button.btn-default.cancel-btn(data-id = data[0].data.id data-projectid = projectId) 取消排号
+

@@ -1,0 +1,100 @@
+extends layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/myTrip.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/myTrip.js')
+    script(type='text/javascript', src='/lib/layer_mobile/layer.js')
+block content
+
+     .guide-service
+         -var projectName=data[0].data[0]
+         p.guide-title  #{projectName.projectName}
+           img.closeImg(src="/images/index/close.png")
+         input(type="hidden" value=projectName.projectId  class="projectId")
+         input(type="hidden" value=leaguerId  class="leaguerId")
+         ul.guide-ul
+             //-li.guide-li
+                span.guide-num 111
+                span.guide-inpt
+                    img.chooseImg(src="/images/index/chooseImg.png")
+                    img.chooseActive(src="/images/index/chooseActive.png")
+         .scan-box
+             span.scan-btn
+                 input(type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)").hide_file
+                 | 添加身份证
+             p.scan-ewm 请拍照识别身份证
+         .bjx-img
+             img(src="/images/index/dydl.png")
+
+         ul.yuyue-box
+             each yuyue in data[0].data
+              //.yuyue-ym
+              li.yuyue-li
+                  input(type="hidden" value=yuyue.id  class="yyId")
+                  span.yuyue-time #{yuyue.beginTime}-#{yuyue.endTime}
+                  span.yuyue-sy  剩余 #{yuyue.leftStock}
+                  span.yuyue-btn
+                      a() 预约
+     script.
+        //@ sourceURL=114
+        $(function(){
+            //插入数据
+            var cardCodeId;
+            var projectId=$(".projectId").val(),
+                leaguerId=$(".leaguerId").val();
+            $.ajax({
+                type: "post",
+                url: "/leaguerTicket",
+                cache: false,
+                data: {leaguerCode: leaguerId, projectId: projectId},
+                success: function (data) {
+                    console.log(data);
+                    var data = data[0];
+                    if (data.status === 200) {
+                        var len = data.data;
+                        var html = "";
+                        var guideId, barcode, barcodes;
+                        $(".guide-ul").css("height", "5rem");
+                        if (len.length === 0) {
+                            $(".guide-ul").css("height", "0rem");
+                        }
+                        if ($(".guide-li").length > 0) {
+                            $(".guide-ul .guide-li").each(function (i, ele) {
+                                guideId = $(ele).find(".guideId").val();
+                                barcode = $(ele).find(".guide-num").text();
+                                len.forEach(function (elem, index) {
+                                    barcodes = elem.barcode;
+                                    if (barcode === barcodes && guideId === elem.fnumber) {
+                                        len.splice(index, 1);
+                                    }
+                                });
+                            });
+                            for (var i = 0; i < len.length; i++) {
+                                html += '<li class="guide-li"><input type="hidden" value=' + len[i].fnumber + ' class="guideId"><span class="guide-num '+(len[i].status==="2"? 'guide-old':'' )+'">' + len[i].barcode + '</span>' +
+                                    '<span class="guide-inpt">'+(len[i].status==="2"? '<img class="chooseJzgx" src="/images/index/jzgx.png">':'<img class="chooseImg" src="/images/index/chooseImg.png"><img class="chooseActive" src="/images/index/chooseActive.png">')+'</span>' +
+                                    '</li>';
+                            }
+                            $(".guide-ul").append(html);
+
+                        } else {
+                            for (var i = 0; i < len.length; i++) {
+                                html += '<li class="guide-li"><input type="hidden" value=' + len[i].fnumber + ' class="guideId"><span class="guide-num '+(len[i].status==="2"? 'guide-old':'' )+'">' + len[i].barcode + '</span>' +
+                                    '<span class="guide-inpt">'+(len[i].status==="2"? '<img class="chooseJzgx" src="/images/index/jzgx.png">':'<img class="chooseImg" src="/images/index/chooseImg.png"><img class="chooseActive" src="/images/index/chooseActive.png">')+'</span>' +
+                                    '</li>';
+                                cardCodeId = len[0].fnumber;
+                            }
+                            $(".guide-ul").append(html);
+                        }
+
+                    } else {
+                        layer.open({
+                            content: data.message
+                            , skin: 'msg'
+                            , time: 2 //2秒后自动关闭
+                        });
+                    }
+                }
+            })
+        })
+

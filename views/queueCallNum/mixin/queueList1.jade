@@ -1,0 +1,14 @@
+mixin queueList1(data)
+    if data.length
+        each item,index in data
+            li.project-item
+                span.project-item-name=item.projectName
+                .now-num-box
+                    span.now-num=item.callingQueueNo
+                    p.now-num-text 当前叫号
+                .queue-num-box
+                    span.queue-num=item.waitNum
+                    p.now-num-text 排队人数
+
+if method === "ajax"
+    +queueList1(data,col)

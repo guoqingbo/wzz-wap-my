@@ -1,0 +1,37 @@
+// 购物车
+mixin shopCarList(data)
+    if data.length
+        each item in data
+            li.ticket-type-item(data-item=item data-id=item.id)
+                .ticket-type-left
+                    .ticket-info-name=item.aliasName
+                .ticket-type-right
+                    span.ticket-price-box
+                        span.price-icon ￥
+                        span.price-num=item.currentPrice
+                    .changge-num-box
+                        span.default-icon.sub-icon
+                            i.icon-iconfont-jian
+                        span.buy-num=item.buyNum
+                        span.default-icon.add-icon
+                            i.icon-iconfont-jia
+    else
+        li.no-data 暂未选择商品
+
+// 门票详情
+mixin lookTicketDetail(data)
+    if data
+        .ticket-detail-header
+            span.ticket-detail-name=data.aliasName
+            i.ticket-close.font-icon.icon-iconfont-pxchaxian
+        .ticket-detail-content!=data.modelExplain
+        .ticket-detail-bottom
+            .ticket-detail-price
+                span.detail-price-text 价格
+                span.detail-price-icon ￥
+                span.detail-price-value=data.currentPrice||0
+            .ticket-detail-btn
+                - var _href = data.enabled === 'T' ?  '/order/ticket/' + data.rateCode + '?parkId='+ data.parkId: 'javascript:;'
+                a.order-btn(href=_href , class=data.enabled === 'T' ? '' : 'gray_btn') 预定
+if render
+    +#{mixin}(data)

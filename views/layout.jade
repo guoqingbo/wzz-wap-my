@@ -1,0 +1,52 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    meta(content='yes', name='apple-mobile-web-app-capable')
+    meta(content='black', name='apple-mobile-web-app-status-bar-style')
+    meta(content='telephone=no', name='format-detection')
+    meta(content='email=no', name='format-detection')
+    meta(name="description" content=description )
+    meta(name="keywords" content=keywords)
+    //meta(name="subject" content=titleContent)
+    title= title || '三亚蜈支洲岛旅游区'
+    //meta(content='email=no', name='format-detection')
+    //meta(name="description" content=description )
+    //meta(name="keywords" content=keywords)
+    //meta(name="subject" content=description)
+    //title= titles
+    // 浏览器标题栏加入图标
+    link(rel="Shortcut Icon" href=titleIcon||"/favicon.ico"  type="image/x-icon")
+    link(rel='stylesheet', href='/stylesheets/reset.css')
+    link(rel='stylesheet', href='/stylesheets/share.css')
+    link(rel='stylesheet', href='/stylesheets/common.css')
+    //link(rel='stylesheet', href='//at.alicdn.com/t/font_1106736_mybi8vwlbx.css')
+    link(rel='stylesheet', href='/fonts/iconfont.css')
+    block stylesheets
+    // es6新增api polyfill
+    script(type='text/javascript' src="/lib/polyfill.min.js")
+    script(type='text/javascript', src="/lib/jquery-1.8.3.min.js")
+    //script(type='text/javascript', src="https://res.wx.qq.com/open/js/1-1.3.2.js")
+    script(type='text/javascript', src="/javascripts/share.js")
+    script(type='text/javascript', src="/lib/touch-0.2.14.min.js")
+    //script(type='text/javascript', src="/javascripts/baidu-statistics.js")
+    script(type='text/javascript', src="/javascripts/public.js")
+    script(type='text/javascript', src="/lib/runtime.js")
+    //script(type='text/javascript', src='/javascripts/jweixin-1.3.2.js')
+    //script(type='text/javascript', src="/javascripts/wxShare.js")
+    script(type='text/javascript', src="/lib/jweixin-1.4.0.js")
+    if wxShare && wxShare.iswx
+      script.
+          var wxShare = !{JSON.stringify(wxShare)}
+      script(type='text/javascript', src="/javascripts/wxShare.js")
+    block javascripts
+
+  body
+    block content
+    //-.publicBox(style="display:none")
+       img(src=publicimg  class="commonImg")
+    //if wxShare && wxShare.iswx
+    //  script.
+    //      var wxShare = !{JSON.stringify(wxShare)}
+    //  script(type='text/javascript', src="/javascripts/wxShare.js")

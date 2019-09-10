@@ -1,0 +1,41 @@
+.appoint-ticket-box{
+    background-color: #fff;
+    padding: .5rem;
+    font-size: .7rem;
+    margin-bottom: .3rem;
+}
+.appoint-ticket-num{
+    float: right;
+    color: #b5865a;
+}
+/*预约时段*/
+.appoint-period-table{
+    background-color: #fff;
+    width: 100%;
+}
+.appoint-period-table th,.appoint-period-table td{
+    text-align: center;
+    height: 1.5rem;
+    width: 25%;
+    font-size: .6rem;
+}
+.appoint-period-table tr{
+    border-bottom: 1px solid #e5e5e5;
+}
+.appoint-period-table tr:last-child{
+    border-bottom: 0;
+}
+.cancel-appont-btn{
+    border: 0;
+    background-color: #01355c;
+    color: #fff;
+    padding: .2rem .5rem;
+    outline: none;
+    border-radius: .2rem;
+}
+.red{
+    color: #fe0002;
+}
+.green{
+    color: #85cb6b;
+}

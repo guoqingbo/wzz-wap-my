@@ -1,0 +1,74 @@
+//- 购物车列表
+mixin shopCarList(data)
+    if data&&data.list.length
+        each item in data.list
+            .ticket-type-box(data-real=item.isRealName data-ratecode=item.rateCode)
+                .ticket-type-header
+                    span.ticket-name=item.aliasName
+                    .ticket-amount
+                        span.ticket-amount-icon *
+                        span.ticket-amount-value=item.buyNum
+                    .ticket-price
+                        span.ticket-price-icon ￥
+                        span.ticket-price-value=item.currentPrice
+                //- 如果是实名制票，选择游玩人
+                if item.isRealName == "T"
+                    .person-option
+                        span.person-play-text 游玩人
+                        //.person-play-often
+                        //    each linkmanItem,index in data.linkman
+                        //        if index<3
+                        //            span.person-often-item(data-item=linkmanItem)=linkmanItem.linkmanName
+                        span.chose-play-person 选择游玩人 >
+
+                    .person-selected
+                        // each item in [1,2]
+                        //     .person-selected-item
+                        //         span.person-selected-name 网哈哈
+                        //         span.person-selected-icard 3464698465156
+                        //         span.person-selected-delete
+                        //             i.icon-iconfont-shanchu
+                        .no-data 尚未选择游玩人
+            .page-line
+    else
+        .no-data 暂未选择商品
+
+// 游玩人弹框
+mixin linkManList(data)
+    .linkMan-handle
+        a(href="javascript:;")#cancel="取消"
+        a(href="javascript:;")#enter="确定"
+    .linkMan-content
+        .linkManEditBar
+            a(href="/member/linkMan/add").linkMan-add +添加
+            .line
+            a(href="/member/linkMan/list").linkMan-edit 编辑
+        ul.linkMan-list
+            each item in data.linkMan
+                li.linkMan-item(data-item=item)
+                    .linkMan-name=item.linkmanName
+                    .linkMan-center
+                        p 手机号：#{item.phoneNo}
+                        p 身份证：#{item.cardNo}
+                    .linkMan-check
+                        span.checkspan(class=data.linkManChecked.indexOf(item.id)>-1?'checked':'')
+                            i.icon-checkmark
+
+// 游玩人
+mixin ticketLinkMan(data)
+    each item in data
+        .person-selected-item(data-item=item)
+            span.person-selected-name=item.linkmanName
+            span.person-selected-icard=item.cardNo
+            span.person-selected-delete
+                i.icon-iconfont-shanchu
+
+// 取票人
+mixin takeTicketLinkMan(data)
+    each item in data
+        .take-person-item(data-item=item)
+            span.take-person-name=item.linkmanName
+            span.take-person-phone=item.phoneNo
+            p.person-selected-icard=item.cardNo
+if render
+    +#{mixin}(data)

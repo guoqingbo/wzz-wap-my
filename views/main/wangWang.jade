@@ -1,0 +1,123 @@
+extends ../layout
+
+block stylesheets
+  link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
+  link(rel="stylesheet", href="/stylesheets/main/wangWang.css")
+block javascripts
+  script(type='text/javascript', src='/lib/swiper/swiper-3.4.2.jquery.min.js')
+  script(type='text/javascript', src='/javascripts/main/wangWang.js')
+block content
+  include ../common/footer
+  include ../common/main
+  //-input.promoteSrcCode(type="hidden" value=promoteSrcCode)
+  //- 头部轮播
+  .hs-banner
+    .bg-banner
+      #banner_swiper.swiper-container
+        .swiper-wrapper
+          each item in data[0].data.many_mig
+            .swiper-slide
+                a(href=item.url)
+                  img(src=item.mig||'/images/demo/no-img.jpg')
+
+        .swiper-pagination
+  //导航栏 轮播
+  if data[0].data["notice"].length>0
+    .news-box
+      .news-img
+        img.news-zuiqiang(src="../images/index/horn.png")
+        img.news-renwen(src="../images/index/hot.png")
+
+      ul.swiper-wrapper.news-ul
+        each newsTop in data[0].data["notice"]
+          li.swiper-slide
+            a(href="/detail/newsTop/" + newsTop.baseCode) #{newsTop.title}
+  //- .hs-search
+  //-   .search-box.clearfix
+  //-     span.search-text
+  //-       | 门票
+  //-       i.icon-iconfont-jiantou
+  //-     span.search-line
+  //-     input(type='text', placeholder='请输入搜索关键字')
+  //-     span.button#searchBtn
+
+  // 导航
+  .hs-nav
+    +navList(ticketPark,projectNameCode)
+  h4.index-title.title-blue
+    span.index-title-line.title-line-blue
+    ="主推套餐"
+  ul.index-list.clearfix
+    each item in data[0].data.season_ticket
+      li
+        a(href=item.url)
+          .index-list-img
+            img(src=item.mig||'/images/demo/no-img.jpg',alt=item.name)
+          .index-list-content
+            h4.index-list-title=item.name
+            p.index-explian=item.remark
+            span.index-list-price="￥"
+              em=item.price
+            span.index-list-btn="立即购买"
+            .content-buttom
+              span="销量:"
+                em=item.sale_num
+              | |
+              span="评论:"
+                em=item.comment_num
+              | |
+              span="热度:"
+                em=item.heat
+  h4.index-title.title-yellow
+    span.index-title-line.title-line-yellow
+    ="最新套餐"
+  .carousel-adv
+    #carousel_swiper.swiper-container
+        .swiper-wrapper
+          each item in data[0].data.new_publish
+            .swiper-slide
+                a(href=item.url)
+                  img(src=item.mig||'/images/demo/no-img.jpg')
+                  .carousel-content
+                    h4=item.name
+                      span="立即购买"
+                    .carousel-content-buttom
+                      span.price="￥"
+                        em=item.price
+                      del="￥"+item.beforePrice
+                      p
+                        span="销量:"
+                          em=item.sale_num
+                        ="|"
+                        span="评论:"
+                          em=item.comment_num
+                        ="|"
+                        span="热度:"
+                          em=item.heat
+    .swiper-pagination
+  h4.index-title.title-yellow
+    span.index-title-line.title-line-yellow
+    ="本周热销"
+  ul.index-list.clearfix
+    each item in data[0].data.hot_product
+      li
+        a(href=item.url)
+          .index-list-img
+            img(src=item.mig||'/images/demo/no-img.jpg')
+          .index-list-content.index-list-rxcontent
+            h4.index-list-rxtitle=item.name
+            p
+              span.price="￥"
+                em=item.price
+              span.index-list-rxbtn="立即购买"
+            p
+              span="销量:"
+                em=item.sale_num
+              ="|"
+              span="评论:"
+                em=item.comment_num
+              ="|"
+              span="热度:"
+                em=item.heat
+  //- a(href="#").more-btn="查看更多"
+  +footer

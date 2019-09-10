@@ -1,0 +1,19 @@
+mixin ticketList(data)
+    if data.length
+        each item,index in data
+            li.appoint-ticket-item
+                span.appoint-ticket-no=item.barcode
+                if item.status == 0
+                    //- 未预约
+                    //input.appoint-ticket-input(type="checkbox" hidden)
+                    button.checkbox.seleted-ticket(data-ticketno=item.barcode)
+                else if item.status == 2
+                    //- 已预约
+                    span.appoint-ticket-time #{item.beginTime+"-"+(item.endTime||"")}
+                    button.cancel-appont-btn(data-ticketno=item.barcode) 取消
+                //else
+                //    span.cannot-apooint 不可预约
+    else
+        li.no-data 暂无数据，请扫身份证或票型条码
+if method === "ajax"
+    +ticketList(data)
