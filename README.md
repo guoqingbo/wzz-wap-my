@@ -10,12 +10,12 @@
    * 源码地址(git)：http://git.sendinfo.com/BasicBusiness/Frontdesign/wzz/wzz-wap-node.git
    * 堡垒机：http://192.168.200.94:7190 guoqingbo/123456
    * 提供的外链
-       项目预约(大屏滚动) /appoint/list
-       排队叫号 /callNum?screenCode=1
-       排队叫号新版 /queueCallNum/list?screenCode=1?col=1,1,1,1,1 col参数为列布局
-       排队叫号新版1 /queueCallNum/list1?screenCode=1
-       游玩项目列表 /appoint/gameList
-       手机取号 /appoint/takeNum
+       项目预约(大屏滚动) /appoint/list  
+       排队叫号 /callNum?screenCode=1  
+       排队叫号新版 /queueCallNum/list?screenCode=1?col=1,1,1,1,1 col参数为列布局  
+       排队叫号新版1 /queueCallNum/list1?screenCode=1  
+       游玩项目列表 /appoint/gameList  
+       手机取号 /appoint/takeNum  
        
 ## 官网wap
 ### 测试环境
