@@ -9,7 +9,7 @@
    * 源码地址(svn)：https://dssvn.sendinfo.com/svn/webwork/frontEnd/蜈支洲
    * 源码地址(git)：http://git.sendinfo.com/BasicBusiness/Frontdesign/wzz/wzz-wap-node.git
    * 堡垒机：http://192.168.200.94:7190 guoqingbo/123456
-   * 提供的外链
+   * 提供的外链  
        项目预约(大屏滚动) /appoint/list  
        排队叫号 /callNum?screenCode=1  
        排队叫号新版 /queueCallNum/list?screenCode=1?col=1,1,1,1,1 col参数为列布局  
