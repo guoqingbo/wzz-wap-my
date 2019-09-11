@@ -3,31 +3,41 @@ exports.mainRouter = function (router, common, requireLogin ) {
     // wap官网首页
     router.get(['/', '/main'], function (req, res, next) {
 
-        if(req.query.promoterId){
-            console.log(req.query);
-            req.session.promoterId=req.query.promoterId;
-            req.session.teamBatchNo=req.query.teamBatchNo||"";
-
-            console.log("=============promoteSrcCode===============",req.session.promoteSrcCode)
-            //线上channerId
-            req.session.channelId=req.query.channelId||"";
-
-            req.session.curUrl = '/main';
-            if(req.query.promoteSrcCode){
-                req.session.curUrl = '/main?promoteSrcCode='+req.query.promoteSrcCode;
-            }
-            // req.session.curUrl = req.originalUrl;
-            return res.redirect('/login')
-        }else{
-            req.session.promoterId="";
-            req.session.teamBatchNo="";
-            // req.session.promoteSrcCode="";
-            console.log("=============promoteSrcCode===============",req.session.promoteSrcCode)
-        }
+        // 全渠道参数
+        req.session.channelId=req.query.channelId||"";
+        req.session.promoterId=req.query.promoterId||"";
+        req.session.teamBatchNo=req.query.teamBatchNo||"";
         req.session.promoteSrcCode=req.query.promoteSrcCode||"";
+
+        // 全渠道扫码进入首页需要登录
+        if(req.query.promoteSrcCode){
+            common.isLogin(req, res)
+        }
+        // if(req.query.promoterId){
+        //     console.log(req.query);
+        //     req.session.promoterId=req.query.promoterId;
+        //     req.session.teamBatchNo=req.query.teamBatchNo||"";
+        //
+        //     //线上channerId
+        //     req.session.channelId=req.query.channelId||"";
+        //
+        //     req.session.curUrl = '/main';
+        //     if(req.query.promoteSrcCode){
+        //         req.session.curUrl = '/main?promoteSrcCode='+req.query.promoteSrcCode;
+        //     }
+        //     // req.session.curUrl = req.originalUrl;
+        //     return res.redirect('/login')
+        // }else{
+        //     req.session.promoterId="";
+        //     req.session.teamBatchNo="";
+        // }
+        // req.session.promoteSrcCode=req.query.promoteSrcCode||"";
+
         let title = ''
         // projectNameCode判断所属项目
         let projectNameCode = req.session.projectNameCode
+
+
         if(projectNameCode=='official'){
             // 官网wap
             title = '三亚蜈支洲岛旅游区'

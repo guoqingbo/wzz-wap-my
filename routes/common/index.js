@@ -483,7 +483,9 @@ let common = {
                 // return res.redirect('/login?redir='+req.originalUrl)
             }
         } else {
-            next();
+            if(next){
+                next();
+            }
         }
     },
     getPageMeta:function (req, res, next) {

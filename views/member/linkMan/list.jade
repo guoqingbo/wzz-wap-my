@@ -1,30 +1,28 @@
 extends ../../layout
 
 block stylesheets
-  link(rel="stylesheet", href="/stylesheets/order.css")
+    link(rel="stylesheet", href="/stylesheets/order.css")
 block javascripts
-  script(type='text/javascript', src='/javascripts/member/order.js')
+    script(type='text/javascript', src='/javascripts/member/order.js')
 block content
-  
-  .linkMan-content.linkMan-list-wrap
-    a(href="/member/linkMan/add").linkMan-add="+添加"
-    ul.linkMan-list
-      each item in data[0].data
-        li
-          .linkMan-name
-              =item.linkmanName
-          .linkMan-center
-              p="手机号："+item.phoneNo
-              p="身份证："+item.cardNo
-          .linkMan-handles
-              a(href="/member/linkMan/modify?id="+item.id+"&name="+item.linkmanName+"&phone="+item.phoneNo+"&charNo="+item.cardNo)
-                span
-                  i.icon-iconfont-xie
-              span(data-id=item.id).linkManDel
-                i.icon-iconfont-shanchu
-  .mask#mask
-  .tips
-    p
-    a(href="javascript:;").queding 确定
-  
-  
+    .linkMan-content.linkMan-list-wrap
+        a(href="/member/linkMan/add").linkMan-add="+添加"
+        ul.linkMan-list
+            each item in data[0].data
+                li
+                    .linkMan-name
+                        =item.linkmanName
+                    .linkMan-center
+                        p="手机号：" + item.phoneNo
+                        p="身份证：" + item.cardNo
+                    .linkMan-handles
+                        a(href="/member/linkMan/modify?id=" + item.id + "&name=" + item.linkmanName + "&phone=" + item.phoneNo + "&charNo=" + item.cardNo+'&originalUrl='+originalUrl)
+                            span
+                                i.icon-iconfont-xie
+                        span(data-id=item.id).linkManDel
+                            i.icon-iconfont-shanchu
+    .mask#mask
+    .tips
+        p
+        a(href="javascript:;").queding 确定
+

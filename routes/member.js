@@ -92,7 +92,6 @@ exports.mainRouter = function (router,common){
         });
     });
 
-    /*----- 订单列表在list.js(方便统一做翻页) -----*/
 
     // 订单详情
     router.get('/member/order/:orderNo', common.isLogin, function (req,res,next){
@@ -298,7 +297,7 @@ exports.mainRouter = function (router,common){
             req: req,
             res: res,
             callBack: function (result, reObj) {
-
+                reObj.originalUrl = req.query.originalUrl || ''
             }
         })
     });

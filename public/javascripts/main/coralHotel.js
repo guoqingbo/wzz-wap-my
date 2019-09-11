@@ -1,8 +1,19 @@
 $(function () {
-    // //判断推广码存不存在
-    // if($(".promoteSrcCode").val()==='T'){
-    //     alert('此推广二维码已失效，请登录智慧畅玩重新获取最新二维码');
-    // }
+    // 判断是否存储全渠道参数
+    function storeQuanQudao(){
+        // 获取url后的参数
+        var query = window.location.search;
+        // 判断推广码存不存在
+        if(query && /promoteSrcCode/.test(query)){
+            sessionStorage.setItem('mainParam',query)
+        }else{
+            var query1 = sessionStorage.getItem('mainParam')
+            if(query1){
+                window.location.href = window.location.href+query1
+            }
+        }
+    }
+    storeQuanQudao()
     /**
      * banner
      */

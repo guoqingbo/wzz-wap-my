@@ -77,7 +77,8 @@ $(function (){
                 .success(function (data){
                     var datas = data[0];
                     if (datas.status === 200){
-                        window.location.href = location.search.split('?originalUrl=')[1] || '/member/linkMan/list';
+                        var originalUrl = getQueryVariable('originalUrl')
+                        window.location.href = originalUrl || '/member/linkMan/list';
                     }else{
                         $('.tips p').text(datas.message);
                         $('.mask,.tips').show();
@@ -97,7 +98,9 @@ $(function (){
                 .success(function (data){
                     var datas = data[0];
                     if (datas.status === 200){
-                        window.location.href = '/member/linkMan/list';
+                        var originalUrl = getQueryVariable('originalUrl')
+                        window.location.href = originalUrl || '/member/linkMan/list';
+                        // window.location.href = '/member/linkMan/list';
                     }else{
                         $('.tips p').text(datas.message);
                         $('.mask,.tips').show();

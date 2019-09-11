@@ -40,9 +40,9 @@ mixin linkManList(data)
         a(href="javascript:;")#enter="确定"
     .linkMan-content
         .linkManEditBar
-            a(href="/member/linkMan/add").linkMan-add +添加
+            a(href="/member/linkMan/add?originalUrl=/order/ticket").linkMan-add +添加
             .line
-            a(href="/member/linkMan/list").linkMan-edit 编辑
+            a(href="/member/linkMan/list?originalUrl=/order/ticket").linkMan-edit 编辑
         ul.linkMan-list
             each item in data.linkMan
                 li.linkMan-item(data-item=item)

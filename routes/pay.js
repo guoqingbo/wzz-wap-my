@@ -262,6 +262,7 @@ exports.mainRouter = function (router, common) {
                         nickName: result.nickname,
                         imgUrl: result.headimgurl,
                         sex: result.sex,
+                        channelId:req.session.channelId||"",
                         promoterId:req.session.promoterId||"",
                         teamBatchNo:req.session.teamBatchNo||""
                     },
