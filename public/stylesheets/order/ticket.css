@@ -61,11 +61,16 @@ body{
     display: inline-block;
 }
 .chose-play-person{
+    cursor: pointer;
     display: inline-block;
     width: 25%;
     text-align: right;
     color: #ff9d00;
     float: right;
+    padding: 0;
+    background-color: #fff;
+    outline: 0;
+    border:0;
 }
 .person-often-item{
     font-size: .5rem;
@@ -168,7 +173,7 @@ body{
     overflow: hidden;
     white-space: nowrap;}
 .linkMan-center{ border-left: 1px solid #ddd; padding: 0 .75rem; font-size: 0.6rem;}
-.linkMan-check{ width: 1rem; line-height: 1.5rem;}
+.linkMan-check{ width: 1rem; line-height: 1.5rem;cursor: pointer}
 .linkMan-check span{ display:inline-block; width: 0.9rem; height: 0.9rem; line-height: 0.9rem; border: 1px solid #dfdfdf; border-radius: 3px; vertical-align: middle; text-align: center;}
 .linkMan-check span.checked{ border: 1px solid #3b76de; color: #3b76de;}
 .linkMan-check span i{ vertical-align: middle;display: none}

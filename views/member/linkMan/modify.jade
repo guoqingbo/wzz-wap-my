@@ -24,6 +24,10 @@ block content
           label.lab-title(for='') 身份证
           .order-item
               input.order-text.card_box(type='text', name='charNo', value=data.charNo placeholder='请填写身份证')
+              span.c-price.camera-text
+                input(type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)").hide_file
+                i.font-icon.icon-iconfont-camera(style='margin-right:.1rem')
+                ="拍照识别"
     .member-handle.linkMan-modify-btn
       a.btn(href='javascript:;') 保存
     .mask#mask

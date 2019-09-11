@@ -4,7 +4,6 @@ $(function () {
     // 初始化页面
     function initHtml() {
         var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
-        console.log(shopData)
         // 生成票型列表
         var html = orderTemplate({data:{list:shopData.list,linkman:linkman},render:true,mixin:'shopCarList'})
         $(".shop-car-list").html(html)
@@ -46,21 +45,24 @@ $(function () {
             })
         }
 
-        $("#linkManLayer").addClass("linkMan-layer-show");
-        $("#mask").show();
-        var html = orderTemplate({
-            data:{
-                linkMan:linkman,
-                linkManChecked:linkManChecked
-            },
-            render:true,
-            mixin:'linkManList'
+        $.get('/member/linkMan',function (data) {
+            $("#linkManLayer").addClass("linkMan-layer-show");
+            $("#mask").show();
+            linkman = data[0].data
+            var html = orderTemplate({
+                data:{
+                    linkMan:linkman,
+                    linkManChecked:linkManChecked
+                },
+                render:true,
+                mixin:'linkManList'
+            })
+            $("#linkManLayer").html(html)
         })
-        $("#linkManLayer").html(html)
     });
 
     // 游玩人
-    $("body").on('click', '.linkMan-check', function () {
+    $(".linkMan-layer").on('click', '.linkMan-check', function () {
         // 获取需要填写的取票人数量
         var allnum = 1
         // 已经选择的游玩人数量
@@ -80,11 +82,11 @@ $(function () {
             }
         }
     });
-    $("body").on('click', '#cancel',function () {
+    $(".linkMan-layer").on('click', '#cancel',function () {
         $("#linkManLayer").removeClass('linkMan-layer-show');
         $("#mask").hide();
     });
-    $("body").on('click', '#enter',function () {
+    $(".linkMan-layer").on('click', '#enter',function () {
         $("#linkManLayer").removeClass('linkMan-layer-show');
         $("#mask").hide();
         // 获取选中的游客
@@ -113,7 +115,7 @@ $(function () {
         }
     });
     // 删除
-    $("body").on('click','.person-selected-delete',function (e) {
+    $(".shop-car-list").on('click','.person-selected-delete',function (e) {
         $(this).parents('.person-selected-item').remove()
     })
     // 提交订单
@@ -174,9 +176,9 @@ $(function () {
         })
 
         var params = {
-            linkName:$(".take-person-name").text(),//取票人姓名
-            linkMobile:$(".take-person-phone").text(),//取票人手机号
-            linkIdcard:$(".person-selected-icard").text(),//取票人身份证
+            linkName:$(".take-ticket-box .take-person-name").text(),//取票人姓名
+            linkMobile:$(".take-ticket-box .take-person-phone").text(),//取票人手机号
+            linkIdcard:$(".take-ticket-box .person-selected-icard").text(),//取票人身份证
             cartOrderStr:JSON.stringify(cartOrderDtos),//下单参数
             paramExtension:"",//业务拓展参数
         }
@@ -224,7 +226,7 @@ $(function () {
         var payUrl = '/pay/park?payOrderNo='+ shopInfo.payOrderNo +'&paySum='+shopInfo.paySum+'&payType='+ paytype;
         if(paytype == 42 || paytype == 41){
             // 如果是银联支付
-            payUrl +='&amount='+item.amount
+            // payUrl +='&amount='+item.amount
         }
         var flag = $(this).data('flag');
         if(!flag){

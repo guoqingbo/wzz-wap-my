@@ -1386,7 +1386,17 @@ footer a.check-all {
     font-size: 0.5rem;
     color: #555;
 }
-
+ .comment-list-img-item{
+     display: inline-block;
+    box-sizing: border-box;
+    width: 25%;
+    height: 3rem;
+     padding: .25rem;
+}
+.comment-list-img-item img{
+    width: 100%;
+    height: 100%;
+}
 .comment-list-top b, .comment-list-top em {
     height: 1.75rem;
     line-height: 1.75rem;

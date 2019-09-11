@@ -3,6 +3,7 @@ $(function () {
     // var searchName = getQueryVariable('searchName')||''
     // var date = $(".calendar-day-item.active").data("today")
     // updateTicketDom({name:searchName,date:date})
+
     var typeSwiper = new Swiper('#swiperType', {
         slidesPerView: 4,
         // spaceBetween: 30,
@@ -97,8 +98,9 @@ $(function () {
         $(this).addClass('active').siblings().removeClass('active')
         var classifyId = $(this).data('classifyid')
         var scrollTop = $('.ticket-type[data-classifyid='+classifyId+']').offset().top-$('#swiperType').height()
-        $('html').animate({
-            scrollTop: scrollTop
+        // 兼容写法
+        $('html,body').animate({
+            scrollTop: scrollTop+"px"
         });
 
     })
@@ -316,4 +318,10 @@ $(function () {
         // 计算价格
         computePrice()
     })
+
+    var classifyId = getQueryVariable('classifyId')||''
+    if(classifyId>=0){
+        $(".ticket-type-slide[data-classifyid="+classifyId+"]").addClass('active').siblings().removeClass('active')
+        $(".ticket-type-slide.active").trigger('click')
+    }
 })

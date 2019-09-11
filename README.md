@@ -3,13 +3,14 @@
     
 ## 项目信息
    * 官网wap，汪汪商城，珊瑚酒店等项目使用同一套代码
-    https://wzzfxswap.sendinfo.com.cn 
-    https://wzzfxswap1.sendinfo.com.cn 
+    https://wzzfxswap.sendinfo.com.cn、 
+    https://wzzfxswap1.sendinfo.com.cn、 
     http://wzzfxswap2.sendinfo.com.cn
     都指向一个ip 
     http://192.168.200.152:4029 
 
-   * 源码地址：https://dssvn.sendinfo.com/svn/webwork/frontEnd/蜈支洲
+   * 源码地址(svn)：https://dssvn.sendinfo.com/svn/webwork/frontEnd/蜈支洲
+   * 源码地址(git)：http://git.sendinfo.com/BasicBusiness/Frontdesign/wzz/wzz-wap-node.git
    * 堡垒机：http://192.168.200.94:7190 guoqingbo/123456
    * 提供的外链
        项目预约(大屏滚动) /appoint/list
@@ -18,7 +19,6 @@
        排队叫号新版1 /queueCallNum/list1?screenCode=1
        游玩项目列表 /appoint/gameList
        手机取号 /appoint/takeNum
-       
 ## 官网wap
 
    ### 测试环境
@@ -37,7 +37,7 @@
    * 堡垒机：http://192.168.200.94:7190 guoqingbo/123456
    * 后台接口：https://b2b.wuzhizhou.com
    * 后台swagger：https://b2b.wuzhizhou.com
-   * 后台账号: sdadmin 123456  superadmin hello123
+   * 后台账号: shenda  hello123  superadmin hello123
    
 
 ## 汪汪商城
@@ -59,7 +59,7 @@
 
 ## 珊瑚酒店
 
- ## 测试环境
+ ### 测试环境
    * 测试地址: http://192.168.200.152:5008(已废弃)
    * 测试域名: https://wzzfxswap2.sendinfo.com.cn
    * 部署地址: 192.168.200.152:4023 /usr/apps/node/wzzWapCoralHotel

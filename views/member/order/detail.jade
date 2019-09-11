@@ -4,7 +4,7 @@ block stylesheets
 block javascripts
     script(type='text/javascript', src='/javascripts/jquery.qrcode.min.js')
 block content
-    a.back-bar(href='javascript:window.history.back(-1);')
+    //a.back-bar(href='javascript:window.history.back(-1);')
     -var datas=data[0].data
     include ../../common/index
     include ../../common/footer
@@ -113,38 +113,42 @@ block content
                     .order-item
                         span=datas.linkAddr&&datas.linkAddr!=='undefined'?datas.linkAddr:''
 
-    if datas.orderType === 'ticket'&& datas.linkManDTOList
-        each item in datas.linkManDTOList
+    if (datas.orderType === 'park'||datas.orderType === 'ticket') && datas.linkManDTOList
+        each item,index in datas.linkManDTOList
             .page-line
             ul.order-list.myorder-list
                 if item.telephone
                     li
-                        label.lab-title(for='') 游玩人
+                        label.lab-title(for='') 游玩人#{index+1}
                         .order-item=item.linkMan
                     li
                         label.lab-title(for='') 手机号
                         .order-item=item.telephone
                 else
                     li
-                        label.lab-title(for='') 姓&ensp;&ensp;名
+                        label.lab-title(for='') 游玩人#{index+1}
                         .order-item=item.linkMan
                 li
                     label.lab-title(for='') 身份证
                     .order-item=item.idNo
 
-    else
-        .page-line
-        ul.order-list.myorder-list
-            li
+    //else
+    .page-line
+    ul.order-list.myorder-list
+
+        li
+            if datas.orderType === 'park'||datas.orderType === 'ticket'
+                label.lab-title(for='') 取票人
+            else
                 label.lab-title(for='') 游玩人
-                .order-item=datas.linkName
+            .order-item=datas.linkName
+        li
+            label.lab-title(for='') 手机号
+            .order-item=datas.linkMobile
+        if datas.linkIdcard
             li
-                label.lab-title(for='') 手机号
-                .order-item=datas.linkMobile
-            if datas.linkIdcard
-                li
-                    label.lab-title(for='') 身份证
-                    .order-item=datas.linkIdcard
+                label.lab-title(for='') 身份证
+                .order-item=datas.linkIdcard
     .page-line
     ul.order-list.myorder-list
         li

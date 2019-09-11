@@ -1,0 +1,32 @@
+//- 评论列表
+mixin commentList(data)
+    if data.length
+        each item in data
+            li
+                .comment-list-top
+                    // 是否为匿名
+                    if item.isAnonymous == 1
+                        if item.leaguerName.length>2
+                            b #{item.leaguerName[0]}***#{item.leaguerName[item.leaguerName.length-1]}
+                        else
+                            b #{item.leaguerName[0]}***
+                    else
+                        b 匿名评论
+                    span.fr
+                        - var score = parseInt(item.score||0)
+                        - for(var i=0;i<score;i++)
+                            i.icon-iconfont-aixin
+                        - for(var j=score;j<5;j++)
+                            i.icon-iconfont-aixin.not-light
+                        em #{item.score}分
+                p.comment-list-img
+                    each img in item.picList
+                        .comment-list-img-item
+                            img(src=img.url)
+                p.comment-list-info=item.content
+                p.replayContent=item.replyContent
+                .comment-date=item.createTime
+
+if method === "ajax"
+    if module == 'commentList'
+        +commentList(data)

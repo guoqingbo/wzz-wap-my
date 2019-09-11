@@ -76,7 +76,6 @@ exports.mainRouter = function (router, common) {
 
     // 下拉加载
     router.post('/list/:module', function (req, res, next) {
-        console.log("评论下拉加载下拉加载req.bodyreq.body",req.body);
         let module = req.params.module,
             method = 'get',
             urlArrm;
@@ -142,9 +141,19 @@ exports.mainRouter = function (router, common) {
             isAjax: true,
             req: req,
             res: res,
-            callBack: function (results, reObj) {
+            callBack: function (results, reObj, res, handTag) {
               if(results[0].status === 200){
-
+                  if(module == 'commentList'){
+                      handTag.tag = false
+                      let renderObj = {
+                          module,
+                          method:"ajax",
+                          data:results[0].data.list.rows,
+                          // ticketType:results[0].classifyKindsVos
+                      }
+                      let html = common.jade('list/mixin/list', renderObj);
+                      res.send([{status:200,html,pages:results[0].data.list.pages}])
+                  }
               }
             }
         });

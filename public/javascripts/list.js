@@ -262,16 +262,24 @@ $(function () {
             data: filterObj,
             dataType: 'json',
             success: function (data) {
-                if (data !== 'error' && data[0].flag !== 'error') {
-                    var results = module === 'commentList' ? data[0].data.list : data[0].data;
+                if (data[0].status == 200 ) {
+                    var results = ''
+                    var html = ''
+                    if(module == 'commentList'){
+                        results = data[0]
+                        html = data[0].html
+                    }else{
+                        results = data[0].data
+                        html = listDom(results.rows, module)
+                    }
+
                     if (module === 'order' && data[0].status == 400)
                         window.location.href = '/login?redir=/list/order';
                     if (startPage) {
-                        dropBox.find('ul').html(listDom(results.rows, module));
-
+                        dropBox.find('ul').html(html);
                     } else {
                         // if (filterObj.currPage <= results.pages) {
-                            dropBox.find('ul').append(listDom(results.rows, module));
+                            dropBox.find('ul').append(html);
                         // }
                         // else{
                         //     dropBox.find('ul').html(listDom(results.rows, module));
@@ -407,36 +415,38 @@ function listDom(list, module) {
                 '<p><i></i>' + list[len].endPlace + '</p>' +
                 '</div>' +
                 '</li>';
-        } else if (module === 'commentList') {
-
-            var star = '', isShowName = '';
-            for (var i = 0; i < list[len].score; i++) {
-                star += '<i class="font-icon icon-iconfont-aixin"></i>'
-            }
-            for (var j = 0; j < (5 - list[len].score); j++) {
-                star += '<i class="font-icon icon-iconfont-aixin not-light"></i>'
-            }
-
-            isShowName = '匿名评论';
-            if (list[len].isAnonymous == '1' || list[len].isAnonymous == 'false') {
-                var _name = list[len].leaguerName, _length = _name.length;
-                if (_length > 2) {
-                    _name = _name[0] + '***' + _name[_length - 1]
-                } else {
-                    _name = _name[0] + '***'
-                }
-                isShowName = _name;
-            }
-
-            dom += '<li><div class="comment-list-top">'
-                + '<b>' + isShowName + '</b>'
-                + '<span class="fr">' + star
-                + '<em>' + list[len].score + '分</em></span></div>'
-                + '<p class="comment-list-info">' + list[len].content + '</p>'
-                + replayContent(list[len].replyContent)
-                + '<div class="comment-date">' + list[len].createTime + '</div>'
-                + '</li>'
-        } else {
+        }
+        // else if (module === 'commentList') {
+        //
+        //     var star = '', isShowName = '';
+        //     for (var i = 0; i < list[len].score; i++) {
+        //         star += '<i class="font-icon icon-iconfont-aixin"></i>'
+        //     }
+        //     for (var j = 0; j < (5 - list[len].score); j++) {
+        //         star += '<i class="font-icon icon-iconfont-aixin not-light"></i>'
+        //     }
+        //
+        //     isShowName = '匿名评论';
+        //     if (list[len].isAnonymous == '1' || list[len].isAnonymous == 'false') {
+        //         var _name = list[len].leaguerName, _length = _name.length;
+        //         if (_length > 2) {
+        //             _name = _name[0] + '***' + _name[_length - 1]
+        //         } else {
+        //             _name = _name[0] + '***'
+        //         }
+        //         isShowName = _name;
+        //     }
+        //
+        //     dom += '<li><div class="comment-list-top">'
+        //         + '<b>' + isShowName + '</b>'
+        //         + '<span class="fr">' + star
+        //         + '<em>' + list[len].score + '分</em></span></div>'
+        //         + '<p class="comment-list-info">' + list[len].content + '</p>'
+        //         + replayContent(list[len].replyContent)
+        //         + '<div class="comment-date">' + list[len].createTime + '</div>'
+        //         + '</li>'
+        // }
+        else {
             var tag = '', _price = '';
             if (list[len].labels || module === 'guide') {
                 var k = module === 'guide' ? 'language' : 'labelsName',

@@ -1,3 +1,4 @@
+
 .no-data{
     text-align: center;
     padding: .5rem;
@@ -105,10 +106,11 @@
 }
 
 .calendar-day-item {
+    cursor: pointer;
     padding: .1rem 0;
     display: inline-block;
     width: 2.75rem;
-    height: 1.5rem;
+    /*height: 1.5rem;*/
     text-align: center;
     border: 1px solid #ddd;
     border-radius: .25rem;
@@ -171,12 +173,15 @@
 #swiperType .swiper-wrapper a {
     text-align: center;
     display: block;
-    /*width: 2.4rem;*/
     height: 1rem;
     line-height: 1rem;
-    margin-top: 0.45rem;
+    margin-top: .45rem;
     border: 1px solid #ddd;
-    border-radius: 0.25rem;
+    border-radius: .25rem;
+    /* word-break: break-all; */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 #swiperType .swiper-wrapper a.cur {
     color: #3b76de;
@@ -250,6 +255,7 @@
     color: #15bea1;
     margin-right: .5rem;
     font-size: .6rem;
+    cursor: pointer;
 }
 .sale-num{
     font-size: .6rem;
