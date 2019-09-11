@@ -19,8 +19,8 @@
        排队叫号新版1 /queueCallNum/list1?screenCode=1
        游玩项目列表 /appoint/gameList
        手机取号 /appoint/takeNum
+       
 ## 官网wap
-
 ### 测试环境
    * 测试域名：https://wzzfxswap.sendinfo.com.cn
    * 测试ip：192.168.200.152:4029
@@ -41,14 +41,12 @@
    
 
 ## 汪汪商城
-
 ## 测试环境
    * 测试地址: http://192.168.200.152:4023(已废弃)
    * 测试域名: https://wzzfxswap1.sendinfo.com.cn
    * 部署地址: 192.168.200.152:4023 /usr/apps/node/wzzWapWangWang
    * 后台接口: https://wzz.sendinfo.com.cn
    * 后台地址: https://wzz.sendinfo.com.cn/admin/index#
-
 ## 生产环境
    * 生产ip：http://47.99.119.191:4016
    * 生产域名: http://m.dogplanet.cn/
@@ -58,7 +56,6 @@
    
 
 ## 珊瑚酒店
-
 ### 测试环境
    * 测试地址: http://192.168.200.152:5008(已废弃)
    * 测试域名: https://wzzfxswap2.sendinfo.com.cn
