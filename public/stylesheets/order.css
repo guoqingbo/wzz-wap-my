@@ -27,11 +27,18 @@
 
 /*Ö§¸¶·½Ê½*/
 .pay-list .font-icon{ font-size:1rem; height: 1.2rem; line-height: 1.2rem; vertical-align: middle;}
-.wenxin .icon-iconfont-weixin{ color: #33cc33;}
-.qq .icon-iconfont-qq{ color: #3366cc;}
-.zhifubao .icon-iconfont-zhifubao{ color: #33ccff;}
-.pay-list .icon-iconfont-gougou{ color: #33cc33;}
-.pay-list .c-base{color: #f66;}
+.pay-item i{
+    margin-right: 0.25rem; font-size: 0.85rem; vertical-align: middle;
+    color: #ccc;
+}
+.pay-item.active i{
+    color: #3cf
+}
+/*.wenxin .icon-iconfont-weixin{ color: #33cc33;}*/
+/*.qq .icon-iconfont-qq{ color: #3366cc;}*/
+/*.zhifubao .icon-iconfont-zhifubao{ color: #33ccff;}*/
+/*.pay-list .icon-iconfont-gougou{ color: #33cc33;}*/
+/*.pay-list .c-base{color: #f66;}*/
 
 .order-handle{ background-color: #fff;}
 .order-handle .btn{ width: 6.25rem;}

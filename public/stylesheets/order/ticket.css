@@ -218,9 +218,12 @@ body{
     text-align: right;
 }
 .pay-item i{
-    color: #3cf;
+    color: #ccc;
     font-size: .8rem;
     vertical-align: middle;
+}
+.pay-item.active i{
+    color: #3cf;
 }
 .btn-handle-box{
     box-sizing: border-box;

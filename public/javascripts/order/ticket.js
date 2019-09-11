@@ -218,6 +218,10 @@ $(function () {
         });
         $("#mask").show()
     }
+    // 支付方式选择
+    $(".pay-item").click(function (e) {
+        $(this).addClass('active').siblings(".pay-item").removeClass('active')
+    })
     // 去支付
     // 阻止多次点击去支付
     $('.to-pay-btn').click(function (e) {
