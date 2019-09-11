@@ -1,14 +1,11 @@
 # 蜈支洲项目
    * 运行时要执行 npm run build 执行压缩 及jade模板编译
-    
-## 项目信息
-   * 官网wap，汪汪商城，珊瑚酒店等项目使用同一套代码
-    https://wzzfxswap.sendinfo.com.cn、 
-    https://wzzfxswap1.sendinfo.com.cn、 
-    http://wzzfxswap2.sendinfo.com.cn
-    都指向一个ip 
-    http://192.168.200.152:4029 
-
+   * 官网wap，汪汪商城，珊瑚酒店等项目使用同一套代码  
+        https://wzzfxswap.sendinfo.com.cn、   
+        https://wzzfxswap1.sendinfo.com.cn、   
+        http://wzzfxswap2.sendinfo.com.cn  
+        都指向一个ip   
+        http://192.168.200.152:4029 
    * 源码地址(svn)：https://dssvn.sendinfo.com/svn/webwork/frontEnd/蜈支洲
    * 源码地址(git)：http://git.sendinfo.com/BasicBusiness/Frontdesign/wzz/wzz-wap-node.git
    * 堡垒机：http://192.168.200.94:7190 guoqingbo/123456
