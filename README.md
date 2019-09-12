@@ -9,9 +9,9 @@
         http://192.168.200.152:4029 
         
         生产环境  
-        https://wzzfxswap.sendinfo.com.cn
-        http://wzzfxswap.sendinfo.com.cn
-        http://m.dogplanet.cn
+        https://wap.wuzhizhou.com/
+        http://wap.wuzhizhou.com/
+        http://m.dogplanet.cn/
         珊瑚酒店正式域名
         都指向一个ip   
         http://47.99.119.191:3000

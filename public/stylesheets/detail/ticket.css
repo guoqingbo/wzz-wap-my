@@ -442,6 +442,9 @@
     font-size: .6rem;
     padding: .5rem 0;
 }
+.ticket-detail-content img{
+    max-width: 100%;
+}
 .ticket-detail-bottom{
     padding: .5rem 0;
 }

@@ -2,7 +2,7 @@
 mixin shopCarList(data)
     if data.length
         each item in data
-            li.ticket-type-item(data-item=item data-id=item.id)
+            li.ticket-type-item(data-item=JSON.stringify(item) data-id=item.id)
                 .ticket-type-left
                     .ticket-info-name=item.aliasName
                 .ticket-type-right

@@ -7,10 +7,9 @@ mixin ticketTypeList(data)
                 ul.ticket-type-list
                     if item.ticketList
                         each sitem in item.ticketList
-                            //if sitem.enabled == "T"
-                            li.ticket-type-item(data-item=sitem data-id=sitem.id)
+                            li.ticket-type-item(data-item=JSON.stringify(sitem)  data-id=sitem.id)
                                 .ticket-info-name=sitem.aliasName
-                                    if sitem.recommend == "T"
+                                    if sitem.recommend === "T"
                                         span.ticket-info-icon 荐
                                 .ticket-type-left
                                     .ticket-price-box

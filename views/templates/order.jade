@@ -45,7 +45,7 @@ mixin linkManList(data)
             a(href="/member/linkMan/list?originalUrl=/order/ticket").linkMan-edit 编辑
         ul.linkMan-list
             each item in data.linkMan
-                li.linkMan-item(data-item=item)
+                li.linkMan-item(data-item=JSON.stringify(item))
                     .linkMan-name=item.linkmanName
                     .linkMan-center
                         p 手机号：#{item.phoneNo}
@@ -57,7 +57,7 @@ mixin linkManList(data)
 // 游玩人
 mixin ticketLinkMan(data)
     each item in data
-        .person-selected-item(data-item=item)
+        .person-selected-item(data-item=JSON.stringify(item))
             span.person-selected-name=item.linkmanName
             span.person-selected-icard=item.cardNo
             span.person-selected-delete
@@ -66,7 +66,7 @@ mixin ticketLinkMan(data)
 // 取票人
 mixin takeTicketLinkMan(data)
     each item in data
-        .take-person-item(data-item=item)
+        .take-person-item(data-item=JSON.stringify(item))
             span.take-person-name=item.linkmanName
             span.take-person-phone=item.phoneNo
             p.person-selected-icard=item.cardNo

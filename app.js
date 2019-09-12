@@ -42,6 +42,7 @@ app.use(session({
     secret: 'wzzwap'
 }));
 app.use(flash());
+
 // 区分不同的项目
 app.use(function (req, res, next) {
     if(/^\/official/.test(req.originalUrl)||
@@ -57,7 +58,7 @@ app.use(function (req, res, next) {
         req.session.projectNameCode = 'wangWang'
     }else if(/^\/coralHotel/.test(req.originalUrl)||
         req.headers.host == 'wzzfxswap2.sendinfo.com.cn' ||
-        req.headers.host == 'wap.wuzhizhou.com'){
+        req.headers.host == 'wap.coralHotel.com'){
         //路径路由以/coralHotel开头，测试域名为wzzfxswap.sendinfo.com.cn，或生产域名为 则为官网wap
         req.session.projectNameCode = 'coralHotel'
     }else{
@@ -76,7 +77,7 @@ app.use(function (req, res, next) {
     // 合并配置参数
     mergeEnvConfig(req)
 
-    // 如果路由以/officail 、/wangWang、/coralHotel 则重定向路由
+    // 如果路由以/officail 、/wangWang、/coralHotel 则去除前缀重定向路由
     if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/.test(req.originalUrl)){
         let url = req.originalUrl.replace(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/,'')||"/"
         res.redirect(url)

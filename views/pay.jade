@@ -97,7 +97,7 @@ block content
       //      | 银联支付
       //    i.font-icon.fr.icon-iconfont-gougou
   .btn-handle
-    a.btn#toPayBtn(data-item=item) 去支付
+    a.btn#toPayBtn(data-item=JSON.stringify(item)) 去支付
     // 微信支付
     //a.btn#toPayBtn(data-item=item  href='/pay/'+item.orderType+'?payOrderNo='+ item.payOrderNo +'&orderNo='+orderNo+'&paySum='+item.paySum+'&orderInfo='+ item.orderInfo+"&distributorCode="+'cgb2cfxs' ) 去支付
     //  银联支付
