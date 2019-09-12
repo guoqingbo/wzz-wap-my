@@ -18,7 +18,8 @@ mixin ticketTypeList(data)
                                         span.price-num=sitem.currentPrice
                                     .ticket-info-bottom
                                         span.info-more-default.look-detail 查看详情
-                                        span.info-more-default.video-intro 视频介绍
+                                        if sitem.voice
+                                            span.info-more-default.video-intro(data-video=sitem.voice) 视频介绍
                                 .ticket-type-right
                                     span.sale-num 售量：#{sitem.salesNum}
                                     .changge-num-box

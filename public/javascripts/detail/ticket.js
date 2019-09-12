@@ -28,8 +28,9 @@ $(function () {
     $("#ticketcalendar").calendar({
         multipleMonth: 4,
         click: function (date) {
+            console.log(date)
             // 转换日期
-            var day = getDay(new Date(date))
+            var day = getDay(new Date(date[0]))
 
            // 更新最后一个日期
             var lastEle = $(".calendar-day-item").eq(3)
@@ -41,7 +42,7 @@ $(function () {
             lastEle.addClass('active').siblings().removeClass('active')
 
             // 更新列表
-            updateTicketDom({date:date})
+            updateTicketDom({date:date[0]})
             // 隐藏日历
             $("#ticketcalendar").removeClass('show');
             $('.mask').hide()
@@ -64,6 +65,7 @@ $(function () {
     });
     // 更新列表
     function updateTicketDom(params) {
+        console.log(params)
         // 更新票型列表
         $.ajax({
             type: "POST",
