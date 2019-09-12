@@ -63,7 +63,7 @@ exports.mainRouter = function (router, common) {
         let module = 'ticket',
             productCode = req.params.productCode,
             date = req.query.date || moment().format('YYYY-MM-DD'),
-            searchName = req.query.searchName,
+            searchName = req.query.searchName||'',
             classifyId = req.query.classifyId ||'',
             handArr = [{
                 urlArr: [module, 'detail', 'main'],
@@ -101,8 +101,8 @@ exports.mainRouter = function (router, common) {
                         reObj.title = title
                         reObj.dayList = utils.getDayList();
 
-                        req.session.content = results[1].data.content;
-                        req.session.orderNotice = results[1].data.orderNotice;
+                        req.session.content = results[0].data.content;
+                        req.session.orderNotice = results[0].data.orderNotice;
 
                         reObj.classifyId = classifyId;
                         // reObj.date = date;

@@ -83,15 +83,12 @@ exports.mainRouter = function (router, common, requireLogin ) {
             if(req.session.wxTokenObj && req.session.wxTokenObj.expires_Time <= +new Date()) {
                 return res.redirect('/horization');
             }
-            let http = 'https'
-            if(!process.env.NODE_ENV){
-                http = 'http'
-            }
+
             let redirect = common.getUrl({
                 urlArr: ['main', 'wechat', 'Authorization'],
                 parameter: {
                     appid: common.envConfig.wx.appId,
-                    redirect_uri: encodeURIComponent(http+'://' + req.headers.host + '/horization/'),
+                    redirect_uri: encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/horization/'),
                     response_type: 'code',
                     scope: 'snsapi_userinfo'
                 },

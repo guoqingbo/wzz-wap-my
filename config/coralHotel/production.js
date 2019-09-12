@@ -16,5 +16,6 @@ module.exports = {
         // userType : 'C'
     },
     debug:true,
-    corpCode:'shjdb2cfxs'
+    corpCode:'shjdb2cfxs',
+    protocol:'http'
 }

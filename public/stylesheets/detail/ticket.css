@@ -25,7 +25,9 @@
     border-right: 1px solid #ddd;
 
 }
-
+.ticket-name-a i{
+    font-size: .6rem;
+}
 .top-header-right {
     position: relative;
     width: 52%;
@@ -168,7 +170,7 @@
 }
 #swiperType .swiper-wrapper .swiper-slide {
     /*width: 2.4rem;*/
-    margin-right: .8rem;
+    /*margin-right: .8rem;*/
 }
 #swiperType .swiper-wrapper a {
     text-align: center;

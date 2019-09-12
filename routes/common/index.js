@@ -433,18 +433,6 @@ let common = {
             return res.redirect('/error')
         }
     },
-    // http跳转至https
-    redirectHttps:function (req, res, next) {
-        // 如果是开发环境或生产环境 http get请求换成https请求
-        // let protocol = req.protocol
-        // let redirect = 'https://' + req.get('host') + req.originalUrl
-        if(process.env.NODE_ENV && req.protocol === 'http'){
-            let redirect = 'https://' + req.get('host') + req.originalUrl
-            return res.redirect(307, redirect);
-        }else{
-            next()
-        }
-    },
     // 获取用户信息
     getUserInfo:function (results,_p) {
         _p.req.session.token = results[0].data.token;

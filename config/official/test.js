@@ -24,4 +24,5 @@ module.exports = {
     },
     debug:true,
     corpCode:'cgb2cfxs',
+    protocol:'https'
 };

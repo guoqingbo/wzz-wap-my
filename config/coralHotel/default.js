@@ -5,14 +5,14 @@ module.exports = {
         ttl: 30 * 60,
         db:2
     },
-    // domain: "http://b2b.wuzhizhou.com",//电商正式
-    // ticketPark:"park2018092911074546610",//正式
+    domain: "http://b2b.wuzhizhou.com",//电商正式
+    ticketPark:"park2018092911074546610",//正式
     // domain1:"http://coach.wuzhizhou.com", //预约正式
     // domain: "https://wzz.sendinfo.com.cn",// 电商测试
-    domain: "http://wzz.sendinfo.com.cn",// 电商测试
+    // domain: "http://wzz.sendinfo.com.cn",// 电商测试
     // domain:"http://192.168.66.239:8080",
-    ticketPark:"park2018091313465343855", //测试
-    domain1:"http://192.168.200.72:8080", //预约测试
+    // ticketPark:"park2018091313465343855", //测试
+    // domain1:"http://192.168.200.72:8080", //预约测试
 
     wx:{
         appId : 'wx4855f46c05a8d2b8',//我的测试环境
@@ -23,5 +23,6 @@ module.exports = {
         // userType : 'C'
     },
     debug:true,
-    corpCode:'shjdb2cfxs'
+    corpCode:'shjdb2cfxs',
+    protocol:'http',
 };

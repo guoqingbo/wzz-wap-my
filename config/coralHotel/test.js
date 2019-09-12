@@ -24,4 +24,5 @@ module.exports = {
     },
     debug:true,
     corpCode:'shjdb2cfxs',
+    protocol:'https'
 };

@@ -38,11 +38,8 @@ exports.mainRouter = function (router, common) {
             paySum = req.query.paySum,
             payType = req.query.payType,
             orderInfo = req.query.orderInfo;
-        let protocol='https'
-        if(/localhost/.test(req.headers.host)){
-            protocol = 'http'
-        }
-        let redirectUrl = protocol+"://" + req.headers.host + "/payPlat/result";
+
+        let redirectUrl = common.envConfig.protocol+"://" + req.headers.host + "/payPlat/result";
         if (common.is_weixn(req)) {
             return next();
         }
@@ -110,11 +107,8 @@ exports.mainRouter = function (router, common) {
         };
         // 银联直付
         if(payType == '41'){
-            let protocol='https'
-            if(/localhost/.test(req.headers.host)){
-                protocol = 'http'
-            }
-            let redirectUrl = protocol+"://" + req.headers.host + "/yinlian/result";
+
+            let redirectUrl = common.envConfig.protocol+"://" + req.headers.host + "/yinlian/result";
             let {amount} = req.query
             params.orderNo = orderNo
             params.amount = amount

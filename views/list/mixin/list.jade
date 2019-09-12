@@ -24,7 +24,8 @@ mixin commentList(data)
                         .comment-list-img-item
                             img(src=img.url)
                 p.comment-list-info=item.content
-                p.replayContent=item.replyContent
+                if item.replyContent
+                    p.replayContent=item.replyContent
                 .comment-date=item.createTime
 
 if method === "ajax"

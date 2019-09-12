@@ -18,4 +18,5 @@ module.exports = {
     },
     corpCode:'scb2cfxs',
     ticketPark:"park2018091313465343855", //测试
+    protocol:'https'
 };

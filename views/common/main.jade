@@ -18,10 +18,16 @@ mixin navList(ticketPark,projectNameCode)
             a(href=projectNameCodePath+'/list/repast')
                 img(src='images/index/nav-icon5.png', alt='餐饮预订')
                 p 餐饮预订
-        li
-            a(href=projectNameCodePath+'/product/ticket/park2018092913241026745?fromBy=indexicon')
-                img(src='images/index/nav-icon6.png', alt='海岛玩家')
-                p 海岛玩家
+        if projectNameCode == 'wangWang'
+            li
+                a(href=projectNameCodePath+'/product/ticket/park2019051216593803881?fromBy=indexicon')
+                    img(src='images/index/nav-icon6.png', alt='海岛玩家')
+                    p 海岛玩家
+        else
+            li
+                a(href=projectNameCodePath + '/product/ticket/park2018092913241026745?fromBy=indexicon')
+                    img(src='images/index/nav-icon6.png', alt='海岛玩家')
+                    p 海岛玩家
         li
             a(href=projectNameCodePath+'/detail/ticket/' + ticketPark + '?classifyId=3')
                 img(src='images/index/nav-icon7.png', alt='特惠套餐')

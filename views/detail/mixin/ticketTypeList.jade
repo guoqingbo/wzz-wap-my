@@ -9,10 +9,10 @@ mixin ticketTypeList(data)
                         each sitem in item.ticketList
                             //if sitem.enabled == "T"
                             li.ticket-type-item(data-item=sitem data-id=sitem.id)
+                                .ticket-info-name=sitem.aliasName
+                                    if sitem.recommend == "T"
+                                        span.ticket-info-icon 荐
                                 .ticket-type-left
-                                    .ticket-info-name=sitem.aliasName
-                                        if sitem.recommend == "T"
-                                            span.ticket-info-icon 荐
                                     .ticket-price-box
                                         span.price-icon ￥
                                         span.price-num=sitem.currentPrice
@@ -25,7 +25,7 @@ mixin ticketTypeList(data)
                                         span.default-icon.sub-icon
                                             i.icon-iconfont-jian
                                         span.buy-num 0
-                                        span.default-icon.add-icon(data-maxOrder=sitem.maxOrder||"")
+                                        span.default-icon.add-icon(data-maxorder=sitem.maxOrder||"")
                                             i.icon-iconfont-jia
                     else
                         li.no-data 暂无数据

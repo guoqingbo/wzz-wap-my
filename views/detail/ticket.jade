@@ -58,8 +58,8 @@ block content
     .ticket-type-box
         .swiper-container#swiperType
             .swiper-wrapper
-                each item in data[2].classifyKindsVos
-                    .swiper-slide.ticket-type-slide(data-classifyid=item.classifyId)
+                each item,index in data[2].classifyKindsVos
+                    .swiper-slide.ticket-type-slide(data-classifyid=item.classifyId data-index=index)
                         a(href='javascript:;')=item.classifyName
                 //.swiper-slide
                 //    a(class= classifyId === '0' ? 'cur' : '') 门票船
@@ -143,7 +143,7 @@ block content
     // 底部购物车
     .footer-shop-box
         .footer-left
-            a.footer-nav
+            a.footer-nav(href='https://wzzdlyq.qiyukf.com/client?k=9043442f1a44a1780180c5459734227c&wp=1')
                 i.icon-nav-onlinekf
                 p.footer-nav-name 客服
             a.footer-nav.shop-car-nav

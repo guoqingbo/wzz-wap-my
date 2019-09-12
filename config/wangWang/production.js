@@ -16,4 +16,5 @@ module.exports = {
         userType : 'C'
     },
     corpCode:'scb2cfxs',
+    protocol:'http',
 }

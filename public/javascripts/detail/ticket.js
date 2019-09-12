@@ -3,10 +3,11 @@ $(function () {
     // var searchName = getQueryVariable('searchName')||''
     // var date = $(".calendar-day-item.active").data("today")
     // updateTicketDom({name:searchName,date:date})
-
+    var classifyId = getQueryVariable('classifyId')||''
     var typeSwiper = new Swiper('#swiperType', {
-        slidesPerView: 4,
-        // spaceBetween: 30,
+        slidesPerView: 5,
+        spaceBetween: 5,
+        initialSlide:$(".ticket-type-slide[data-classifyid="+classifyId+"]").data('index')
     });
     // 跳转到搜索页
     $("input[name='searchName']").focus(function(e) {
@@ -166,7 +167,7 @@ $(function () {
         var buyNumEle = productEle.find('.buy-num')
 
         var buyNum = Number(buyNumEle.text())
-        var maxNum = productEle.find(".add-icon").data("maxOrder")
+        var maxNum = productEle.find(".add-icon").data("maxorder")
 
         if($(this).hasClass('sub-icon')){
             buyNum--
@@ -199,7 +200,7 @@ $(function () {
 
 
         var buyNum = Number(buyNumEle.text())
-        var maxNum = 100
+        var maxNum = productTypeEle.find(".add-icon").data("maxorder")
 
         if($(this).hasClass('sub-icon')){
             buyNum--
@@ -319,7 +320,8 @@ $(function () {
         computePrice()
     })
 
-    var classifyId = getQueryVariable('classifyId')||''
+
+    // 初始化票型位置
     if(classifyId>=0){
         $(".ticket-type-slide[data-classifyid="+classifyId+"]").addClass('active').siblings().removeClass('active')
         $(".ticket-type-slide.active").trigger('click')
