@@ -98,7 +98,6 @@ exports.mainRouter = function (router, common) {
         let {orderNo, orderInfo, payOrderNo, paySum ,payType } = req.query;
         let member = req.session.member;
         req.session.orderNo = orderNo;
-        let orderId=req.session.orderDetail;
         //微信支付附加参数
         let params = {
             openId: wxTokenObj.openid,
@@ -324,8 +323,6 @@ exports.mainRouter = function (router, common) {
     //微信中转
     router.get('/wechatTransfer', function (req, res, next) {
         //获取code
-         console.log("req.query.redirect_uri",req.query.redirect_uri);
-        console.log("拿code1111111111111111111111");
         let redirect = common.getUrl({
             urlArr: ['main', 'wechat', 'Authorization'],
             parameter: {
@@ -336,21 +333,17 @@ exports.mainRouter = function (router, common) {
             },
             outApi: true  //外网接口判断 {true:是}
         }) + '#wechat_redirect';
-        console.log("redirectredirectredirect",redirect);
         res.redirect(redirect)
-
-        // console.log("拿回调的code",req.query.code);
-        // res.redirect(req.query.redirect_uri+'?code='+req.query.code);
     });
     //微信中转
     router.get('/wechatTransferUrl', function (req, res, next) {
         if(req.query.states.indexOf("orderNo")!= -1  ){
             res.redirect(encodeURI(req.query.states)+'&code='+req.query.code);
         }else{
-            console.log("进来2222")
             res.redirect(req.query.states+'?code='+req.query.code);
         }
     });
+
     // 支付宝同步回调
     router.get('/payPlat/result', function (req, res, next) {
         common.commonRequest({
@@ -462,59 +455,4 @@ exports.mainRouter = function (router, common) {
             res.redirect(req.session.curUrl)
         })
     })
-
-    // 微信支付，使用第三方代理支付
-    router.get('/weixinProxyPay', function (req, res, next) {
-        // 配置微信授权
-        // 缓存缺少openid，重新授权登录
-        let wxTokenObj = req.session.wxTokenObj;
-        // 不存在微信授权缓存 不存在openid
-        if(!wxTokenObj || !wxTokenObj.openid){
-            // 缓存当前地址
-            req.session.curUrl = req.originalUrl;
-            return res.redirect('/login')
-            // 如果超过过期时间，去刷新token
-        }else if(wxTokenObj.expires_Time <= +new Date()) {
-            // 缓存当前地址
-            req.session.curUrl = req.originalUrl;
-            // 跳转到刷新token路由
-            return res.redirect('/refreshToken');
-        }
-        // 使用缓存openid 去支付接口
-        let {orderNo, orderInfo, payOrderNo, paySum ,payType } = req.query;
-        let member = req.session.member;
-        req.session.orderNo = orderNo;
-
-        //微信支付附加参数
-        let params = {
-            openId: wxTokenObj.openid,
-            operateId: member.id,
-            orderInfo: orderInfo,
-            distributorCode:common.envConfig.corpCode
-        };
-
-        //发送支付请求
-        common.commonRequest({
-            url: [{
-                urlArr: ['main', 'pay', 'main'],
-                parameter: {
-                    orderNo: orderNo,
-                    userType: userType,
-                    payType: payType, //微信支付类型
-                    paySum: paySum,
-                    payOrderNo: payOrderNo,
-                    extendParamJson: JSON.stringify(params)
-                }
-            }],
-            page: '/weixinProxyPay',
-            req: req,
-            res: res,
-            callBack: function (results, reObj, resp, handTag) {
-                if(results[0].status == 200){
-                    // reObj.common.envConfig.weixinProxy+'/weixinProxy/getCode
-                }
-            }
-        });
-
-    });
 };

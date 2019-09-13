@@ -32,18 +32,23 @@ $(function () {
     $("#ticketcalendar").calendar({
         multipleMonth: 4,
         click: function (date) {
-            console.log(date)
             // 转换日期
             var day = getDay(new Date(date[0]))
 
-           // 更新最后一个日期
-            var lastEle = $(".calendar-day-item").eq(3)
-            lastEle.attr('data-today',day.today)
-            lastEle.find('.calendar-day-value').text(day.date)
-            lastEle.find('.calendar-week').text(day.week)
+            // 如果选择的日期，在快捷日期里存在，则快捷日期，改为选中状态，否则更新最后一个日期
+           if($(".calendar-day-item[data-today="+day.today+"]").length){
+               // 添加样式
+               $(".calendar-day-item[data-today="+day.today+"]").addClass('active').siblings().removeClass('active')
+           }else{
+               // 更新最后一个日期
+               var lastEle = $(".calendar-day-item").eq(3)
+               lastEle.attr('data-today',day.today)
+               lastEle.find('.calendar-day-value').text(day.date)
+               lastEle.find('.calendar-week').text(day.week)
+               // 添加样式
+               lastEle.addClass('active').siblings().removeClass('active')
+           }
 
-            // 添加样式
-            lastEle.addClass('active').siblings().removeClass('active')
 
             // 更新列表
             updateTicketDom({date:date[0]})
@@ -262,6 +267,7 @@ $(function () {
         $(".ticket-detail-box").html(html)
         $("#mask").show()
         $(".ticket-detail-box").addClass('show')
+        $(".ticket-detail-content").uniqueScroll()
     })
     $("body").on("click",".ticket-close",function () {
         $(".ticket-detail-box").removeClass('show');
@@ -332,8 +338,8 @@ $(function () {
         $(".ticket-type-slide.active").trigger('click')
     }
     // 产看详情弹框，阻止父级滚动
-    $(".ticket-detail-box").scroll(function (e) {
-        e.preventDefault()
-        e.stopPropagation()
-    })
+    // $(".ticket-detail-box").uniqueScroll()
+    // $(".ticket-detail-box").scroll(function (e) {
+    //     $(".ticket-detail-content").uniqueScroll()
+    // })
 })

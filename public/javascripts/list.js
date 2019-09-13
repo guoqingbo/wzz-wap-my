@@ -265,7 +265,7 @@ $(function () {
                 if (data[0].status == 200 ) {
                     var results = ''
                     var html = ''
-                    if(module == 'commentList'){
+                    if(typeof data[0].html !='undefined'){
                         results = data[0]
                         html = data[0].html
                     }else{

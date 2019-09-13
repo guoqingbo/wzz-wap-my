@@ -149,10 +149,18 @@ exports.mainRouter = function (router, common) {
                           module,
                           method:"ajax",
                           data:results[0].data.list.rows,
-                          // ticketType:results[0].classifyKindsVos
                       }
                       let html = common.jade('list/mixin/list', renderObj);
                       res.send([{status:200,html,pages:results[0].data.list.pages}])
+                  }else if(module == 'strategy'){
+                      handTag.tag = false
+                      let renderObj = {
+                          module,
+                          method:"ajax",
+                          data:results[0].data.rows,
+                      }
+                      let html = common.jade('list/mixin/list', renderObj);
+                      res.send([{status:200,html,pages:results[0].data.pages}])
                   }
               }
             }

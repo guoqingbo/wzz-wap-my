@@ -33,6 +33,64 @@ function isWeiXin() {
     }
 }
 $(function () {
+    // 子元素scroll父元素容器不跟随滚动JS实现
+    $.fn.uniqueScroll = function () {
+        $(this).on('mousewheel', _pc)
+            .on('DOMMouseScroll', _pc);
+
+        function _pc(e) {
+
+            var scrollTop = $(this)[0].scrollTop,
+                scrollHeight = $(this)[0].scrollHeight,
+                height = $(this)[0].clientHeight;
+
+            var delta = (e.originalEvent.wheelDelta) ? e.originalEvent.wheelDelta : -(e.originalEvent.detail || 0);
+
+            if ((delta > 0 && scrollTop <= delta) || (delta < 0 && scrollHeight - height - scrollTop <= -1 * delta)) {
+                this.scrollTop = delta > 0 ? 0 : scrollHeight;
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        }
+
+        $(this).on('touchstart', function (e) {
+            var targetTouches = e.targetTouches ? e.targetTouches : e.originalEvent.targetTouches;
+            $(this)[0].tmPoint = {x: targetTouches[0].pageX, y: targetTouches[0].pageY};
+        });
+        $(this).on('touchmove', _mobile);
+        $(this).on('touchend', function (e) {
+            $(this)[0].tmPoint = null;
+        });
+        $(this).on('touchcancel', function (e) {
+            $(this)[0].tmPoint = null;
+        });
+
+        function _mobile(e) {
+
+            if ($(this)[0].tmPoint == null) {
+                return;
+            }
+
+            var targetTouches = e.targetTouches ? e.targetTouches : e.originalEvent.targetTouches;
+            var scrollTop = $(this)[0].scrollTop,
+                scrollHeight = $(this)[0].scrollHeight,
+                height = $(this)[0].clientHeight;
+
+            var point = {x: targetTouches[0].pageX, y: targetTouches[0].pageY};
+            var de = $(this)[0].tmPoint.y - point.y;
+            if (de < 0 && scrollTop <= 0) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+
+            if (de > 0 && scrollTop + height >= scrollHeight) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        }
+    };
+    $('.mask').uniqueScroll()
+
     // 百度统计
     var _hmt = _hmt || [];
     (function() {

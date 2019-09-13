@@ -27,7 +27,29 @@ mixin commentList(data)
                 if item.replyContent
                     p.replayContent=item.replyContent
                 .comment-date=item.createTime
-
+//- 攻略
+mixin strategyList(data)
+    if data.length
+        each item in data
+            li
+                -var href = '/detail/strategy/' + item.baseCode;
+                if item.link || item.url
+                    - href = item.link || item.url
+                a.clearfix(href=href)
+                    .raiders-img
+                        img(alt='图片', src=item.face_img)
+                    .raiders-info
+                        h3=item.name
+                        p
+                            span
+                                i.font-icon.icon-clock
+                                | #{item.createTime}
+                            if !item.link && !item.url
+                                span.fr
+                                    i.font-icon.icon-views
+                                    | #{item.viewNum}
 if method === "ajax"
     if module == 'commentList'
         +commentList(data)
+    if module == 'strategy'
+        +strategyList(data)
