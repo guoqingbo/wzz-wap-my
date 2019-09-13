@@ -90,7 +90,6 @@ $(function () {
         }
     };
     $('.mask').uniqueScroll()
-
     // 百度统计
     var _hmt = _hmt || [];
     (function() {

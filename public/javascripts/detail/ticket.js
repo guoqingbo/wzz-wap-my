@@ -267,6 +267,10 @@ $(function () {
         $(".ticket-detail-box").html(html)
         $("#mask").show()
         $(".ticket-detail-box").addClass('show')
+        $(".ticket-detail-content").on('touchstart touchmove touchend',function (e) {
+            e.stopPropagation()
+            // e.preventDefault()
+        })
         $(".ticket-detail-content").uniqueScroll()
     })
     $("body").on("click",".ticket-close",function () {
@@ -338,7 +342,7 @@ $(function () {
         $(".ticket-type-slide.active").trigger('click')
     }
     // 产看详情弹框，阻止父级滚动
-    // $(".ticket-detail-box").uniqueScroll()
+    $(".ticket-detail-box").uniqueScroll()
     // $(".ticket-detail-box").scroll(function (e) {
     //     $(".ticket-detail-content").uniqueScroll()
     // })
