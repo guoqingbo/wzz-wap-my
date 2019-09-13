@@ -57,7 +57,7 @@
 ### 生产环境
    * 生产ip：http://47.99.119.191:4016
    * 生产域名: http://m.dogplanet.cn/
-   * 部署地址: (线上服务器域名+)/usr/apps/node/
+   * 部署地址: 47.99.119.191:3000 /application/sendinfo-wzz-node/wap-fxsc-4016
    * 后台接口: https://b2b.wuzhizhou.com
    * 后台地址: https://b2b.wuzhizhou.com/admin/login
    

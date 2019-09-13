@@ -101,6 +101,8 @@ exports.mainRouter = function (router,common){
                 parameter: {
                     orderNo: req.params.orderNo,
                     leaguerId:req.session.member.id
+                    // orderNo: '19019091119000028',
+                    // leaguerId:'15138'
                 }
             }],
             req: req,

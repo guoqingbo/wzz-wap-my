@@ -167,7 +167,7 @@ block content
             a.btn(href='/member/saleAfter/'+ datas.orderNo) 申请售后
         if datas.orderStatus === "0"
             - var _t=datas.orderType
-            a.btn(href='/pay/' + _t + '/' + datas.orderNo) 去支付
+            //a.btn(href='/pay/' + _t + '/' + datas.orderNo) 去支付
             a.btn#cancel(href='javascript:;',data-id=datas.orderNo) 取消订单
         if datas.orderType==='shop'
             if datas.sendStatus === '1'

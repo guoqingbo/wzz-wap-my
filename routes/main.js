@@ -94,6 +94,10 @@ exports.mainRouter = function (router, common, requireLogin ) {
                 },
                 outApi: true  //外网接口判断 {true:是}
             }) + '#wechat_redirect'
+            // 如果是珊瑚酒店使用蜈支洲wap官网的微信授权
+            if(req.session.projectNameCode === 'coralHotel'){
+                redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent('http://' + req.headers.host + '/horization')
+            }
             res.redirect(redirect)
         } else {
             res.render('login', {

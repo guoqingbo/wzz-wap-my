@@ -1,6 +1,6 @@
 const async = require('async');
 const userType = 'C'; //用户类型c端
-const WXPAYTYPE = 32; //32:微信公众号支付 34:智游宝微信公众号支付
+const WXPAYTYPE = 32; //32:微信公众号支付 34:智游宝微信公众号支付 33:小程序支付
 // const needle = require('needle');
 // const iconv = require('iconv-lite');
 
@@ -29,7 +29,6 @@ exports.mainRouter = function (router, common) {
             }
         });
     });
-
 
     // 去支付
     router.get('/pay/:module', function (req, res, next) {
@@ -78,6 +77,8 @@ exports.mainRouter = function (router, common) {
             title: '支付宝支付'
         });
     }, function (req, res, next) {
+        // 如果是珊瑚酒店的微信支付
+
         // 配置微信授权
         // 缓存缺少openid，重新授权登录
         let wxTokenObj = req.session.wxTokenObj;
@@ -107,7 +108,6 @@ exports.mainRouter = function (router, common) {
         };
         // 银联直付
         if(payType == '41'){
-
             let redirectUrl = common.envConfig.protocol+"://" + req.headers.host + "/yinlian/result";
             let {amount} = req.query
             params.orderNo = orderNo
@@ -118,8 +118,6 @@ exports.mainRouter = function (router, common) {
         let renderPage = '';
         switch (WXPAYTYPE) {
             case 32:
-                renderPage = 'wxpay';
-                break;
             case 33:
                 renderPage = 'wxpay';
                 break;
@@ -144,11 +142,13 @@ exports.mainRouter = function (router, common) {
                 req: req,
                 res: res,
                 callBack: function (results, reObj, resp, handTag) {
+
                     if(payType == 41){
+                        // 银联支付
                         handTag.tag = 0
                         res.redirect(results[0].data)
                     }
-                    //小程序支付需要的参数
+                    //小程序支付需要的参数(只有蜈支洲官网有)
                     req.session.xcxPay = {
                         orderNo: orderNo,
                         userType: userType,
@@ -163,12 +163,20 @@ exports.mainRouter = function (router, common) {
                     };
                     switch (WXPAYTYPE) {
                         case 32:
-                            reObj.item = JSON.parse(results[0].data);
-                            reObj.xcxInfo= req.session.xcxPay;
-                            break;
                         case 33:
                             reObj.item = JSON.parse(results[0].data);
                             reObj.xcxInfo= req.session.xcxPay;
+                            if(req.session.projectNameCode === 'coralHotel'){
+                                // 如果是珊瑚酒店的微信公众号支付
+                                handTag.tag = 0
+                                let proxyPayUrl = common.envConfig.weixinProxy+'/weixinProxy/wxPay'
+                                // 拼接参数
+                                let item = JSON.parse(results[0].data)
+                                item.redirectSuccess = common.envConfig.protocol+"://" + req.headers.host + "/payPlat/Notify/1";
+                                item.redirectError = common.envConfig.protocol+"://" + req.headers.host + "/payPlat/Notify/0";
+                                proxyPayUrl+='?item='+JSON.stringify(item)
+                                res.redirect(proxyPayUrl)
+                            }
                             break;
                         case 34:
                             reObj.item = results[0].data;
@@ -177,7 +185,7 @@ exports.mainRouter = function (router, common) {
                 }
             });
         }else{
-            //小程序支付需要的参数
+            //小程序支付需要的参数(只有蜈支洲官网有)
             req.session.xcxPay = {
                 orderNo: orderNo,
                 userType: userType,
@@ -336,11 +344,7 @@ exports.mainRouter = function (router, common) {
     });
     //微信中转
     router.get('/wechatTransferUrl', function (req, res, next) {
-        console.log("拿回调的states",req.query.states);
-        console.log("拿回调的code",req.query.code);
         if(req.query.states.indexOf("orderNo")!= -1  ){
-            console.log("进来111")
-            console.log('req.query.statesreq.query.states',req.query.states);
             res.redirect(encodeURI(req.query.states)+'&code='+req.query.code);
         }else{
             console.log("进来2222")
@@ -458,4 +462,59 @@ exports.mainRouter = function (router, common) {
             res.redirect(req.session.curUrl)
         })
     })
+
+    // 微信支付，使用第三方代理支付
+    router.get('/weixinProxyPay', function (req, res, next) {
+        // 配置微信授权
+        // 缓存缺少openid，重新授权登录
+        let wxTokenObj = req.session.wxTokenObj;
+        // 不存在微信授权缓存 不存在openid
+        if(!wxTokenObj || !wxTokenObj.openid){
+            // 缓存当前地址
+            req.session.curUrl = req.originalUrl;
+            return res.redirect('/login')
+            // 如果超过过期时间，去刷新token
+        }else if(wxTokenObj.expires_Time <= +new Date()) {
+            // 缓存当前地址
+            req.session.curUrl = req.originalUrl;
+            // 跳转到刷新token路由
+            return res.redirect('/refreshToken');
+        }
+        // 使用缓存openid 去支付接口
+        let {orderNo, orderInfo, payOrderNo, paySum ,payType } = req.query;
+        let member = req.session.member;
+        req.session.orderNo = orderNo;
+
+        //微信支付附加参数
+        let params = {
+            openId: wxTokenObj.openid,
+            operateId: member.id,
+            orderInfo: orderInfo,
+            distributorCode:common.envConfig.corpCode
+        };
+
+        //发送支付请求
+        common.commonRequest({
+            url: [{
+                urlArr: ['main', 'pay', 'main'],
+                parameter: {
+                    orderNo: orderNo,
+                    userType: userType,
+                    payType: payType, //微信支付类型
+                    paySum: paySum,
+                    payOrderNo: payOrderNo,
+                    extendParamJson: JSON.stringify(params)
+                }
+            }],
+            page: '/weixinProxyPay',
+            req: req,
+            res: res,
+            callBack: function (results, reObj, resp, handTag) {
+                if(results[0].status == 200){
+                    // reObj.common.envConfig.weixinProxy+'/weixinProxy/getCode
+                }
+            }
+        });
+
+    });
 };

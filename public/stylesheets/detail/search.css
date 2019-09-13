@@ -37,8 +37,9 @@
     float: right;
     border: 0;
     outline: none;
-    margin-top: .1rem;
+    margin-top: .2rem;
     color: #1a81ea;
+    font-size: .6rem;
 }
 
 .rol-top{

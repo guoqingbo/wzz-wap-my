@@ -1,4 +1,5 @@
 module.exports = {
     corpCode:'shjdb2cfxs',
-    protocol:'http'
+    protocol:'http',
+    weixinProxy:'https://wap.wuzhizhou.com'
 }

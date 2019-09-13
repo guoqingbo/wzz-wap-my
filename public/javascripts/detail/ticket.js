@@ -11,6 +11,10 @@ $(function () {
     });
     // 跳转到搜索页
     $("input[name='searchName']").focus(function(e) {
+        e.preventDefault()
+        e.stopPropagation()
+        // 禁止弹出键盘
+        document.activeElement.blur();
         window.location.href = "/detail/search"
     })
     // 日历点击
@@ -158,7 +162,6 @@ $(function () {
 
         })
         // 生成html(使用jade模板编译的模板js,gulp自动编译，放入dist/templates)
-        console.log(shopData)
         var html = ticketTemplate({data:shopData,render:true,mixin:'shopCarList'})
         $(".shop-car-list").html(html)
     }
@@ -328,4 +331,9 @@ $(function () {
         $(".ticket-type-slide[data-classifyid="+classifyId+"]").addClass('active').siblings().removeClass('active')
         $(".ticket-type-slide.active").trigger('click')
     }
+    // 产看详情弹框，阻止父级滚动
+    $(".ticket-detail-box").scroll(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+    })
 })

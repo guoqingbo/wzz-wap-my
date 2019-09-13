@@ -1,4 +1,6 @@
-
+body{
+    /*padding-bottom: 4rem;*/
+}
 .no-data{
     text-align: center;
     padding: .5rem;

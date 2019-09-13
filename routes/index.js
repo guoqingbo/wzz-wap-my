@@ -36,5 +36,7 @@ require('./complaint').mainRouter(router,common);
 require('./upload').mainRouter(router,common);
 // 排队叫号
 require('./queueCallNum').mainRouter(router,common);
+// 微信授权代理
+require('./weixinProxy').mainRouter(router,common);
 
 module.exports = router;

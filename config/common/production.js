@@ -1,5 +1,4 @@
 module.exports = {
-    port: 3000,
     redis: {
         host: "sendinfo.redis.com",
         port: 6379,
@@ -13,6 +12,7 @@ module.exports = {
         client_secret: 'LeWZ9YEjvXGaPD8fEZyLEAT6aXA9p6tB'
     },
     domain: "http://b2b.wuzhizhou.com",//正式环境api
+    domain1:"http://coach.wuzhizhou.com", //预约正式
     // domain:'https://wzz.sendinfo.com.cn',
     ticketPark:"park2018092911074546610",//正式
     wx:{
@@ -21,4 +21,6 @@ module.exports = {
         // WXPAYTYPE :32, //32:微信公众号支付 34:智游宝微信公众号支付
         // userType : 'C'
     },
+    corpCode:'cgb2cfxs',
+    protocol:'https'
 }
