@@ -48,7 +48,7 @@
 
 ## 汪汪商城
 ### 测试环境
-   * 测试地址: http://192.168.200.152:4023(已废弃)
+   * 测试地址: http://192.168.200.152:4023
    * 测试域名: https://wzzfxswap1.sendinfo.com.cn
    * 部署地址: 192.168.200.152:4023 /usr/apps/node/wzzWapWangWang
    * 后台接口: https://wzz.sendinfo.com.cn
@@ -64,7 +64,7 @@
 
 ## 珊瑚酒店
 ### 测试环境
-   * 测试地址: http://192.168.200.152:5008(已废弃)
+   * 测试地址: http://192.168.200.152:5008
    * 测试域名: https://wzzfxswap2.sendinfo.com.cn
    * 部署地址: 192.168.200.152:4023 /usr/apps/node/wzzWapCoralHotel
    * 后台接口: https://wzz.sendinfo.com.cn

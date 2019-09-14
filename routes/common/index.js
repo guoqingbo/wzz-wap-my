@@ -549,11 +549,11 @@ let common = {
         return html
     },
     // 合并配置参数
-    mergeEnvConfig(req){
+    mergeEnvConfig(projectNameCode){
         let envConfig1 = configLite({
             filename: process.env.NODE_ENV,
             config_basedir: __dirname,
-            config_dir: 'config/'+req.session.projectNameCode
+            config_dir: 'config/'+projectNameCode
         });
         // Object.assign和并对象时，第一个参数（原对象）会被改变，因此不想改变原对象时，第一个参数传{}
         common.envConfig = Object.assign({},envConfig,envConfig1)

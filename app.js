@@ -43,54 +43,63 @@ app.use(session({
 }));
 app.use(flash());
 
-// 区分不同的项目
-app.use(function (req, res, next) {
-    console.log('进入的项目域名========================================================='+req.headers.host)
-    if(/^\/official/.test(req.originalUrl)||
-        req.headers.host == 'wzzfxswap.sendinfo.com.cn' ||
-        req.headers.host == 'wap.wuzhizhou.com'){
-        //路径路由以/officail开头，或测试域名为wzzfxswap.sendinfo.com.cn，或生产域名为wap.wuzhizhou.com 则为官网wap
-        req.session.projectNameCode = 'official'
 
-    }else  if(/^\/wangWang/.test(req.originalUrl)||
-        req.headers.host == 'wzzfxswap1.sendinfo.com.cn' ||
-        req.headers.host == 'm.dogplanet.cn'){
-        //路径路由以/wangWang，或测试域名为wzzfxswap1.sendinfo.com.cn，或生产域名为m.dogplanet.cn 则为汪汪商城
-        req.session.projectNameCode = 'wangWang'
-    }else if(/^\/coralHotel/.test(req.originalUrl)||
-        req.headers.host == 'wzzfxswap2.sendinfo.com.cn' ||
-        req.headers.host == 'wap.coralHotel.com'){
-        //路径路由以/coralHotel开头，测试域名为wzzfxswap.sendinfo.com.cn，或生产域名为 则为官网wap
-        req.session.projectNameCode = 'coralHotel'
-    }else{
+if(process.env.projectNameCode){
+    console.log("启动时指定了项目名称==========================================="+process.env.projectNameCode)
+    // 如果启动时指定了项目名称
+    // 合并配置参数
+    mergeEnvConfig(process.env.projectNameCode)
 
-        if(!req.session.projectNameCode){
-            // 如果启动时指定了项目名称
-            if(process.env.projectNameCode){
-                req.session.projectNameCode = process.env.projectNameCode
-            }else{
+    app.use(function (req, res, next) {
+        res.locals.projectNameCode = req.session.projectNameCode = process.env.projectNameCode
+        next()
+    });
+
+}else {
+    console.log("启动时没有指定了项目名称===========================================")
+    // 如果启动时没有指定环境变量区分不同的项目
+    app.use(function (req, res, next) {
+
+        if(/^\/official/.test(req.originalUrl)||
+            req.headers.host == 'wzzfxswap.sendinfo.com.cn' ||
+            req.headers.host == 'wap.wuzhizhou.com'){
+            //路径路由以/officail开头，或测试域名为wzzfxswap.sendinfo.com.cn，或生产域名为wap.wuzhizhou.com 则为官网wap
+            req.session.projectNameCode = 'official'
+
+        }else  if(/^\/wangWang/.test(req.originalUrl)||
+            req.headers.host == 'wzzfxswap1.sendinfo.com.cn' ||
+            req.headers.host == 'm.dogplanet.cn'){
+            //路径路由以/wangWang，或测试域名为wzzfxswap1.sendinfo.com.cn，或生产域名为m.dogplanet.cn 则为汪汪商城
+            req.session.projectNameCode = 'wangWang'
+        }else if(/^\/coralHotel/.test(req.originalUrl)||
+            req.headers.host == 'wzzfxswap2.sendinfo.com.cn' ||
+            req.headers.host == 'wap.coralHotel.com'){
+            //路径路由以/coralHotel开头，测试域名为wzzfxswap.sendinfo.com.cn，或生产域名为 则为官网wap
+            req.session.projectNameCode = 'coralHotel'
+        }else{
+
+            if(!req.session.projectNameCode){
                 // 默认为官网wap
                 req.session.projectNameCode = 'official'
             }
         }
-    }
 
-    // 如果路由以/officail 、/wangWang、/coralHotel 则去除前缀重定向路由
-    if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/.test(req.originalUrl)){
-        let url = req.originalUrl.replace(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/,'')||"/"
-        res.redirect(url)
-        return
-    }
-    console.log('采用的项目========================================================='+req.session.projectNameCode)
-    res.locals.projectNameCode = req.session.projectNameCode
+        // 如果路由以/officail 、/wangWang、/coralHotel 则去除前缀重定向路由
+        if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/.test(req.originalUrl)){
+            let url = req.originalUrl.replace(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/,'')||"/"
+            res.redirect(url)
+            return
+        }
 
-    // 合并配置参数
-    mergeEnvConfig(req)
-    console.log('返回的配置信息=========================================================')
-    console.log(mergeEnvConfig(req))
+        res.locals.projectNameCode = req.session.projectNameCode
 
-    next()
-});
+        // 合并配置参数
+        mergeEnvConfig(req.session.projectNameCode)
+
+        next()
+    });
+}
+
 
 app.use('/', routes);
 
