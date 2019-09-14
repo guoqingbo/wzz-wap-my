@@ -7,8 +7,9 @@ let async = require('async'),
     // fetch = require('node-fetch'),
     request = require('request')
     jade = require('jade')
-    configLite = require('config-lite')
-    envConfig = configLite({
+    configLite = require('config-lite');
+
+const envConfig = configLite({
         filename: process.env.NODE_ENV,
         config_basedir: __dirname,
         config_dir: 'config/common'
@@ -554,7 +555,8 @@ let common = {
             config_basedir: __dirname,
             config_dir: 'config/'+req.session.projectNameCode
         });
-        common.envConfig = Object.assign(envConfig,envConfig1)
+        // Object.assign和并对象时，第一个参数（原对象）会被改变，因此不想改变原对象时，第一个参数传{}
+        common.envConfig = Object.assign({},envConfig,envConfig1)
         return common.envConfig
     }
 };

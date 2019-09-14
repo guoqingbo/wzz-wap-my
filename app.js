@@ -74,6 +74,13 @@ app.use(function (req, res, next) {
             }
         }
     }
+
+    // 如果路由以/officail 、/wangWang、/coralHotel 则去除前缀重定向路由
+    if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/.test(req.originalUrl)){
+        let url = req.originalUrl.replace(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/,'')||"/"
+        res.redirect(url)
+        return
+    }
     console.log('采用的项目========================================================='+req.session.projectNameCode)
     res.locals.projectNameCode = req.session.projectNameCode
 
@@ -82,12 +89,6 @@ app.use(function (req, res, next) {
     console.log('返回的配置信息=========================================================')
     console.log(mergeEnvConfig(req))
 
-    // 如果路由以/officail 、/wangWang、/coralHotel 则去除前缀重定向路由
-    if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/.test(req.originalUrl)){
-        let url = req.originalUrl.replace(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/,'')||"/"
-        res.redirect(url)
-        return
-    }
     next()
 });
 
