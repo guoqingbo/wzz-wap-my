@@ -153,7 +153,7 @@ border-bottom: 1px solid #eee;
     color: #15be9f;
 }
 .raiders-list { background-color: #eee; }
-.raiders-list .raiders-info { padding: .3rem .6rem; }
+.raiders-list .raiders-info { padding: .3rem 0; }
 .raiders-list li { margin-bottom: .5rem; background: #fff; -webkit-box-shadow: 0 0 10px -5px rgba(0, 0, 0, .8); -moz-box-shadow: 0 0 10px -5px rgba(0, 0, 0, .8); box-shadow: 0 0 10px -5px rgba(0, 0, 0, .8); }
 .raiders-list .raiders-img { width: 100%; height: 6rem; }
 .raiders-list .raiders-img img { width: 100%; height: 100%; }
