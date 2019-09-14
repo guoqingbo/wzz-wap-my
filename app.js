@@ -74,6 +74,13 @@ app.use(function (req, res, next) {
             }
         }
     }
+
+    // 如果路由以/officail 、/wangWang、/coralHotel 则去除前缀重定向路由
+    if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/.test(req.originalUrl)){
+        let url = req.originalUrl.replace(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/,'')||"/"
+        res.redirect(url)
+        return
+    }
     console.log('采用的项目========================================================='+req.session.projectNameCode)
     res.locals.projectNameCode = req.session.projectNameCode
 
@@ -82,12 +89,6 @@ app.use(function (req, res, next) {
     console.log('返回的配置信息=========================================================')
     console.log(mergeEnvConfig(req))
 
-    // 如果路由以/officail 、/wangWang、/coralHotel 则去除前缀重定向路由
-    if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/.test(req.originalUrl)){
-        let url = req.originalUrl.replace(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/,'')||"/"
-        res.redirect(url)
-        return
-    }
     next()
 });
 
@@ -96,13 +97,13 @@ app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-        var error = new Error('Not Found');
-        res.status(404);
-        res.render('error404',{
-            message: error.message,
-        });
+    var error = new Error('Not Found');
+    res.status(404);
+    res.render('error404',{
+        message: error.message,
+    });
 
-  //next(err);
+    //next(err);
 });
 
 // error handlers
@@ -110,13 +111,13 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
     });
-  });
     // 内存快照
     // var heapdump = require('heapdump');
     // var memwatch = require('memwatch-next');
@@ -136,10 +137,10 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 module.exports = app;
