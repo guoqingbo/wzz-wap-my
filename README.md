@@ -1,20 +1,19 @@
 # 蜈支洲项目
    * 运行时要执行 npm run build 执行压缩 及jade模板编译
-   * 官网wap，汪汪商城，珊瑚酒店等项目使用同一套代码    
+   * 官网wap，汪汪商城，珊瑚酒店等项目使用同一套代码
+       
         测试环境  
-        https://wzzfxswap.sendinfo.com.cn、   
-        https://wzzfxswap1.sendinfo.com.cn、   
-        http://wzzfxswap2.sendinfo.com.cn  
-        都指向一个ip   
-        http://192.168.200.152:4029 
-        
+        https://wzzfxswap.sendinfo.com.cn   http://192.168.200.152:4029/  官网wap  
+        https://wzzfxswap1.sendinfo.com.cn  http://192.168.200.152:4023/  汪汪商城  
+        http://wzzfxswap2.sendinfo.com.cn   http://192.168.200.152:5008/  珊瑚酒店  
+       
         生产环境  
-        https://wap.wuzhizhou.com/
-        http://wap.wuzhizhou.com/
-        http://m.dogplanet.cn/
+        https://wap.wuzhizhou.com/  官网wap   
+        http://wap.wuzhizhou.com/   官网wap   
+        http://m.dogplanet.cn/      汪汪商城  
         珊瑚酒店正式域名
-        都指向一个ip   
-        http://47.99.119.191:3000
+      
+      
    * 源码地址(svn)：https://dssvn.sendinfo.com/svn/webwork/frontEnd/蜈支洲
    * 源码地址(git)：http://git.sendinfo.com/BasicBusiness/Frontdesign/wzz/wzz-wap-node.git
    * 堡垒机：http://192.168.200.94:7190 guoqingbo/123456
