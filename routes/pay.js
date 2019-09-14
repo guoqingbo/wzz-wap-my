@@ -165,7 +165,8 @@ exports.mainRouter = function (router, common) {
                         case 33:
                             reObj.item = JSON.parse(results[0].data);
                             reObj.xcxInfo= req.session.xcxPay;
-                            if(req.session.projectNameCode === 'coralHotel'){
+                            let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+                            if(projectNameCode === 'coralHotel'){
                                 // 如果是珊瑚酒店的微信公众号支付
                                 handTag.tag = 0
                                 let proxyPayUrl = common.envConfig.weixinProxy+'/weixinProxy/wxPay'

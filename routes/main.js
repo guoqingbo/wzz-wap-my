@@ -35,7 +35,7 @@ exports.mainRouter = function (router, common, requireLogin ) {
 
         let title = ''
         // projectNameCode判断所属项目
-        let projectNameCode = req.session.projectNameCode
+        let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
 
 
         if(projectNameCode=='official'){
@@ -95,7 +95,8 @@ exports.mainRouter = function (router, common, requireLogin ) {
                 outApi: true  //外网接口判断 {true:是}
             }) + '#wechat_redirect'
             // 如果是珊瑚酒店使用蜈支洲wap官网的微信授权
-            if(req.session.projectNameCode === 'coralHotel'){
+            let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+            if(projectNameCode === 'coralHotel'){
                 redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent('http://' + req.headers.host + '/horization')
             }
             res.redirect(redirect)
