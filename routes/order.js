@@ -311,6 +311,35 @@ exports.mainRouter = function (router, common) {
         });
     });
 
+    // 其它优惠项目推荐
+    router.post('/order/getRecomentList', function (req, res, next) {
+
+        common.commonRequest({
+            url: [{
+                urlArr: ['ticket', 'detail', 'productItems'],
+                parameter: {
+                    goodsCode: common.envConfig.ticketPark,
+                    date: moment().format('YYYY-MM-DD'),
+                }
+            }],
+            req: req,
+            res: res,
+            isAjax: true,
+            callBack: function (results, reqs, resp, handTag) {
+                if(results[0].status == 200){
+                    handTag.tag = false
+                    let renderObj = {
+                        method:"ajax",
+                        data:results[0].data,
+                        // ticketType:results[0].classifyKindsVos
+                    }
+                    let html = common.jade('order/mixin/recomentList', renderObj);
+                    res.send([{status:200,html,pages:1}])
+                }
+            }
+        });
+    });
+
     // 表单提交
     router.post('/order/:module', function (req, res, next) {
 

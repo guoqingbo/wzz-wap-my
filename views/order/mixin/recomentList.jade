@@ -1,0 +1,25 @@
+mixin ticketTypeList(data)
+    if data.length
+        each item in data
+                    if item.ticketList
+                        each sitem in item.ticketList
+                            li.ticket-type-item(data-item=JSON.stringify(sitem)  data-id=sitem.id)
+                                .ticket-info-name=sitem.aliasName
+                                    if sitem.recommend === "T"
+                                        span.ticket-info-icon 荐
+                                .ticket-type-left
+                                    .ticket-price-box
+                                        span.price-icon ￥
+                                        span.price-num=sitem.currentPrice
+                                .ticket-type-right
+                                    span.sale-num 售量：#{sitem.salesNum}
+                                    .changge-num-box
+                                        span.default-icon.sub-icon
+                                            i.icon-iconfont-jian
+                                        span.buy-num 0
+                                        span.default-icon.add-icon(data-maxorder=sitem.maxOrder||"")
+                                            i.icon-iconfont-jia
+                    else
+                        li.no-data 暂无数据
+if method === "ajax"
+    +ticketTypeList(data)

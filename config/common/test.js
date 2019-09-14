@@ -1,5 +1,4 @@
 module.exports = {
-    port:'4029',
     redis: {
         host: "192.168.200.50",
         port: 6379,

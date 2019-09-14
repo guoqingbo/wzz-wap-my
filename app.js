@@ -45,6 +45,7 @@ app.use(flash());
 
 // 区分不同的项目
 app.use(function (req, res, next) {
+    console.log('进入的项目域名========================================================='+req.headers.host)
     if(/^\/official/.test(req.originalUrl)||
         req.headers.host == 'wzzfxswap.sendinfo.com.cn' ||
         req.headers.host == 'wap.wuzhizhou.com'){
@@ -73,9 +74,13 @@ app.use(function (req, res, next) {
             }
         }
     }
+    console.log('采用的项目========================================================='+req.session.projectNameCode)
     res.locals.projectNameCode = req.session.projectNameCode
+
     // 合并配置参数
     mergeEnvConfig(req)
+    console.log('返回的配置信息=========================================================')
+    console.log(mergeEnvConfig(req))
 
     // 如果路由以/officail 、/wangWang、/coralHotel 则去除前缀重定向路由
     if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/.test(req.originalUrl)){

@@ -238,4 +238,40 @@ $(function () {
             window.location = payUrl;
         }
     });
+
+    // 获取其他优惠项目
+    var recomentListPages = 1
+    var recomentListTotalPage = ''
+    function getRecomentList(){
+        $.ajax({
+            type: 'POST',
+            url: '/order/getRecomentList',
+            data: {
+                pages:recomentListPages
+            },
+            success: function (data) {
+                if (data[0].status === 200 ) {
+
+                } else {
+                    new ErrLayer({message:data[0].message})
+                }
+            },
+            error:function (err) {
+                console.log(err)
+            }
+        });
+    }
+
+    // 其它优惠项目点击加载更多
+    $(".show-more-btn").click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        recomentListPages++
+        if(recomentListPages > recomentListTotalPage){
+            $(this).attr('disabled','disabled')
+            $(this).text('没有更多数据了')
+        }else{
+            getRecomentList()
+        }
+    })
 })

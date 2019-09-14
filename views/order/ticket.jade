@@ -11,6 +11,31 @@ block content
         span.group-item-label 游玩日期
         span.group-item-value.play-day 2019-08-10
     .page-line
+    //- 其它优惠项目推荐
+    .recoment-ticket-box
+        .recoment-ticket-header 其他优惠项目推荐
+        ul.ticket-type-list
+            each item in [1,2]
+                li.ticket-type-item(data-item="{}")
+                    .ticket-info-name 门船票（淡季）
+                        span.ticket-info-icon 荐
+                    .ticket-type-left
+                        .sale-num 售量：1000
+                    .ticket-type-right
+                        .ticket-old-price-box
+                            span.old-price-icon ￥
+                            span.old-price-num 0.002
+                        .ticket-price-box
+                            span.price-icon ￥
+                            span.price-num 0.002
+                        .changge-num-box
+                            span.default-icon.sub-icon
+                                i.icon-iconfont-jian
+                            span.buy-num 2
+                            span.default-icon.add-icon
+                                i.icon-iconfont-jia
+        button.show-more-btn 展示更多 >
+    .page-line
     //- 选择的票型
     .shop-car-list
         // each item in [1,2,3]

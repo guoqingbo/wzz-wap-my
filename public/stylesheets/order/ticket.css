@@ -246,3 +246,101 @@ body{
 .pay-name {
     margin-left: .5rem;
 }
+/*其它优惠项目推荐*/
+.recoment-ticket-header{
+    background-color: #fff;
+    font-size: .6rem;
+    font-weight: bold;
+    padding: .5rem;
+}
+.ticket-type-list{
+    /*margin-bottom: .5rem;*/
+    background-color: #fff;
+    padding: 0 .5rem;
+}
+.ticket-type-item{
+    border-top: 1px solid #e5e5e5;
+    padding: .5rem 0;
+}
+.ticket-type-left{
+    display: inline-block;
+    width: 40%;
+    vertical-align: middle;
+}
+.ticket-type-right{
+    display: inline-block;
+    width: 60%;
+    overflow: hidden;
+    vertical-align: middle;
+    color: #999;
+}
+.ticket-info-name{
+    font-size: .65rem;
+}
+.ticket-info-icon{
+    background: #ff7a50;
+    color: #fff;
+    padding: .1rem;
+    font-size: .6rem;
+    border-radius: .1rem;
+}
+.ticket-price-box{
+    display: inline-block;
+    color: #f63;
+    vertical-align: middle;
+    font-size: .6rem;
+}
+.ticket-old-price-box{
+    text-decoration:line-through;
+    display: inline-block;
+    color: #999;
+    margin-right: .3rem;
+    vertical-align: middle;
+    font-size: .6rem;
+}
+.old-price-icon,.price-icon {
+    font-size: .5rem;
+}
+.price-num{
+    font-size: .6rem;
+}
+.sale-num{
+    font-size: .55rem;
+    display: inline-block;
+    max-width: 4rem;
+    color: #999;
+}
+.changge-num-box{
+    display: inline-block;
+    float: right;
+    font-size: .6rem;
+    /*padding-top: .1rem;*/
+}
+.default-icon{
+    box-sizing: border-box;
+    display: inline-block;
+    border: 1px solid #e5e5e5;
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    border-radius: 2rem;
+    text-align: center;
+}
+.default-icon i{
+    font-weight: bolder;
+}
+.buy-num {
+    margin: 0 .5rem;
+    font-size: .7rem;
+    color: #f63;
+}
+.show-more-btn{
+    box-sizing: border-box;
+    padding: .5rem;
+    width: 100%;
+    text-align: center;
+    border: 0;
+    outline: 0;
+    color: #999;
+    background-color: #fff;
+}
