@@ -15,7 +15,7 @@ exports.mainRouter = function (router, common, requireLogin ) {
             req.session.promoterId=req.query.promoterId||"";
             req.session.teamBatchNo=req.query.teamBatchNo||"";
             req.session.promoteSrcCode=req.query.promoteSrcCode||"";
-
+            console.log("全渠道==============================="+JSON.stringify(req.query))
             if(isReLogin){
                 req.session.curUrl = req.originalUrl
                 return res.redirect('/login')

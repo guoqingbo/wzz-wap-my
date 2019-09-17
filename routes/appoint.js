@@ -4,7 +4,10 @@ const multer = require('multer');
 let upload = multer({});
 let utils = {
     getHours:function () {
+        // 半小时之前的时间
         let date = new Date()
+        date.setMinutes(date.getMinutes() + 30);
+
         let hours = date.getHours()
         let minutes = date.getMinutes()
         hours = hours<10?"0"+hours:hours

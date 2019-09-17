@@ -23,9 +23,9 @@ block content
               label.lab-title(for='') 退款原因
               .order-item
                 input.order-text(type='text', name='reason', value='', placeholder='请说明您需要退款的原因')
-            li
-                label.lab-title 退款商品
-                .order-item= datas.orderInfo
+            //li
+            //    label.lab-title 退款商品
+            //    .order-item= datas.orderInfo
             li
                 label.lab-title 退款金额
                 .order-item
@@ -52,8 +52,14 @@ block content
                         span.fr #{datas.amount}
                             //input.refundNum(name='refundAmount', type="tel", value=datas.amount, data-max=datas.amount, data-min=datas.amount)
                 each item in datas.orderDetails
-                    li.refund-item(data-id= item.id style="display:none")
+                    li(data-id= item.id style="display:none")
                         label.lab-title(for="") 退订票型
+                        .order-item
+                            span= item.orderInfo
+                        //    span.fr
+                        //        input.refundNum.refundNums(name='refundAmount', type="tel", value= item.leftAmount, data-max=item.leftAmount, data-min= item.leftAmount < 1 ? '0' : '1')
+                    li.refund-item(data-id= item.id style="display:none")
+                        label.lab-title(for="") 退单数量
                         .order-item
                             span(style='width:60%')= item.orderInfo
                             span.fr
@@ -61,10 +67,19 @@ block content
 
             else
                 each item in datas.orderDetails
-                    li.refund-item(data-id= item.id)
+                    li
                         label.lab-title(for="") 退订票型
                         .order-item
-                            span(style='width:60%')= item.orderInfo
+                            span= item.orderInfo
+                        //    span.fr
+                        //        if datas.linkManDTOList
+                        //            input.refundNums(data-max=item.leftAmount value=item.leftAmount readonly)
+                        //        else
+                        //            input.refundNum.refundNums(name='refundAmount', type="tel", value= item.leftAmount < 1 ? '0' : item.leftAmount, data-max=item.leftAmount, data-min= item.leftAmount < 1 ? '0' : '1')
+                    li.refund-item(data-id= item.id)
+                        label.lab-title(for="") 退订数量
+                        .order-item
+                            //span(style='width:60%')= item.orderInfo
                             span.fr
                                 if datas.linkManDTOList
                                     input.refundNums(data-max=item.leftAmount value=item.leftAmount readonly)

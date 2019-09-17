@@ -35,6 +35,9 @@
                         }else{
                             num=optnum;
                         }
+                        if(num<=0){
+                            num = 0
+                        }
                         $this.val(num);
                         $(".numSpinnerBox").find("a").removeClass("c-f60");
                         $(this).addClass("c-f60");
@@ -47,6 +50,9 @@
                         }
                         else{
                             num=optnum;
+                        }
+                        if(num<=0){
+                            num = 0
                         }
                         $this.val(num);
                         $(".numSpinnerBox").find("a").removeClass("c-f60");

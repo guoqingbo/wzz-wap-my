@@ -64,7 +64,7 @@
       "error_file" : "./logs/app-err.log",  // 错误日志路径
       "out_file"   : "./logs/app-out.log",  // 普通日志路径
       "env": {
-        "PORT":3002,
+        "PORT":5008,
         "projectNameCode":"coralHotel",
         "NODE_ENV": "production"  // 环境参数，当前指定为生产环境
       },
