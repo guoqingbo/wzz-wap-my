@@ -258,7 +258,8 @@ exports.mainRouter = function (router, common) {
         //         reObj.is_weixn = common.is_weixn(req);
         //     }
         // })
-        res.render('order/ticket',{title:'提交订单'})
+        let is_weixn = common.is_weixn(req);
+        res.render('order/ticket',{title:'提交订单',is_weixn})
     });
 
     // 省市区获取
