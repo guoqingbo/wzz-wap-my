@@ -50,7 +50,7 @@ block content
         .swiper-pagination
 
     .details-info
-        h3.details-title #{data[0].data['parkName']}
+        h3.details-title #{data[0].data['parkName']||data[0].data['eateryName']}
         //-.detail-content
             .detail-intrd
                 a( href="/detail/location")
@@ -88,7 +88,7 @@ block content
                 | 单价:
                 span.price
                     em ￥
-                    strong#totalprice #{data[0].data['currentPrice']}
+                    strong#totalprice #{data[0].data['currentPrice']||data[0].data['price']}
     //- 详情切换
     mixin detailTab(data,module)
         ul#details-tab.tours-details-tab.tab.clearfix.details-tab

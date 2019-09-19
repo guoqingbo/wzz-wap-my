@@ -97,7 +97,7 @@ exports.mainRouter = function (router, common) {
         // 使用缓存openid 去支付接口
         let {orderNo, orderInfo, payOrderNo, paySum ,payType } = req.query;
         let member = req.session.member;
-        req.session.orderNo = orderNo;
+        req.session.orderNo = orderNo||'';
         //微信支付附加参数
         let params = {
             openId: wxTokenObj.openid,
@@ -125,9 +125,13 @@ exports.mainRouter = function (router, common) {
         }
         if(WXPAYTYPE!="33") {
             //发送支付请求
+            let urlArr = ['main', 'pay', 'main']
+            if(orderNo){
+                urlArr = ['main', 'pay', 'toPayByOrderNo']
+            }
             common.commonRequest({
                 url: [{
-                    urlArr: ['main', 'pay', 'main'],
+                    urlArr,
                     parameter: {
                         orderNo: orderNo,
                         userType: userType,
@@ -412,31 +416,44 @@ exports.mainRouter = function (router, common) {
 
     // 银联支付回掉(该地址作为参数传入)
     router.get('/yinlian/result', function (req, res, next) {
+        let orderNo = req.session.orderNo
+        let leaguerId = req.session.member.id
+
         // 银联支付
         let payStatus = req.query.status
-        common.commonRequest({
-            url: [{
-                urlArr: ['member', 'order', 'detail'],
-                parameter: {
-                    orderNo: req.session.orderNo,
-                    leaguerId: req.session.member.id
+        if(orderNo && leaguerId){
+            common.commonRequest({
+                url: [{
+                    urlArr: ['member', 'order', 'detail'],
+                    parameter: {
+                        orderNo,
+                        leaguerId
+                    }
+                }],
+                req: req,
+                res: res,
+                page: 'payResult',
+                title: '支付结果',
+                callBack: function (results, reObj, resp, handTag) {
+                    // payStatus存在则说明是银联支付
+                    if(payStatus == 'TRADE_SUCCESS'){
+                        results[0].flag = 'success';
+                    }else{
+                        results[0].flag = 'error';
+                    }
+                    reObj.orderNo = req.session.orderNo
+                    reObj.backDetailUrl = req.session.backDetailUrl;
                 }
-            }],
-            req: req,
-            res: res,
-            page: 'payResult',
-            title: '支付结果',
-            callBack: function (results, reObj, resp, handTag) {
-                // payStatus存在则说明是银联支付
-                if(payStatus == 'TRADE_SUCCESS'){
-                    results[0].flag = 'success';
-                }else{
-                    results[0].flag = 'error';
-                }
-                reObj.orderNo = req.session.orderNo
-                reObj.backDetailUrl = req.session.backDetailUrl;
+            });
+        }else{
+            if(payStatus == 'TRADE_SUCCESS'){
+                // 支付成功
+                res.redirect('/list/order')
+            }else{
+                // 支付失败
+                res.render('payResult',{data:[{flag:'error',data:{}}]})
             }
-        });
+        }
     });
 
     // 微信刷新token

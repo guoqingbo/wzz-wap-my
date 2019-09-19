@@ -108,24 +108,26 @@ block content
         //-             i.font-icon.icon-iconfont-hongbao
         //-             | 优惠劵
         //-         i.font-icon.fr.icon-iconfont-jiantou
-        li
-            a(href='/appoint/queue')
-                label.lab-title(for='')
-                    i.icon-paidui
-                    | 排队查看
-                i.font-icon.fr.icon-iconfont-jiantou
+        if projectNameCode == 'official'
+            // 只有官网才有排队查看
+            li
+                a(href='/appoint/queue')
+                    label.lab-title(for='')
+                        i.icon-paidui
+                        | 排队查看
+                    i.font-icon.fr.icon-iconfont-jiantou
         li
             a(href='/member/linkMan/list')
                 label.lab-title(for='')
                     i.member-ico.mico-linkman
                     | 常用游玩人
                 i.font-icon.fr.icon-iconfont-jiantou
-        li
-            a(href='https://wzzdlyq.qiyukf.com/client?k=9043442f1a44a1780180c5459734227c&wp=1')
-                label.lab-title(for='')
-                    i.font-icon.icon-italk
-                    | 客服
-                i.font-icon.fr.icon-iconfont-jiantou
+        //li
+        //    a(href='https://wzzdlyq.qiyukf.com/client?k=9043442f1a44a1780180c5459734227c&wp=1')
+        //        label.lab-title(for='')
+        //            i.font-icon.icon-italk
+        //            | 客服
+        //        i.font-icon.fr.icon-iconfont-jiantou
     //.page-line
     //ul.order-list.member-list
     //    li

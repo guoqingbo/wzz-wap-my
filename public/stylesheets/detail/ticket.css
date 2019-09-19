@@ -240,6 +240,7 @@ body{
 }
 .ticket-info-name{
     font-size: .65rem;
+    display: block;
 }
 .ticket-info-icon{
     background: #ff7a50;
@@ -505,4 +506,70 @@ body{
     top: -1.2rem;
     width: 1.2rem;
     z-index: 10;
+}
+/*购票提醒弹框*/
+.buy-ticket-layer{
+    display: none;
+    border-radius: .2rem;
+    position: fixed;
+    z-index: 22;
+    width: 95%;
+    background: #fff;
+    box-sizing: border-box;
+    padding: .5rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.buy-ticket-tip{
+    font-size: .7rem;
+    padding: .4rem 0;
+    border-bottom: 1px solid #ddd;
+}
+.buy-ticket-remind{
+    color: #666;
+    padding: .5rem 0;
+    font-size: .6rem;
+    height: 10rem;
+    overflow-y: auto;
+    line-height: 1.4;
+}
+.buy-ticket-remind img{
+    max-width: 100%;
+}
+.checked-icon{
+    display: inline-block;
+    width: .65rem;
+    margin-right: .3rem;
+    height: .65rem;
+    border-radius: 100%;
+    border: 1px solid #c1c1c1;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+.checked-icon.active{
+    border: none;
+    background: url(../../images/login/ico_checked_03.png) no-repeat center;
+    background-size: 100%;
+}
+.btn-default{
+    border: 0;
+    outline: none;
+    display: inline-block;
+    text-align: center;
+    padding: .3rem 0;
+    font-size: .55rem;
+    width: 5rem;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #f63;
+}
+.buy-ticket-bottom{
+    margin-top: .5rem;
+    padding-top: .5rem;
+    border-top: 1px solid #e5e5e5;
+}
+
+.btn-default:disabled{
+    background: #ccc
 }

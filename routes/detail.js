@@ -392,16 +392,18 @@ exports.mainRouter = function (router, common) {
     router.get('/product/:module/:rateCode', function (req, res, next) {
         var module = req.params.module,
             rateCode = req.params.rateCode,
-            productCode = req.query.productCode,
+            productCode = common.envConfig.ticketPark,
             parkId = req.query.parkId||1,
             nowDate = req.query.date || moment().format('YYYY-MM-DD'),
             handArr = [{
-                    urlArr: ['ticket', 'order', 'main'],
-                    parameter: {
-                        rateCode: rateCode,
-                        parkId:parkId
-                    }
-                }];
+                urlArr: [module, 'order', 'main'],
+                parameter: {
+                    rateCode: rateCode,
+                    parkId:parkId
+                }
+            }];
+
+
 
         common.commonRequest({
             url: handArr,

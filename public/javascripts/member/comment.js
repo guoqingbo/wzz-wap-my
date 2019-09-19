@@ -130,7 +130,7 @@ $(function (){
         sendFiles:function () {
             if(Object.keys(upload.files).length<=0){
                 new ErrLayer({
-                    message:"请先上传凭证"
+                    message:"请先上传图片"
                 });
                 return false
             }

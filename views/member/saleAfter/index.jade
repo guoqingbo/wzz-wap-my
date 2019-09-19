@@ -13,13 +13,20 @@ block content
     .lable-item-group
         span.lable-item-name 退订票型
         span.lable-item-value=data[0].data.orderInfo
+        //span.num-spinner-box
+        //    //a.sub(href='javascript:void(0);')
+        //    //    i.icon-iconfont-jian
+        //    input.refundNums(readonly='', data-max=max, value=1)
+        //    //a.add(href='javascript:void(0);')
+        //    //    i.icon-iconfont-jia
+    .lable-item-group
+        span.lable-item-name 退订数量
         span.num-spinner-box
             //a.sub(href='javascript:void(0);')
             //    i.icon-iconfont-jian
             input.refundNums(readonly='', data-max=max, value=1)
             //a.add(href='javascript:void(0);')
             //    i.icon-iconfont-jia
-
     .lable-group
         .lable-name 退单原因：
         .lable-value

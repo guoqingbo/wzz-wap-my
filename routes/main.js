@@ -3,15 +3,30 @@ exports.mainRouter = function (router, common, requireLogin ) {
     // wap官网首页
     router.get(['/', '/main'], function (req, res, next) {
 
-        // 全渠道参数
-        req.session.channelId=req.query.channelId||"";
-        req.session.promoterId=req.query.promoterId||"";
-        req.session.teamBatchNo=req.query.teamBatchNo||"";
-        req.session.promoteSrcCode=req.query.promoteSrcCode||"";
-
         // 全渠道扫码进入首页需要登录
-        if(req.query.promoteSrcCode){
-            common.isLogin(req, res)
+        if(req.query.promoterId){
+            // 全渠道参数进入，判断是否要重新登陆，promoterId和之前登陆不一样时，重新登陆
+            let isReLogin = false
+            if(req.session.promoterId!==req.query.promoterId){
+                isReLogin = true
+            }
+            // 全渠道参数
+            req.session.channelId=req.query.channelId||"";
+            req.session.promoterId=req.query.promoterId||"";
+            req.session.teamBatchNo=req.query.teamBatchNo||"";
+            req.session.promoteSrcCode=req.query.promoteSrcCode||"";
+            console.log("全渠道==============================="+JSON.stringify(req.query))
+            if(isReLogin){
+                req.session.curUrl = req.originalUrl
+                return res.redirect('/login')
+            }
+            // common.isLogin(req, res)
+        }else{
+            // 全渠道参数
+            req.session.channelId="";
+            req.session.promoterId="";
+            req.session.teamBatchNo="";
+            req.session.promoteSrcCode=""
         }
         // if(req.query.promoterId){
         //     console.log(req.query);

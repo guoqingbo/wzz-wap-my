@@ -71,6 +71,8 @@ $(function () {
         });
 
         $(".ticket-detail-box").removeClass('show')
+
+        $(".buy-ticket-layer").hide()
     });
     // 更新列表
     function updateTicketDom(params) {
@@ -176,6 +178,9 @@ $(function () {
         var productEle = $(this).parents('.ticket-type-item')
         var buyNumEle = productEle.find('.buy-num')
 
+        // 订单信息
+        var item = productEle.data("item")
+
         var buyNum = Number(buyNumEle.text())
         var maxNum = productEle.find(".add-icon").data("maxorder")
 
@@ -185,6 +190,15 @@ $(function () {
         }else{
             // 如果是+
             buyNum++
+            // item.bookRemind = '自定义测试数据'
+            if(buyNum==1 && item.bookRemind){
+                // 加入购物车时，判断是否弹出购票提示
+                $(".mask").show()
+                $(".buy-ticket-layer").data("id",item.id)
+                $(".buy-ticket-layer").show()
+                $(".buy-ticket-remind").html(item.bookRemind)
+                return
+            }
         }
         if(buyNum<=0){
             buyNum = 0
@@ -346,4 +360,45 @@ $(function () {
     // $(".ticket-detail-box").scroll(function (e) {
     //     $(".ticket-detail-content").uniqueScroll()
     // })
+
+    // 购票提醒-我已了解
+    $("#checkedBtn").click(function () {
+        if($(".checked-icon").hasClass('active')){
+            $(".checked-icon").removeClass('active')
+            $(".buy-ticket-confirm").attr('disabled','disabled')
+        }else{
+            $(".checked-icon").addClass('active')
+            $(".buy-ticket-confirm").removeAttr('disabled')
+        }
+    })
+    // 购票提醒-确认
+    $(".buy-ticket-confirm").click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        // 加入购物车
+        var id =  $(".buy-ticket-layer").data("id")
+        var buyNumEle = $('.ticket-type-item[data-id='+id+']').find('.buy-num')
+        buyNumEle.text(1)
+        // 计算价格和数量
+        computePrice()
+
+        // 购票提醒-关闭
+        closeTicketBox()
+
+    })
+    // 购票提醒-取消
+    $(".buy-ticket-cancel").click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        // 购票提醒-关闭
+        closeTicketBox()
+    })
+    // 购票提醒-关闭
+    function closeTicketBox() {
+        $(".mask").hide()
+        $(".buy-ticket-layer").hide()
+        $(".checked-icon").removeClass('active')
+        $(".buy-ticket-confirm").attr('disabled','disabled')
+    }
 })

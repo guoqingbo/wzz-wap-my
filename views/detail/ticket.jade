@@ -140,6 +140,18 @@ block content
         img.close-icon(src="/images/detail/close.png")
         video(controls="controls" style="width: 100%;object-fit: fill;height:8rem")
             //source(src=voice type="video/mp4")
+
+    //- 购票提醒弹框
+    .buy-ticket-layer
+        h3.buy-ticket-tip 购票提醒
+        // 购票提示
+        .buy-ticket-remind
+        .check-box#checkedBtn
+            span.checked-icon
+            span 我已了解
+        .buy-ticket-bottom
+            button.btn-default.buy-ticket-cancel 取消
+            button.btn-default.buy-ticket-confirm.fr(href="javascript:;" disabled=true) 确认
     // 底部购物车
     .footer-shop-box
         .footer-left

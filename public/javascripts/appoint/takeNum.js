@@ -1,11 +1,11 @@
 $(function () {
     // console.log(document.referrer)
-    if(window.name !== 'takeNum'){
-        location.reload()
-        window.name = 'takeNum'
-    }else{
-        window.name = ''
-    }
+    // if(window.name !== 'takeNum'){
+    //     window.location.href = window.location.href
+    //     window.name = 'takeNum'
+    // }else{
+    //     window.name = ''
+    // }
     $('body').click(function (e) {
         $(".project-seletct").removeClass("show")
     })
