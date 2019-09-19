@@ -246,19 +246,19 @@ exports.mainRouter = function (router, common) {
 
     // 门票提交订单
     router.get('/order/ticket', common.isLogin, function (req, res, next) {
-        common.commonRequest({
-            url:[{
-                urlArr:['member','linkMan','list']
-            }],
-            title:'提交订单',
-            page: 'order/ticket',
-            req: req,
-            res: res,
-            callBack: function (results, reObj, res, handTag) {
-                reObj.is_weixn = common.is_weixn(req);
-            }
-        })
-        // res.render('order/ticket',{title:'提交订单'})
+        // common.commonRequest({
+        //     url:[{
+        //         urlArr:['member','linkMan','list']
+        //     }],
+        //     title:'提交订单',
+        //     page: 'order/ticket',
+        //     req: req,
+        //     res: res,
+        //     callBack: function (results, reObj, res, handTag) {
+        //         reObj.is_weixn = common.is_weixn(req);
+        //     }
+        // })
+        res.render('order/ticket',{title:'提交订单'})
     });
 
     // 省市区获取

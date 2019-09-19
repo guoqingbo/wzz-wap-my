@@ -95,9 +95,9 @@ exports.mainRouter = function (router, common, requireLogin ) {
     // 登陆页面
     router.get('/login', function (req, res, next) {
         if (common.is_weixn(req)) {
-            if(req.session.wxTokenObj && req.session.wxTokenObj.expires_Time <= +new Date()) {
-                return res.redirect('/horization');
-            }
+            // if(req.session.wxTokenObj && req.session.wxTokenObj.expires_Time <= +new Date()) {
+            //     return res.redirect('/horization');
+            // }
 
             let redirect = common.getUrl({
                 urlArr: ['main', 'wechat', 'Authorization'],
