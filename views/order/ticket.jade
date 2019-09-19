@@ -13,7 +13,11 @@ block content
     .page-line
     //- 其它优惠项目推荐
     .recoment-ticket-box
-        .recoment-ticket-header 其他优惠项目推荐
+        .recoment-ticket-header 推荐搭配（组合越多，越优惠）
+        .recoment-ticket-discount
+            span 继续选购，还可优惠
+            span.discount-icon ￥
+            span.discount-value 0
         ul.ticket-type-list
             each item in [1,2]
                 li.ticket-type-item(data-item="{}")
@@ -35,7 +39,15 @@ block content
                             span.default-icon.add-icon
                                 i.icon-iconfont-jia
         button.show-more-btn 展示更多 >
-    .page-line
+        .recoment-ticket-bottom
+            .has-discount-box
+                span.has-discount-text 已优惠：
+                span.price-color.price-icon ￥
+                span.price-color.has-discount-value 0
+            .recoment-total-box
+                span.recoment-total-text 小计：
+                span.price-color.price-icon ￥
+                span.price-color.recoment-total-value 0
     //- 选择的票型
     .shop-car-list
         // each item in [1,2,3]

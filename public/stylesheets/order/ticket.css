@@ -259,8 +259,22 @@ body{
     padding: 0 .5rem;
 }
 .ticket-type-item{
-    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
     padding: .5rem 0;
+}
+.discount-icon{
+    color: #f63;
+    font-size: .5rem;
+    margin-left: .5rem;
+}
+.discount-value{
+    color: #f63;
+    font-size: .6rem;
+}
+
+.recoment-ticket-discount{
+    padding: .5rem;
+    font-size: .5rem;
 }
 .ticket-type-left{
     display: inline-block;
@@ -343,4 +357,24 @@ body{
     outline: 0;
     color: #999;
     background-color: #fff;
+}
+.recoment-ticket-bottom{
+    overflow: hidden;
+    padding: .5rem;
+    background-color: #fff;
+    margin: .3rem 0;
+}
+.has-discount-box{
+    float: left;
+    padding-left: 6rem;
+}
+.recoment-total-box{
+    float: right;
+}
+.price-color{
+    color: #f63;
+}
+.price-icon{
+    font-size: .5rem;
+    margin-left: .3rem;
 }

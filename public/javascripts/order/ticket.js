@@ -2,17 +2,25 @@ $(function () {
     // var linkman =$("#linkManLayer").data("linkman")||[]
     var linkman =[]
     var shopInfo = {}
+    var recomentInfo = {list:[]}
     // 初始化页面
     function initHtml() {
         var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
         // 生成票型列表
         var html = orderTemplate({data:{list:shopData.list},render:true,mixin:'shopCarList'})
+        // 价格
+        var totalPrice = Number(shopData.money)
+        if(recomentInfo.list.length){
+            html+=orderTemplate({data:{list:recomentInfo.list},render:true,mixin:'shopCarList'})
+            totalPrice+=Number(recomentInfo.totalPrice)
+        }
         $(".shop-car-list").html(html)
 
         // 游玩日期
         $('.play-day').text(shopData.day)
+
         // 总价
-        $('.order-total-money-value').text(shopData.money)
+        $('.order-total-money-value').text(totalPrice)
     }
     initHtml()
 
@@ -275,4 +283,73 @@ $(function () {
             getRecomentList()
         }
     })
+
+    // 票型列表数量加减
+    $('.ticket-type-list').on("click",'.sub-icon,.add-icon',function (e) {
+        var productEle = $(this).parents('.ticket-type-item')
+        var buyNumEle = productEle.find('.buy-num')
+        console.log(buyNumEle)
+        // 订单信息
+        // var item = productEle.data("item")
+
+        var buyNum = Number(buyNumEle.text())
+        var maxNum = productEle.find(".add-icon").data("maxorder")
+
+        if($(this).hasClass('sub-icon')){
+            buyNum--
+            // 如果是-
+        }else{
+            // 如果是+
+            buyNum++
+        }
+        if(buyNum<=0){
+            buyNum = 0
+        }
+        if(maxNum && buyNum>maxNum){
+            buyNum = maxNum
+        }
+        buyNumEle.text(buyNum)
+
+        // 计算价格和数量
+        computePrice()
+    })
+    // 计算价格
+    function computePrice() {
+        var totalPrice = 0
+        var shopNum = 0
+        var list = []
+        $(".ticket-type-list .ticket-type-item").each(function () {
+            // 单价
+            var priceUnit = $(this).find(".price-num").text()
+
+            // 购买数量
+            var buyNum = $(this).find(".buy-num").text()
+            if(buyNum>0){
+                var item = $(this).data('item')
+                item.buyNum = buyNum
+                list.push(item)
+
+                totalPrice+=Number(buyNum*priceUnit)
+                shopNum+=Number(buyNum)
+
+            }
+        })
+        // 总价
+        $(".recoment-total-value").text(totalPrice.toFixed(2))
+        recomentInfo.list = list
+        recomentInfo.totalPrice = totalPrice
+
+        // 重新生成票型html
+        initHtml()
+
+        // 数量
+        // $(".ticket-shop-num").text(shopNum)
+        // if(shopNum<=0){
+        //     // 预定按钮置灰
+        //     $(".pay-btn").attr('disabled','disabled')
+        // }else{
+        //     $(".pay-btn").removeAttr('disabled','disabled')
+        // }
+        return totalPrice
+    }
 })
