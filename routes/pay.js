@@ -97,7 +97,7 @@ exports.mainRouter = function (router, common) {
         // 使用缓存openid 去支付接口
         let {orderNo, orderInfo, payOrderNo, paySum ,payType } = req.query;
         let member = req.session.member;
-        req.session.orderNo = orderNo;
+        req.session.orderNo = orderNo||'';
         //微信支付附加参数
         let params = {
             openId: wxTokenObj.openid,
