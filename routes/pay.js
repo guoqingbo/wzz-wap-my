@@ -125,9 +125,13 @@ exports.mainRouter = function (router, common) {
         }
         if(WXPAYTYPE!="33") {
             //发送支付请求
+            let urlArr = ['main', 'pay', 'main']
+            if(orderNo){
+                urlArr = ['main', 'pay', 'toPayByOrderNo']
+            }
             common.commonRequest({
                 url: [{
-                    urlArr: ['main', 'pay', 'main'],
+                    urlArr,
                     parameter: {
                         orderNo: orderNo,
                         userType: userType,
@@ -447,7 +451,7 @@ exports.mainRouter = function (router, common) {
                 res.redirect('/list/order')
             }else{
                 // 支付失败
-                res.render('payResult',{data:[{flag:'error'}]})
+                res.render('payResult',{data:[{flag:'error',data:{}}]})
             }
         }
     });

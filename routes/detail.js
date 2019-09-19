@@ -396,12 +396,14 @@ exports.mainRouter = function (router, common) {
             parkId = req.query.parkId||1,
             nowDate = req.query.date || moment().format('YYYY-MM-DD'),
             handArr = [{
-                    urlArr: ['ticket', 'order', 'main'],
-                    parameter: {
-                        rateCode: rateCode,
-                        parkId:parkId
-                    }
-                }];
+                urlArr: [module, 'order', 'main'],
+                parameter: {
+                    rateCode: rateCode,
+                    parkId:parkId
+                }
+            }];
+
+
 
         common.commonRequest({
             url: handArr,

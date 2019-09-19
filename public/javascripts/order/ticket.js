@@ -1,11 +1,12 @@
 $(function () {
-    var linkman =$("#linkManLayer").data("linkman")||[]
+    // var linkman =$("#linkManLayer").data("linkman")||[]
+    var linkman =[]
     var shopInfo = {}
     // 初始化页面
     function initHtml() {
         var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
         // 生成票型列表
-        var html = orderTemplate({data:{list:shopData.list,linkman:linkman},render:true,mixin:'shopCarList'})
+        var html = orderTemplate({data:{list:shopData.list},render:true,mixin:'shopCarList'})
         $(".shop-car-list").html(html)
 
         // 游玩日期

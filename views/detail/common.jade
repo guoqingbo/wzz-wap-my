@@ -252,7 +252,8 @@ mixin ticketList(data,module,classifyId,date,goodsCode,productCode)
                                             //span(style=item.voice?"display:inline-block":"display:none")
                                             //  a.audioDetail(href='/audioDetail?voice='+item.voice) 视频介绍>
                                     if module === 'route' || module === 'repast'
-                                        h4.pro-info-title=sitem.aliasName
+                                        //h4.pro-info-title=sitem.aliasName
+                                        a.pro-info-title(href="/product/repast/"+sitem.rateCode+'?productCode='+productCode )=sitem.aliasName
                                         p.pro-info-explian
                                             a.showDetail(href='javascript:;') 查看详情>
                                 .pro-price

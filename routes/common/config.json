@@ -23,6 +23,7 @@
     },
     "pay": {
       "main":"/order/orderPay/toPay",
+      "toPayByOrderNo":"/order/orderPay/toPayByOrderNo",
       "alipay": "/pay/api/toAliPay/wapPay",
       "result": "/pay/api/leaguer/manage/getPayOrder",
       "getPayinfo":"/pay/api/leaguer/manage/getPayInfo"

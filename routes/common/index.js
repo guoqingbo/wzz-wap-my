@@ -232,7 +232,13 @@ let common = {
         let option = config ? Object.assign(defaultOption,config) : defaultOption;
         return new Promise(function (resolve,reject) {
             request(option,  function (err, resp, body) {
-                body = body && typeof body === 'string' ? JSON.parse(body) : body;
+                try {
+                    if(typeof body === 'string'){
+                        body = JSON.parse(body)
+                    }
+                }catch (e) {
+                    console.log(e)
+                }
                 if(option.url.indexOf(common.envConfig.domain1) == -1 || process.env.NODE_ENV !== 'production'){
                     common.envConfig.debug && console.log(option.url);
                     common.envConfig.debug && console.log(option.qs||option.form);

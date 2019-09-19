@@ -11,7 +11,7 @@
         https://wap.wuzhizhou.com/  官网wap   
         http://wap.wuzhizhou.com/   官网wap   
         http://m.dogplanet.cn/      汪汪商城  
-        珊瑚酒店正式域名
+        http://h.wuzhizhou.com/     珊瑚酒店  
       
       
    * 源码地址(svn)：https://dssvn.sendinfo.com/svn/webwork/frontEnd/蜈支洲
@@ -56,7 +56,8 @@
 ### 生产环境
    * 生产ip：http://47.99.119.191:4016
    * 生产域名: http://m.dogplanet.cn/
-   * 部署地址: 47.99.119.191:3000 /application/sendinfo-wzz-node/wap-fxsc-4016
+   * 部署地址: 47.99.119.191:3000 /application/sendinfo-wzz-node/wzz-wap-3000
+   * 部署地址: 47.99.119.191:3000 /application/sendinfo-wzz-node/wap-fxsc-4016（原来的，已废弃）
    * 后台接口: https://b2b.wuzhizhou.com
    * 后台地址: https://b2b.wuzhizhou.com/admin/login
    
@@ -70,8 +71,8 @@
    * 后台地址: https://wzz.sendinfo.com.cn/admin/index#
    
 ### 生产环境
-   * 生产ip：http://47.99.119.191:3000/coralHotel
-   * 生产域名: 
-   * 部署地址: (线上服务器域名+)/usr/apps/node/
+   * 生产ip：http://47.99.119.191:5008
+   * 生产域名: http://h.wuzhizhou.com/
+   * 部署地址: 47.99.119.191:5008 /application/sendinfo-wzz-node/wzz-wap-3000
    * 后台接口: https://b2b.wuzhizhou.com
    * 后台地址: https://b2b.wuzhizhou.com/admin/login
