@@ -8,7 +8,8 @@ mixin ticketTypeList(data)
                     if item.ticketList
                         each sitem in item.ticketList
                             li.ticket-type-item(data-item=JSON.stringify(sitem)  data-id=sitem.id)
-                                a.ticket-info-name(href='/product/ticket/'+sitem.rateCode+'?parkId='+sitem.parkId)=sitem.aliasName
+                                .ticket-info-name
+                                    a(href='/product/ticket/'+sitem.rateCode+'?parkId='+sitem.parkId)=sitem.aliasName
                                     if sitem.recommend === "T"
                                         span.ticket-info-icon 荐
                                 .ticket-type-left

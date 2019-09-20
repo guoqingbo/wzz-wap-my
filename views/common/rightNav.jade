@@ -1,0 +1,81 @@
+mixin rightNav()
+    // 右侧快捷导航
+    .rightxbar +
+    ul.right-nav-list
+      li.right-nav-item
+        a(href='/')
+          i.icon-ihome
+          //img.right-nav-icon(src="/images/common/nav-icon1.png")
+      li.right-nav-item
+        a(href='/list/order')
+          i.icon-nav-order
+          //img.right-nav-icon(src="/images/common/nav-icon2.png")
+    script.
+      $(function () {
+          $(".rightxbar").click(function (e) {
+              e.preventDefault()
+              e.stopPropagation()
+              // var height = $(".right-nav-list").height()
+              console.log($(".right-nav-list").hasClass('show'))
+              if($(".right-nav-list").hasClass('show')){
+                  $(".right-nav-list").removeClass('show')
+              }else{
+                  $(".right-nav-list").addClass('show')
+              }
+          })
+      })
+    style.
+      .rightxbar{
+        position: fixed;
+        right: .5rem;
+        top: 80%;
+        cursor: pointer;
+        z-index: 9;
+        width: 1.5rem;
+        height: 1.5rem;
+        background: #f63;
+        border-radius: 100%;
+        font-size: 1rem;
+        color: #fff;
+        text-align: center;
+        line-height: 1.5rem;
+      }
+      .right-nav-list {
+        transition: all .4s;
+        z-index: 9;
+        position: fixed;
+        top: 100%;
+        right: .5rem;
+      }
+      .right-nav-list.show{
+        top: 65%;
+      }
+      .right-nav-item{
+        box-sizing: border-box;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 1rem;
+        text-align: center;
+        background-color: #fff;
+        margin-bottom: .5rem;
+        padding: .3rem;
+      }
+      .right-nav-item:nth-child(1){
+        background: #089779
+      }
+
+      .right-nav-item:nth-child(2) {
+        background: #ff7a51
+      }
+
+      .right-nav-item:nth-child(3) {
+        background: #ffb351
+      }
+      .right-nav-item i{
+        color: #fff;
+        font-size: .6rem;
+      }
+      .right-nav-icon{
+        /*height: 1rem;*/
+        width: 100%;
+      }
