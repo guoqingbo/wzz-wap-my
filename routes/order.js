@@ -315,7 +315,7 @@ exports.mainRouter = function (router, common) {
     // 其它优惠项目推荐
     router.post('/order/getRecomentList', function (req, res, next) {
         let {rateCodes,orderSum,pageSize,currPage} = req.body
-        orderSum = 200
+        // orderSum = 200
         common.commonRequest({
             url: [{
                 urlArr: ['ticket', 'order', 'matchGoods'],

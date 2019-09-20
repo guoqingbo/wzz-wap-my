@@ -93,8 +93,12 @@ block content
     .order-boottom
         .order-boottom-left
             span.order-total-text 订单总额：
-            span.order-total-money-icon ￥
+            span.order-total-money-icon.price-color ￥
             span.order-total-money-value 0
+        .order-boottom-center
+            span.has-discount-text 已优惠：
+            span.price-color.price-icon ￥
+            span.price-color.has-discount-value 0
         .order-boottom-right
             button.submit-btn 去支付
     #mask.mask

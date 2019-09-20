@@ -139,6 +139,10 @@ body{
 .order-boottom-left{
     display: inline-block;
 }
+.order-boottom-center{
+    display: inline-block;
+    padding-left: .8rem;
+}
 .order-boottom-right{
    float: right;
 }
@@ -376,5 +380,5 @@ body{
 }
 .price-icon{
     font-size: .5rem;
-    margin-left: .3rem;
+    /*margin-left: .3rem;*/
 }
