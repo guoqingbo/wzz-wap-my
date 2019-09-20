@@ -55,18 +55,22 @@ $(function () {
         }
 
         $.get('/member/linkMan',function (data) {
-            $("#linkManLayer").addClass("linkMan-layer-show");
-            $("#mask").show();
-            linkman = data[0].data
-            var html = orderTemplate({
-                data:{
-                    linkMan:linkman,
-                    linkManChecked:linkManChecked
-                },
-                render:true,
-                mixin:'linkManList'
-            })
-            $("#linkManLayer").html(html)
+            if(data[0].status == 200){
+                $("#linkManLayer").addClass("linkMan-layer-show");
+                $("#mask").show();
+                linkman = data[0].data
+                var html = orderTemplate({
+                    data:{
+                        linkMan:linkman,
+                        linkManChecked:linkManChecked
+                    },
+                    render:true,
+                    mixin:'linkManList'
+                })
+                $("#linkManLayer").html(html)
+            }else if(data[0].status == 400){
+                window.location.href='/login?redir='+window.location.href
+            }
         })
     });
 
@@ -260,14 +264,16 @@ $(function () {
             type: 'POST',
             url: '/order/getRecomentList',
             data: {
-                pageSize:3,
+                pageSize:2,
                 currPage:recomentListPages,
                 rateCodes:rateCodes.join(','),
                 orderSum:shopData.money
             },
             success: function (data) {
                 if (data[0].status === 200 ) {
+                    recomentListTotalPage = data[0].pages
                     $(".ticket-type-list").append(data[0].html)
+                    computePrice()
                 } else {
                     new ErrLayer({message:data[0].message})
                 }
@@ -322,12 +328,19 @@ $(function () {
     })
     // 计算价格
     function computePrice() {
+        // 已经优惠的
+        var hasAccountMoney = 0
+        // 还可优惠的价格
+        var canAccountMoney = 0
         var totalPrice = 0
         var shopNum = 0
         var list = []
         $(".ticket-type-list .ticket-type-item").each(function () {
             // 单价
-            var priceUnit = $(this).find(".price-num").text()
+            var priceUnit = Number($(this).find(".price-num").text())
+
+            // 展示价格
+            var priceOld = Number($(this).find(".old-price-num").text())
 
             // 购买数量
             var buyNum = $(this).find(".buy-num").text()
@@ -335,16 +348,29 @@ $(function () {
                 var item = $(this).data('item')
                 item.buyNum = buyNum
                 list.push(item)
-
+                hasAccountMoney+=Number(buyNum*(priceOld-priceUnit))
                 totalPrice+=Number(buyNum*priceUnit)
                 shopNum+=Number(buyNum)
 
+            }else{
+                canAccountMoney+=Number(priceOld-priceUnit)
             }
         })
-        // 总价
-        $(".recoment-total-value").text(totalPrice.toFixed(2))
+
         recomentInfo.list = list
         recomentInfo.totalPrice = totalPrice
+        recomentInfo.canAccountMoney = canAccountMoney
+        recomentInfo.hasAccountMoney = hasAccountMoney
+
+        // 总价
+        $(".recoment-total-value").text(recomentInfo.totalPrice.toFixed(2))
+
+        // 已惠价
+        $(".has-discount-value").text(recomentInfo.hasAccountMoney.toFixed(2))
+
+        // 还可优惠
+        $(".discount-value").text(recomentInfo.canAccountMoney.toFixed(2))
+
 
         // 重新生成票型html
         initHtml()

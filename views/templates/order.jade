@@ -4,13 +4,13 @@ mixin shopCarList(data)
         each item in data.list
             .ticket-type-box(data-real=item.isRealName data-ratecode=item.rateCode)
                 .ticket-type-header
-                    span.ticket-name=item.aliasName
+                    span.ticket-name=item.aliasName || item.name
                     .ticket-amount
                         span.ticket-amount-icon *
                         span.ticket-amount-value=item.buyNum
                     .ticket-price
                         span.ticket-price-icon ￥
-                        span.ticket-price-value=item.currentPrice
+                        span.ticket-price-value=item.currentPrice || item.price
                 //- 如果是实名制票，选择游玩人
                 if item.isRealName == "T"
                     .person-option

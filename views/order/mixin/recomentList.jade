@@ -1,25 +1,24 @@
 mixin recomentList(data)
     if data.length
         each item in data
-            li.ticket-type-item(data-item="{}")
-                .ticket-info-name 门船票（淡季）
-                    span.ticket-info-icon 荐
+            li.ticket-type-item(data-item=JSON.stringify(item))
+                .ticket-info-name=item.name
                 .ticket-type-left
                     .sale-num 售量：1000
                 .ticket-type-right
                     .ticket-old-price-box
                         span.old-price-icon ￥
-                        span.old-price-num 0.002
+                        span.old-price-num=item.priceShow
                     .ticket-price-box
                         span.price-icon ￥
-                        span.price-num 0.002
+                        span.price-num=item.price
                     .changge-num-box
                         span.default-icon.sub-icon
                             i.icon-iconfont-jian
-                        span.buy-num 2
+                        span.buy-num 0
                         span.default-icon.add-icon
                             i.icon-iconfont-jia
-        else
-            li.no-data 暂无数据
+    else
+        li.no-data 暂无推荐搭配
 if method === "ajax"
     +recomentList(data)
