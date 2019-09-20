@@ -52,7 +52,8 @@
       "classifyParkTicket":"/product/api/product/classifyParkTicket"
     },
     "order": {
-      "main": "/product/api/product/webTicketInfo"
+      "main": "/product/api/product/webTicketInfo",
+      "matchGoods":"/product/api/recommend/matchGoods"
     }
   },
   "hotel": {

@@ -314,14 +314,17 @@ exports.mainRouter = function (router, common) {
 
     // 其它优惠项目推荐
     router.post('/order/getRecomentList', function (req, res, next) {
-
+        let {rateCodes,orderSum,pageSize,currPage} = req.body
         common.commonRequest({
             url: [{
-                urlArr: ['ticket', 'detail', 'productItems'],
+                urlArr: ['ticket', 'order', 'matchGoods'],
                 parameter: {
-                    goodsCode: common.envConfig.ticketPark,
-                    date: moment().format('YYYY-MM-DD'),
-                }
+                    rateCodes,
+                    orderSum,
+                    pageSize,
+                    currPage
+                },
+                method:'GET'
             }],
             req: req,
             res: res,
@@ -331,11 +334,11 @@ exports.mainRouter = function (router, common) {
                     handTag.tag = false
                     let renderObj = {
                         method:"ajax",
-                        data:results[0].data,
+                        data:results[0].data.rows,
                         // ticketType:results[0].classifyKindsVos
                     }
                     let html = common.jade('order/mixin/recomentList', renderObj);
-                    res.send([{status:200,html,pages:1}])
+                    res.send([{status:200,html,pages:results[0].data.pages}])
                 }
             }
         });

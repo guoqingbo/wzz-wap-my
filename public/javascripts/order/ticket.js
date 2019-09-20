@@ -3,9 +3,9 @@ $(function () {
     var linkman =[]
     var shopInfo = {}
     var recomentInfo = {list:[]}
+    var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
     // 初始化页面
     function initHtml() {
-        var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
         // 生成票型列表
         var html = orderTemplate({data:{list:shopData.list},render:true,mixin:'shopCarList'})
         // 价格
@@ -20,7 +20,7 @@ $(function () {
         $('.play-day').text(shopData.day)
 
         // 总价
-        $('.order-total-money-value').text(totalPrice)
+        $('.order-total-money-value').text(totalPrice.toFixed(2))
     }
     initHtml()
 
@@ -252,15 +252,22 @@ $(function () {
     var recomentListPages = 1
     var recomentListTotalPage = ''
     function getRecomentList(){
+        var rateCodes = []
+        for(var i=0;i<shopData.list.length;i++){
+            rateCodes.push(shopData.list[i].rateCode)
+        }
         $.ajax({
             type: 'POST',
             url: '/order/getRecomentList',
             data: {
-                pages:recomentListPages
+                pageSize:3,
+                currPage:recomentListPages,
+                rateCodes:rateCodes.join(','),
+                orderSum:shopData.money
             },
             success: function (data) {
                 if (data[0].status === 200 ) {
-
+                    $(".ticket-type-list").append(data[0].html)
                 } else {
                     new ErrLayer({message:data[0].message})
                 }
@@ -270,7 +277,7 @@ $(function () {
             }
         });
     }
-
+    getRecomentList()
     // 其它优惠项目点击加载更多
     $(".show-more-btn").click(function (e) {
         e.preventDefault()
