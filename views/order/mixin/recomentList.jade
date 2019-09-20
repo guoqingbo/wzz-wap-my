@@ -16,7 +16,7 @@ mixin recomentList(data)
                         span.default-icon.sub-icon
                             i.icon-iconfont-jian
                         span.buy-num 0
-                        span.default-icon.add-icon
+                        span.default-icon.add-icon(data-maxorder=item.maxBuyNum)
                             i.icon-iconfont-jia
     else
         li.no-data 暂无推荐搭配

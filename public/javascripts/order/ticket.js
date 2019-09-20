@@ -7,10 +7,12 @@ $(function () {
     // 初始化页面
     function initHtml() {
         // 生成票型列表
+        console.log(shopData.list)
         var html = orderTemplate({data:{list:shopData.list},render:true,mixin:'shopCarList'})
         // 价格
         var totalPrice = Number(shopData.money)
         if(recomentInfo.list.length){
+            console.log(recomentInfo.list)
             html+=orderTemplate({data:{list:recomentInfo.list},render:true,mixin:'shopCarList'})
             totalPrice+=Number(recomentInfo.totalPrice)
         }
@@ -346,7 +348,9 @@ $(function () {
             var buyNum = $(this).find(".buy-num").text()
             if(buyNum>0){
                 var item = $(this).data('item')
+                // 修改item字段和门票一致
                 item.buyNum = buyNum
+                item.rateCode=item.code
                 list.push(item)
                 hasAccountMoney+=Number(buyNum*(priceOld-priceUnit))
                 totalPrice+=Number(buyNum*priceUnit)
