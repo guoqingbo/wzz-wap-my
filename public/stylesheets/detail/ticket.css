@@ -564,6 +564,9 @@ body{
     color: #fff;
     background-color: #f63;
 }
+.check-box{
+    padding-top: .5rem;
+}
 .buy-ticket-bottom{
     margin-top: .5rem;
     padding-top: .5rem;
