@@ -95,9 +95,9 @@ exports.mainRouter = function (router, common, requireLogin ) {
     // 登陆页面
     router.get('/login', function (req, res, next) {
         if (common.is_weixn(req)) {
-            if(req.session.wxTokenObj && req.session.wxTokenObj.expires_Time <= +new Date()) {
-                return res.redirect('/horization');
-            }
+            // if(req.session.wxTokenObj && req.session.wxTokenObj.expires_Time <= +new Date()) {
+            //     return res.redirect('/horization');
+            // }
 
             let redirect = common.getUrl({
                 urlArr: ['main', 'wechat', 'Authorization'],
@@ -109,6 +109,7 @@ exports.mainRouter = function (router, common, requireLogin ) {
                 },
                 outApi: true  //外网接口判断 {true:是}
             }) + '#wechat_redirect'
+
             // 如果是珊瑚酒店使用蜈支洲wap官网的微信授权
             let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
             if(projectNameCode === 'coralHotel'){

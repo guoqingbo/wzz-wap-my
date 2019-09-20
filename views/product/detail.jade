@@ -27,6 +27,8 @@ block stylesheets
             display: block;
             text-align: center;
             color: #999;
+            line-height: 1;
+            padding-top: .25rem;
         }
         .nav-pro  li a i {
             font-size: 1rem;
@@ -34,7 +36,7 @@ block stylesheets
         .nav-pro li a p {
             padding-top: 0;
             font-size: .45rem;
-            margin-top: -1.4rem;
+            margin-top: .1rem;
         }
 block javascripts
     script(type='text/javascript', src='/lib/swiper/swiper-3.4.2.jquery.min.js')
@@ -72,7 +74,10 @@ block content
 
     .order-footer
         .order-total.float-layer
-            a.btn-order.background-base(href='/order/'+module+'/'+data[0].data['rateCode']+'?parkId='+data[0].data['parkId']+ '&date=' +date+'&classifyId='+classifyId+'&productCode='+productCode ) 立即预订
+            if module == 'ticket'
+                a.btn-order.background-base(href='/order/'+module+'/'+data[0].data['rateCode']+'?parkId='+data[0].data['parkId']+ '&date=' +date+'&classifyId='+classifyId+'&productCode='+productCode ) 立即预订
+            else
+                a.btn-order.background-base(href='/order/'+module+'/'+data[0].data['rateCode']+'?productCode='+productCode ) 立即预订
             ul.nav-pro
                 li.nav-lipro
                     a.on(href='/')
@@ -88,7 +93,7 @@ block content
                 | 单价:
                 span.price
                     em ￥
-                    strong#totalprice #{data[0].data['currentPrice']||data[0].data['price']}
+                    strong#totalprice #{data[0].data['currentPrice']}
     //- 详情切换
     mixin detailTab(data,module)
         ul#details-tab.tours-details-tab.tab.clearfix.details-tab
@@ -99,6 +104,6 @@ block content
         .details-tab-panel
             #tab-panel.ticket-details-tabs(style='margin-left: 0%;')
                 #book.details-tab-item(style='height: auto;')
-                    .tab-article!=data.modelExplain
+                    .tab-article!=data.modelExplain||data.modelDetail
                 //-#scenic.details-tab-item
                     .tab-article!=data.orderNotice
