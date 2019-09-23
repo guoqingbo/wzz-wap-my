@@ -22,6 +22,15 @@ $(function () {
         }
         $(".shop-car-list").html(html)
 
+        // 获取缓存取票人
+        var takeTicketLinkMan = sessionStorage.getItem('takeTicketLinkMan',JSON.stringify(selectedPerson))
+        var html = orderTemplate({
+            data:takeTicketLinkMan,
+            render:true,
+            mixin:'takeTicketLinkMan'
+        })
+        $(".take-person-option").html(html)
+
         // 游玩日期
         $('.play-day').text(shopData.day)
 
@@ -138,7 +147,7 @@ $(function () {
                 render:true,
                 mixin:'takeTicketLinkMan'
             })
-            parentEle.find(".take-person-option").html(html)
+            $(".take-person-option").html(html)
         }
     });
     // 删除
