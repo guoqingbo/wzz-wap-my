@@ -24,13 +24,14 @@ $(function () {
 
         // 获取缓存取票人
         var takeTicketLinkMan = JSON.parse(sessionStorage.getItem('takeTicketLinkMan')||"[]")
-        var html = orderTemplate({
-            data:takeTicketLinkMan,
-            render:true,
-            mixin:'takeTicketLinkMan'
-        })
-        $(".take-person-option").html(html)
-
+        if(takeTicketLinkMan.length){
+            var html = orderTemplate({
+                data:takeTicketLinkMan,
+                render:true,
+                mixin:'takeTicketLinkMan'
+            })
+            $(".take-person-option").html(html)
+        }
         // 游玩日期
         $('.play-day').text(shopData.day)
 
