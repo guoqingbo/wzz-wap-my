@@ -122,12 +122,13 @@ block content
                     i.member-ico.mico-linkman
                     | 常用游玩人
                 i.font-icon.fr.icon-iconfont-jiantou
-        //li
-        //    a(href='https://wzzdlyq.qiyukf.com/client?k=9043442f1a44a1780180c5459734227c&wp=1')
-        //        label.lab-title(for='')
-        //            i.font-icon.icon-italk
-        //            | 客服
-        //        i.font-icon.fr.icon-iconfont-jiantou
+        if projectNameCode == 'official'
+            li
+                a(href='https://wzzdlyq.qiyukf.com/client?k=9043442f1a44a1780180c5459734227c&wp=1')
+                    label.lab-title(for='')
+                        i.font-icon.icon-italk
+                        | 客服
+                    i.font-icon.fr.icon-iconfont-jiantou
     //.page-line
     //ul.order-list.member-list
     //    li

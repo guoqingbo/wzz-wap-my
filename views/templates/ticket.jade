@@ -23,7 +23,8 @@ mixin lookTicketDetail(data)
     if data
         .ticket-detail-header
             span.ticket-detail-name=data.aliasName
-            i.ticket-close.font-icon.icon-iconfont-pxchaxian
+            button.ticket-close
+                i.font-icon.icon-iconfont-pxchaxian
         .ticket-detail-content!=data.modelExplain
         .ticket-detail-bottom
             .ticket-detail-price
