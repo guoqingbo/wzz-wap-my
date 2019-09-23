@@ -274,7 +274,7 @@ $(function () {
     }
 
     // 查看详情
-    $("body").on("click",".look-detail",function () {
+    $(".ticket-list-box").on("click",".look-detail",function () {
         var sitem = $(this).parents('.ticket-type-item').data("item")
         // 生成详情html
         var html = ticketTemplate({data:sitem,render:true,mixin:'lookTicketDetail'})
@@ -287,7 +287,9 @@ $(function () {
         })
         $(".ticket-detail-content").uniqueScroll()
     })
-    $("body").on("click",".ticket-close",function () {
+    $(".ticket-detail-box").on("click",".ticket-close",function (e) {
+        e.preventDefault()
+        e.stopPropagation()
         $(".ticket-detail-box").removeClass('show');
         $("#mask").hide();
     });

@@ -281,6 +281,9 @@ body{
     line-height: 1rem;
     border-radius: 2rem;
     text-align: center;
+    background-color: #fff;
+    padding: 0;
+    color: #999;
 }
 .default-icon i{
     font-weight: bolder;
@@ -321,6 +324,10 @@ body{
 }
 .footer-nav i{
     font-size: .9rem;
+}
+.footer-nav-icon{
+    width: 1rem;
+    vertical-align: unset;
 }
 .footer-nav-name{
     color: #999;
@@ -430,10 +437,19 @@ body{
     font-size: .7rem;
 }
 .ticket-close{
-    position: absolute;
-    right: .5rem;
-    top: .25rem;
+    display: block;
+    width: 1rem;
+    /* height: 1rem; */
+    /* text-align: center; */
+    /*line-height: 1rem;*/
+    float: right;
     font-size: .8rem;
+    /* cursor: pointer; */
+    padding: 0;
+    background-color: #fff;
+    border: 0;
+    outline: 0;
+    margin-top: -.1rem;
 }
 .ticket-detail-content{
     border-bottom: 1px solid #e5e5e5;

@@ -1328,7 +1328,9 @@ footer a.check-all {
     bottom: 0;
     background: #fff;
     border-top: 1px solid #dadada;
-    z-index: 9
+    z-index: 9;
+    display: flex;
+    justify-content: space-around;
 }
 
 .hs-footer ul li {
@@ -1961,7 +1963,7 @@ footer a.check-all {
     /* margin-top: -7.7rem; */
     box-sizing: border-box;
     padding: .5rem .5rem;
-    height: 75%;
+    /*height: 75%;*/
     transition: 400ms;
     -webkit-transition: 400ms;
 }
