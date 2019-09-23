@@ -24,8 +24,8 @@
         "usePolling": true
       },
       "log_date_format": "YYYY-MM-DD HH:mm:ss",
-      "error_file" : "./logs/app-err.log",  // 错误日志路径
-      "out_file"   : "./logs/app-out.log",  // 普通日志路径
+      "error_file" : "./logs/official/app-err.log",  // 错误日志路径
+      "out_file"   : "./logs/official/app-out.log",  // 普通日志路径
       "env": {
         "projectNameCode":"official",
         "PORT":3000,
@@ -61,8 +61,8 @@
         "usePolling": true
       },
       "log_date_format": "YYYY-MM-DD HH:mm:ss",
-      "error_file" : "./logs/app-err.log",  // 错误日志路径
-      "out_file"   : "./logs/app-out.log",  // 普通日志路径
+      "error_file" : "./logs/coralHotel/app-err.log",  // 错误日志路径
+      "out_file"   : "./logs/coralHotel/app-out.log",  // 普通日志路径
       "env": {
         "PORT":5008,
         "projectNameCode":"coralHotel",
@@ -98,8 +98,8 @@
         "usePolling": true
       },
       "log_date_format": "YYYY-MM-DD HH:mm:ss",
-      "error_file" : "./logs/app-err.log",  // 错误日志路径
-      "out_file"   : "./logs/app-out.log",  // 普通日志路径
+      "error_file" : "./logs/wangWang/app-err.log",  // 错误日志路径
+      "out_file"   : "./logs/wangWang/app-out.log",  // 普通日志路径
       "env": {
         "projectNameCode":"wangWang",
         "PORT":4016,
