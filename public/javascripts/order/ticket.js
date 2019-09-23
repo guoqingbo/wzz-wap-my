@@ -123,6 +123,9 @@ $(function () {
             var item = $(this).parents('.linkMan-item').data("item")
             selectedPerson.push(item)
         })
+        if (selectedPerson.length==0){
+            return
+        }
         // 填入对应的游客
         if(parentEle.find(".person-selected").length){
             // 缓存游客
