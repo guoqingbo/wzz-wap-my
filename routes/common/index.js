@@ -245,7 +245,7 @@ let common = {
                 }
                 if(option.url.indexOf(common.envConfig.domain1) == -1 || process.env.NODE_ENV !== 'production'){
                     common.envConfig.debug && console.log(option.url);
-                    console.log("===========请求耗时==============="+requestEntTime-requestStartTime)
+                    console.log("===========请求耗时==============="+(requestEntTime-requestStartTime)+"ms")
                     common.envConfig.debug && console.log(option.qs||option.form);
                     common.envConfig.debug && console.log(body);
                 }
