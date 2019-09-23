@@ -69,48 +69,63 @@ $(function (){
                 });
         }
     });
+    // 新增或修改联系人
+    function addOrModifyLinkMan(type){
+        var url = '/member/linkMan/add'
+        var params = {
+            charNo:$("input[name='charNo']").val(),
+            name:$("input[name='name']").val(),
+            phone:$("input[name='phone']").val(),
+        }
+        if(type == 'modify'){
+            params.id = $("input[name='id']").val()
+            url = "/member/linkMan/modify"
+        }
+        if (validator.form()){
+            $.post(url, params)
+                .success(function (data){
+                    if (data[0].status === 200){
+                        var originalUrl = getQueryVariable('originalUrl')
+                        var comefrom = getQueryVariable('comefrom')
+
+                        var linkMan = data[0].data
+                        // 如果存在comefrom，字段则是从订单页添加联系人，要自动填充到订单页对应的联系人
+                        if(comefrom == 'takePerson'){
+                            // 取票人
+                            // 缓存取票人
+                            sessionStorage.setItem('takeTicketLinkMan',JSON.stringify([linkMan]))
+
+                        }else{
+                            // 游玩人
+                            // 获取缓存的游玩人
+                            var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
+                            ticketLinkMan[comefrom] = [linkMan]
+                            // 缓存游玩人
+                            console.log(ticketLinkMan)
+                            sessionStorage.setItem('ticketLinkMan',JSON.stringify(ticketLinkMan))
+                        }
+                        window.location.href = originalUrl || '/member/linkMan/list';
+                    }else{
+                        $('.tips p').text(data[0].message);
+                        $('.mask,.tips').show();
+                    }
+                })
+                .error(function (err){
+                    window.location.href = '/error';
+                });
+        }
+    }
 
     //新增常用联系人
     $(".linkMan-btn .submit-btn").click(function(){
-        if (validator.form()){
-            $.post('/member/linkMan/add', $('#form').serialize())
-                .success(function (data){
-                    var datas = data[0];
-                    if (datas.status === 200){
-                        var originalUrl = getQueryVariable('originalUrl')
-                        window.location.href = originalUrl || '/member/linkMan/list';
-                    }else{
-                        $('.tips p').text(datas.message);
-                        $('.mask,.tips').show();
-                    }
-                })
-                .error(function (err){
-                    window.location.href = '/error';
-                });
-        }
+        addOrModifyLinkMan()
     })
-
 
     //修改常用联系人
     $(".linkMan-modify-btn").find("a").on("click",function(){
-        if (validator.form()){
-            $.post('/member/linkMan/modify?'+$('#form').serialize())
-                .success(function (data){
-                    var datas = data[0];
-                    if (datas.status === 200){
-                        var originalUrl = getQueryVariable('originalUrl')
-                        window.location.href = originalUrl || '/member/linkMan/list';
-                        // window.location.href = '/member/linkMan/list';
-                    }else{
-                        $('.tips p').text(datas.message);
-                        $('.mask,.tips').show();
-                    }
-                })
-                .error(function (err){
-                    window.location.href = '/error';
-                });
-        }
+        addOrModifyLinkMan('modify')
     })
+
     //修改密码
     $('#setNewPassword').on('click',function(){
         if (validator.form()){

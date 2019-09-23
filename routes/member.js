@@ -300,6 +300,7 @@ exports.mainRouter = function (router,common){
             res: res,
             callBack: function (result, reObj) {
                 reObj.originalUrl = req.query.originalUrl || ''
+                reObj.comefrom =  req.query.comefrom || ''
             }
         })
     });
@@ -330,7 +331,7 @@ exports.mainRouter = function (router,common){
         common.commonRequest({
         url:[{
             urlArr:['member','linkMan','modify'],
-            parameter: req.query
+            parameter: req.body
         }],
         isAjax: true,
         req: req,

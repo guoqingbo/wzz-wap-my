@@ -24,13 +24,15 @@ mixin shopCarList(data)
                     .person-selected
                         if data.ticketLinkMan && data.ticketLinkMan[item.rateCode]
                             +ticketLinkMan(data.ticketLinkMan[item.rateCode])
+                        else
+                            .no-data 尚未选择游玩人
                         // each item in [1,2]
                         //     .person-selected-item
                         //         span.person-selected-name 网哈哈
                         //         span.person-selected-icard 3464698465156
                         //         span.person-selected-delete
                         //             i.icon-iconfont-shanchu
-                        .no-data 尚未选择游玩人
+
             .page-line
     else
         .no-data 暂未选择商品
@@ -42,9 +44,9 @@ mixin linkManList(data)
         a(href="javascript:;")#enter="确定"
     .linkMan-content
         .linkManEditBar
-            a(href="/member/linkMan/add?originalUrl=/order/ticket").linkMan-add +添加
+            a(href="/member/linkMan/add?originalUrl=/order/ticket&comefrom="+data.comefrom).linkMan-add +添加
             .line
-            a(href="/member/linkMan/list?originalUrl=/order/ticket").linkMan-edit 编辑
+            a(href="/member/linkMan/list?originalUrl=/order/ticket&comefrom="+data.comefrom).linkMan-edit 编辑
         ul.linkMan-list
             each item in data.linkMan
                 li.linkMan-item(data-item=JSON.stringify(item))

@@ -7,6 +7,7 @@ $(function () {
         var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
         // 获取缓存的游玩人
         var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
+        console.log(ticketLinkMan)
         // 生成票型列表
         var html = orderTemplate({data:{list:shopData.list,ticketLinkMan:ticketLinkMan},render:true,mixin:'shopCarList'})
         $(".shop-car-list").html(html)
@@ -41,10 +42,15 @@ $(function () {
     $("body").on("click",".chose-play-person",function (e) {
         // 获取已经选择的游玩人
         var linkManChecked=[]
-
+        var comefrom = 'takePerson'// 判断是取票人还是游玩人，默认取票人，用于新增或编辑联系人时直接填充到订单页
         if($(this).parents(".ticket-type-box").length){
             // 游玩人
             parentEle = $(this).parents(".ticket-type-box")
+
+            // 用于新增或编辑联系人时直接填充到订单页
+            var ratecode = parentEle.data("ratecode")
+            comefrom = ratecode
+
             parentEle.find(".person-selected-item").each(function (e) {
                 var personItem = $(this).data("item")
                 linkManChecked.push(personItem.id)
@@ -66,7 +72,8 @@ $(function () {
                 var html = orderTemplate({
                     data:{
                         linkMan:linkman,
-                        linkManChecked:linkManChecked
+                        linkManChecked:linkManChecked,
+                        comefrom:comefrom,
                     },
                     render:true,
                     mixin:'linkManList'
