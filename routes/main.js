@@ -1,6 +1,6 @@
 // var moment = require('moment');
 exports.mainRouter = function (router, common, requireLogin ) {
-    // wap官网首页
+    // 首页
     router.get(['/', '/main'], function (req, res, next) {
 
         // 全渠道扫码进入首页需要登录
@@ -68,6 +68,11 @@ exports.mainRouter = function (router, common, requireLogin ) {
             title = '珊瑚酒店'
             page = 'main/coralHotel'
             modelCode = 'home_page2'
+        }else if(projectNameCode=='storeTerminal'){
+            // 珊瑚酒店
+            title = '门店终端分销商城'
+            page = 'main/storeTerminal'
+            modelCode = 'home_page'
         }
         common.commonRequest({
             url: [{

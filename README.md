@@ -12,7 +12,7 @@
         http://wap.wuzhizhou.com/   官网wap   
         http://m.dogplanet.cn/      汪汪商城  
         http://h.wuzhizhou.com/     珊瑚酒店  
-      
+        http://s.wuzhizhou.com/     门店终端分销   
       
    * 源码地址(svn)：https://dssvn.sendinfo.com/svn/webwork/frontEnd/蜈支洲
    * 源码地址(git)：http://git.sendinfo.com/BasicBusiness/Frontdesign/wzz/wzz-wap-node.git
@@ -74,5 +74,20 @@
    * 生产ip：http://47.99.119.191:5008
    * 生产域名: http://h.wuzhizhou.com/
    * 部署地址: 47.99.119.191:5008 /application/sendinfo-wzz-node/wzz-wap-3000
+   * 后台接口: https://b2b.wuzhizhou.com
+   * 后台地址: https://b2b.wuzhizhou.com/admin/login
+
+## 门店终端分销
+### 测试环境
+   * 测试地址: http://192.168.200.152:3004
+   * 测试域名: https://wzzfxswap3.sendinfo.com.cn
+   * 部署地址: 192.168.200.152:3004 /usr/apps/node/wzzWapOfficial
+   * 后台接口: https://wzz.sendinfo.com.cn
+   * 后台地址: https://wzz.sendinfo.com.cn/admin/index#
+   
+### 生产环境
+   * 生产ip：http://47.99.119.191:3004
+   * 生产域名: http://s.wuzhizhou.com/
+   * 部署地址: 47.99.119.191:3004 /application/sendinfo-wzz-node/wzz-wap-3000
    * 后台接口: https://b2b.wuzhizhou.com
    * 后台地址: https://b2b.wuzhizhou.com/admin/login
