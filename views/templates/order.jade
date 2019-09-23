@@ -22,6 +22,8 @@ mixin shopCarList(data)
                         button.chose-play-person 选择游玩人 >
 
                     .person-selected
+                        if data.ticketLinkMan && data.ticketLinkMan[item.rateCode]
+                            +ticketLinkMan(data.ticketLinkMan[item.rateCode])
                         // each item in [1,2]
                         //     .person-selected-item
                         //         span.person-selected-name 网哈哈

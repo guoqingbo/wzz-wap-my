@@ -6,7 +6,11 @@ $(function () {
     var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
     // 初始化页面
     function initHtml() {
+        var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
+        // 获取缓存的游玩人
+        var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
         // 生成票型列表
+        var html = orderTemplate({data:{list:shopData.list,ticketLinkMan:ticketLinkMan},render:true,mixin:'shopCarList'})
         console.log(shopData.list)
         var html = orderTemplate({data:{list:shopData.list},render:true,mixin:'shopCarList'})
         // 价格
@@ -34,7 +38,7 @@ $(function () {
         });
     })
 
-    // 选择游玩人
+    // 选择游玩人/取票人 弹框
     var parentEle = '' //
     $("body").on("click",".chose-play-person",function (e) {
         // 获取已经选择的游玩人
@@ -112,6 +116,11 @@ $(function () {
         })
         // 填入对应的游客
         if(parentEle.find(".person-selected").length){
+            // 缓存游客
+            var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
+            var ratecode = parentEle.data("ratecode")
+            ticketLinkMan[ratecode] = selectedPerson
+            sessionStorage.setItem('ticketLinkMan',JSON.stringify(ticketLinkMan))
             // 门票游玩人
             var html = orderTemplate({
                 data:selectedPerson,
@@ -119,7 +128,10 @@ $(function () {
                 mixin:'ticketLinkMan'
             })
             parentEle.find(".person-selected").html(html)
-        }else if(parentEle.find(".take-person-option").length){
+        }
+        else if(parentEle.find(".take-person-option").length){
+            // 缓存取票人
+            sessionStorage.setItem('takeTicketLinkMan',JSON.stringify(selectedPerson))
             // 取票人
             var html = orderTemplate({
                 data:selectedPerson,
@@ -157,7 +169,6 @@ $(function () {
             }
         })
         if(checkPersonNum){
-            console.log()
             // 检测实名制票，是否全部选择游玩人
             return new ErrLayer({message:message})
         }
@@ -233,11 +244,12 @@ $(function () {
         });
         $("#mask").show()
     }
+
     // 支付方式选择
     $(".pay-item").click(function (e) {
         $(this).addClass('active').siblings(".pay-item").removeClass('active')
     })
-    // 去支付
+
     // 阻止多次点击去支付
     $('.to-pay-btn').click(function (e) {
         e.preventDefault();
