@@ -23,7 +23,7 @@ $(function () {
         $(".shop-car-list").html(html)
 
         // 获取缓存取票人
-        var takeTicketLinkMan = sessionStorage.getItem('takeTicketLinkMan',JSON.stringify(selectedPerson))
+        var takeTicketLinkMan = JSON.parse(sessionStorage.getItem('takeTicketLinkMan')||"[]")
         var html = orderTemplate({
             data:takeTicketLinkMan,
             render:true,

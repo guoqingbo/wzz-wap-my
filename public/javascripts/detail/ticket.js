@@ -338,6 +338,10 @@ $(function () {
 
         })
         sessionStorage.setItem('shopData',JSON.stringify({list:shopData,day:day,money:money}))
+        // 清空订单页面，游玩人，取票人缓存
+        sessionStorage.removeItem('takeTicketLinkMan')
+        sessionStorage.removeItem('ticketLinkMan')
+
         window.location.href = '/order/ticket'
     })
     // 清空购物车
