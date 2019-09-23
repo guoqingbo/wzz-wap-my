@@ -11,6 +11,15 @@ $(function () {
         var html = orderTemplate({data:{list:shopData.list,ticketLinkMan:ticketLinkMan},render:true,mixin:'shopCarList'})
         $(".shop-car-list").html(html)
 
+        // 获取缓存取票人
+        var takeTicketLinkMan = sessionStorage.getItem('takeTicketLinkMan',JSON.stringify(selectedPerson))
+        var html = orderTemplate({
+            data:takeTicketLinkMan,
+            render:true,
+            mixin:'takeTicketLinkMan'
+        })
+        $(".take-person-option").html(html)
+
         // 游玩日期
         $('.play-day').text(shopData.day)
         // 总价
@@ -126,7 +135,7 @@ $(function () {
                 render:true,
                 mixin:'takeTicketLinkMan'
             })
-            parentEle.find(".take-person-option").html(html)
+            $(".take-person-option").html(html)
         }
     });
     // 删除

@@ -77,7 +77,6 @@ exports.mainRouter = function (router, common) {
             title: '支付宝支付'
         });
     }, function (req, res, next) {
-        // 如果是珊瑚酒店的微信支付
 
         // 配置微信授权
         // 缓存缺少openid，重新授权登录
@@ -113,6 +112,13 @@ exports.mainRouter = function (router, common) {
             params.amount = amount
             params.payType = payType
             params.redirectUrl = redirectUrl
+            params.subFlag = 'F'
+            // 如果是蜈支洲官网
+            let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+            if(projectNameCode == 'official'){
+                params.subFlag = 'T'
+            }
+
         }
         let renderPage = '';
         switch (WXPAYTYPE) {
