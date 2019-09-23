@@ -98,6 +98,11 @@ $(function () {
         })
         // 填入对应的游客
         if(parentEle.find(".person-selected").length){
+            // 缓存游客
+            var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
+            var ratecode = parentEle.data("ratecode")
+            ticketLinkMan[ratecode] = selectedPerson
+            sessionStorage.setItem('ticketLinkMan',JSON.stringify(ticketLinkMan))
             // 门票游玩人
             var html = orderTemplate({
                 data:selectedPerson,
@@ -105,7 +110,10 @@ $(function () {
                 mixin:'ticketLinkMan'
             })
             parentEle.find(".person-selected").html(html)
-        }else if(parentEle.find(".take-person-option").length){
+        }
+        else if(parentEle.find(".take-person-option").length){
+            // 缓存取票人
+            sessionStorage.setItem('takeTicketLinkMan',JSON.stringify(selectedPerson))
             // 取票人
             var html = orderTemplate({
                 data:selectedPerson,
