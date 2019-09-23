@@ -24,7 +24,7 @@ $(function () {
         });
     })
 
-    // 选择游玩人
+    // 选择游玩人/取票人 弹框
     var parentEle = '' //
     $("body").on("click",".chose-play-person",function (e) {
         // 获取已经选择的游玩人
@@ -143,7 +143,6 @@ $(function () {
             }
         })
         if(checkPersonNum){
-            console.log()
             // 检测实名制票，是否全部选择游玩人
             return new ErrLayer({message:message})
         }
@@ -219,11 +218,12 @@ $(function () {
         });
         $("#mask").show()
     }
+
     // 支付方式选择
     $(".pay-item").click(function (e) {
         $(this).addClass('active').siblings(".pay-item").removeClass('active')
     })
-    // 去支付
+
     // 阻止多次点击去支付
     $('.to-pay-btn').click(function (e) {
         e.preventDefault();
