@@ -307,6 +307,7 @@ body{
     color: #f63;
     vertical-align: middle;
     font-size: .6rem;
+    margin-right: .5rem;
 }
 .ticket-old-price-box{
     text-decoration:line-through;

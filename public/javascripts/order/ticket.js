@@ -350,7 +350,7 @@ $(function () {
                 var item = $(this).data('item')
                 // 修改item字段和门票一致
                 item.buyNum = buyNum
-                item.rateCode=item.code
+                // item.rateCode=item.code
                 list.push(item)
                 hasAccountMoney+=Number(buyNum*(priceOld-priceUnit))
                 totalPrice+=Number(buyNum*priceUnit)

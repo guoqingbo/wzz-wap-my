@@ -4,19 +4,19 @@ mixin recomentList(data)
             li.ticket-type-item(data-item=JSON.stringify(item))
                 .ticket-info-name=item.name
                 .ticket-type-left
-                    .sale-num 售量：1000
-                .ticket-type-right
-                    .ticket-old-price-box
-                        span.old-price-icon ￥
-                        span.old-price-num=item.priceShow
+                    //.sale-num 售量：1000
                     .ticket-price-box
                         span.price-icon ￥
                         span.price-num=item.price
+                    .ticket-old-price-box
+                        span.old-price-icon ￥
+                        span.old-price-num=item.priceShow
+                .ticket-type-right
                     .changge-num-box
                         span.default-icon.sub-icon
                             i.icon-iconfont-jian
                         span.buy-num 0
-                        span.default-icon.add-icon(data-maxorder=item.maxBuyNum)
+                        span.default-icon.add-icon(data-maxorder=item.maxOrder)
                             i.icon-iconfont-jia
     else
         li.no-data 暂无推荐搭配

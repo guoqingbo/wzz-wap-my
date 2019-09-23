@@ -14,8 +14,8 @@ module.exports = {
     // domain: "http://b2b.wuzhizhou.com",//正式环境api
     // ticketPark:"park2018092911074546610",//正式
     // domain1:"http://coach.wuzhizhou.com", //预约正式
-    domain:'http://192.168.66.98:8080',
-    // domain: "http://wzz.sendinfo.com.cn",// 测试
+    // domain:'http://192.168.66.98:8080',
+    domain: "http://wzz.sendinfo.com.cn",// 测试
     ticketPark:"park2018091313465343855", //测试
     domain1:"http://192.168.200.72:8080", //预约测试
     wx:{
