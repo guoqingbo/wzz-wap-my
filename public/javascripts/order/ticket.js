@@ -5,8 +5,10 @@ $(function () {
     // 初始化页面
     function initHtml() {
         var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
+        // 获取缓存的游玩人
+        var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
         // 生成票型列表
-        var html = orderTemplate({data:{list:shopData.list},render:true,mixin:'shopCarList'})
+        var html = orderTemplate({data:{list:shopData.list,ticketLinkMan:ticketLinkMan},render:true,mixin:'shopCarList'})
         $(".shop-car-list").html(html)
 
         // 游玩日期
@@ -47,18 +49,22 @@ $(function () {
         }
 
         $.get('/member/linkMan',function (data) {
-            $("#linkManLayer").addClass("linkMan-layer-show");
-            $("#mask").show();
-            linkman = data[0].data
-            var html = orderTemplate({
-                data:{
-                    linkMan:linkman,
-                    linkManChecked:linkManChecked
-                },
-                render:true,
-                mixin:'linkManList'
-            })
-            $("#linkManLayer").html(html)
+            if(data[0].status == 200){
+                $("#linkManLayer").addClass("linkMan-layer-show");
+                $("#mask").show();
+                linkman = data[0].data
+                var html = orderTemplate({
+                    data:{
+                        linkMan:linkman,
+                        linkManChecked:linkManChecked
+                    },
+                    render:true,
+                    mixin:'linkManList'
+                })
+                $("#linkManLayer").html(html)
+            }else if(data[0].status == 400){
+                window.location.href='/login?redir='+window.location.href
+            }
         })
     });
 
