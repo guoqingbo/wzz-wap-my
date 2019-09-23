@@ -2,22 +2,25 @@ $(function () {
     // var linkman =$("#linkManLayer").data("linkman")||[]
     var linkman =[]
     var shopInfo = {}
-    var recomentInfo = {list:[]}
+    var recomentInfo = JSON.parse(sessionStorage.getItem('recomentInfo') ||'{"list":"[]"}')
     var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
     // 初始化页面
     function initHtml() {
         var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
         // 获取缓存的游玩人
         var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
-        console.log(ticketLinkMan)
+
         // 生成票型列表
-        var html = orderTemplate({data:{list:shopData.list,ticketLinkMan:ticketLinkMan},render:true,mixin:'shopCarList'})
-        console.log(shopData.list)
-        var html = orderTemplate({data:{list:shopData.list},render:true,mixin:'shopCarList'})
+        var html = orderTemplate({
+            data:{list:shopData.list,ticketLinkMan:ticketLinkMan},
+            render:true,
+            mixin:'shopCarList'
+        })
+
         // 价格
         var totalPrice = Number(shopData.money)
+        // 生成推荐
         if(recomentInfo.list.length){
-            console.log(recomentInfo.list)
             html+=orderTemplate({data:{list:recomentInfo.list},render:true,mixin:'shopCarList'})
             totalPrice+=Number(recomentInfo.totalPrice)
         }
@@ -335,7 +338,6 @@ $(function () {
     $('.ticket-type-list').on("click",'.sub-icon,.add-icon',function (e) {
         var productEle = $(this).parents('.ticket-type-item')
         var buyNumEle = productEle.find('.buy-num')
-        console.log(buyNumEle)
         // 订单信息
         // var item = productEle.data("item")
 
@@ -397,6 +399,10 @@ $(function () {
         recomentInfo.totalPrice = totalPrice
         recomentInfo.canAccountMoney = canAccountMoney
         recomentInfo.hasAccountMoney = hasAccountMoney
+
+        // 缓存推荐
+        console.log(recomentInfo)
+        sessionStorage.setItem('recomentInfo',JSON.stringify(recomentInfo))
 
         // 总价
         $(".recoment-total-value").text(recomentInfo.totalPrice.toFixed(2))
