@@ -800,7 +800,7 @@ $.ajaxSetup({
     },
     error: function (err) {
         console.log(err)
-        if (err.status === 401) {
+        if (err.status == 401 || err.status == 400) {
             location.href = '/login';
         }else {
             var message = typeof JSON.parse(err.responseText).message !== 'undefined' ? JSON.parse(err.responseText).message : '';

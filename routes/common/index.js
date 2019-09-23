@@ -231,7 +231,11 @@ let common = {
         }
         let option = config ? Object.assign(defaultOption,config) : defaultOption;
         return new Promise(function (resolve,reject) {
+            // 计算接口请求耗时
+            let requestStartTime = new Date().getTime()
             request(option,  function (err, resp, body) {
+                // 计算接口请求耗时
+                let requestEntTime = new Date().getTime()
                 try {
                     if(typeof body === 'string'){
                         body = JSON.parse(body)
@@ -241,6 +245,7 @@ let common = {
                 }
                 if(option.url.indexOf(common.envConfig.domain1) == -1 || process.env.NODE_ENV !== 'production'){
                     common.envConfig.debug && console.log(option.url);
+                    console.log("===========请求耗时==============="+requestEntTime-requestStartTime)
                     common.envConfig.debug && console.log(option.qs||option.form);
                     common.envConfig.debug && console.log(body);
                 }
