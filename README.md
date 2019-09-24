@@ -1,6 +1,6 @@
 # 蜈支洲项目
    * 运行时要执行 npm run build 执行压缩 及jade模板编译
-   * 官网wap，汪汪商城，珊瑚酒店等项目使用同一套代码
+   * 官网wap，汪汪商城，珊瑚酒店，门店终端分销等项目使用同一套代码
        
         测试环境  
         https://wzzfxswap.sendinfo.com.cn   http://192.168.200.152:4029/  官网wap  
