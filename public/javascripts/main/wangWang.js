@@ -9,7 +9,8 @@ $(function () {
         }else{
             var query1 = sessionStorage.getItem('mainParam')
             if(query1){
-                window.location.href = window.location.href+query1
+                window.history.replaceState(null,null,window.location.href+query1);
+                // window.location.href = window.location.href+query1
             }
         }
     }
