@@ -40,7 +40,7 @@ mixin roomList(data,beginDate,endDate,productCode)
 
                 if item.ratecodes && item.ratecodes.length
                     .pro-price(style='width:unset')
-                        a.price-code-btn.down(href='javascript:;')
+                        button.price-code-btn.down
                             i.font-icon.icon-iconfont-jiantou
                 else
                     .pro-price
@@ -52,6 +52,11 @@ mixin roomList(data,beginDate,endDate,productCode)
                     a.close-ticket.font-icon.icon-iconfont-pxchaxian(href='javascript:;')
                     h3.notice-tit=item.modelName
                     .ht-pic
+                        .home_slider2.swiper-container.detail-container
+                            ul.swiper-wrapper
+                                each item in [1]
+                                    li.swiper-slide
+                                        img(src='/images/demo/no-img.jpg')
                     .article-info.bgf
                         .article-main
                             ul.order-list.myorder-list

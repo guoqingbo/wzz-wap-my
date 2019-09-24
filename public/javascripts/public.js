@@ -794,6 +794,11 @@ $.ajaxSetup({
         loadding.show();
     },
     complete: function (data, status) {
+
+        var res = JSON.parse(data.responseText)
+        if(res[0] && res[0].status == 400){
+            window.location.href = '/login?redir=' + window.location.href
+        }
         loadding.remove();
         btnFlag = true;
         // console.log(data.getAllResponseHeaders())
@@ -811,6 +816,7 @@ $.ajaxSetup({
         }
     }
 });
+
 
 // 跳转链接replace history
 function fnUrlReplace(eleLink) {
