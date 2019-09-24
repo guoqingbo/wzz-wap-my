@@ -57,9 +57,8 @@ if(process.env.projectNameCode){
         next()
     });
 
-}else {
+}else{
     // 本地开发用到（生产或测试已废弃）
-    console.log("启动时没有指定了项目名称===========================================")
     // 如果启动时没有指定环境变量区分不同的项目
     app.use(function (req, res, next) {
 
