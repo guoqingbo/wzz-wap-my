@@ -7,27 +7,28 @@ mixin ticketTypeList(data)
                 ul.ticket-type-list
                     if item.ticketList
                         each sitem in item.ticketList
-                            li.ticket-type-item(data-item=JSON.stringify(sitem)  data-id=sitem.id)
-                                .ticket-info-name
-                                    a(href='/product/ticket/'+sitem.rateCode+'?parkId='+sitem.parkId)=sitem.aliasName
-                                    if sitem.recommend === "T"
-                                        span.ticket-info-icon 荐
-                                .ticket-type-left
-                                    .ticket-price-box
-                                        span.price-icon ￥
-                                        span.price-num=sitem.currentPrice
-                                    .ticket-info-bottom
-                                        span.info-more-default.look-detail 查看详情
-                                        if sitem.voice
-                                            span.info-more-default.video-intro(data-video=sitem.voice) 视频介绍
-                                .ticket-type-right
-                                    span.sale-num 售量：#{sitem.salesNum}
-                                    .changge-num-box
-                                        button.default-icon.sub-icon
-                                            i.icon-iconfont-jian
-                                        span.buy-num 0
-                                        button.default-icon.add-icon(data-maxorder=sitem.maxOrder||"")
-                                            i.icon-iconfont-jia
+                            if sitem.currentPrice
+                                li.ticket-type-item(data-item=JSON.stringify(sitem)  data-id=sitem.id)
+                                    .ticket-info-name
+                                        a(href='/product/ticket/'+sitem.rateCode+'?parkId='+sitem.parkId)=sitem.aliasName
+                                        if sitem.recommend === "T"
+                                            span.ticket-info-icon 荐
+                                    .ticket-type-left
+                                        .ticket-price-box
+                                            span.price-icon ￥
+                                            span.price-num=sitem.currentPrice
+                                        .ticket-info-bottom
+                                            span.info-more-default.look-detail 查看详情
+                                            if sitem.voice
+                                                span.info-more-default.video-intro(data-video=sitem.voice) 视频介绍
+                                    .ticket-type-right
+                                        span.sale-num 售量：#{sitem.salesNum}
+                                        .changge-num-box
+                                            button.default-icon.sub-icon
+                                                i.icon-iconfont-jian
+                                            span.buy-num 0
+                                            button.default-icon.add-icon(data-maxorder=sitem.maxOrder||"")
+                                                i.icon-iconfont-jia
                     else
                         li.no-data 暂无数据
 if method === "ajax"
