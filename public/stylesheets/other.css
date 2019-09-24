@@ -1,0 +1,38 @@
+.section-name{
+    padding: .5rem;
+    font-size: .6rem;
+    font-weight: bold;
+}
+.hs-nav ul {
+    display: block;
+    width: 100%;
+    background-color: #fff;
+    overflow: hidden;
+    padding-top: .75rem;
+}
+
+.hs-nav ul li {
+    width: 25%;
+    float: left;
+    padding-bottom: .75rem
+}
+
+.hs-nav ul li a {
+    display: block;
+    text-align: center;
+    font-size: .55rem
+}
+
+.hs-nav ul li a img {
+    width: 2rem;
+    height: 2rem;
+    margin: 0 auto;
+    border-radius: 2rem;
+}
+
+.hs-nav ul li a p {
+    padding-top: .5rem;
+    width: 100%;
+    text-align: center;
+    overflow: hidden
+}

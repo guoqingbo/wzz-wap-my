@@ -24,6 +24,7 @@
        排队叫号新版1 /queueCallNum/list1?screenCode=1  
        游玩项目列表 /appoint/gameList  
        手机取号 /appoint/takeNum  
+       我的行程 /myTrip
        
 ## 官网wap
 ### 测试环境

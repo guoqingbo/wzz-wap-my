@@ -279,7 +279,10 @@ exports.mainRouter = function (router, common, requireLogin ) {
             }
         });
     });
-
+    // 其它只通过链接访问的模块
+    router.get('/other', function (req, res) {
+        res.render('other', {title: '其它嵌入的模块'})
+    });
     //错误处理
     router.get('/error', function (req, res, next) {
         res.render('error', {
