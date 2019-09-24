@@ -1,0 +1,60 @@
+extends layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/other.css")
+block javascripts
+    //script(type='text/javascript', src='/javascripts/other.js')
+block content
+    //- 提供外链
+    .section-name 对外提供的外链
+    .hs-nav
+        ul
+            li
+                a(href='/appoint/list')
+                    img(src='/images/demo/no-img.jpg')
+                    p 大屏滚动
+            li
+                a(href='/callNum?screenCode=1')
+                    img(src='/images/demo/no-img.jpg')
+                    p 排队叫号1
+            li
+                a(href='/queueCallNum/list?screenCode=1?col=1,1,1,1,1')
+                    img(src='/images/demo/no-img.jpg')
+                    p 排队叫号2
+            li
+                a(href='/queueCallNum/list1?screenCode=1')
+                    img(src='/images/demo/no-img.jpg')
+                    p 排队叫号3
+            li
+                a(href='/appoint/gameList')
+                    img(src='/images/demo/no-img.jpg')
+                    p 游玩项目
+            li
+                a(href='/appoint/takeNum')
+                    img(src='/images/demo/no-img.jpg')
+                    p 手机取号
+            li
+                a(href='/myTrip')
+                    img(src='/images/demo/no-img.jpg')
+                    p 我的行程
+    // 文档
+    .section-name 文档及其它
+    .hs-nav
+        ul
+            li
+                a(href='https://docs.qq.com/doc/DWXhsY25zb09uZWZw')
+                    img(src='/images/demo/no-img.jpg')
+                    p 我的行程文档
+            li
+                a(href='http://www.pmdaniu.com/cloud/32620/392d60cfc7421805a222da531da296aa-1163/start.html')
+                    img(src='/images/demo/no-img.jpg')
+                    p 排队预约文档1
+            li
+                a(href='http://u.pmdaniu.com/yBnz')
+                    img(src='/images/demo/no-img.jpg')
+                    p 排队预约文档2
+            li
+                a(href='http://192.168.200.94:7190')
+                    img(src='/images/demo/no-img.jpg')
+                    p 堡垒机
+

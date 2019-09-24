@@ -1,6 +1,6 @@
 // var moment = require('moment');
 exports.mainRouter = function (router, common, requireLogin ) {
-    // wap官网首页
+    // 首页
     router.get(['/', '/main'], function (req, res, next) {
 
         // 全渠道扫码进入首页需要登录
@@ -68,6 +68,11 @@ exports.mainRouter = function (router, common, requireLogin ) {
             title = '珊瑚酒店'
             page = 'main/coralHotel'
             modelCode = 'home_page2'
+        }else if(projectNameCode=='storeTerminal'){
+            // 珊瑚酒店
+            title = '门店终端分销商城'
+            page = 'main/storeTerminal'
+            modelCode = 'home_page'
         }
         common.commonRequest({
             url: [{
@@ -274,7 +279,10 @@ exports.mainRouter = function (router, common, requireLogin ) {
             }
         });
     });
-
+    // 其它只通过链接访问的模块
+    router.get('/other', function (req, res) {
+        res.render('other', {title: '其它嵌入的模块'})
+    });
     //错误处理
     router.get('/error', function (req, res, next) {
         res.render('error', {

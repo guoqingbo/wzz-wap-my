@@ -436,6 +436,7 @@ exports.mainRouter = function (router, common) {
         });
         // res.render('appoint/takeNum',{title:'手机取号'})
     });
+
     // 排号成功
     router.get('/appoint/takeNumSuccess', function (req, res, next) {
         // res.render('appoint/takeNumSuccess',{title:'排号成功',data:[{data:{}}]})

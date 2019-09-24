@@ -249,8 +249,16 @@
 .brief-attr{display:inline-block;vertical-align:middle;height:2rem;line-height:2rem;width:30%;overflow:hidden}
 .price-code{background-color:#f4f4f4;display:none}
 .price-code h4{font-size:.65rem}
-.pro-price a.price-code-btn{background:0 0;color:#333;font-size:.75rem;transform:rotate(270deg)}
-.pro-price a.down{transform:rotate(90deg)}
+.pro-price .price-code-btn{
+    border:0;
+    padding: 0;
+    outline:0;
+    background-color:#fff;
+    color:#333;
+    font-size:.75rem;
+    transform:rotate(270deg)
+}
+.pro-price .down{transform:rotate(90deg)}
 .go-member{display:block;width:54px;height:54px;position:fixed;right:10px;bottom:80px;z-index:20}
 .go-member a{display:block;width:50px;height:50px;position:absolute;top:0;right:0;z-index:2;cursor:pointer;border:4px solid #FFF;box-shadow:0 0 15px rgba(0,0,0,.5);border-radius:50%;text-align:center;background:#15bea1}
 .go-member a i{width:50px;cursor:pointer;border-radius:50%;border:none;font-size:20px;color:#fff;display:inline-block;margin-top:2px}

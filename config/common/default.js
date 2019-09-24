@@ -11,13 +11,13 @@ module.exports = {
         client_id: 'tG13Z8Px6FClmzMYw2PYZd1z',
         client_secret: 'N8rzh1U47NxfxpqPCytCdvv3h3asB11r'
     },
-    // domain: "http://b2b.wuzhizhou.com",//正式环境api
-    // ticketPark:"park2018092911074546610",//正式
-    // domain1:"http://coach.wuzhizhou.com", //预约正式
-    // domain:'http://192.168.66.98:8080',
-    domain: "http://wzz.sendinfo.com.cn",// 测试
-    ticketPark:"park2018091313465343855", //测试
-    domain1:"http://192.168.200.72:8080", //预约测试
+    domain: "http://b2b.wuzhizhou.com",//正式环境api
+    ticketPark:"park2018092911074546610",//正式
+    domain1:"http://coach.wuzhizhou.com", //预约正式
+    // domain:'http://192.168.66.110:8080',
+    // domain: "http://wzz.sendinfo.com.cn",// 测试
+    // ticketPark:"park2018091313465343855", //测试
+    // domain1:"http://192.168.200.72:8080", //预约测试
     wx:{
         appId : 'wx4855f46c05a8d2b8',//我的测试环境
         appSecret : 'bc3e19c589440fe94a2aed85031806ad',//我的测试环境

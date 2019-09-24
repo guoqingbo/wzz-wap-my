@@ -46,6 +46,7 @@ app.use(flash());
 
 if(process.env.projectNameCode){
     console.log("启动时指定了项目名称==========================================="+process.env.projectNameCode)
+    // 生产和测试使用该逻辑
     // 如果启动时指定了项目名称
     // 合并配置参数
     mergeEnvConfig(process.env.projectNameCode)
@@ -57,6 +58,7 @@ if(process.env.projectNameCode){
     });
 
 }else {
+    // 本地开发用到（生产或测试已废弃）
     console.log("启动时没有指定了项目名称===========================================")
     // 如果启动时没有指定环境变量区分不同的项目
     app.use(function (req, res, next) {
@@ -74,9 +76,14 @@ if(process.env.projectNameCode){
             req.session.projectNameCode = 'wangWang'
         }else if(/^\/coralHotel/.test(req.originalUrl)||
             req.headers.host == 'wzzfxswap2.sendinfo.com.cn' ||
-            req.headers.host == 'wap.coralHotel.com'){
-            //路径路由以/coralHotel开头，测试域名为wzzfxswap.sendinfo.com.cn，或生产域名为 则为官网wap
+            req.headers.host == 'h.wuzhizhou.com'){
+            //路径路由以/coralHotel开头，测试域名为wzzfxswap2.sendinfo.com.cn，或生产域名h.wuzhizhou.com为 则为官网wap
             req.session.projectNameCode = 'coralHotel'
+        }else if(/^\/storeTerminal/.test(req.originalUrl)||
+            req.headers.host == 'wzzfxswap3.sendinfo.com.cn' ||
+            req.headers.host == 's.wuzhizhou.com'){
+            //路径路由以/coralHotel开头，测试域名为wzzfxswap3.sendinfo.com.cn，或生产域名s.wuzhizhou.com为 则为官网wap
+            req.session.projectNameCode = 'storeTerminal'
         }else{
 
             if(!req.session.projectNameCode){
@@ -86,8 +93,8 @@ if(process.env.projectNameCode){
         }
 
         // 如果路由以/officail 、/wangWang、/coralHotel 则去除前缀重定向路由
-        if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/.test(req.originalUrl)){
-            let url = req.originalUrl.replace(/(^\/coralHotel)|(^\/wangWang)|(^\/official)/,'')||"/"
+        if(/(^\/coralHotel)|(^\/wangWang)|(^\/official)|(^\/storeTerminal)/.test(req.originalUrl)){
+            let url = req.originalUrl.replace(/(^\/coralHotel)|(^\/wangWang)|(^\/official)|(^\/storeTerminal)/,'')||"/"
             res.redirect(url)
             return
         }

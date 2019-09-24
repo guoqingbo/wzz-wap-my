@@ -175,6 +175,14 @@ $(function () {
         $('.video-pop-box').hide()
         $('.mask').hide()
     })
+
+    // if(module == 'hotel'){
+    //     new Swiper('.home_slider2', {
+    //         loop: true,
+    //         autoplay: 3000,
+    //     });
+    // }
+
 });
 
 function listDom(list, begin, end) {
@@ -259,6 +267,7 @@ function bedType(num) {
 /**
  * 查看详情
  */
+var time1 = null
 function showDetail() {
     var _showDetail = $('.showDetail'), _mask = $('#mask'), _ticketLayer = $('.ticket-layer');
     var dom;
@@ -271,14 +280,35 @@ function showDetail() {
                 modelCode: modelCode,
                 wayType: 2
             }).success(function (data) {
-                dom = '<div class="flexslider home_slider2">' +
-                    '<ul class="slides">';
-                for (var i = 0; i < data[0].data.length; i++) {
-                    dom += '<li><div class="slide"><img src="' + data[0].data[i].wapUrl + '" </div></li>'
+                // dom = '<div class="flexslider home_slider2">' +
+                //     '<ul class="slides">';
+                // for (var i = 0; i < data[0].data.length; i++) {
+                //     dom += '<li><div class="slide"><img src="' + data[0].data[i].wapUrl + '" </div></li>'
+                // }
+                // dom += '</ul></div>';
+                // dom = ''
+                // for (var i = 0; i < data[0].data.length; i++) {
+                //     dom += '<img src="'+data[0].data[i].wapUrl+'">'
+                // }
+                if(data[0].data.length){
+                    dom = '<div class="home_slider2 swiper-container detail-container"><ul class="swiper-wrapper">'
+                    for (var i = 0; i < data[0].data.length; i++) {
+                        dom +='<li class="swiper-slide"><img src="'+data[0].data[i].wapUrl+'"></li>'
+                    }
+                    dom += '</ul></div>'
+                    _this.parents('li').find('.ticket-layer').find('.ht-pic').html(dom);
+                    new Swiper(_this.parents('li').find('.home_slider2'), {
+                        loop: true,
+                        autoplay: 2000,
+                    });
                 }
-                dom += '</ul></div>';
-                _this.parents('li').find('.ticket-layer').find('.ht-pic').html(dom);
-                // _this.parents('li').find('.ticket-layer').show(function () {
+
+                _this.parents('li').find('.ticket-layer').addClass('show');
+
+                // if(time1){
+                //     clearTimeout(time1)
+                // }
+                // time1 = setTimeout(function () {
                 //     _this.parents('li').find('.home_slider2').flexslider({
                 //         animation: 'slide',
                 //         controlNav: false,
@@ -286,21 +316,10 @@ function showDetail() {
                 //         animationLoop: true,
                 //         useCSS: false,
                 //         slideshow: true,
-                //         slideshowSpeed: 3000
+                //         slideshowSpeed: 2000
                 //     });
-                // });
-                _this.parents('li').find('.ticket-layer').addClass('show');
-                setTimeout(function () {
-                    _this.parents('li').find('.home_slider2').flexslider({
-                        animation: 'slide',
-                        controlNav: false,
-                        directionNav: false,
-                        animationLoop: true,
-                        useCSS: false,
-                        slideshow: true,
-                        slideshowSpeed: 3000
-                    });
-                },400);
+                // },420);
+
                 _mask.show();
 
             })
