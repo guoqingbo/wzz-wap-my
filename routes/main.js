@@ -1,4 +1,15 @@
-// var moment = require('moment');
+let moment = require('moment');
+let utils = {
+    //  是否加载国庆风格
+    isGuoQing(){
+        let flag = false
+        let nowDay = moment().format('MM-DD hh:mm:ss')
+        if(nowDay>='09-30 23:59:59' && nowDay<='10-07 23:59:59'){
+            flag = true
+        }
+        return flag
+    }
+}
 exports.mainRouter = function (router, common, requireLogin ) {
     // 首页
     router.get(['/', '/main'], function (req, res, next) {
@@ -15,7 +26,6 @@ exports.mainRouter = function (router, common, requireLogin ) {
             req.session.promoterId=req.query.promoterId||"";
             req.session.teamBatchNo=req.query.teamBatchNo||"";
             req.session.promoteSrcCode=req.query.promoteSrcCode||"";
-            console.log("全渠道==============================="+JSON.stringify(req.query))
             if(isReLogin){
                 req.session.curUrl = req.originalUrl
                 return res.redirect('/login')
@@ -91,6 +101,7 @@ exports.mainRouter = function (router, common, requireLogin ) {
                     Object.assign(reObj, pageMeta);
                     reObj.module = 'index';
                     reObj.ticketPark = common.envConfig.ticketPark
+                    reObj.isGuoQing = utils.isGuoQing()
                 }
             }
         });

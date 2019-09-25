@@ -24,6 +24,7 @@ function redirectHttps() {
 
 }
 redirectHttps()
+// 是否是微信
 function isWeiXin() {
     var ua = window.navigator.userAgent.toLowerCase();
     if (ua.match(/MicroMessenger/i) == 'micromessenger') {
@@ -32,6 +33,30 @@ function isWeiXin() {
         return false;
     }
 }
+
+// 判断是否存储全渠道参数
+// function storeQuanQudao(){
+//     // 获取url后的参数
+//     var query = window.location.search;
+//     // 判断推广码存不存在
+//     if(query && /promoteSrcCode/.test(query)){
+//         sessionStorage.setItem('mainParam',query)
+//     }else{
+//         console.log(window)
+//         var query1 = sessionStorage.getItem('mainParam')
+//         if(query1){
+//             if(query){
+//                 // 如果url后有参数
+//                 query1 = query1.replace(/^\?/,'&')
+//             }
+//             window.history.replaceState(null,null,window.location.href+query1);
+//
+//             // window.location.href = window.location.href+query1
+//         }
+//     }
+// }
+// storeQuanQudao()
+
 $(function () {
     // 子元素scroll父元素容器不跟随滚动JS实现
     $.fn.uniqueScroll = function () {

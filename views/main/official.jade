@@ -3,6 +3,9 @@ extends ../layout
 block stylesheets
   link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
   link(rel="stylesheet", href="/stylesheets/main/official.css")
+  if isGuoQing
+    // 国庆风格
+    link(rel="stylesheet", href="/stylesheets/main/index.css")
 block javascripts
   script(type='text/javascript', src='/lib/swiper/swiper-3.4.2.jquery.min.js')
   //script(type='text/javascript', src='/javascripts/touch-0.2.14.min.js')
