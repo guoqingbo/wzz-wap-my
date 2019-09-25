@@ -1,4 +1,10 @@
-/*国庆风格*/
-body{
-    background: url(../../images/index/body-img4.png) top no-repeat #a30506; background-size: contain;
+/*官网国庆风格*/
+body.official{
+    background: url(../../images/index/body-img4.png) top no-repeat #a30506;
+    background-size: contain;
+}
+/*汪汪国庆风格*/
+body.wangWang{
+    background: url(../../images/wangWang/index/body-img4.png) top no-repeat #a30506;
+    background-size: contain;
 }
