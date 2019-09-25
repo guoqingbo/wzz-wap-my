@@ -4,7 +4,7 @@ let utils = {
     isGuoQing(){
         let flag = false
         let nowDay = moment().format('MM-DD hh:mm:ss')
-        if(nowDay>='09-30 23:59:59' && nowDay<='10-07 23:59:59'){
+        if(nowDay>='09-24 23:59:59' && nowDay<='10-07 23:59:59'){
             flag = true
         }
         return flag
