@@ -3,9 +3,10 @@
    * 官网wap，汪汪商城，珊瑚酒店，门店终端分销等项目使用同一套代码
        
         测试环境  
-        https://wzzfxswap.sendinfo.com.cn   http://192.168.200.152:4029/  官网wap  
-        https://wzzfxswap1.sendinfo.com.cn  http://192.168.200.152:4023/  汪汪商城  
-        http://wzzfxswap2.sendinfo.com.cn   http://192.168.200.152:5008/  珊瑚酒店  
+        https://wzzfxswap.sendinfo.com.cn        http://192.168.200.152:4029/  官网wap  
+        https://wzzfxswap1.sendinfo.com.cn       http://192.168.200.152:4023/  汪汪商城  
+        http://wzzfxswap2.sendinfo.com.cn        http://192.168.200.152:5008/  珊瑚酒店  
+        http://wzzfxswap3.sendinfo.com.cn(没配)  http://192.168.200.152:3004/  门店终端分销   
        
         生产环境  
         https://wap.wuzhizhou.com/  官网wap   
