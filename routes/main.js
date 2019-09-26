@@ -10,7 +10,7 @@ let utils = {
         return flag
     }
 }
-exports.mainRouter = function (router, common, requireLogin ) {
+exports.mainRouter = function (router, common) {
     // 首页
     router.get(['/', '/main'], function (req, res, next) {
 
