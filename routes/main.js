@@ -13,7 +13,7 @@ let utils = {
         return flag
     }
 }
-exports.mainRouter = function (router, common, requireLogin ) {
+exports.mainRouter = function (router, common) {
     // 首页
     router.get(['/', '/main'], function (req, res, next) {
 
@@ -129,9 +129,9 @@ exports.mainRouter = function (router, common, requireLogin ) {
                 outApi: true  //外网接口判断 {true:是}
             }) + '#wechat_redirect'
 
-            // 如果是珊瑚酒店使用蜈支洲wap官网的微信授权
-            let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
-            if(projectNameCode === 'coralHotel'){
+            // 如果配置存在微信授权支付代理，使用蜈支洲wap官网的微信授权
+            // let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+            if(common.envConfig.weixinProxy){
                 redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent('http://' + req.headers.host + '/horization')
             }
             res.redirect(redirect)

@@ -21,6 +21,7 @@ module.exports = {
         // WXPAYTYPE : 32, //32:微信公众号支付 34:智游宝微信公众号支付
         // userType : 'C'
     },
+    // weixinProxy:'https://wzzfxswap1.sendinfo.com.cn',// 微信授权支付代理
     corpCode:'cgb2cfxs',
     protocol:'https'
 };

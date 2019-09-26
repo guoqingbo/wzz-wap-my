@@ -1,5 +1,6 @@
 # 蜈支洲项目
    * 运行时要执行 npm run build 执行压缩 及jade模板编译
+   * 请尽量避免在js中拼接复杂html，使用jade模板（templates目录下为js中使用的jade模板，gulp会自动打包到dist目录下）
    * 官网wap，汪汪商城，珊瑚酒店，门店终端分销等项目使用同一套代码
        
         测试环境  
@@ -15,10 +16,10 @@
         http://h.wuzhizhou.com/     珊瑚酒店  
         http://s.wuzhizhou.com/     门店终端分销   
       
-   * 源码地址(svn)：https://dssvn.sendinfo.com/svn/webwork/frontEnd/蜈支洲
+   * 源码地址(svn)：https://dssvn.sendinfo.com/svn/webwork/frontEnd/蜈支洲(已废弃)
    * 源码地址(git)：http://git.sendinfo.com/BasicBusiness/Frontdesign/wzz/wzz-wap-node.git
    * 堡垒机：http://192.168.200.94:7190 guoqingbo/123456
-   * 提供的外链(/other查看)  
+   * 提供的外链(/other快捷查看)  
        项目预约(大屏滚动) /appoint/list  
        排队叫号 /callNum?screenCode=1  
        排队叫号新版 /queueCallNum/list?screenCode=1?col=1,1,1,1,1 col参数为列布局  
@@ -82,7 +83,7 @@
 ## 门店终端分销
 ### 测试环境
    * 测试地址: http://192.168.200.152:3004
-   * 测试域名: https://wzzfxswap3.sendinfo.com.cn
+   * 测试域名: https://wzzfxswap3.sendinfo.com.cn（尚未配置）
    * 部署地址: 192.168.200.152:3004 /usr/apps/node/wzzWapOfficial
    * 后台接口: https://wzz.sendinfo.com.cn
    * 后台地址: https://wzz.sendinfo.com.cn/admin/index#
