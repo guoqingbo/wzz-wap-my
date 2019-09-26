@@ -18,11 +18,11 @@ $(function () {
         })
 
         // 价格
-        var totalPrice = Number(shopData.money)
+        var totalPrice = Number(shopData.money || 0)
         // 生成推荐
         if(recomentInfo.list.length){
             html+=orderTemplate({data:{list:recomentInfo.list},render:true,mixin:'shopCarList'})
-            totalPrice+=Number(recomentInfo.totalPrice)
+            totalPrice+=Number(recomentInfo.totalPrice || 0)
         }
         $(".shop-car-list").html(html)
 
