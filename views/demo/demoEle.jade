@@ -126,17 +126,15 @@ mixin list(data)
 
 // 图片上传
 mixin uploadImg(data)
-    .ele-item.clear(style=data.style.ele data-id=data.id)
-        .img-upload-box(style=data.style.btn)
-            input(type="file" accept="image/gif,image/jpeg,image/jpg,image/png" hidden)
+    .ele-item
+        .img-upload-box
+            input.img-upload-input(type="file" accept="image/gif,image/jpeg,image/jpg,image/png" hidden)
             i.iconfont.icon-tupianshangchuan
             button.img-upload-btn 上传图片
     script.
         $(function () {
-            var $eleItem = $('.ele-item[data-id=#{data.id}]')
-            var $imgUploadBtn = $eleItem.find(".img-upload-btn")
-            var $input = $eleItem.find("input[type=file]")
-            $imgUploadBtn.click(function (e) {
+            var $input = $(".img-upload-input")
+            $(".img-upload-btn").click(function (e) {
                 e.preventDefault()
                 e.stopPropagation()
                 $input.trigger("click")
