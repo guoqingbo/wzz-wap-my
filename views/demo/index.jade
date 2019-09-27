@@ -1,0 +1,19 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
+block javascripts
+    script(type='text/javascript', src='/lib/layer_mobile/layer.js')
+    script(type='text/javascript', src='/lib/swiper/swiper-3.4.2.jquery.min.js')
+block content
+    include ./demoEle
+    // 轮播图
+    +swiper()
+    // 导航菜单
+    +nav()
+    // 选项卡
+    +tab()
+    // 选项卡，后台请求内容
+    +tabAjax()
+    // 产品列表
+    +list()

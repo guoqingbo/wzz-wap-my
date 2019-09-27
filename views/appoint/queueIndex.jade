@@ -1,0 +1,56 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
+    link(rel="stylesheet", href="/stylesheets/appoint/queueIndex.css")
+block javascripts
+    script(type='text/javascript', src='/lib/swiper/swiper-3.4.2.jquery.min.js')
+    script(type='text/javascript', src='/javascripts/appoint/queueIndex.js')
+block content
+    // 头部轮播
+    .header-box
+        .swiper-container.wiper-container-ele
+            .swiper-wrapper
+                // each item in [1,2,3,4]
+                .swiper-slide
+                    a.swiper-slide-a(href='javascript:void(0)')
+                        img.swiper-slide-img(src='/images/appoint/bg.png')
+
+            .swiper-pagination
+    // 菜单导航
+    .nav-box
+       ul.nav-list
+           li.nav-item
+               a(href='/appoint/goAppoint')
+                   img.nav-item-img(src='/images/appoint/nav1.png')
+                   span.nav-item-name 去预约
+           li.nav-item
+               a(href='/appoint/takeNum')
+                   img.nav-item-img(src='/images/appoint/nav2.png')
+                   span.nav-item-name 去排队
+           li.nav-item
+               a(href='/appoint/myAppoint')
+                   img.nav-item-img(src='/images/appoint/nav3.png')
+                   span.nav-item-name 我的预约
+           li.nav-item
+               a(href='/appoint/myQueue')
+                   img.nav-item-img(src='/images/appoint/nav4.png')
+                   span.nav-item-name 我的排队
+    // 选项卡
+    .tab-box
+        .tab-wrap-box
+            ul.tab-select-list
+                li.tab-select-item.active
+                    span.tab-select-name 预约流程
+                    span.tab-select-line
+                li.tab-select-item
+                    span.tab-select-name 在线排队
+                    span.tab-select-line
+
+            // 选项卡内容
+            .tab-content-box
+                .swiper-container.tab-content-list
+                    .swiper-wrapper
+                        each item in [1,2]
+                            .swiper-slide.tab-content-item 选项卡内容
+

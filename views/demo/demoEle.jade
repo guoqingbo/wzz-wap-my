@@ -1,0 +1,362 @@
+// 轮播图
+mixin swiper(data)
+    .ele-item
+        .swiper-container.wiper-container-ele
+            .swiper-wrapper
+                each item in [1,2,3,4]
+                    .swiper-slide
+                        a.swiper-slide-a(href='javascript:void(0)')
+                            img.swiper-slide-img(src='/images/demo/no-img.jpg')
+
+            .swiper-pagination
+    script.
+        $(function () {
+            new Swiper('.wiper-container-ele', {
+                loop: true,
+                autoplay: 4000,
+                pagination: '.swiper-pagination'
+            });
+        })
+// 导航菜单
+mixin nav(data)
+    .ele-item
+        ul.nav-list
+            each item in [1,2,3,4]
+                li.nav-item
+                    a(href='javascript:;')
+                        img.nav-item-img(src='/images/demo/no-img.jpg')
+                        span.nav-item-name 菜单
+// 选项卡
+mixin tab(data)
+    .ele-item
+        ul.tab-select-list
+            each item,index in [1,2]
+                li.tab-select-item(class=index==0?'active':'')
+                    span.tab-select-name 选项卡
+
+        // 选项卡内容
+        .tab-content-box
+            .swiper-container.tab-content-list
+                .swiper-wrapper
+                    each item in [1,2]
+                        .swiper-slide.tab-content-item 选项卡内容
+
+    script.
+        $(function () {
+            var mySwiper = new Swiper('.tab-content-list',{
+                onSlideChangeStart: function (swiper) {
+                    $(".tab-select-item").eq(swiper.activeIndex).addClass('active').siblings().removeClass('active')
+                }
+            });
+
+            $(".tab-select-item").click(function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+                var index = $(this).index()
+                $(this).addClass('active').siblings().removeClass('active')
+                mySwiper.slideTo(index, 1000, false);//切换到第一个slide，速度为1秒
+            })
+        })
+// 选项卡，后台请求数据
+mixin tabAjax(data)
+    .ele-item
+        ul.tabAjax-select-list
+            each item,index in [1,2]
+                li.tabAjax-select-item(class=index==0?'active':'')
+                    span.tabAjax-select-name 选项卡
+                    span.tabAjax-select-line
+
+        // 选项卡内容
+        .tabAjax-content-box 哈哈哈哈
+
+    script.
+        $(function () {
+
+            $(".tabAjax-select-item").click(function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+                $(this).addClass('active').siblings().removeClass('active')
+                var selected = $(this).data('selected')
+                $.ajax({
+                    type: "POST",
+                    url: "/xxxxz",
+                    data: {selected: selected},
+                    success: function (data) {
+                       if(data[0].status == 200){
+                           $(".tab-content-box").html("请求成功")
+                       }else {
+                           new ErrLayer({message: data[0].message} || '请求错误')
+                       }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                })
+            })
+        })
+// 项目列表
+mixin list(data)
+    .ele-item
+        ul.project-list
+            each item in [1,2]
+                li.project-item
+                    a(href='javascript:;')
+                        .project-item-default.project-item-left
+                            img.project-item-img(src='/images/demo/no-img.jpg')
+                        .project-item-default.project-item-center
+                            p.project-item-name 项目名
+                            button.project-item-more 预定须知弹框 >
+                        .project-item-default.project-item-right
+                            a.default-btn(href='javascript:;') 去预约
+    script.
+        $(function () {
+            $(".project-item-more ").click(function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+                layer.open({
+                    title:'标题',
+                    anim:'up',
+                    content: '哈哈哈哈',
+                    className:'my-layer',
+                    // skin:'footer'
+                })
+
+            })
+        })
+
+// 图片上传
+mixin uploadImg(data)
+    .ele-item.clear(style=data.style.ele data-id=data.id)
+        .img-upload-box(style=data.style.btn)
+            input(type="file" accept="image/gif,image/jpeg,image/jpg,image/png" hidden)
+            i.iconfont.icon-tupianshangchuan
+            button.img-upload-btn 上传图片
+    script.
+        $(function () {
+            var $eleItem = $('.ele-item[data-id=#{data.id}]')
+            var $imgUploadBtn = $eleItem.find(".img-upload-btn")
+            var $input = $eleItem.find("input[type=file]")
+            $imgUploadBtn.click(function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+                $input.trigger("click")
+            })
+            $input.change(function () {
+                if(!$(this).val()){
+                    var file = $(this).prop("files")[0];
+                    if(checkFile (file)){
+                        sendFiles (file)
+                    }
+                }
+            })
+
+            function checkFile(file) {
+                if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                    alert("只能上传图片")
+                    return false
+                }
+                var fileSize = file.size / 1024 / 1024
+                var maxFileSize = 4
+                if (fileSize > maxFileSize) {
+                    alert({
+                        message: '您上传的身份证图片大小为' + fileSize.toFixed(2) + 'M，请选择小于' + maxFileSize + 'M的图片'
+                    })
+                    return false
+                }
+                return true
+            }
+
+            function sendFiles(file) {
+                // 上传图片
+                var formData = new FormData()
+                formData.append("file", file)
+                $.ajax({
+                    url: '/upload/img',
+                    type: 'post',
+                    cache: false,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    dataType: "JSON",
+                    beforeSend: function () {
+
+                    },
+                    success: function (res) {
+                        sendSuccess(res)
+                    }
+                })
+            }
+
+            function sendSuccess(res) {
+                console.log(res)
+            }
+        })
+
+style.
+    body{
+        font-size: .6rem;
+    }
+    .clear:after{
+        content: ".";
+        height: 0;
+        visibility: hidden;
+        display: block;
+        clear: both;
+    }
+    /*轮播图组件*/
+    .wiper-container-ele .swiper-slide-img{
+        width: 100%;
+        height: 8rem;
+    }
+    .wiper-container-ele .swiper-slide-a{
+        display: block;
+    }
+    /*导航菜单*/
+    .nav-list{
+        padding: .5rem;
+        box-sizing: border-box;
+    }
+    .nav-item{
+        display: inline-block;
+        width: 25%;
+        height: 25%;
+        box-sizing: border-box;
+        text-align: center;
+        position: relative;
+        margin-bottom: .5rem;
+    }
+    .nav-item-img{
+        display: block;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 5rem;
+        margin: 0 auto .2rem;
+    }
+    /*选项卡*/
+    .tab-select-list{
+        border-bottom: 1px solid #e5e5e5;
+        padding-top: .5rem;
+    }
+    .tab-select-item{
+        display: inline-block;
+        width: 50%;
+        text-align: center;
+        color: #999;
+    }
+    .tab-select-item.active{
+        color: #2765f4;
+    }
+    .tab-select-name{
+        display: inline-block;
+    }
+    .tab-select-item.active .tab-select-name{
+        padding-bottom: .5rem;
+        border-bottom: 2px solid #2765f4;
+    }
+    .tab-content-box{
+        box-sizing: border-box;
+        padding: .5rem;
+    }
+    /*选项卡,ajax请求数据*/
+    .tabAjax-select-list {
+        border-bottom: 1px solid #e5e5e5;
+        padding-top: .5rem;
+    }
+    .tabAjax-select-item {
+        display: inline-block;
+        width: 50%;
+        text-align: center;
+        /*color: #999;*/
+    }
+    .tabAjax-select-item.active {
+        color: #2765f4;
+    }
+    .tabAjax-select-name {
+        display: inline-block;
+    }
+    .tabAjax-select-item.active .tabAjax-select-name {
+        padding-bottom: .5rem;
+    }
+    .tabAjax-select-item.active .tabAjax-select-line {
+        display: block;
+        width: 2rem;
+        height: 4px;
+        border-radius: 4px;
+        margin: 0 auto;
+        background-color: #2765f4;;
+    }
+    .tabAjax-content-box {
+        box-sizing: border-box;
+        padding: .5rem;
+    }
+
+    /*产品列表*/
+    .project-list{
+        padding: .5rem;
+    }
+    .project-item{
+        margin-bottom: .5rem;
+        background-color: #fff;
+        border-radius: .3rem;
+        padding: .5rem;
+    }
+    .project-item-default{
+        display: inline-block;
+        box-sizing: border-box;
+        vertical-align: top;
+    }
+    .project-item-left{
+        width: 25%;
+    }
+    .project-item-center {
+        width: 50%;
+        padding: 0 .5rem;
+    }
+    .project-item-right {
+        width: 25%;
+    }
+    .project-item-img{
+        width: 100%;
+        height: 3.7rem;
+        border-radius: .5rem;
+    }
+    .default-btn{
+        display: inline-block;
+        width: 3.5rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
+        border-radius: .3rem;
+        text-align: center;
+        color: #fff;
+        background-color: #2765f4;
+    }
+    /*弹出层样式*/
+    .my-layer h3{
+        text-align: left;
+        border-bottom: 1px solid #e5e5e5;
+        height: 1.5rem;
+        line-height: 1.5rem;
+    }
+    .my-layer .layui-m-layercont{
+        padding:.5rem;
+        max-height: 10rem;
+        overflow: auto;
+    }
+    /*图片上传组件*/
+    .img-upload-box{
+        text-align: center;
+        display: inline-block;
+        border: 1px solid #e5e5e5;
+        padding: .3rem;
+        border-radius: .3rem;
+    }
+    .img-upload-box i{
+        vertical-align: middle;
+    }
+    .img-upload-box .img-upload-btn{
+        border: 0;
+        background-color: transparent;
+        vertical-align: middle;
+        outline: none;
+    }
+

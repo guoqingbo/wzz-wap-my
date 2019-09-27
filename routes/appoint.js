@@ -506,4 +506,101 @@ exports.mainRouter = function (router, common) {
 
     });
 
+    // 排队预约 手机端
+    router.get('/appoint/queueIndex', function (req, res, next) {
+        res.render('appoint/queueIndex',{title:'排队预约',data:[{data:{}}]})
+        // return
+        // let {projectId,ticketNo} = req.query
+        // // projectId = 4
+        // // ticketNo = 'FT190903000001086867'
+        // common.commonRequest({
+        //     url: [{
+        //         urlArr: ['appoint','listForQueueWap'],
+        //         outApi:common.envConfig.domain1,
+        //         parameter:{projectId,ticketNo},
+        //     }],
+        //     req: req,
+        //     res: res,
+        //     page: 'appoint/takeNumSuccess',
+        //     title: '排号成功',
+        //     callBack: function (results, reObj, res, handTag) {
+        //         if(results[0].status==200){
+        //             reObj.projectId = projectId
+        //         }
+        //     }
+        // });
+    });
+    // 去预约
+    router.get('/appoint/goAppoint', function (req, res, next) {
+        res.render('appoint/goAppoint',{title:'预约',data:[{data:{}}]})
+        // return
+        // let {projectId,ticketNo} = req.query
+        // // projectId = 4
+        // // ticketNo = 'FT190903000001086867'
+        // common.commonRequest({
+        //     url: [{
+        //         urlArr: ['appoint','listForQueueWap'],
+        //         outApi:common.envConfig.domain1,
+        //         parameter:{projectId,ticketNo},
+        //     }],
+        //     req: req,
+        //     res: res,
+        //     page: 'appoint/takeNumSuccess',
+        //     title: '排号成功',
+        //     callBack: function (results, reObj, res, handTag) {
+        //         if(results[0].status==200){
+        //             reObj.projectId = projectId
+        //         }
+        //     }
+        // });
+    });
+    // 我的预约
+    router.get('/appoint/myAppoint', function (req, res, next) {
+        res.render('appoint/myAppoint',{title:'我的预约',data:[{data:{}}]})
+        // return
+        // let {projectId,ticketNo} = req.query
+        // // projectId = 4
+        // // ticketNo = 'FT190903000001086867'
+        // common.commonRequest({
+        //     url: [{
+        //         urlArr: ['appoint','listForQueueWap'],
+        //         outApi:common.envConfig.domain1,
+        //         parameter:{projectId,ticketNo},
+        //     }],
+        //     req: req,
+        //     res: res,
+        //     page: 'appoint/takeNumSuccess',
+        //     title: '排号成功',
+        //     callBack: function (results, reObj, res, handTag) {
+        //         if(results[0].status==200){
+        //             reObj.projectId = projectId
+        //         }
+        //     }
+        // });
+    });
+    // 我的排队
+    router.get('/appoint/myQueue', function (req, res, next) {
+        res.render('appoint/myQueue',{title:'我的排队',data:[{data:{}}]})
+        // return
+        // let {projectId,ticketNo} = req.query
+        // // projectId = 4
+        // // ticketNo = 'FT190903000001086867'
+        // common.commonRequest({
+        //     url: [{
+        //         urlArr: ['appoint','listForQueueWap'],
+        //         outApi:common.envConfig.domain1,
+        //         parameter:{projectId,ticketNo},
+        //     }],
+        //     req: req,
+        //     res: res,
+        //     page: 'appoint/takeNumSuccess',
+        //     title: '排号成功',
+        //     callBack: function (results, reObj, res, handTag) {
+        //         if(results[0].status==200){
+        //             reObj.projectId = projectId
+        //         }
+        //     }
+        // });
+    });
+
 };

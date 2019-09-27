@@ -1,0 +1,44 @@
+body{
+    font-size: .6rem;
+}
+.appoint-ticket-box{
+    /*background-color: #fff;*/
+    margin: .5rem 0;
+}
+.appoint-ticket-list{
+    max-height: 10rem;
+    overflow: auto;
+    margin: 0 .5rem .5rem;
+    background-color: #fff;
+    border-radius: .3rem;
+}
+.appoint-ticket-item{
+    overflow: hidden;
+    padding: .5rem;
+    /*border-bottom: 1px solid #e5e5e5;*/
+    font-size: .6rem;
+    color: #999;
+}
+.appoint-ticket-item:last-child{
+    border-bottom: 0;
+}
+.cancel-appont-btn{
+    border: 0;
+    outline: none;
+    float: right;
+    padding: .2rem .3rem;
+    color: #fff;
+    border-radius: .2rem;
+    background-color: #3b76de;
+    margin-top: -.1rem;
+}
+.appoint-ticket-time{
+    color: #999;
+    padding-left: .6rem;
+}
+.appoint-ticket-name{
+    padding: .5rem;
+}
+.appoint-ticket-amount{
+    margin-left: .5rem;
+}

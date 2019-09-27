@@ -1,0 +1,78 @@
+/*轮播图组件*/
+body{
+    font-size: .6rem;
+}
+.wiper-container-ele .swiper-slide-img{
+    width: 100%;
+    height: 8rem;
+}
+.wiper-container-ele .swiper-slide-a{
+    display: block;
+}
+/*导航菜单*/
+.nav-box{
+    padding: .5rem;
+}
+.nav-list{
+    padding: .5rem .5rem 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: .3rem;
+}
+.nav-item{
+    display: inline-block;
+    width: 25%;
+    height: 25%;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    margin-bottom: .5rem;
+}
+.nav-item-img{
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5rem;
+    margin: 0 auto .2rem;
+}
+/*选项卡*/
+.tab-box{
+    padding: .5rem;
+}
+.tab-wrap-box{
+    background-color: #fff;
+    border-radius: .3rem;
+}
+.tab-select-list{
+    margin: 0 .5rem;
+    border-bottom: 1px solid #e5e5e5;
+    padding-top: .5rem;
+}
+.tab-select-item{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    color: #999;
+    font-size: .7rem;
+}
+.tab-select-item.active{
+    color: #2765f4;
+}
+.tab-select-name{
+    display: inline-block;
+}
+.tab-select-item.active .tab-select-name{
+    padding-bottom: .5rem;
+}
+.tab-select-item.active .tab-select-line{
+    display: block;
+    width: 2rem;
+    height: 4px;
+    border-radius: 4px;
+    background-color: #2765f4;
+    margin: 0 auto;
+}
+.tab-content-box{
+    box-sizing: border-box;
+    padding: .5rem;
+}

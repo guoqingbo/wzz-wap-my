@@ -38,5 +38,6 @@ require('./upload').mainRouter(router,common);
 require('./queueCallNum').mainRouter(router,common);
 // 微信授权代理
 require('./weixinProxy').mainRouter(router,common);
-
+// 组件模板
+require('./demo').mainRouter(router,common);
 module.exports = router;

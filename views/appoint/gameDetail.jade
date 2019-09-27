@@ -10,7 +10,11 @@ block content
     include ./mixin/periodList
     .appoint-ticket-box
         //- 票型列表
-        p.appoint-ticket-tip 预约后项目可在预约时间内直接游玩不需要排队</br>预约先通过扫订单身份证，或纸质二维码获取可预约票型
+        .appoint-ticket-tip
+            //p 预约后项目可在预约时间内直接游玩不需要排队
+            //p 预约先通过扫订单身份证，或纸质二维码获取可预约票型
+            span.appoint-ticket-tip-text 预约后项目可在预约时间内直接游玩不需要排队
+            button.appoint-notice-btn 预约说明 >
         ul.appoint-ticket-list
             +ticketList(data[0].data)
         //ul.appoint-ticket-list
@@ -32,8 +36,9 @@ block content
             input.ipnut-file(type="file" name="image" accept="image/*" hidden)
 
             button.appoint-ticket-btn.scan-code-btn 扫纸质票二维码
-    table.appoint-period-table
-        +periodList(data[1].data,nowTime)
+    .period-table-box
+        table.appoint-period-table
+            +periodList(data[1].data,nowTime)
         //tr
         //    th 时段
         //    th 剩余

@@ -1,0 +1,18 @@
+extends ../layout
+
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/appoint/myAppoint.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/appoint/myAppoint.js')
+block content
+    .appoint-ticket-box
+        each item in [1,2,3]
+            ul.appoint-ticket-list
+                li.appoint-ticket-name 香蕉船
+                each item,index in [1,2,3]
+                    li.appoint-ticket-item
+                        span.appoint-ticket-no=item.barcode || 'ET11111111111111'
+                        span.appoint-ticket-amount x3
+                        span.appoint-ticket-time #{item.beginTime||'08:00' + "-" + (item.endTime || "09:00")}
+                        button.cancel-appont-btn(data-ticketno=item.barcode) 取消预约
+

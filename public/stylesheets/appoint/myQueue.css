@@ -1,0 +1,24 @@
+body{
+    font-size: .6rem;
+}
+.queue-box{
+    padding: .5rem;
+}
+.queue-item{
+    background-color: #fff;
+    padding: .5rem;
+    margin: .5rem 0;
+    border-radius: .3rem;
+}
+.queue-name{
+    padding-bottom: .5rem;
+    font-size: .7rem;
+}
+.queue-item-group{
+    color: #999;
+    padding: .2rem 0;
+}
+.queue-item-label{
+    display: inline-block;
+    width: 3rem;
+}
