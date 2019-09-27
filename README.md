@@ -43,6 +43,7 @@
    * 生产ip：http://47.99.119.191:3000
    * 部署地址：47.99.119.191:3000 /application/sendinfo-wzz-node/wzz-wap-3000
    * 堡垒机：http://192.168.200.94:7190 guoqingbo/123456
+   * 排队预约：http://coach.wuzhizhou.com
    * 后台接口：https://b2b.wuzhizhou.com
    * 后台swagger：https://b2b.wuzhizhou.com
    * 后台账号: shenda  hello123  superadmin hello123
