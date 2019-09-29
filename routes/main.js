@@ -16,7 +16,7 @@ let utils = {
 exports.mainRouter = function (router, common) {
     // 首页
     router.get(['/', '/main'], function (req, res, next) {
-
+        console.log(req.query)
         // 全渠道扫码进入首页需要登录
         if(req.query.promoterId){
             // 全渠道参数进入，判断是否要重新登陆，promoterId和之前登陆不一样时，重新登陆

@@ -8,6 +8,8 @@ router.use(common.wxShare)
 // 获取自定义标题
 router.use(common.getPageMeta)
 
+//
+
 // main
 require('./main').mainRouter(router,common);
 // member

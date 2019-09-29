@@ -42,7 +42,6 @@ function isWeiXin() {
 //     if(query && /promoteSrcCode/.test(query)){
 //         sessionStorage.setItem('mainParam',query)
 //     }else{
-//         console.log(window)
 //         var query1 = sessionStorage.getItem('mainParam')
 //         if(query1){
 //             if(query){
@@ -57,7 +56,14 @@ function isWeiXin() {
 // }
 // storeQuanQudao()
 
+
+
+
 $(function () {
+    // 如果是从全渠道进入，更改底部首页url
+    if(sessionStorage.getItem('mainParam')){
+        $(".home").attr('href','/'+sessionStorage.getItem('mainParam'))
+    }
     // 子元素scroll父元素容器不跟随滚动JS实现
     $.fn.uniqueScroll = function () {
         $(this).on('mousewheel', _pc)
