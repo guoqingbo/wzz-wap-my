@@ -6,6 +6,9 @@ let utils = {
         let nowDay = moment().format('MM-DD hh:mm:ss')
         if(nowDay>='09-30 23:59:59' && nowDay<='10-07 23:59:59'){
             flag = true
+        }else if(process.env.NODE_ENV !='production' && (nowDay>='09-24 23:59:59' && nowDay<='10-07 23:59:59')){
+            // 非生产环境
+            flag = true
         }
         return flag
     }
