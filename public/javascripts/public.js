@@ -61,9 +61,16 @@ function isWeiXin() {
 
 $(function () {
     // 如果是从全渠道进入，更改底部首页url
+    var query = window.location.search;
+    // 判断推广码存不存在
+    if(query && /promoteSrcCode/.test(query)){
+        sessionStorage.setItem('mainParam',query)
+    }
     if(sessionStorage.getItem('mainParam')){
         $(".home").attr('href','/'+sessionStorage.getItem('mainParam'))
     }
+
+
     // 子元素scroll父元素容器不跟随滚动JS实现
     $.fn.uniqueScroll = function () {
         $(this).on('mousewheel', _pc)
