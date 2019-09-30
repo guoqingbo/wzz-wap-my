@@ -166,9 +166,24 @@ $(function () {
             var buyNum = $(this).find(".ticket-amount-value").text()
             // 已选实名制人数
             var personNum = $(this).find(".person-selected-item").length
-
             // 票型名称
             var ticketName = $(this).find(".ticket-name").text()
+            // 判断实名制票型，身份证号是否重复
+            var personArr = []
+            $(this).find(".person-selected-item").each(function () {
+                var idCard = $(this).find('.person-selected-icard').text()
+                if( personArr.indexOf(idCard)>-1){
+                    checkPersonNum = true
+                    message =ticketName+ '</br>身份证号（'+idCard+'）重复'
+                    return false
+                }else{
+                    personArr.push(idCard)
+                }
+            })
+            if(checkPersonNum){
+                return false
+            }
+
 
             if(personNum<buyNum){
                 message =ticketName+ '游玩人与购买数量不一致'
