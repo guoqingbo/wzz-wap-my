@@ -181,9 +181,24 @@ $(function () {
             var buyNum = $(this).find(".ticket-amount-value").text()
             // 已选实名制人数
             var personNum = $(this).find(".person-selected-item").length
-
             // 票型名称
             var ticketName = $(this).find(".ticket-name").text()
+            // 判断实名制票型，身份证号是否重复
+            var personArr = []
+            $(this).find(".person-selected-item").each(function () {
+                var idCard = $(this).find('.person-selected-icard').text()
+                if( personArr.indexOf(idCard)>-1){
+                    checkPersonNum = true
+                    message =ticketName+ '</br>身份证号（'+idCard+'）重复'
+                    return false
+                }else{
+                    personArr.push(idCard)
+                }
+            })
+            if(checkPersonNum){
+                return false
+            }
+
 
             if(personNum<buyNum){
                 message =ticketName+ '游玩人与购买数量不一致'
@@ -230,6 +245,17 @@ $(function () {
             linkIdcard:$(".take-ticket-box .person-selected-icard").text(),//取票人身份证
             cartOrderStr:JSON.stringify(cartOrderDtos),//下单参数
             paramExtension:"",//业务拓展参数
+        }
+        if(sessionStorage.getItem('promoter')){
+            var query = sessionStorage.getItem('promoter').substring(1);
+            var vars = query.split("&");
+            var promoter = {}
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                promoter[pair[0]] = pair[1]
+            }
+            params.channelId = promoter.channelId // 全渠道订单来源标识
+            params.promoteSrcCode = promoter.promoteSrcCode // 全渠道订单来源
         }
         $.ajax({
             type: 'POST',

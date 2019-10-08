@@ -1,10 +1,20 @@
-/*官网国庆风格*/
+/*官网国庆风格1*/
+/*body.official{*/
+    /*background: url(../../images/index/body-img4.png) top no-repeat #a30506;*/
+    /*background-size: contain;*/
+/*}*/
+/*官网国庆风格2*/
 body.official{
-    background: url(../../images/index/body-img4.png) top no-repeat #a30506;
+    background: url(../../images/index/body-img6.png) top no-repeat #ab2526;
     background-size: contain;
 }
-/*汪汪国庆风格*/
+/*汪汪国庆风格1*/
+/*body.wangWang{*/
+    /*background: url(../../images/wangWang/index/body-img4.png) top no-repeat #a30506;*/
+    /*background-size: contain;*/
+/*}*/
+/*汪汪国庆风格2*/
 body.wangWang{
-    background: url(../../images/wangWang/index/body-img4.png) top no-repeat #a30506;
+    background: url(../../images/wangWang/index/body-img5.png) top no-repeat #ac2527;
     background-size: contain;
 }

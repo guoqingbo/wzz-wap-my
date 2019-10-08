@@ -5,13 +5,8 @@ let async = require('async');
 exports.mainRouter = function (router, common, requireLogin ) {
 
     // 我的行程
-    router.get('/myTrip', function (req, res, next) {
+    router.get('/myTrip',common.isLogin, function (req, res, next) {
        //res.render('myTrip',{title:'行程规划'});
-        if(!req.session.member||req.session.member.id === ''){
-            req.session.curUrl = req.originalUrl;
-            res.redirect('/login');
-            return;
-        }
         common.commonRequest({
             url: [{
                 urlArr: ['myTrip', 'myTripList', 'list'],
@@ -100,12 +95,7 @@ exports.mainRouter = function (router, common, requireLogin ) {
     });
 
     // 导游导览
-    router.get('/myGuide', function (req, res, next) {
-        if (!req.session.member||req.session.member.id==='') {
-            req.session.curUrl = req.originalUrl;
-            res.redirect('/login');
-            return;
-        }
+    router.get('/myGuide', common.isLogin,function (req, res, next) {
         let projectId=req.query.projectId;
        common.commonRequest({
              url: [{

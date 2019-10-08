@@ -294,9 +294,9 @@ exports.mainRouter = function (router, common) {
         parameter.leaguerId = req.session.member.id
         // parameter.cartOrderDtos = JSON.parse(parameter.cartOrderDtos)
         // 全渠道订单来源标识
-        parameter.promoteSrcCode= req.session.promoteSrcCode||"";
+        // parameter.promoteSrcCode= req.session.promoteSrcCode||"";
         // 全渠道订单来源
-        parameter.channelId= req.session.channelId||"";
+        // parameter.channelId= req.session.channelId||"";
         parameter.accountType = 4;
        common.commonRequest({
             url: [{
@@ -385,9 +385,9 @@ exports.mainRouter = function (router, common) {
             parameter.paramExtension = req.query.parkId || '';
             delete req.query.parkId;
         }
-        parameter.promoteSrcCode= req.session.promoteSrcCode||"";
+        parameter.promoteSrcCode= req.body.promoteSrcCode||"";
         //线上channelId
-        parameter.channelId= req.session.channelId;
+        parameter.channelId= req.body.channelId||'';
         var busiTypeName;
         // busiType Name
         switch(module){

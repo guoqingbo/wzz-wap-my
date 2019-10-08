@@ -34,30 +34,70 @@ function isWeiXin() {
     }
 }
 
-// 判断是否存储全渠道参数
-// function storeQuanQudao(){
-//     // 获取url后的参数
-//     var query = window.location.search;
-//     // 判断推广码存不存在
-//     if(query && /promoteSrcCode/.test(query)){
-//         sessionStorage.setItem('mainParam',query)
-//     }else{
-//         console.log(window)
-//         var query1 = sessionStorage.getItem('mainParam')
-//         if(query1){
-//             if(query){
-//                 // 如果url后有参数
-//                 query1 = query1.replace(/^\?/,'&')
-//             }
-//             window.history.replaceState(null,null,window.location.href+query1);
-//
-//             // window.location.href = window.location.href+query1
-//         }
-//     }
+
+// window.onunload = function() {
+//     sessionStorage.removeItem('promoter')
 // }
-// storeQuanQudao()
+// window.onunload = function(){
+//     alert('确定关闭')
+// }
+
 
 $(function () {
+    // 判断是否存储全渠道参数
+    function storeQuanQudao(){
+        // 获取url后的参数
+        var query = window.location.search.substring(1);
+        if(query && /promoteSrcCode/.test(query)){
+            var vars = query.split("&");
+            var promoter = {}
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                promoter[pair[0]] = pair[1]
+            }
+            var sessionPromoter=JSON.stringify({
+                promoterId:promoter.promoterId,
+                channelId:promoter.channelId,
+                teamBatchNo:promoter.teamBatchNo,
+                promoteSrcCode:promoter.promoteSrcCode
+            });
+            sessionStorage.setItem('promoter',sessionPromoter)
+        }
+        // 缓存中存在推广码
+        var query1 = sessionStorage.getItem('promoter')
+        if(query1){
+            query1 = JSON.parse(query1)
+            var promoterStr = 'promoterId='+query1.promoterId +'&channelId='+query1.channelId+'&teamBatchNo='+query1.teamBatchNo+'&promoteSrcCode='+query1.promoteSrcCode
+            var promoterStr1 = ''
+            if(query){
+                // 如果url后有参数
+                promoterStr1 = '&'+promoterStr
+            }else{
+                promoterStr1 = '?'+promoterStr
+            }
+            if(!/promoteSrcCode/.test(query)){
+                window.history.replaceState(null,null,window.location.href+promoterStr1);
+            }
+            // window.location.href = window.location.href+query1
+            // 如果没有全渠道参数，更改所有的a链接href
+            $('a').each(function () {
+                var href = $(this).attr('href')
+                var promoterStr2=''
+                if(!/promoteSrcCode/.test(href)&&/\//.test(href)){
+                    if(/\?/.test(href)){
+                        // 如果href后有参数
+                        promoterStr2 = '&'+promoterStr
+                    }else{
+                        promoterStr2 = '?'+promoterStr
+                    }
+                    $(this).attr('href',href+promoterStr2)
+                }
+            })
+        }
+
+    }
+    storeQuanQudao()
+
     // 子元素scroll父元素容器不跟随滚动JS实现
     $.fn.uniqueScroll = function () {
         $(this).on('mousewheel', _pc)

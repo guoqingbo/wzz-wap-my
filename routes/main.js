@@ -1,10 +1,12 @@
 let moment = require('moment');
+let url = require("url");
+
 let utils = {
     //  是否加载国庆风格
     isGuoQing(){
         let flag = false
-        let nowDay = moment().format('MM-DD hh:mm:ss')
-        if(nowDay>='09-30 23:59:59' && nowDay<='10-07 23:59:59'){
+        let nowDay = moment().format('YYYY-MM-DD hh:mm:ss')
+        if(nowDay>='2019-09-30 23:59:59' && nowDay<='2019-10-07 23:59:59'){
             flag = true
         }else if(process.env.NODE_ENV !='production' && (nowDay>='09-24 23:59:59' && nowDay<='10-07 23:59:59')){
             // 非生产环境
@@ -16,50 +18,33 @@ let utils = {
 exports.mainRouter = function (router, common) {
     // 首页
     router.get(['/', '/main'], function (req, res, next) {
-
+        console.log(req.query)
         // 全渠道扫码进入首页需要登录
-        if(req.query.promoterId){
-            // 全渠道参数进入，判断是否要重新登陆，promoterId和之前登陆不一样时，重新登陆
-            let isReLogin = false
-            if(req.session.promoterId!==req.query.promoterId){
-                isReLogin = true
-            }
-            // 全渠道参数
-            req.session.channelId=req.query.channelId||"";
-            req.session.promoterId=req.query.promoterId||"";
-            req.session.teamBatchNo=req.query.teamBatchNo||"";
-            req.session.promoteSrcCode=req.query.promoteSrcCode||"";
-            if(isReLogin){
-                req.session.curUrl = req.originalUrl
-                return res.redirect('/login')
-            }
-            // common.isLogin(req, res)
-        }else{
-            // 全渠道参数
-            req.session.channelId="";
-            req.session.promoterId="";
-            req.session.teamBatchNo="";
-            req.session.promoteSrcCode=""
-        }
         // if(req.query.promoterId){
-        //     console.log(req.query);
-        //     req.session.promoterId=req.query.promoterId;
-        //     req.session.teamBatchNo=req.query.teamBatchNo||"";
-        //
-        //     //线上channerId
-        //     req.session.channelId=req.query.channelId||"";
-        //
-        //     req.session.curUrl = '/main';
-        //     if(req.query.promoteSrcCode){
-        //         req.session.curUrl = '/main?promoteSrcCode='+req.query.promoteSrcCode;
+        //     // 全渠道参数进入，判断是否要重新登陆，promoterId和之前登陆不一样时，重新登陆
+        //     let isReLogin = false
+        //     if(req.session.promoterId!==req.query.promoterId){
+        //         isReLogin = true
         //     }
-        //     // req.session.curUrl = req.originalUrl;
-        //     return res.redirect('/login')
+        //     // 全渠道参数
+        //     // let promoter = req.query.promoter;
+        //     // req.session.channelId=req.query.channelId||"";
+        //     // req.session.promoterId=req.query.promoterId||"";
+        //     // req.session.teamBatchNo=req.query.teamBatchNo||"";
+        //     // req.session.promoteSrcCode=req.query.promoteSrcCode||"";
+        //     if(isReLogin){
+        //         req.session.curUrl = req.originalUrl
+        //         return res.redirect('/login')
+        //     }
+        //     // common.isLogin(req, res)
         // }else{
+        //     // 全渠道参数
+        //     req.session.channelId="";
         //     req.session.promoterId="";
         //     req.session.teamBatchNo="";
+        //     req.session.promoteSrcCode=""
         // }
-        // req.session.promoteSrcCode=req.query.promoteSrcCode||"";
+
 
         let title = ''
         // projectNameCode判断所属项目
@@ -113,16 +98,21 @@ exports.mainRouter = function (router, common) {
 
     // 登陆页面
     router.get('/login', function (req, res, next) {
+        let redir = req.query.redir || req.session.curUrl || './member'
         if (common.is_weixn(req)) {
             // if(req.session.wxTokenObj && req.session.wxTokenObj.expires_Time <= +new Date()) {
             //     return res.redirect('/horization');
             // }
-
+            let promoter = ''
+            let {channelId='',promoterId='',teamBatchNo=''} = url.parse(redir,true).query;
+            if(promoterId){
+                promoter = '?channelId='+channelId+'&promoterId='+promoterId+'&teamBatchNo='+teamBatchNo
+            }
             let redirect = common.getUrl({
                 urlArr: ['main', 'wechat', 'Authorization'],
                 parameter: {
                     appid: common.envConfig.wx.appId,
-                    redirect_uri: encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/horization/'),
+                    redirect_uri: encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/horization/'+promoter),
                     response_type: 'code',
                     scope: 'snsapi_userinfo'
                 },
@@ -132,13 +122,13 @@ exports.mainRouter = function (router, common) {
             // 如果配置存在微信授权支付代理，使用蜈支洲wap官网的微信授权
             // let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
             if(common.envConfig.weixinProxy){
-                redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent('http://' + req.headers.host + '/horization')
+                redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent('http://' + req.headers.host + '/horization?promoter='+promoter)
             }
             res.redirect(redirect)
         } else {
             res.render('login', {
                 title: '登录',
-                redir: req.query.redir || req.session.curUrl || './member'
+                redir,
             })
         }
     });
@@ -176,7 +166,12 @@ exports.mainRouter = function (router, common) {
             }],
             req: req,
             res: res,
-            isAjax: true
+            isAjax: true,
+            callBack: function (results, reqs, resp, handTag) {
+                if(results[0].status == 200){
+                    req.session.promoterId = req.body.promoterId
+                }
+            }
         });
     });
     //手机号快捷登录
@@ -190,7 +185,12 @@ exports.mainRouter = function (router, common) {
             }],
             req: req,
             res: res,
-            isAjax: true
+            isAjax: true,
+            callBack: function (results, reqs, resp, handTag) {
+                if(results[0].status == 200){
+                    req.session.promoterId = req.body.promoterId
+                }
+            }
         });
     });
 

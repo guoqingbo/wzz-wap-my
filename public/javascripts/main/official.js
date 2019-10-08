@@ -1,20 +1,20 @@
 $(function () {
     // 判断是否存储全渠道参数
-    function storeQuanQudao(){
-        // 获取url后的参数
-        var query = window.location.search;
-        // 判断推广码存不存在
-        if(query && /promoteSrcCode/.test(query)){
-            sessionStorage.setItem('mainParam',query)
-        }else{
-            var query1 = sessionStorage.getItem('mainParam')
-            if(query1){
-                window.history.replaceState(null,null,window.location.href+query1);
-                // window.location.href = window.location.href+query1
-            }
-        }
-    }
-    storeQuanQudao()
+    // function storeQuanQudao(){
+    //     // 获取url后的参数
+    //     var query = window.location.search;
+    //     // 判断推广码存不存在
+    //     if(query && /promoteSrcCode/.test(query)){
+    //         sessionStorage.setItem('promoter',query)
+    //     }else{
+    //         var query1 = sessionStorage.getItem('promoter')
+    //         if(query1){
+    //             window.history.replaceState(null,null,window.location.href+query1);
+    //             // window.location.href = window.location.href+query1
+    //         }
+    //     }
+    // }
+    // storeQuanQudao()
 
     // 重定向到https
     // redirectHttps()

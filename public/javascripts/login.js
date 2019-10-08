@@ -85,7 +85,9 @@ $(function () {
     /**
      * 发送验证码
      */
-    $('#getCodeBtn').on('click', function () {
+    $('#getCodeBtn').on('click', function (e) {
+        e.preventDefault()
+        e.stopPropagation()
         if (codeValid.form()) {
             var sendType = $(this).data('type');
             // 快捷登录or注册
@@ -137,7 +139,16 @@ $(function () {
     var submitForm = $('#submitForm');
     submitForm.submit(function () {
         var $this = $(this);
-        var data = $(this).serialize();
+        // 获取全渠道缓存
+        var data = {
+            loginName:$('input[name="loginName"]').val(),
+            loginPass:$('input[name="loginPass"]').val()
+        };
+        var promoter = sessionStorage.getItem('promoter')
+        if(promoter) {
+            promoter = JSON.parse(promoter)
+            data.promoterId = promoter.promoterId
+        }
         if (validator.form()) {
             var url = $this.data('url');
             $.post('/leaguerLogin', data)
@@ -165,10 +176,20 @@ $(function () {
      * 快捷登录
      */
     var submitLogin = $('#submitLogin');
-    submitLogin.submit(function () {
+    submitLogin.submit(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
         if (validator2.form()) {
             var $this = $(this);
-            var loginData = submitLogin.serialize();
+            var loginData = {
+                mobile:$('input[name="mobile"]').val(),
+                checkCode:$('input[name="checkCode"]').val(),
+            };
+            var promoter = sessionStorage.getItem('promoter')
+            if(promoter) {
+                promoter = JSON.parse(promoter)
+                loginData.promoterId = promoter.promoterId
+            }
             var url = $this.data('url');
             $.post('/phoneNumberLogin', loginData)
                 .success(function (res) {

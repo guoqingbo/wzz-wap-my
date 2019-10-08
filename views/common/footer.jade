@@ -2,7 +2,7 @@ mixin footer()
   .hs-footer
     ul
       li
-        a(href='/', class= module === 'index'? 'on': '')
+        a.home(href='/', class= module === 'index'? 'on': '')
           if module === 'index'
             img(src='/images/common/nav-icon1-on.png')
           else

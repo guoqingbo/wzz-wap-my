@@ -8,6 +8,20 @@ router.use(common.wxShare)
 // 获取自定义标题
 router.use(common.getPageMeta)
 
+// 全渠道扫码进入(需要登录)
+// router.use(function (req, res, next) {
+//     if(req.method=="GET"){
+//         if(req.query.promoterId){
+//             // 全渠道参数
+//             req.session.channelId=req.query.channelId||"";
+//             req.session.promoterId=req.query.promoterId||"";
+//             req.session.teamBatchNo=req.query.teamBatchNo||"";
+//             req.session.promoteSrcCode=req.query.promoteSrcCode||"";
+//         }
+//     }
+//     next()
+// })
+
 // main
 require('./main').mainRouter(router,common);
 // member

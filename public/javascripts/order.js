@@ -466,9 +466,22 @@ $(function () {
                 '/order/' + module + '?' + $ord.form.serialize() :
                 '/order/addCart?' + $ord.form.serialize() + '&' + $('#cartForm').serialize();
 
+            var params = {}
+            if(sessionStorage.getItem('promoter')){
+                var query = sessionStorage.getItem('promoter').substring(1);
+                var vars = query.split("&");
+                var promoter = {}
+                for (var i=0;i<vars.length;i++) {
+                    var pair = vars[i].split("=");
+                    promoter[pair[0]] = pair[1]
+                }
+                params.channelId = promoter.channelId // 全渠道订单来源标识
+                params.promoteSrcCode = promoter.promoteSrcCode // 全渠道订单来源
+            }
+
             if (hasLogin||leaguerId) {
                 //已经登录直接提交订单
-                $.post(_url)
+                $.post(_url,params)
                     .success(function (data) {
                         var datas = data[0];
                         if (datas.status === 200 && _b) {
