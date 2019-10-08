@@ -3,11 +3,8 @@ let utils = {
     //  是否加载国庆风格
     isGuoQing(){
         let flag = false
-        let nowDay = moment().format('MM-DD hh:mm:ss')
-        if(nowDay>='09-30 23:59:59' && nowDay<='10-07 23:59:59'){
-            flag = true
-        }else if(process.env.NODE_ENV !='production' && (nowDay>='09-24 23:59:59' && nowDay<='10-07 23:59:59')){
-            // 非生产环境
+        let nowDay = moment().format('YYYY-MM-DD hh:mm:ss')
+        if(nowDay>='2019-09-30 23:59:59' && nowDay<='2019-10-07 23:59:59'){
             flag = true
         }
         return flag

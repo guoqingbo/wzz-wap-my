@@ -55,8 +55,12 @@ function isWeiXin() {
 //     }
 // }
 // storeQuanQudao()
-
-
+// window.onunload = function() {
+//     sessionStorage.removeItem('mainParam')
+// }
+// window.onunload = function(){
+//     alert('确定关闭')
+// }
 
 
 $(function () {
@@ -69,7 +73,6 @@ $(function () {
     if(sessionStorage.getItem('mainParam')){
         $(".home").attr('href','/'+sessionStorage.getItem('mainParam'))
     }
-
 
     // 子元素scroll父元素容器不跟随滚动JS实现
     $.fn.uniqueScroll = function () {
