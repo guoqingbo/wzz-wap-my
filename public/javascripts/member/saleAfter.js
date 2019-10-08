@@ -7,7 +7,7 @@ $(function () {
                 $(this).next().trigger("click")
             })
             $(".ipnut-file").change(function () {
-                var file =$(this).prop("files")[0];
+                var file = $(this).prop("files")[0];
                 var field = $(this).attr("name") || "image";
                 if(!file){
                     return
@@ -132,6 +132,7 @@ $(function () {
     $(".preview-box").on('click','.deleteImg span',function(){
         var index  = $(this).parent().index();
         $(this).parent().remove();
+        $(".ipnut-file").val('');
         delete upload.files[index]
     })
 })

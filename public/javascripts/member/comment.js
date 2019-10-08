@@ -160,6 +160,7 @@ $(function (){
     $(".preview-box").on('click','.deleteImg span',function(){
         var index  = $(this).parent().index();
         $(this).parent().remove();
+        $(".ipnut-file").val('');
         delete upload.files[index]
     })
 });
