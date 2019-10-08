@@ -215,7 +215,7 @@ exports.mainRouter = function (router, common) {
     // 授权access_token
     router.get('/horization', function (req, res, next) {
         let funArray = [];
-
+        let {channelId='',promoterId='',teamBatchNo=''} = req.query
         // 获取微信accessToken | openid, 获取后存入缓存wxTokenObj
         let getaccessToken = function (cb) {
             common.commonRequest({
@@ -274,9 +274,9 @@ exports.mainRouter = function (router, common) {
                         nickName: result.nickname,
                         imgUrl: result.headimgurl,
                         sex: result.sex,
-                        channelId:req.session.channelId||"",
-                        promoterId:req.session.promoterId||"",
-                        teamBatchNo:req.session.teamBatchNo||""
+                        channelId,
+                        promoterId,
+                        teamBatchNo
                     },
                 }],
                 req: req,
@@ -321,6 +321,7 @@ exports.mainRouter = function (router, common) {
                 res.redirect('/error');
                 return;
             }
+            req.session.promoterId = promoterId;
             req.session.leaguerId = results[0].data.leaguerId;
             req.session.member = results[0].data;
             req.session.member.id = req.session.leaguerId

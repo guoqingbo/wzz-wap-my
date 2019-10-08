@@ -64,12 +64,7 @@ exports.mainRouter = function (router, common) {
     });
 
     //兑换优惠券
-    router.get('/coupon/exchange', function (req, res, next){
-        if(!req.session.member || req.session.member.id === ''){
-            req.session.curUrl=req.originalUrl;
-            res.redirect('/login');
-            return;
-        }
+    router.get('/coupon/exchange',common.isLogin, function (req, res, next){
         res.render("coupons/exchange",{title:"兑换优惠券"})
     });
     //点击兑换优惠券

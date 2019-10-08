@@ -1,4 +1,5 @@
 module.exports = {
     corpCode:'cgb2cfxs',
-    protocol:'http'
+    protocol:'http',
+    // weixinProxy:'https://wzzfxswap.sendinfo.com.cn'
 };

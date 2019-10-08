@@ -1,12 +1,6 @@
 exports.mainRouter = function (router, common) {
     // 投诉建议
-    router.get('/complaint/:module', function (req, res, next) {
-        //检查是否登陆
-        if (!req.session.member || !req.session.member.id) {
-            var redir = req.originalUrl;
-            res.redirect('/login?redir=' + redir);
-            return;
-        }
+    router.get('/complaint/:module',common.isLogin, function (req, res, next) {
         var module = req.params.module,
             title = "投诉建议";
         res.render('complaint/'+module, {

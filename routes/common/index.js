@@ -468,7 +468,12 @@ let common = {
         if(req.session.member && req.session.member.leaguerId && !req.session.member.id){
             req.session.member.id = req.session.member.leaguerId
         }
-        if (!req.session.member || !req.session.member.leaguerId || !req.session.member.id) {
+        // 全渠道参数进入，判断是否要重新登陆，promoterId和之前登陆不一样时，重新登陆
+        let isReLogin = false
+        if(req.method=="GET" && req.query.promoterId && req.session.promoterId!==req.query.promoterId){
+            isReLogin = true
+        }
+        if (!req.session.member || !req.session.member.leaguerId || !req.session.member.id || isReLogin) {
             // 判断是get请求，还是post请求
             if(req.method=="POST"){
                 return res.send([{status:400,message:"登陆过期，请重新登录"}])
