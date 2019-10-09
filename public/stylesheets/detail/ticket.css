@@ -206,7 +206,7 @@ body{
 /*票型列表*/
 .ticket-list-box{
     border-top: 1px solid #e5e5e5;
-    margin-bottom: 4rem;
+    padding-bottom: 4rem;
 }
 .ticket-type-header{
     padding: .5rem;
