@@ -10,7 +10,7 @@ router.use(common.getPageMeta)
 
 // 全渠道扫码进入(需要登录)
 router.use(function (req, res, next) {
-    if(/(^\/login)|(^\/horization)/.test(req.originalUrl)){
+    if(/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(req.originalUrl)){
          next()
     }
     else if(req.method=="GET"){

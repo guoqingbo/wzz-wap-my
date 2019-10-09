@@ -201,7 +201,7 @@ $(function () {
 
 
             if(personNum<buyNum){
-                message =ticketName+ '游玩人与购买数量不一致'
+                message =ticketName+ '</br>需选择'+buyNum+'位游玩人'
                 checkPersonNum = true
                 return false
             }

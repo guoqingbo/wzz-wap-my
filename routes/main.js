@@ -112,7 +112,7 @@ exports.mainRouter = function (router, common) {
                 urlArr: ['main', 'wechat', 'Authorization'],
                 parameter: {
                     appid: common.envConfig.wx.appId,
-                    redirect_uri: encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/horization/'+promoter),
+                    redirect_uri: encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/horization'+promoter),
                     response_type: 'code',
                     scope: 'snsapi_userinfo'
                 },
@@ -122,7 +122,7 @@ exports.mainRouter = function (router, common) {
             // 如果配置存在微信授权支付代理，使用蜈支洲wap官网的微信授权
             // let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
             if(common.envConfig.weixinProxy){
-                redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent('http://' + req.headers.host + '/horization/'+promoter)
+                redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/horization'+promoter)
             }
             res.redirect(redirect)
         } else {

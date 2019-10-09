@@ -242,7 +242,11 @@
     "getAllProject":"/staff/api/getAllProject",
     "listForQueueWap":"/staff/api/queue/listForQueueWap",
     "cancleQueueWap":"/staff/api/queue/cancleQueueWap",
-    "queuesNew":"/staff/api/queue/screenCode/queuesNew"
+    "queuesNew":"/staff/api/queue/screenCode/queuesNew",
+    "queueIndex":"/staff/api/onlineOrderHomePage",
+    "projectTypeList":"/staff/api/projectTypeList",
+    "projectmanageList":"/staff/api/projectmanageList"
+
   },
   "newsTop": {
     "detail": {

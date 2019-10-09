@@ -1,0 +1,13 @@
+mixin goAppointList(data)
+    each item in data
+        li.project-item
+            .project-item-default.project-item-left
+                img.project-item-img(src=item.projectLogo||'/images/demo/no-img.jpg')
+            .project-item-default.project-item-center
+                p.project-item-name=item.projectName
+                button.project-item-more 预定须知 >
+            .project-item-default.project-item-right
+                a.default-btn.go-appoint-btn(href='/appoint/gameDetail/'+item.projectId) 去预约
+
+if method === "ajax"
+    +goAppointList(data)

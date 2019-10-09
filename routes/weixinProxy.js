@@ -8,7 +8,7 @@ exports.mainRouter = function (router, common) {
             urlArr: ['main', 'wechat', 'Authorization'],
             parameter: {
                 appid: common.envConfig.wx.appId,
-                redirect_uri:  encodeURIComponent('https://' + req.headers.host + '/weixinProxy/redirect?redirectUri='+redirectUri),
+                redirect_uri:  encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/weixinProxy/redirect?redirectUri='+encodeURIComponent(redirectUri)),
                 response_type: 'code',
                 scope: 'snsapi_userinfo'
             },

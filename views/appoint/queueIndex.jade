@@ -11,10 +11,10 @@ block content
     .header-box
         .swiper-container.wiper-container-ele
             .swiper-wrapper
-                // each item in [1,2,3,4]
-                .swiper-slide
-                    a.swiper-slide-a(href='javascript:void(0)')
-                        img.swiper-slide-img(src='/images/appoint/bg.png')
+                 each item in data[0].picture.url.split(',')
+                    .swiper-slide
+                        a.swiper-slide-a(href='javascript:void(0)')
+                            img.swiper-slide-img(src=item||'/images/appoint/bg.png')
 
             .swiper-pagination
     // 菜单导航
@@ -51,6 +51,7 @@ block content
             .tab-content-box
                 .swiper-container.tab-content-list
                     .swiper-wrapper
-                        each item in [1,2]
-                            .swiper-slide.tab-content-item 选项卡内容
+                        // each item in [1,2]
+                        .swiper-slide.tab-content-item!=data[0].data.bookInformation
+                        .swiper-slide.tab-content-item!=data[0].data.lineMessage
 

@@ -300,7 +300,10 @@ $(function () {
                 // 每次数据加载完，必须重置
                 dropload.resetload();
             },
-            error: function (xhr, type) {
+            error: function (error) {
+                // console.log(error)
+                dropload.lock();
+                dropload.noData();
                 // 即使加载出错，也得重置
                 dropload.resetload();
             }

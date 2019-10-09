@@ -508,51 +508,69 @@ exports.mainRouter = function (router, common) {
 
     // 排队预约 手机端
     router.get('/appoint/queueIndex', function (req, res, next) {
-        res.render('appoint/queueIndex',{title:'排队预约',data:[{data:{}}]})
-        // return
-        // let {projectId,ticketNo} = req.query
-        // // projectId = 4
-        // // ticketNo = 'FT190903000001086867'
-        // common.commonRequest({
-        //     url: [{
-        //         urlArr: ['appoint','listForQueueWap'],
-        //         outApi:common.envConfig.domain1,
-        //         parameter:{projectId,ticketNo},
-        //     }],
-        //     req: req,
-        //     res: res,
-        //     page: 'appoint/takeNumSuccess',
-        //     title: '排号成功',
-        //     callBack: function (results, reObj, res, handTag) {
-        //         if(results[0].status==200){
-        //             reObj.projectId = projectId
-        //         }
-        //     }
-        // });
+        // res.render('appoint/queueIndex',{title:'排队预约',data:[{data:{}}]})
+        common.commonRequest({
+            url: [{
+                urlArr: ['appoint','queueIndex'],
+                outApi:common.envConfig.domain1,
+                method:'POST'
+            }],
+            req: req,
+            res: res,
+            page: 'appoint/queueIndex',
+            title: '排队预约',
+            callBack: function (results, reObj, res, handTag) {
+                if(results[0].status==200){
+
+                }
+            }
+        });
     });
     // 去预约
     router.get('/appoint/goAppoint', function (req, res, next) {
-        res.render('appoint/goAppoint',{title:'预约',data:[{data:{}}]})
-        // return
-        // let {projectId,ticketNo} = req.query
-        // // projectId = 4
-        // // ticketNo = 'FT190903000001086867'
-        // common.commonRequest({
-        //     url: [{
-        //         urlArr: ['appoint','listForQueueWap'],
-        //         outApi:common.envConfig.domain1,
-        //         parameter:{projectId,ticketNo},
-        //     }],
-        //     req: req,
-        //     res: res,
-        //     page: 'appoint/takeNumSuccess',
-        //     title: '排号成功',
-        //     callBack: function (results, reObj, res, handTag) {
-        //         if(results[0].status==200){
-        //             reObj.projectId = projectId
-        //         }
-        //     }
-        // });
+        // res.render('appoint/goAppoint',{title:'预约',data:[{data:{}}]})
+        common.commonRequest({
+            url: [{
+                urlArr: ['appoint','projectTypeList'],
+                outApi:common.envConfig.domain1,
+                method:"POST"
+            }],
+            req: req,
+            res: res,
+            page: 'appoint/goAppoint',
+            title: '预约',
+            callBack: function (results, reObj, res, handTag) {
+                if(results[0].status==200){
+
+                }
+            }
+        });
+    });
+    // 获取预约项目列表
+    router.post('/appoint/goAppointList', function (req, res, next) {
+        let parameter = req.body
+        parameter.leaguerCode = req.session.member.id
+        common.commonRequest({
+            url: [{
+                urlArr: ['appoint', 'projectmanageList'],
+                parameter,
+                outApi:common.envConfig.domain1
+            }],
+            req: req,
+            res: res,
+            isAjax:true,
+            callBack: function (results, reObj, res, handTag) {
+                if(results[0].status===200){
+                    handTag.tag = false
+                    let renderObj = {
+                        data:results[0].data.rows,
+                        method:"ajax",
+                    }
+                    let html = common.jade('appoint/mixin/goAppointList', renderObj);
+                    res.send([{status:200,html,pages:results[0].data.pages,bookInformation:results[0].bookInformation}])
+                }
+            }
+        });
     });
     // 我的预约
     router.get('/appoint/myAppoint', function (req, res, next) {

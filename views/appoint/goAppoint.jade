@@ -1,31 +1,34 @@
 extends ../layout
 
 block stylesheets
+    link(rel="stylesheet", href="/lib/dropload/dropload.css")
     link(rel="stylesheet", href="/stylesheets/appoint/goAppoint.css")
 block javascripts
+    script(type='text/javascript', src='/lib/dropload/dropload.min.js')
     script(type='text/javascript', src='/lib/layer_mobile/layer.js')
     script(type='text/javascript', src='/javascripts/appoint/goAppoint.js')
 block content
     .tabAjax-box
         ul.tabAjax-select-list
-            li.tabAjax-select-item.active
-                span.tabAjax-select-name 海上娱乐
-                span.tabAjax-select-line
-            li.tabAjax-select-item
-                span.tabAjax-select-name 潜水
-                span.tabAjax-select-line
-            li.tabAjax-select-item
-                span.tabAjax-select-name 陆地游玩
-                span.tabAjax-select-line
+            each item,index in data[0].data
+                li.tabAjax-select-item(class=index==0?'active':'' data-key=item.key style='width:'+(100/data[0].data.length)+'%')
+                    span.tabAjax-select-name=item.value
+                    span.tabAjax-select-line
+            //li.tabAjax-select-item
+            //    span.tabAjax-select-name 潜水
+            //    span.tabAjax-select-line
+            //li.tabAjax-select-item
+            //    span.tabAjax-select-name 陆地游玩
+            //    span.tabAjax-select-line
         .project-box
             ul.project-list
-                each item in [1,2]
-                    li.project-item
-                        .project-item-default.project-item-left
-                            img.project-item-img(src='/images/demo/no-img.jpg')
-                        .project-item-default.project-item-center
-                            p.project-item-name 项目名
-                            button.project-item-more 预定须知 >
-                        .project-item-default.project-item-right
-                            a.default-btn.go-appoint-btn(href='/appoint/gameDetail/8') 去预约
+                // each item in [1,2]
+                //     li.project-item
+                //         .project-item-default.project-item-left
+                //             img.project-item-img(src='/images/demo/no-img.jpg')
+                //         .project-item-default.project-item-center
+                //             p.project-item-name 项目名
+                //             button.project-item-more 预定须知 >
+                //         .project-item-default.project-item-right
+                //             a.default-btn.go-appoint-btn(href='/appoint/gameDetail/8') 去预约
 
