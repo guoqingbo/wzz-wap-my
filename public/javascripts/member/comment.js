@@ -89,8 +89,6 @@ $(function (){
                 //     upload.uploadImg = res
                 //     console.log(upload.uploadImg)
                 // })
-
-
             })
         },
         files:{},

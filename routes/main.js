@@ -99,15 +99,15 @@ exports.mainRouter = function (router, common) {
     // 登陆页面
     router.get('/login', function (req, res, next) {
         let redir = req.query.redir || req.session.curUrl || './member'
+        let promoter = ''
+        let {channelId='',promoterId='',teamBatchNo=''} = url.parse(redir,true).query;
+        if(promoterId){
+            promoter = '?channelId='+channelId+'&promoterId='+promoterId+'&teamBatchNo='+teamBatchNo
+        }
         if (common.is_weixn(req)) {
             // if(req.session.wxTokenObj && req.session.wxTokenObj.expires_Time <= +new Date()) {
             //     return res.redirect('/horization');
             // }
-            let promoter = ''
-            let {channelId='',promoterId='',teamBatchNo=''} = url.parse(redir,true).query;
-            if(promoterId){
-                promoter = '?channelId='+channelId+'&promoterId='+promoterId+'&teamBatchNo='+teamBatchNo
-            }
             let redirect = common.getUrl({
                 urlArr: ['main', 'wechat', 'Authorization'],
                 parameter: {
@@ -122,7 +122,7 @@ exports.mainRouter = function (router, common) {
             // 如果配置存在微信授权支付代理，使用蜈支洲wap官网的微信授权
             // let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
             if(common.envConfig.weixinProxy){
-                redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent('http://' + req.headers.host + '/horization?promoter='+promoter)
+                redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent('http://' + req.headers.host + '/horization/'+promoter)
             }
             res.redirect(redirect)
         } else {

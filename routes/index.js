@@ -9,18 +9,24 @@ router.use(common.wxShare)
 router.use(common.getPageMeta)
 
 // 全渠道扫码进入(需要登录)
-// router.use(function (req, res, next) {
-//     if(req.method=="GET"){
-//         if(req.query.promoterId){
-//             // 全渠道参数
-//             req.session.channelId=req.query.channelId||"";
-//             req.session.promoterId=req.query.promoterId||"";
-//             req.session.teamBatchNo=req.query.teamBatchNo||"";
-//             req.session.promoteSrcCode=req.query.promoteSrcCode||"";
-//         }
-//     }
-//     next()
-// })
+router.use(function (req, res, next) {
+    if(/(^\/login)|(^\/horization)/.test(req.originalUrl)){
+         next()
+    }
+    else if(req.method=="GET"){
+        if(req.query.promoterId && req.session.promoterId!==req.query.promoterId){
+            let {channelId='',promoterId='',teamBatchNo='',promoteSrcCode=''} = req.query;
+            let promoter = '?channelId='+channelId+'&promoterId='+promoterId+'&teamBatchNo='+teamBatchNo+'&promoteSrcCode='+promoteSrcCode
+            // req.session.promoterId = req.query.promoterId
+            req.session.curUrl = req.originalUrl
+            return res.redirect('/login'+promoter)
+        }else{
+            next()
+        }
+    }else{
+        next()
+    }
+})
 
 // main
 require('./main').mainRouter(router,common);
