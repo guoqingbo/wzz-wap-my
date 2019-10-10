@@ -438,17 +438,22 @@ exports.mainRouter = function (router, common) {
     });
 
     // 排号成功
-    router.get('/appoint/takeNumSuccess', function (req, res, next) {
+    router.get('/appoint/takeNumSuccess', common.isLogin,function (req, res, next) {
         // res.render('appoint/takeNumSuccess',{title:'排号成功',data:[{data:{}}]})
         // return
         let {projectId,ticketNo} = req.query
+        let leaguerId = req.session.member.id
         // projectId = 4
         // ticketNo = 'FT190903000001086867'
         common.commonRequest({
             url: [{
                 urlArr: ['appoint','listForQueueWap'],
                 outApi:common.envConfig.domain1,
-                parameter:{projectId,ticketNo},
+                parameter:{
+                    projectId,
+                    ticketNo,
+                    leaguerId,
+                },
             }],
             req: req,
             res: res,
@@ -549,7 +554,6 @@ exports.mainRouter = function (router, common) {
     // 获取预约项目列表
     router.post('/appoint/goAppointList', function (req, res, next) {
         let parameter = req.body
-        parameter.leaguerCode = req.session.member.id
         common.commonRequest({
             url: [{
                 urlArr: ['appoint', 'projectmanageList'],

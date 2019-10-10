@@ -164,3 +164,24 @@ button:disabled{
     padding: 0;
     font-size: .5rem;
 }
+/*辅助码弹框样式*/
+.my-layer .layui-m-layercont{
+    padding:.5rem;
+    max-height: 10rem;
+    overflow: auto;
+}
+.my-layer .code-input{
+    border: 1px solid #e5e5e5;
+    width: 70%;
+    padding: .4rem .5rem;
+    border-radius: 5px;
+}
+.my-layer .code-tip{
+    font-size: .5rem;
+    color: #999;
+    padding: .2rem 0;
+}
+.my-layer .error-tip{
+    padding: .2rem 0;
+    color: #f00;
+}

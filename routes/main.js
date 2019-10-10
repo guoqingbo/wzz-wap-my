@@ -100,10 +100,12 @@ exports.mainRouter = function (router, common) {
     router.get('/login', function (req, res, next) {
         let redir = req.query.redir || req.session.curUrl || './member'
         let promoter = ''
-        let {channelId='',promoterId='',teamBatchNo=''} = url.parse(redir,true).query;
-        if(promoterId){
-            promoter = '?channelId='+channelId+'&promoterId='+promoterId+'&teamBatchNo='+teamBatchNo
-        }
+        // req.session.curUrl = redir
+
+        // let {channelId='',promoterId='',teamBatchNo=''} = url.parse(redir,true).query;
+        // if(promoterId){
+        //     promoter = '?channelId='+channelId+'&promoterId='+promoterId+'&teamBatchNo='+teamBatchNo
+        // }
         if (common.is_weixn(req)) {
             // if(req.session.wxTokenObj && req.session.wxTokenObj.expires_Time <= +new Date()) {
             //     return res.redirect('/horization');
@@ -169,7 +171,7 @@ exports.mainRouter = function (router, common) {
             isAjax: true,
             callBack: function (results, reqs, resp, handTag) {
                 if(results[0].status == 200){
-                    req.session.promoterId = req.body.promoterId
+                    // req.session.promoterId = req.body.promoterId
                 }
             }
         });
@@ -188,7 +190,7 @@ exports.mainRouter = function (router, common) {
             isAjax: true,
             callBack: function (results, reqs, resp, handTag) {
                 if(results[0].status == 200){
-                    req.session.promoterId = req.body.promoterId
+                    // req.session.promoterId = req.body.promoterId
                 }
             }
         });
@@ -292,6 +294,25 @@ exports.mainRouter = function (router, common) {
                 }
             }
         });
+    });
+    // 注销用户
+    router.post('/clearPromoterSection', function (req, res, next) {
+        // delete req.session.promoterId
+        // 登陆
+        // common.get(req.header.origin+'/login',{redir:req.body.redir}).then(response=>{
+        //     console.log(response)
+        // })
+        req.session.curUrl = req.body.redir
+        // res.redirect('/login')
+        // if(req.cookies.promoter){
+        //
+        // }else{
+        //
+        // }
+        // 清除全渠道信息
+        // res.cookie('promoter', '',{maxAge:0});
+        // res.cookie('ceshi', '123',{expires: false,maxAge:0});
+        res.send([{status:200}])
     });
     // 其它只通过链接访问的模块
     router.get('/other', function (req, res) {

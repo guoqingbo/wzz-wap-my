@@ -144,11 +144,11 @@ $(function () {
             loginName:$('input[name="loginName"]').val(),
             loginPass:$('input[name="loginPass"]').val()
         };
-        var promoter = sessionStorage.getItem('promoter')
-        if(promoter) {
-            promoter = JSON.parse(promoter)
-            data.promoterId = promoter.promoterId
-        }
+        // var promoter = sessionStorage.getItem('promoter')
+        // if(promoter) {
+        //     promoter = JSON.parse(promoter)
+        //     data.promoterId = promoter.promoterId
+        // }
         if (validator.form()) {
             var url = $this.data('url');
             $.post('/leaguerLogin', data)
@@ -185,11 +185,11 @@ $(function () {
                 mobile:$('input[name="mobile"]').val(),
                 checkCode:$('input[name="checkCode"]').val(),
             };
-            var promoter = sessionStorage.getItem('promoter')
-            if(promoter) {
-                promoter = JSON.parse(promoter)
-                loginData.promoterId = promoter.promoterId
-            }
+            // var promoter = sessionStorage.getItem('promoter')
+            // if(promoter) {
+            //     promoter = JSON.parse(promoter)
+            //     loginData.promoterId = promoter.promoterId
+            // }
             var url = $this.data('url');
             $.post('/phoneNumberLogin', loginData)
                 .success(function (res) {

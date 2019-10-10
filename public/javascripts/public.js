@@ -41,14 +41,161 @@ function isWeiXin() {
 // window.onunload = function(){
 //     alert('确定关闭')
 // }
-
-
+// WeixinJSBridge.invoke('closeWindow',{},function(res){
+//
+//     $.ajax({
+//         type: "POST",
+//         url:'/clearPromoterSection',
+//         data:{
+//             differTime:differTime
+//         },
+//         dataType: "JSON",
+//         success: function(msg){
+//             console.log(msg);
+//         },
+//         error:function(err){
+//             console.log(err)
+//         }
+//     })
+//
+// });
 $(function () {
+    // var beginTime = 0;//执行onbeforeunload的开始时间
+    // var differTime = 0;//时间差
+    // window.onunload = function (){
+    //     differTime = new Date().getTime() - beginTime;
+    //     if(differTime <= 5) {
+    //         console.log("浏览器关闭")
+    //         $.ajax({
+    //             type: "POST",
+    //             url:'/clearPromoterSection',
+    //             // data:{
+    //             //     differTime:differTime
+    //             // },
+    //             dataType: "JSON",
+    //             success: function(msg){
+    //                 console.log(msg);
+    //             },
+    //             error:function(err){
+    //                 console.log(err)
+    //             }
+    //         })
+    //     }else{
+    //         console.log("浏览器刷新")
+    //     }
+    //
+    // }
+    // window.onbeforeunload = function (){
+    //     beginTime = new Date().getTime();
+    // };
+
+    // // 判断是否存储全渠道参数
+    // function storeQuanQudao(){
+    //     // 获取url后的参数
+    //     var query = window.location.search.substring(1);
+    //     if(query && /promoteSrcCode/.test(query)){
+    //         // 如果缓存中没有全渠道参数说明是第一次扫码进入，此时需要重新登陆,清除之前后台缓存的全渠道参数
+    //         if(!sessionStorage.getItem('promoter')){
+    //             $.ajax({
+    //                 type: "POST",
+    //                 url:'/clearPromoterSection',
+    //                 dataType: "JSON",
+    //                 data:{
+    //                     redir:window.location.href
+    //                 },
+    //                 success: function(data){
+    //                     if(data[0].status == 200){
+    //                         if(!/\/login/.test(window.location.href)){
+    //                             window.location.href = '/login?redir='+encodeURIComponent(window.location.href);
+    //                         }
+    //                     }
+    //                 },
+    //                 error:function(err){
+    //                     console.log(err)
+    //                 }
+    //             })
+    //         }
+    //         var vars = query.split("&");
+    //         var promoter = {}
+    //         for (var i=0;i<vars.length;i++) {
+    //             var pair = vars[i].split("=");
+    //             promoter[pair[0]] = pair[1]
+    //         }
+    //         var sessionPromoter=JSON.stringify({
+    //             promoterId:promoter.promoterId,
+    //             channelId:promoter.channelId,
+    //             teamBatchNo:promoter.teamBatchNo,
+    //             promoteSrcCode:promoter.promoteSrcCode
+    //         });
+    //         sessionStorage.setItem('promoter',sessionPromoter)
+    //     }
+    //     if(sessionStorage.getItem('promoter')){
+    //         setCookie('promoter',sessionStorage.getItem('promoter'))
+    //     }else{
+    //         delCookie('promoter')
+    //     }
+    //     // 缓存中存在推广码
+    //     var query1 = sessionStorage.getItem('promoter')
+    //     if(query1){
+    //         // 之所以拼接url参数，是防止后台登陆信息缓存过期
+    //         query1 = JSON.parse(query1)
+    //         var promoterStr = 'promoterId='+query1.promoterId +'&channelId='+query1.channelId+'&teamBatchNo='+query1.teamBatchNo+'&promoteSrcCode='+query1.promoteSrcCode
+    //         var promoterStr1 = ''
+    //         if(query){
+    //             // 如果url后有参数
+    //             promoterStr1 = '&'+promoterStr
+    //         }else{
+    //             promoterStr1 = '?'+promoterStr
+    //         }
+    //         if(!/promoteSrcCode/.test(query)){
+    //             window.history.replaceState(null,null,window.location.href+promoterStr1);
+    //         }
+    //         // window.location.href = window.location.href+query1
+    //         // 如果没有全渠道参数，更改所有的a链接href
+    //         $('a').each(function () {
+    //             var href = $(this).attr('href')
+    //             var promoterStr2=''
+    //             if(!/promoteSrcCode/.test(href)&&/\//.test(href)){
+    //                 if(/\?/.test(href)){
+    //                     // 如果href后有参数
+    //                     promoterStr2 = '&'+promoterStr
+    //                 }else{
+    //                     promoterStr2 = '?'+promoterStr
+    //                 }
+    //                 $(this).attr('href',href+promoterStr2)
+    //             }
+    //         })
+    //     }
+    //
+    // }
+    console.log(window.location)
     // 判断是否存储全渠道参数
     function storeQuanQudao(){
         // 获取url后的参数
         var query = window.location.search.substring(1);
         if(query && /promoteSrcCode/.test(query)){
+            //如果缓存中没有全渠道参数说明是第一次扫码进入，此时需要重新登陆,清除之前后台缓存的全渠道参数
+            if(!sessionStorage.getItem('promoter') && getCookie('promoter')){
+                window.location.href = '/login?redir='+encodeURIComponent(window.location.href);
+                // $.ajax({
+                //     type: "POST",
+                //     url:'/clearPromoterSection',
+                //     dataType: "JSON",
+                //     data:{
+                //         redir:window.location.href
+                //     },
+                //     success: function(data){
+                //         if(data[0].status == 200){
+                //             if(!/\/login/.test(window.location.href)){
+                //                 window.location.href = '/login';
+                //             }
+                //         }
+                //     },
+                //     error:function(err){
+                //         console.log(err)
+                //     }
+                // })
+            }
             var vars = query.split("&");
             var promoter = {}
             for (var i=0;i<vars.length;i++) {
@@ -63,40 +210,20 @@ $(function () {
             });
             sessionStorage.setItem('promoter',sessionPromoter)
         }
-        // 缓存中存在推广码
-        var query1 = sessionStorage.getItem('promoter')
-        if(query1){
-            query1 = JSON.parse(query1)
-            var promoterStr = 'promoterId='+query1.promoterId +'&channelId='+query1.channelId+'&teamBatchNo='+query1.teamBatchNo+'&promoteSrcCode='+query1.promoteSrcCode
-            var promoterStr1 = ''
-            if(query){
-                // 如果url后有参数
-                promoterStr1 = '&'+promoterStr
-            }else{
-                promoterStr1 = '?'+promoterStr
-            }
-            if(!/promoteSrcCode/.test(query)){
-                window.history.replaceState(null,null,window.location.href+promoterStr1);
-            }
-            // window.location.href = window.location.href+query1
-            // 如果没有全渠道参数，更改所有的a链接href
-            $('a').each(function () {
-                var href = $(this).attr('href')
-                var promoterStr2=''
-                if(!/promoteSrcCode/.test(href)&&/\//.test(href)){
-                    if(/\?/.test(href)){
-                        // 如果href后有参数
-                        promoterStr2 = '&'+promoterStr
-                    }else{
-                        promoterStr2 = '?'+promoterStr
-                    }
-                    $(this).attr('href',href+promoterStr2)
-                }
-            })
+        // if(getCookie('promoter')){
+        //     sessionStorage.setItem('promoter',getCookie('promoter'))
+        // }
+        if(sessionStorage.getItem('promoter')){
+            setCookie('promoter',sessionStorage.getItem('promoter'))
+        }else{
+            delCookie('promoter')
         }
-
     }
-    storeQuanQudao()
+
+    if(!/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(window.location.pathname)){
+        storeQuanQudao()
+    }
+
 
     // 子元素scroll父元素容器不跟随滚动JS实现
     $.fn.uniqueScroll = function () {
@@ -692,8 +819,23 @@ function getCookie(name) {
     else
         return null;
 }
-
-
+function setCookie(name,value,time) {
+    var setStr = name + "="+ escape (value)
+    if(time){
+        var exp = new Date();
+        exp.setTime(exp.getTime() + time*1000);
+        setStr+=";expires=" + exp.toGMTString()
+    }
+    document.cookie = setStr
+}
+function delCookie(name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval=getCookie(name);
+    if(cval!=null){
+        document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+    }
+}
 // loadding层
 function LoadingLayer(option) {
     this.mask = option && option.mask || false;

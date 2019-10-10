@@ -62,7 +62,7 @@ $(function () {
         e.preventDefault()
         e.stopPropagation()
         layer.open({
-            title:'标题',
+            title:'预定须知',
             anim:'up',
             content: bookInformation,
             className:'my-layer',

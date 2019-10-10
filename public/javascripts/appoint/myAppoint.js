@@ -27,7 +27,7 @@ $(function () {
         e.preventDefault()
         e.stopPropagation()
         layer.open({
-            title:'标题',
+            title:'预定须知',
             anim:'up',
             content: '哈哈哈哈',
             className:'my-layer',

@@ -8,18 +8,41 @@ router.use(common.wxShare)
 // 获取自定义标题
 router.use(common.getPageMeta)
 
+// // 全渠道扫码进入(需要登录)
+// router.use(function (req, res, next) {
+//     if(/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(req.originalUrl)){
+//          next()
+//     }
+//     else if(req.method=="GET"){
+//         if(req.query.promoterId && req.session.promoterId!==req.query.promoterId){
+//             let {channelId='',promoterId='',teamBatchNo='',promoteSrcCode=''} = req.query;
+//             let promoter = '?channelId='+channelId+'&promoterId='+promoterId+'&teamBatchNo='+teamBatchNo+'&promoteSrcCode='+promoteSrcCode
+//             // req.session.promoterId = req.query.promoterId
+//             req.session.curUrl = req.originalUrl
+//             return res.redirect('/login'+promoter)
+//         }else{
+//             next()
+//         }
+//     }else{
+//         next()
+//     }
+// })
 // 全渠道扫码进入(需要登录)
 router.use(function (req, res, next) {
     if(/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(req.originalUrl)){
-         next()
+        next()
     }
     else if(req.method=="GET"){
-        if(req.query.promoterId && req.session.promoterId!==req.query.promoterId){
-            let {channelId='',promoterId='',teamBatchNo='',promoteSrcCode=''} = req.query;
-            let promoter = '?channelId='+channelId+'&promoterId='+promoterId+'&teamBatchNo='+teamBatchNo+'&promoteSrcCode='+promoteSrcCode
-            // req.session.promoterId = req.query.promoterId
+        let promoter = JSON.parse(req.cookies.promoter || '{}')
+        let {channelId,promoterId,teamBatchNo,promoteSrcCode} = req.query
+        if(promoterId){
+            // req.cookies.promoter = JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode})
+            res.cookie('promoter', JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode}),{expires:0});
+            // res.cookie('ceshi', '123',{expires: false,maxAge:0});
+        }
+        if(promoterId && promoter.promoterId!==promoterId){
             req.session.curUrl = req.originalUrl
-            return res.redirect('/login'+promoter)
+            return res.redirect('/login')
         }else{
             next()
         }
@@ -27,7 +50,6 @@ router.use(function (req, res, next) {
         next()
     }
 })
-
 // main
 require('./main').mainRouter(router,common);
 // member

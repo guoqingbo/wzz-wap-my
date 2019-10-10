@@ -326,6 +326,33 @@ $(function () {
             }
         });
     })
+    // 查询辅助码
+    $(".query-code-btn").click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        var content = '<div class="code-box">' +
+            '<p>通过网上购买取票辅助码查询可预约票型</p>' +
+            '<p class="code-tip">（刚购买订单需要5分钟后才可预约）</p>' +
+            '<input class="code-input" value="" name="code" placeholder="请输入辅助码"/>' +
+            '<p class="error-tip"></p>' +
+            '</div>'
+        layer.open({
+            className:'my-layer',
+            content: content
+            ,btn: ['查询', '取消']
+            ,yes: function(index){
+                // 获取当前辅助码
+                var code = $('input[name="code"]').val()
+                if(!code){
+                    $(".error-tip").text('无当前辅助码记录，请确认输入正确')
+                }else{
+                    $(".error-tip").text('')
+                }
+                // layer.close(index);
+            }
+        });
+
+    })
     // 根据二维码票型编码，查询票型信息
     function geTicketInfo(res){
         if(res){
