@@ -14,7 +14,7 @@ block content
             //p 预约后项目可在预约时间内直接游玩不需要排队
             //p 预约先通过扫订单身份证，或纸质二维码获取可预约票型
             span.appoint-ticket-tip-text 预约后项目可在预约时间内直接游玩不需要排队
-            button.appoint-notice-btn 预约说明 >
+            button.appoint-notice-btn(data-bookinformation=data[0].bookInformation) 预约说明 >
         ul.appoint-ticket-list
             +ticketList(data[0].data)
         //ul.appoint-ticket-list

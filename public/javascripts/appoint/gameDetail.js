@@ -330,8 +330,9 @@ $(function () {
     $(".appoint-notice-btn").click(function (e) {
         e.preventDefault()
         e.stopPropagation()
+        var bookinformation = $(this).data("bookinformation")
         layer.open({
-            content: '预约说明'
+            content:bookinformation
             ,btn: '我知道了'
         });
         // layer.open({

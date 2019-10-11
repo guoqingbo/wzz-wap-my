@@ -582,7 +582,7 @@ exports.mainRouter = function (router, common) {
         // res.render('appoint/myAppoint',{title:'我的预约',data:[{data:{}}]})
         // return
         let leaguerId = req.session.member.id
-        leaguerId=1
+        // leaguerId = 1
         common.commonRequest({
             url: [{
                 urlArr: ['appoint','onlineMyOrder'],
@@ -605,6 +605,7 @@ exports.mainRouter = function (router, common) {
     router.get('/appoint/myQueue', function (req, res, next) {
         // res.render('appoint/myQueue',{title:'我的排队',data:[{data:{}}]})
         let leaguerId = req.session.member.id
+        // leaguerId = 1
         common.commonRequest({
             url: [{
                 urlArr: ['appoint','onlineMyWait'],

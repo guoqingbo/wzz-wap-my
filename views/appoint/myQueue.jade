@@ -9,21 +9,24 @@ block javascripts
 block content
     .queue-box
         ul.queue-list
-            each item in data[0].data
-                li.queue-item
-                    .queue-name=item.projectName
-                    .queue-item-group
-                        span.queue-item-label 条形码：
-                        span.queue-item-value=item.modelCode
-                    .queue-item-group
-                        span.queue-item-label 取号时间：
-                        span.queue-item-value=item.checkTime
-                    .queue-item-group
-                        span.queue-item-label 排队号码：
-                        span.queue-item-value=item.queueUpNo
-                    .queue-item-group
-                        span.queue-item-label 前面人数：
-                        span.queue-item-value 36
+            if data[0].data.length
+                each item in data[0].data
+                    li.queue-item
+                        .queue-name=item.projectName
+                        .queue-item-group
+                            span.queue-item-label 条形码：
+                            span.queue-item-value=item.modelCode
+                        .queue-item-group
+                            span.queue-item-label 取号时间：
+                            span.queue-item-value=item.createTime
+                        .queue-item-group
+                            span.queue-item-label 排队号码：
+                            span.queue-item-value=item.queueUpNo
+                        .queue-item-group
+                            span.queue-item-label 前面人数：
+                            span.queue-item-value=item.num
+            else
+                li.no-data(style="text-align: center") 暂无排队信息
 
 
 

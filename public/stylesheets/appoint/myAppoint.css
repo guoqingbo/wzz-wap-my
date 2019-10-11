@@ -30,7 +30,7 @@ body{
     color: #fff;
     border-radius: .2rem;
     background-color: #3b76de;
-    margin-top: -.1rem;
+    margin-top: -.15rem;
 }
 .appoint-ticket-time{
     color: #999;
@@ -41,4 +41,11 @@ body{
 }
 .appoint-ticket-amount{
     margin-left: .5rem;
+}
+.appoint-ticket-no{
+    display: inline-block;
+    width: 5rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: middle;
 }
