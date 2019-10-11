@@ -228,12 +228,12 @@ body{
 }
 .ticket-type-left{
     display: inline-block;
-    width: 50%;
+    width: 46%;
     vertical-align: middle;
 }
 .ticket-type-right{
     display: inline-block;
-    width: 50%;
+    width: 54%;
     overflow: hidden;
     vertical-align: middle;
     color: #999;
@@ -278,21 +278,25 @@ body{
     border: 1px solid #e5e5e5;
     width: 1rem;
     height: 1rem;
-    line-height: 1rem;
+    /*line-height: 1rem;*/
     border-radius: 2rem;
     text-align: center;
     background-color: #fff;
     padding: 0;
     color: #999;
     outline: 0;
+    vertical-align: middle;
 }
 .default-icon i{
     font-weight: bolder;
+    vertical-align: middle;
 }
 .buy-num {
+    display: inline-block;
     margin: 0 .5rem;
     font-size: .7rem;
     color: #f63;
+    vertical-align: middle;
 }
 
 /*底部合计*/
