@@ -60,6 +60,25 @@ function isWeiXin() {
 //
 // });
 $(function () {
+    // 百度统计
+    (function() {
+        // 生产环境添加百度统计
+        var hostname = window.location.hostname
+        // 官网百度统计
+        if(hostname == 'wap.wuzhizhou.com'){
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?ca42e0b7298e4a404b7bc0a8d133f595";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        }
+        // 汪汪百度统计
+        if(hostname == 'm.dogplanet.cn'){
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?ab832811e03c962ec30b36982817d21d";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        }
+    })();
     // var beginTime = 0;//执行onbeforeunload的开始时间
     // var differTime = 0;//时间差
     // window.onunload = function (){
@@ -281,23 +300,7 @@ $(function () {
         }
     };
     $('.mask').uniqueScroll()
-    // 百度统计
-    (function() {
-        // 生产环境添加百度统计
-        var hostname = window.location.hostname
-        if(hostname == 'wap.wuzhizhou.com'){
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?ca42e0b7298e4a404b7bc0a8d133f595";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        }
-        if(hostname == 'm.dogplanet.cn'){
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?ab832811e03c962ec30b36982817d21d";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        }
-    })();
+
 
     // 响应式布局
     var winWidth = $(window).width();

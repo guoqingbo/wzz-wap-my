@@ -139,6 +139,8 @@ $(function () {
         }
         // 填入对应的游客
         if(parentEle.find(".person-selected").length){
+            // 购买实名制数量
+            var amount = Number(parentEle.find(".ticket-amount-value").text()||0)
             // 缓存游客
             var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
             var ratecode = parentEle.data("ratecode")
@@ -146,11 +148,14 @@ $(function () {
             sessionStorage.setItem('ticketLinkMan',JSON.stringify(ticketLinkMan))
             // 门票游玩人
             var html = orderTemplate({
-                data:selectedPerson,
+                data:{selectedPerson:selectedPerson,amount:amount},
                 render:true,
                 mixin:'ticketLinkMan'
             })
             parentEle.find(".person-selected").html(html)
+            // if(selectedPerson.length<amount){
+            //     parentEle.find(".no-data").text('需选择'+(amount-selectedPerson.length)+'位游玩人')
+            // }
         }
         else if(parentEle.find(".take-person-option").length){
             // 缓存取票人
@@ -166,7 +171,26 @@ $(function () {
     });
     // 删除
     $(".shop-car-list").on('click','.person-selected-delete',function (e) {
+        console.log(123456789)
+        var parantEle = $(this).parents(".ticket-type-box")
         $(this).parents('.person-selected-item').remove()
+        var ratecode = parantEle.data("ratecode")
+        var amount = Number(parantEle.find(".ticket-amount-value").text())
+        // 清除对应的缓存
+        // 缓存游客
+        var selectedPerson = []
+        parantEle.find('.person-selected-item').each(function () {
+            var item = $(this).data("item")
+            selectedPerson.push(item)
+        })
+        var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
+
+        ticketLinkMan[ratecode] = selectedPerson
+        sessionStorage.setItem('ticketLinkMan',JSON.stringify(ticketLinkMan))
+
+        if(selectedPerson.length<amount){
+            parantEle.find('.no-data').text('需再选择'+(amount-selectedPerson.length)+'位游玩人')
+        }
     })
     // 提交订单
     $(".submit-btn").click(function (e) {

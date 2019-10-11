@@ -23,7 +23,7 @@ mixin shopCarList(data)
 
                     .person-selected
                         if data.ticketLinkMan && data.ticketLinkMan[item.rateCode]
-                            +ticketLinkMan(data.ticketLinkMan[item.rateCode])
+                            +ticketLinkMan({selectedPerson:data.ticketLinkMan[item.rateCode],amount:item.buyNum})
                         else
                             .no-data 需选择#{item.buyNum}位游玩人
                         // each item in [1,2]
@@ -60,13 +60,16 @@ mixin linkManList(data)
 
 // 游玩人
 mixin ticketLinkMan(data)
-    each item in data
+    each item in data.selectedPerson
         .person-selected-item(data-item=JSON.stringify(item))
             span.person-selected-name=item.linkmanName
             span.person-selected-icard=item.cardNo
             span.person-selected-delete
                 i.icon-iconfont-shanchu
-
+    if data.selectedPerson.length < data.amount
+        .no-data 需再选择#{data.amount-data.selectedPerson.length}位游玩人
+    else
+        .no-data
 // 取票人
 mixin takeTicketLinkMan(data)
     each item in data
