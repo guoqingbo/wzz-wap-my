@@ -168,15 +168,14 @@ $(function () {
     //     }
     //
     // }
-    console.log(window.location)
     // 判断是否存储全渠道参数
     function storeQuanQudao(){
         // 获取url后的参数
         var query = window.location.search.substring(1);
         if(query && /promoteSrcCode/.test(query)){
             //如果缓存中没有全渠道参数说明是第一次扫码进入，此时需要重新登陆,清除之前后台缓存的全渠道参数
-            if(!sessionStorage.getItem('promoter') && getCookie('promoter')){
-                window.location.href = '/login?redir='+encodeURIComponent(window.location.href);
+            // if(!sessionStorage.getItem('promoter') && getCookie('promoter')){
+            //     window.location.href = '/login?redir='+encodeURIComponent(window.location.href);
                 // $.ajax({
                 //     type: "POST",
                 //     url:'/clearPromoterSection',
@@ -195,7 +194,7 @@ $(function () {
                 //         console.log(err)
                 //     }
                 // })
-            }
+            // }
             var vars = query.split("&");
             var promoter = {}
             for (var i=0;i<vars.length;i++) {
@@ -214,12 +213,12 @@ $(function () {
         //     sessionStorage.setItem('promoter',getCookie('promoter'))
         // }
         if(sessionStorage.getItem('promoter')){
+            delCookie('promoter')
             setCookie('promoter',sessionStorage.getItem('promoter'))
         }else{
             delCookie('promoter')
         }
     }
-
     if(!/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(window.location.pathname)){
         storeQuanQudao()
     }

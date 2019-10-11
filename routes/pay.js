@@ -322,7 +322,9 @@ exports.mainRouter = function (router, common) {
                 res.redirect('/error');
                 return;
             }
-            // req.session.promoterId = promoterId;
+
+            // req.session.promoterId = promoterId
+
             req.session.leaguerId = results[0].data.leaguerId;
             req.session.member = results[0].data;
             req.session.member.id = req.session.leaguerId

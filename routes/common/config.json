@@ -245,7 +245,9 @@
     "queuesNew":"/staff/api/queue/screenCode/queuesNew",
     "queueIndex":"/staff/api/onlineOrderHomePage",
     "projectTypeList":"/staff/api/projectTypeList",
-    "projectmanageList":"/staff/api/projectmanageList"
+    "projectmanageList":"/staff/api/projectmanageList",
+    "onlineMyOrder":"/staff/api/onlineMyOrder",
+    "onlineMyWait":"/staff/api/onlineMyWait"
 
   },
   "newsTop": {

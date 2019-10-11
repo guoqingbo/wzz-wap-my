@@ -29,19 +29,20 @@ router.use(common.getPageMeta)
 // })
 // 全渠道扫码进入(需要登录)
 router.use(function (req, res, next) {
-    if(/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(req.originalUrl)){
-        next()
-    }
-    else if(req.method=="GET"){
-        let promoter = JSON.parse(req.cookies.promoter || '{}')
-        let {channelId,promoterId,teamBatchNo,promoteSrcCode} = req.query
-        if(promoterId){
+   if(req.method=="GET"){
+       if(/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(req.originalUrl)){
+           return next()
+       }
+        // let promoter = JSON.parse(req.cookies.promoter || '{}')
+        let {channelId,promoterId,teamBatchNo,promoteSrcCode,timeTmp} = req.query
+        if(promoterId && !timeTmp){
             // req.cookies.promoter = JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode})
-            res.cookie('promoter', JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode}),{expires:0});
+            // res.cookie.setMaxAge(-10)
+            res.cookie('promoter', JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode}));
             // res.cookie('ceshi', '123',{expires: false,maxAge:0});
-        }
-        if(promoterId && promoter.promoterId!==promoterId){
-            req.session.curUrl = req.originalUrl
+
+            // 添加自定义参数 ,防止重复登陆
+            req.session.curUrl = req.originalUrl +'&timeTmp=1'
             return res.redirect('/login')
         }else{
             next()

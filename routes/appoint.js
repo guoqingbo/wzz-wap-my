@@ -577,52 +577,49 @@ exports.mainRouter = function (router, common) {
         });
     });
     // 我的预约
-    router.get('/appoint/myAppoint', function (req, res, next) {
-        res.render('appoint/myAppoint',{title:'我的预约',data:[{data:{}}]})
+    router.get('/appoint/myAppoint',common.isLogin,function (req, res, next) {
+        // res.render('appoint/myAppoint',{title:'我的预约',data:[{data:{}}]})
         // return
-        // let {projectId,ticketNo} = req.query
-        // // projectId = 4
-        // // ticketNo = 'FT190903000001086867'
-        // common.commonRequest({
-        //     url: [{
-        //         urlArr: ['appoint','listForQueueWap'],
-        //         outApi:common.envConfig.domain1,
-        //         parameter:{projectId,ticketNo},
-        //     }],
-        //     req: req,
-        //     res: res,
-        //     page: 'appoint/takeNumSuccess',
-        //     title: '排号成功',
-        //     callBack: function (results, reObj, res, handTag) {
-        //         if(results[0].status==200){
-        //             reObj.projectId = projectId
-        //         }
-        //     }
-        // });
+        let leaguerId = req.session.member.id
+        common.commonRequest({
+            url: [{
+                urlArr: ['appoint','onlineMyOrder'],
+                outApi:common.envConfig.domain1,
+                parameter:{leaguerId},
+                method:"POST"
+            }],
+            req: req,
+            res: res,
+            page: 'appoint/myAppoint',
+            title: '我的预约',
+            callBack: function (results, reObj, res, handTag) {
+                if(results[0].status==200){
+
+                }
+            }
+        });
     });
     // 我的排队
     router.get('/appoint/myQueue', function (req, res, next) {
-        res.render('appoint/myQueue',{title:'我的排队',data:[{data:{}}]})
-        // return
-        // let {projectId,ticketNo} = req.query
-        // // projectId = 4
-        // // ticketNo = 'FT190903000001086867'
-        // common.commonRequest({
-        //     url: [{
-        //         urlArr: ['appoint','listForQueueWap'],
-        //         outApi:common.envConfig.domain1,
-        //         parameter:{projectId,ticketNo},
-        //     }],
-        //     req: req,
-        //     res: res,
-        //     page: 'appoint/takeNumSuccess',
-        //     title: '排号成功',
-        //     callBack: function (results, reObj, res, handTag) {
-        //         if(results[0].status==200){
-        //             reObj.projectId = projectId
-        //         }
-        //     }
-        // });
+        // res.render('appoint/myQueue',{title:'我的排队',data:[{data:{}}]})
+        let leaguerId = req.session.member.id
+        common.commonRequest({
+            url: [{
+                urlArr: ['appoint','onlineMyWait'],
+                outApi:common.envConfig.domain1,
+                parameter:{leaguerId},
+                method:"POST"
+            }],
+            req: req,
+            res: res,
+            page: 'appoint/myQueue',
+            title: '我的排队',
+            callBack: function (results, reObj, res, handTag) {
+                if(results[0].status==200){
+
+                }
+            }
+        });
     });
 
 };

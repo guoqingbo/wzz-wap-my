@@ -18,7 +18,7 @@ let utils = {
 exports.mainRouter = function (router, common) {
     // 首页
     router.get(['/', '/main'], function (req, res, next) {
-        console.log(req.query)
+
         // 全渠道扫码进入首页需要登录
         // if(req.query.promoterId){
         //     // 全渠道参数进入，判断是否要重新登陆，promoterId和之前登陆不一样时，重新登陆
@@ -100,7 +100,7 @@ exports.mainRouter = function (router, common) {
     router.get('/login', function (req, res, next) {
         let redir = req.query.redir || req.session.curUrl || './member'
         let promoter = ''
-        // req.session.curUrl = redir
+        req.session.curUrl = redir
 
         // let {channelId='',promoterId='',teamBatchNo=''} = url.parse(redir,true).query;
         // if(promoterId){
@@ -171,7 +171,8 @@ exports.mainRouter = function (router, common) {
             isAjax: true,
             callBack: function (results, reqs, resp, handTag) {
                 if(results[0].status == 200){
-                    // req.session.promoterId = req.body.promoterId
+                    // let promoter = JSON.parse(req.cookies.promoter || '{}')
+                    // req.session.promoterId = promoter.promoterId
                 }
             }
         });
@@ -190,7 +191,8 @@ exports.mainRouter = function (router, common) {
             isAjax: true,
             callBack: function (results, reqs, resp, handTag) {
                 if(results[0].status == 200){
-                    // req.session.promoterId = req.body.promoterId
+                    // let promoter = JSON.parse(req.cookies.promoter || '{}')
+                    // req.session.promoterId = promoter.promoterId
                 }
             }
         });
