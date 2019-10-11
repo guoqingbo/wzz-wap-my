@@ -164,6 +164,13 @@ button:disabled{
     padding: 0;
     font-size: .5rem;
 }
+/*预约说明*/
+.layui-m-layerchild.my-layer h3{
+    text-align: left;
+    border-bottom: 1px solid #e5e5e5;
+    height: 1.5rem;
+    line-height: 1.5rem;
+}
 /*辅助码弹框样式*/
 .my-layer .layui-m-layercont{
     padding:.5rem;

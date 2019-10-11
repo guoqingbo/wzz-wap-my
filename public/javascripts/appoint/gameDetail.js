@@ -326,6 +326,23 @@ $(function () {
             }
         });
     })
+    // 预约说明
+    $(".appoint-notice-btn").click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        layer.open({
+            content: '预约说明'
+            ,btn: '我知道了'
+        });
+        // layer.open({
+        //     title:'预约说明',
+        //     anim:'up',
+        //     content: '预约说明',
+        //     className:'my-layer',
+        //     // skin:'footer'
+        // })
+
+    })
     // 查询辅助码
     $(".query-code-btn").click(function (e) {
         e.preventDefault()

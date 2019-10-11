@@ -374,6 +374,7 @@ exports.mainRouter = function (router, common) {
     // 扫码（纸质票）排队查看列表
     router.post('/appoint/queueList', function (req, res, next) {
         let ticketNo = req.body.ticketNo
+        // ticketNo = 'FT190903000001086867'
         // res.render('appoint/queueList',{title:'排队情况'});
         let url = common.gul(['appoint', 'ticketQueue'],common.envConfig.domain1)
         let params = {ticketNo}
@@ -581,6 +582,7 @@ exports.mainRouter = function (router, common) {
         // res.render('appoint/myAppoint',{title:'我的预约',data:[{data:{}}]})
         // return
         let leaguerId = req.session.member.id
+        leaguerId=1
         common.commonRequest({
             url: [{
                 urlArr: ['appoint','onlineMyOrder'],

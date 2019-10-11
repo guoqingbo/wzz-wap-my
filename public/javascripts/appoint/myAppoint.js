@@ -1,38 +1,19 @@
 $(function () {
-    // tab ajax请求
-    $(".tabAjax-select-item").click(function (e) {
-        e.preventDefault()
-        e.stopPropagation()
-        $(this).addClass('active').siblings().removeClass('active')
-        var selected = $(this).data('selected')
-        $.ajax({
-            type: "POST",
-            url: "/xxxxz",
-            data: {selected: selected},
-            success: function (data) {
+    // 取消预约
+    $("body").on("click",".cancel-appont-btn",function (e) {
+        var params = {
+            ticketNo:$(this).data("ticketno"),
+            projectCode:projectId
+        }
+        $.post("/appoint/cancel",params)
+            .success(function (data) {
+                new ErrLayer({message: data[0].message})
                 if(data[0].status == 200){
-                    $(".tab-content-box").html("请求成功")
-                }else {
-                    new ErrLayer({message: data[0].message} || '请求错误')
+                    window.location.reload()
                 }
-            },
-            error: function (err) {
-                console.log(err);
-            }
-        })
-    })
-
-    // 预定须知
-    $(".project-item-more ").click(function (e) {
-        e.preventDefault()
-        e.stopPropagation()
-        layer.open({
-            title:'预定须知',
-            anim:'up',
-            content: '哈哈哈哈',
-            className:'my-layer',
-            // skin:'footer'
-        })
-
+            })
+            .error(function (error) {
+                console.log(error)
+            })
     })
 })

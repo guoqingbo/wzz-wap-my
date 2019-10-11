@@ -57,12 +57,12 @@ $(function () {
 
     })
 
-    // 预定须知
+    // 预订须知
     $(".project-list").on("click",".project-item-more ",function (e) {
         e.preventDefault()
         e.stopPropagation()
         layer.open({
-            title:'预定须知',
+            title:'预订须知',
             anim:'up',
             content: bookInformation,
             className:'my-layer',
