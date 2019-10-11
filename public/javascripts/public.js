@@ -282,7 +282,6 @@ $(function () {
     };
     $('.mask').uniqueScroll()
     // 百度统计
-    var _hmt = _hmt || [];
     (function() {
         // 生产环境添加百度统计
         var hostname = window.location.hostname
@@ -292,13 +291,17 @@ $(function () {
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         }
+        if(hostname == 'm.dogplanet.cn'){
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?ab832811e03c962ec30b36982817d21d";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        }
     })();
-
 
     // 响应式布局
     var winWidth = $(window).width();
     $("html").css("fontSize", (winWidth / 640) * 40 + "px");
-
 
     // 不知道什么鬼
     if ($('#details-tab').size() > 0) {
