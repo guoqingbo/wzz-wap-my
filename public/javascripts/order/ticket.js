@@ -2,7 +2,7 @@ $(function () {
     // var linkman =$("#linkManLayer").data("linkman")||[]
     var linkman =[]
     var shopInfo = {}
-    var recomentInfo = JSON.parse(sessionStorage.getItem('recomentInfo') ||'{"list":"[]"}')
+    var recomentInfo = JSON.parse(sessionStorage.getItem('recomentInfo') ||'{"list":[]}')
     var shopData = JSON.parse(sessionStorage.getItem('shopData') || '{}')
     // 初始化页面
     function initHtml() {
@@ -20,6 +20,7 @@ $(function () {
         // 价格
         var totalPrice = Number(shopData.money || 0)
         // 生成推荐
+        console.log(recomentInfo.list.length)
         if(recomentInfo.list.length){
             html+=orderTemplate({data:{list:recomentInfo.list},render:true,mixin:'shopCarList'})
             totalPrice+=Number(recomentInfo.totalPrice || 0)
@@ -370,7 +371,10 @@ $(function () {
             }
         });
     }
-    getRecomentList()
+    // 只有官网才有随意拼
+    if ($(".recoment-ticket-box").length){
+        getRecomentList()
+    }
     // 其它优惠项目点击加载更多
     $(".show-more-btn").click(function (e) {
         e.preventDefault()
