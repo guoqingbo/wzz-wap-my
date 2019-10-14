@@ -6,7 +6,7 @@ body{
     margin: .5rem 0;
 }
 .appoint-ticket-list{
-    max-height: 10rem;
+    /*max-height: 10rem;*/
     overflow: auto;
     margin: 0 .5rem .5rem;
     background-color: #fff;
@@ -32,6 +32,14 @@ body{
     background-color: #3b76de;
     margin-top: -.15rem;
 }
+.queue-item-group{
+    padding: .2rem 0;
+}
+.queue-item-label{
+    display: inline-block;
+    width: 3rem;
+    vertical-align: middle;
+}
 .appoint-ticket-time{
     color: #999;
     padding-left: .6rem;
@@ -44,8 +52,8 @@ body{
 }
 .appoint-ticket-no{
     display: inline-block;
-    width: 5rem;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    /*width: 5rem;*/
+    /*text-overflow: ellipsis;*/
+    /*overflow: hidden;*/
     vertical-align: middle;
 }

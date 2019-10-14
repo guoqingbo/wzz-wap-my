@@ -602,7 +602,7 @@ exports.mainRouter = function (router, common) {
         });
     });
     // 我的排队
-    router.get('/appoint/myQueue', function (req, res, next) {
+    router.get('/appoint/myQueue', common.isLogin,function (req, res, next) {
         // res.render('appoint/myQueue',{title:'我的排队',data:[{data:{}}]})
         let leaguerId = req.session.member.id
         // leaguerId = 1

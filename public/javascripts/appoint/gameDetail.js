@@ -331,17 +331,17 @@ $(function () {
         e.preventDefault()
         e.stopPropagation()
         var bookinformation = $(this).data("bookinformation")
-        layer.open({
-            content:bookinformation
-            ,btn: '我知道了'
-        });
         // layer.open({
-        //     title:'预约说明',
-        //     anim:'up',
-        //     content: '预约说明',
-        //     className:'my-layer',
-        //     // skin:'footer'
-        // })
+        //     content:bookinformation
+        //     ,btn: '我知道了'
+        // });
+        layer.open({
+            title:'预约说明',
+            anim:'up',
+            content: bookinformation,
+            className:'my-layer',
+            // skin:'footer'
+        })
 
     })
     // 查询辅助码

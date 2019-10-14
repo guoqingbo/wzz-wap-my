@@ -1006,13 +1006,18 @@ $.ajaxSetup({
         loadding.show();
     },
     complete: function (data, status) {
-
-        var res = JSON.parse(data.responseText)
-        if(res[0] && res[0].status == 400){
-            window.location.href = '/login?redir=' + window.location.href
-        }
         loadding.remove();
         btnFlag = true;
+        if(!/^\/login/.test(window.location.pathname)){
+            var res = JSON.parse(data.responseText)
+            if(res[0] && res[0].status == 400){
+                window.location.href = '/login?redir=' + encodeURIComponent(window.location.href)
+            }
+        }
+        // var res = JSON.parse(data.responseText)
+        // if(res[0] && res[0].status == 400){
+        //     window.location.href = '/login?redir=' + window.location.href
+        // }
         // console.log(data.getAllResponseHeaders())
     },
     error: function (err) {

@@ -290,13 +290,16 @@ exports.mainRouter = function (router, common) {
 
     // 购物车表单提交
     router.post('/order/saveCartOrder',common.isLogin, function (req, res, next) {
+        let {channelId='',promoterId='',teamBatchNo='',promoteSrcCode=''} = JSON.parse(req.cookies.promoter || '{}')
         let parameter = req.body
         parameter.leaguerId = req.session.member.id
         // parameter.cartOrderDtos = JSON.parse(parameter.cartOrderDtos)
+
+        // parameter.teamBatchNo= teamBatchNo;
         // 全渠道订单来源标识
-        // parameter.promoteSrcCode= req.session.promoteSrcCode||"";
+        parameter.promoteSrcCode= promoteSrcCode;
         // 全渠道订单来源
-        // parameter.channelId= req.session.channelId||"";
+        parameter.channelId= channelId;
         parameter.accountType = 4;
        common.commonRequest({
             url: [{
@@ -347,7 +350,7 @@ exports.mainRouter = function (router, common) {
 
     // 表单提交
     router.post('/order/:module', function (req, res, next) {
-
+        let {channelId='',promoterId='',teamBatchNo='',promoteSrcCode=''} = JSON.parse(req.cookies.promoter || '{}')
         var module = req.params.module,
             parameter = req.query,
             urlArr = module === 'addCart' ? ['cart', 'list', 'add'] : ['order', 'saveOrder'];
@@ -385,9 +388,10 @@ exports.mainRouter = function (router, common) {
             parameter.paramExtension = req.query.parkId || '';
             delete req.query.parkId;
         }
-        parameter.promoteSrcCode= req.body.promoteSrcCode||"";
+        // parameter.teamBatchNo = teamBatchNo
+        parameter.promoteSrcCode= promoteSrcCode;
         //线上channelId
-        parameter.channelId= req.body.channelId||'';
+        parameter.channelId= channelId;
         var busiTypeName;
         // busiType Name
         switch(module){

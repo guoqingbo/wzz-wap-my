@@ -6,16 +6,41 @@ block javascripts
     script(type='text/javascript', src='/javascripts/appoint/myAppoint.js')
 block content
     .appoint-ticket-box
+        // each item in [1,2,3,4]
+        //     ul.appoint-ticket-list
+        //         li.appoint-ticket-name 名称
+        //         each sitem,sindex in [1,2,3]
+        //             li.appoint-ticket-item
+        //                 .queue-item-group
+        //                     span.queue-item-label 条形码：
+        //                     span.appoint-ticket-amount WTds;fgkpoijfoapsdjfaoisfj X3
+        //                 .queue-item-group
+        //                     span.queue-item-label 预约时段：
+        //                     span.appoint-ticket-time 09:00-10:30
+        //                     button.cancel-appont-btn(data-ticketno=sitem.ticketNo data-projectcode=sitem.projectinfoId) 取消预约
         if data[0].data.length
+            // each item in data[0].data
+            //     ul.appoint-ticket-list
+            //         li.appoint-ticket-name=item.projectName
+            //         each sitem,sindex in item.projectOrderList
+            //             li.appoint-ticket-item
+            //                 span.appoint-ticket-no=sitem.ticketNo
+            //                 span.appoint-ticket-amount x#{sitem.stockNum}
+            //                 span.appoint-ticket-time #{sitem.beginTime+ "-" + sitem.endTime}
+            //                 button.cancel-appont-btn(data-ticketno=sitem.ticketNo data-projectcode=sitem.projectinfoId) 取消预约
             each item in data[0].data
                 ul.appoint-ticket-list
                     li.appoint-ticket-name=item.projectName
                     each sitem,sindex in item.projectOrderList
                         li.appoint-ticket-item
-                            span.appoint-ticket-no=sitem.ticketNo
-                            span.appoint-ticket-amount x#{sitem.stockNum}
-                            span.appoint-ticket-time #{sitem.beginTime+ "-" + sitem.endTime}
-                            button.cancel-appont-btn(data-ticketno=sitem.ticketNo data-projectcode=sitem.projectinfoId) 取消预约
+                            .queue-item-group
+                                span.queue-item-label 条形码：
+                                span.appoint-ticket-no #{sitem.ticketNo}
+                                span.appoint-ticket-amount x#{sitem.stockNum}
+                            .queue-item-group
+                                span.queue-item-label 预约时段：
+                                span.appoint-ticket-time #{sitem.beginTime+ "-" + sitem.endTime}
+                                button.cancel-appont-btn(data-ticketno=sitem.ticketNo data-projectcode=sitem.projectinfoId) 取消预约
         else
             .no-data(style="text-align: center") 暂无预约信息
 
