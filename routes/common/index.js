@@ -161,7 +161,9 @@ let common = {
                 } else {
                     if (results.length > 0) {
                         results.map(function (item, index) {
-                            if (item.status !== 200) {
+                            if(!item){
+                                _p.res.redirect('/error');
+                            } else if (item.status !== 200) {
                                 _p.req.flash('message', item.message ? item.message : '该产品不存在');
                                 switch (item.status) {
                                     case 400:

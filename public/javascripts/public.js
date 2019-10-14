@@ -1021,7 +1021,6 @@ $.ajaxSetup({
         // console.log(data.getAllResponseHeaders())
     },
     error: function (err) {
-        console.log(err)
         if (err.status == 401 || err.status == 400) {
             location.href = '/login';
         }else {
