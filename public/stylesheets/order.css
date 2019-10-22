@@ -392,3 +392,8 @@
     opacity: 1;
     transition: 400ms;
 }
+/*退单数量*/
+.real-name-amount{
+    color:#999;
+    outline: 0;
+}

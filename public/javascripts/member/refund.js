@@ -1,6 +1,7 @@
 $(function (){
    var refundSum=JSON.parse($(".refundSum").val()),refundSumArr=[],refundSumId;
-   var refundNums=$(".refundNums").val();
+   var refundNums=$("input[name='refundAmount']").val();
+   console.log(refundNums)
    if(refundSum){
       for(var i=0;i<refundSum.length;i++){
           refundSumId=refundSum[i].id;
@@ -70,7 +71,7 @@ $(function (){
                 $('.refund-item').each(function () {
                     data.refundDetailJson.push({
                         orderDetailId: $(this).data('id'),
-                        refundAmount: $(this).find('.refundNums').val(),
+                        refundAmount: $(this).find("input[name='refundAmount']").val(),
                         orderDetailModelId:orderDetailModelId
                     })
                 });
@@ -78,7 +79,7 @@ $(function (){
                 $('.refund-item').each(function () {
                     data.refundDetailJson.push({
                         orderDetailId: $(this).data('id'),
-                        refundAmount: $(this).find('.refundNums').val(),
+                        refundAmount: $(this).find("input[name='refundAmount']").val(),
                         orderDetailModelId:orderDetailModelId
                     })
                 });
@@ -86,7 +87,7 @@ $(function (){
                 $('.refund-item').each(function () {
                     data.refundDetailJson.push({
                         orderDetailId: $(this).data('id'),
-                        refundAmount: $(this).find('.refundNums').val()
+                        refundAmount: $(this).find("input[name='refundAmount']").val()
                     })
                 });
             }
@@ -137,5 +138,4 @@ $(function (){
             }
         });
     });
-
 });

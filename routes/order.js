@@ -389,7 +389,7 @@ exports.mainRouter = function (router, common) {
             delete req.query.parkId;
         }
         // parameter.teamBatchNo = teamBatchNo
-        parameter.promoteSrcCode= promoteSrcCode;
+        parameter.promoteSrcCode = promoteSrcCode;
         //线上channelId
         parameter.channelId= channelId;
         var busiTypeName;

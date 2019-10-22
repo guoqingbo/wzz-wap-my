@@ -52,10 +52,23 @@ exports.mainRouter = function (router, common) {
         };
         // 银联直付
         if(payType == '42'){
-            let {amount,orderNo,payType} = req.query
+            // let {amount,orderNo,payType} = req.query
+            // params.orderNo = orderNo
+            // params.amount = amount
+            // params.payType = payType
+
+            let redirectUrl = common.envConfig.protocol+"://" + req.headers.host + "/yinlian/result";
+            let {amount} = req.query
             params.orderNo = orderNo
             params.amount = amount
             params.payType = payType
+            params.redirectUrl = redirectUrl
+            params.subFlag = 'F'
+            // 如果是蜈支洲官网
+            let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+            if(projectNameCode == 'official'){
+                params.subFlag = 'T'
+            }
         }
 
         // 请求支付宝配置
@@ -74,7 +87,14 @@ exports.mainRouter = function (router, common) {
             req: req,
             res: res,
             page: common.is_weixn(req) ? 'pay/wxpay' : 'pay/payAlipay',
-            title: '支付宝支付'
+            title: '支付宝支付',
+            callBack: function (results, reObj, resp, handTag) {
+                if (payType == 42) {
+                    // 银联支付
+                    handTag.tag = 0
+                    res.redirect(results[0].data)
+                }
+            }
         });
     }, function (req, res, next) {
 
@@ -427,7 +447,7 @@ exports.mainRouter = function (router, common) {
     // 银联支付回掉(该地址作为参数传入)
     router.get('/yinlian/result', function (req, res, next) {
         let orderNo = req.session.orderNo
-        let leaguerId = req.session.member.id
+        let leaguerId = req.session.member?req.session.member.id:''
 
         // 银联支付
         let payStatus = req.query.status

@@ -15,14 +15,15 @@ block content
         .bg-banner
             #banner_swiper.swiper-container
                 .swiper-wrapper
-                    each item,i in data[0].data.many_mig
-                        .swiper-slide
-                            a(href=item.url)
-                                img(src=item.mig||'/images/demo/no-img.jpg')
-                                .coral-banner-box
-                                    .title(data-title=data[0].data.many_mig)=item.title
-                                    .total=(i+1)
-                                        | /#{data[0].data.many_mig.length}
+                    if data[0].data.many_mig && data[0].data.many_mig.length
+                        each item,i in data[0].data.many_mig
+                            .swiper-slide
+                                a(href=item.url)
+                                    img(src=item.mig||'/images/demo/no-img.jpg')
+                                    .coral-banner-box
+                                        .title(data-title=data[0].data.many_mig)=item.title
+                                        .total=(i+1)
+                                            | /#{data[0].data.many_mig.length}
 
                 .swiper-pagination
 
@@ -30,14 +31,14 @@ block content
     .hs-nav
         //+navList(ticketPark,projectNameCode)
         ul.clearfix
-            //li
-            //    a(href='/detail/ticket/' + ticketPark + '?classifyId=0')
-            //        img(src='images/coralHotel/main/preference.png', alt='门票预订')
-            //        p 门票预订
             li
-                a(href='/detail/ticket/' + ticketPark + '?classifyId=2')
-                    img(src='images/coralHotel/main/recreation.png', alt='娱乐预订')
+                a(href='/detail/ticket/' + ticketPark + '?classifyId=0')
+                    img(src='images/coralHotel/main/preference.png', alt='门票预订')
                     p 娱乐预订
+            //li
+            //    a(href='/detail/ticket/' + ticketPark + '?classifyId=2')
+            //        img(src='images/coralHotel/main/recreation.png', alt='娱乐预订')
+            //        p 娱乐预订
             li
                 a(href='/list/hotel')
                     img(src='images/coralHotel/main/hotel.png', alt='酒店预订')

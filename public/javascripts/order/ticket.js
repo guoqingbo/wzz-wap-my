@@ -20,7 +20,6 @@ $(function () {
         // 价格
         var totalPrice = Number(shopData.money || 0)
         // 生成推荐
-        console.log(recomentInfo.list.length)
         if(recomentInfo.list.length){
             html+=orderTemplate({data:{list:recomentInfo.list},render:true,mixin:'shopCarList'})
             totalPrice+=Number(recomentInfo.totalPrice || 0)
@@ -360,8 +359,13 @@ $(function () {
             success: function (data) {
                 if (data[0].status === 200 ) {
                     recomentListTotalPage = data[0].pages
-                    $(".ticket-type-list").append(data[0].html)
-                    computePrice()
+                    if(recomentListTotalPage){
+                        $(".recoment-ticket-box").show()
+                        $(".ticket-type-list").append(data[0].html)
+                        computePrice()
+                    }else{
+                        $(".recoment-ticket-box").hide()
+                    }
                 } else {
                     new ErrLayer({message:data[0].message})
                 }

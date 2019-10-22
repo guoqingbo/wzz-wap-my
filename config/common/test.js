@@ -12,6 +12,7 @@ module.exports = {
         client_secret: 'N8rzh1U47NxfxpqPCytCdvv3h3asB11r'
     },
     // domain:'http://192.168.66.110:8080',
+    // domain:'http://192.168.201.129:8080',// 测试tesb
     domain: "http://wzz.sendinfo.com.cn",// 测试
     domain1:"http://192.168.200.72:8080", //预约测试
     ticketPark:"park2018091313465343855",// 测试
