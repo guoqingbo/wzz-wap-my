@@ -326,17 +326,19 @@ $(function () {
     // 阻止多次点击去支付
     $('.to-pay-btn').click(function (e) {
         e.preventDefault();
+        e.stopPropagation()
         var paytype = $(".pay-item.active").data('paytype');
         var payUrl = '/pay/park?payOrderNo='+ shopInfo.payOrderNo +'&paySum='+shopInfo.paySum+'&payType='+ paytype;
         if(paytype == 42 || paytype == 41){
             // 如果是银联支付
             // payUrl +='&amount='+item.amount
         }
-        var flag = $(this).data('flag');
-        if(!flag){
-            $(this).data('flag', true);
-            window.location = payUrl;
-        }
+        window.location.href = payUrl;
+        // var flag = $(this).data('flag');
+        // if(!flag){
+        //     $(this).data('flag', true);
+        //     window.location.href = payUrl;
+        // }
     });
 
     // 获取其他优惠项目

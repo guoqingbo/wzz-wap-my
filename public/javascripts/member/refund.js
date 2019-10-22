@@ -1,7 +1,6 @@
 $(function (){
    var refundSum=JSON.parse($(".refundSum").val()),refundSumArr=[],refundSumId;
    var refundNums=$("input[name='refundAmount']").val();
-   console.log(refundNums)
    if(refundSum){
       for(var i=0;i<refundSum.length;i++){
           refundSumId=refundSum[i].id;
