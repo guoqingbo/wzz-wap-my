@@ -344,9 +344,9 @@ exports.mainRouter = function (router, common) {
             }
 
             // req.session.promoterId = promoterId
-
             req.session.leaguerId = results[0].data.leaguerId;
-            req.session.member = results[0].data;
+            // req.session.member = results[0].data
+            req.session.member = results[0].data.leaguer;
             req.session.member.id = req.session.leaguerId
             req.session.token = results[0].data.token;
             let redirectUrl = req.session.urla || req.session.curUrl || req.query.curUrl || "/main";

@@ -49,9 +49,13 @@ let private = {
     nowdDate: Date.now(),
     getParam: function (item) {
         _o = item.parameter || {};
-        _o.corpCode = "cgb2cfxs";
-        if(common.envConfig.corpCode){
-            _o.corpCode = common.envConfig.corpCode
+        if(!_o.corpCode){
+            // 传入的接口中没有corpCode参数时
+            _o.corpCode = "cgb2cfxs";
+            if(common.envConfig.corpCode){
+                // 项目中配置了corpCode参数时
+                _o.corpCode = common.envConfig.corpCode
+            }
         }
         _o.wayType = "2";
         return _o;

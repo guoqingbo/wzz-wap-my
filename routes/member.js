@@ -169,7 +169,12 @@ exports.mainRouter = function (router,common){
     // 提交评论
     router.post('/member/comment',function (req,res,next){
         req.body.leaguerId = req.session.member.id;
-        req.body.leaguerName = req.session.member.realName ? req.session.member.realName : req.session.member.loginName;
+        req.body.leaguerName = req.session.member.realName || req.session.member.loginName;
+
+        if(typeof req.session.member.leaguer == "object"){
+            // 兼容历史遗留的问题，如果重新微信登陆了，则可以去除该行代码
+            req.body.leaguerName = req.session.member.leaguer.realName || req.session.member.leaguer.loginName;
+        }
         common.commonRequest({
             url: [{
                 urlArr: ['main','comment','add'],

@@ -119,6 +119,8 @@ exports.mainRouter = function (router, common) {
             case 'strategy':
                 req.body.modelCode = module;
                 req.body.infoModelCode=module;
+                // 攻略（汪汪商城，门店终端，珊瑚酒店）统一使用官网的分销渠道
+                req.body.corpCode = 'cgb2cfxs'
                 break;
             case 'integral':
                 urlArrm = ['member', 'integral'];

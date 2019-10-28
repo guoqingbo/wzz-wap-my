@@ -5,7 +5,7 @@
        
         测试环境  
         https://wzzfxswap.sendinfo.com.cn        http://192.168.200.152:4029/  官网wap  
-        https://wzzfxswap1.sendinfo.com.cn       http://192.168.200.152:4023/  汪汪商城  
+                http://192.168.200.152:4023/  汪汪商城  
         http://wzzfxswap2.sendinfo.com.cn        http://192.168.200.152:5008/  珊瑚酒店  
         http://wzzfxswap3.sendinfo.com.cn(没配)  http://192.168.200.152:3004/  门店终端分销   
        
@@ -55,7 +55,7 @@
    * 测试域名: https://wzzfxswap1.sendinfo.com.cn
    * 部署地址: 192.168.200.152:4023 /usr/apps/node/wzzWapWangWang
    * 后台接口: https://wzz.sendinfo.com.cn
-   * 后台地址: https://wzz.sendinfo.com.cn/admin/index#
+   * 后台地址: http://192.168.200.72:9080/admin/login#
    
 ### 生产环境
    * 生产ip：http://47.99.119.191:4016
