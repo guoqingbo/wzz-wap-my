@@ -54,6 +54,7 @@ if(process.env.projectNameCode){
     app.use(function (req, res, next) {
         // 便于在路由或页面获取启动的项目编码
         res.locals.projectNameCode = req.session.projectNameCode = process.env.projectNameCode
+        res.locals.nodeEnv = process.env.NODE_ENV || 'develop'
         next()
     });
 

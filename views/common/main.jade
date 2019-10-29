@@ -8,10 +8,16 @@ mixin navList(ticketPark,projectNameCode)
             a(href='/detail/ticket/' + ticketPark + '?classifyId=2')
                 img(src='images/index/nav-icon3.png', alt='娱乐预订')
                 p 娱乐预订
-        li
-            a(href='/list/hotel')
-                img(src='images/index/nav-icon4.png', alt='酒店预订')
-                p 酒店预订
+        if projectNameCode == 'official' && nodeEnv == 'production'
+            li
+                a(href='http://h.wuzhizhou.com/list/hotel')
+                    img(src='images/index/nav-icon4.png', alt='珊瑚酒店')
+                    p 珊瑚酒店
+        else
+            li
+                a(href='/list/hotel')
+                    img(src='images/index/nav-icon4.png', alt='酒店预订')
+                    p 酒店预订
         li
             a(href='/list/repast')
                 img(src='images/index/nav-icon5.png', alt='餐饮预订')
