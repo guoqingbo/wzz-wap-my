@@ -75,6 +75,9 @@ body{
     color: #fff;
     font-size: .6rem;
 }
+.confirm-button:disabled{
+    background-color: #ccc;
+}
 .upload-img-tip{
     color: #999;
     font-size: .5rem;

@@ -90,6 +90,7 @@ $(function () {
         }
         var sendFilesRes = upload.sendFiles()
         if(sendFilesRes){
+            $(".confirm-button").attr("disabled",'disabled')
             sendFilesRes.done(function (imgs) {
                 if(!imgs){
                     return new ErrLayer({
@@ -120,6 +121,7 @@ $(function () {
                             message:res[0].message
                         });
                     }
+                    $(".confirm-button").removeAttr("disabled")
                 })
             })
         }
