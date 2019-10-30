@@ -37,9 +37,15 @@ let utils = {
         dayObj.today = dayObj.year+'-'+ dayObj.month+'-'+ dayObj.day;
         return dayObj
     },
-    getDayList(){
+    getDayList(req){
         let dayList = []
         let date = new Date();
+        // 如果是门店终端，开始日期从第二天开始
+        let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+        if(projectNameCode == 'storeTerminal'){
+            date.setTime(date.getTime()+1000*60*60*24)
+        }
+
         for(let i=0;i<4;i++){
             if(i>0){
                 date.setTime(date.getTime()+1000*60*60*24)
@@ -60,10 +66,19 @@ exports.mainRouter = function (router, common) {
     // 门票详情页(带购物车)
     router.get('/detail/ticket/:productCode', function (req, res, next) {
         req.session.preUrl = req.originalUrl;
-        let module = 'ticket',
-            productCode = req.params.productCode,
-            date = req.query.date || moment().format('YYYY-MM-DD'),
-            searchName = req.query.searchName||'',
+        let module = 'ticket'
+        let productCode = req.params.productCode
+        let date = req.query.date
+        if(!date){
+            // 如果是门店终端，开始日期从第二天开始
+            let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+            if(projectNameCode == 'storeTerminal'){
+                date = moment().add(1, 'days').format("YYYY-MM-DD")
+            }else{
+                date = moment().format("YYYY-MM-DD")
+            }
+        }
+        let searchName = req.query.searchName||''
             classifyId = req.query.classifyId ||'',
             handArr = [{
                 urlArr: [module, 'detail', 'main'],
@@ -99,7 +114,7 @@ exports.mainRouter = function (router, common) {
                         Object.assign(reObj, pageMeta);
                         let {title} = utils.getTicketTitle(req.query.classifyId)
                         reObj.title = title
-                        reObj.dayList = utils.getDayList();
+                        reObj.dayList = utils.getDayList(req);
 
                         req.session.content = results[0].data.content;
                         req.session.orderNotice = results[0].data.orderNotice;
