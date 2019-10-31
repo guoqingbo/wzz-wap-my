@@ -13,7 +13,9 @@ function redirectHttps() {
     // if(hostname == 'localhost' || hostname == 'gqb.sendinfo.com.cn' || hostname == '192.168.66.111' ){
     //     return
     // }
-    if(hostname=='wap.wuzhizhou.com'){
+    if(hostname=='wap.wuzhizhou.com'||
+        hostname=='wzzfxswap.sendinfo.com.cn'||
+        hostname=='wzzfxswap1.sendinfo.com.cn'){
         var url = window.location.href;
         if (url.indexOf("https") < 0) {
             url = url.replace("http:", "https:");

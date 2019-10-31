@@ -185,6 +185,7 @@ exports.mainRouter = function (router, common) {
                             },
                             'content-type': 'text/html;charset=utf-8',
                         }).then(response=>{
+                            let {err, resp, body} = response
                             if (!err && resp.statusCode === 200) {
                                 var res2 = typeof body === 'string' ? JSON.parse(body) : body;
                                 if (res2.status !== 200 && res2.status !== 402) {
