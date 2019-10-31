@@ -2,6 +2,7 @@ module.exports = {
     corpCode:'scb2cfxs',
     protocol:'https',
     weixinProxy:'https://wzzfxswap.sendinfo.com.cn',
+    domain:'http://192.168.201.129:8080',// 测试tesb
     // weixinProxy:'http://gqb.sendinfo.com.cn',
     // wx:{
     //     appId : 'wx4855f46c05a8d2b8',//我的测试环境

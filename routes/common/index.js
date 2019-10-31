@@ -21,7 +21,7 @@ let private = {
     key: 'd332326d0b36f9cf66d290363f3b29f6',
     getUrl: function (url) {
         let config = conJson,
-            reUrl = envConfig.domain;
+            reUrl = common.envConfig.domain;
         url.urlArr
             .map(function (item, index) {
                 config = config[item];
@@ -85,7 +85,7 @@ let common = {
     },
     gul: function (url,outApi) {
         let config = conJson,
-            reUrl = envConfig.domain;
+            reUrl = common.envConfig.domain;
 
         url.map(function (item, index) {
             config = config[item];
@@ -385,7 +385,7 @@ let common = {
         }
         let cachedSignatures = req.session.cachedSignatures;
         let expireTime = 7200 - 100;
-        let appObj = envConfig.wx;
+        let appObj = common.envConfig.wx;
         let _url = req.protocol + 's://' + req.hostname + req.originalUrl.split('#')[0];
         let signatureObj = cachedSignatures[_url];
         // 如果缓存中已存在签名，则直接返回签名
