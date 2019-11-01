@@ -363,10 +363,12 @@ $(function () {
                     recomentListTotalPage = data[0].pages
                     if(recomentListTotalPage){
                         $(".recoment-ticket-box").show()
+                        $(".order-boottom-center").show()
                         $(".ticket-type-list").append(data[0].html)
                         computePrice()
                     }else{
                         $(".recoment-ticket-box").hide()
+                        $(".order-boottom-center").hide()
                     }
                 } else {
                     new ErrLayer({message:data[0].message})
@@ -380,6 +382,8 @@ $(function () {
     // 只有官网才有随意拼
     if ($(".recoment-ticket-box").length){
         getRecomentList()
+    }else{
+        $(".order-boottom-center").hide()
     }
     // 其它优惠项目点击加载更多
     $(".show-more-btn").click(function (e) {
@@ -461,7 +465,6 @@ $(function () {
         recomentInfo.hasAccountMoney = hasAccountMoney
 
         // 缓存推荐
-        console.log(recomentInfo)
         sessionStorage.setItem('recomentInfo',JSON.stringify(recomentInfo))
 
         // 总价
@@ -469,6 +472,7 @@ $(function () {
 
         // 已惠价
         $(".has-discount-value").text(recomentInfo.hasAccountMoney.toFixed(2))
+
 
         // 还可优惠
         $(".discount-value").text(recomentInfo.canAccountMoney.toFixed(2))
