@@ -480,3 +480,33 @@ p.car-sales{
     background-color: #fff;
     height: 6.5rem;
 }
+/*详情添加首页和客服导航*/
+.nav-pro{
+    display: inline-block;
+    float: left;
+    width: 7rem;
+}
+.nav-pro li{
+    width: 40%;
+    height: 100%;
+    float: left;
+    display: block;
+}
+.nav-pro li a.on {
+    color: #3b76dd;
+}
+.nav-pro li a {
+    display: block;
+    text-align: center;
+    color: #999;
+    line-height: 1;
+    padding-top: .25rem;
+}
+.nav-pro  li a i {
+    font-size: 1rem;
+}
+.nav-pro li a p {
+    padding-top: 0;
+    font-size: .45rem;
+    margin-top: .1rem;
+}

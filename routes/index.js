@@ -30,6 +30,9 @@ router.use(common.getPageMeta)
 // 全渠道扫码进入(需要登录)
 router.use(function (req, res, next) {
    if(req.method=="GET"){
+       if(req.cookies.promoter){
+           res.locals.promoter = JSON.parse(req.cookies.promoter)
+       }
        if(/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(req.originalUrl)){
            return next()
        }

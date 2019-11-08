@@ -11,14 +11,18 @@ mixin navList(ticketPark,projectNameCode)
         if projectNameCode == 'official'
             if nodeEnv == 'production'
                 li
-                    a(href='http://h.wuzhizhou.com')
+                    a(href=promoter?'http://h.wuzhizhou.com?promoterId='+promoter.promoterId+'&promoteSrcCode='+promoter.promoteSrcCode+'&channelId='+promoter.channelId:'http://h.wuzhizhou.com')
                         img(src='images/index/nav-icon4.png', alt='珊瑚酒店')
                         p 珊瑚酒店
             else
                 li
-                    a(href='/list/hotel')
+                    a(href=promoter ? 'http://h.wuzhizhou.com?promoterId=' + promoter.promoterId + '&promoteSrcCode=' + promoter.promoteSrcCode + '&channelId=' + promoter.channelId: 'http://h.wuzhizhou.com')
                         img(src='images/index/nav-icon4.png', alt='珊瑚酒店')
                         p 珊瑚酒店
+                //li
+                //    a(href='/list/hotel')
+                //        img(src='images/index/nav-icon4.png', alt='珊瑚酒店')
+                //        p 珊瑚酒店
         else
             li
                 a(href='/list/hotel')

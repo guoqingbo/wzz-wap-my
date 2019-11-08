@@ -5,8 +5,23 @@ mixin orderBtn(data,module,page)
         if data.isAble==0
           a.formBtn.fr.btn-order.background-gray(javascript="javascript:;") 立即预订
         else
-          if module === 'combo' || module === 'shop'|| module === 'car'|| module === 'guide'
+          if module === 'combo' || module === 'car'|| module === 'guide'
             a.formBtn.fr.btn-order.background-base(href='/order/'+module+'/'+data.id+'?rateCode='+data.rateCode) 立即预订
+          else if module === 'shop'
+            ul.nav-pro
+              li.nav-lipro
+                a.home.on(href='/')
+                  //i.icon-ihome
+                  img(src='/images/common/nav-icon1-on.png' style='height: 1rem;vertical-align: unset;')
+                  p 首页
+              // 只有wap官网有客服
+              if projectNameCode == 'official'
+                li.nav-lipro
+                  a(href='https://wzzdlyq.qiyukf.com/client?k=9043442f1a44a1780180c5459734227c&wp=1')
+                    //i.icon-italk
+                    img(src='/images/common/nav-icon4.png' style='height: 1rem;vertical-align: unset;')
+                    p 客服
+            a.formBtn.fr.btn-order.background-base(href='/order/' + module + '/' + data.id + '?rateCode=' + data.rateCode) 立即购买
           else
             a.formBtn.fr.btn-order.background-base(href='/order/'+module+'/'+data.id) 立即预订
       else
@@ -18,7 +33,6 @@ mixin orderBtn(data,module,page)
             em ￥
             strong#totalprice 0.00
             em.c-999.couponHandlePrice
-            em.c-price.payPrice    
+            em.c-price.payPrice
             if module==='hotel'
               span#cost.cost.c-base 费用明细
-           

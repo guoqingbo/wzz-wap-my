@@ -346,6 +346,9 @@ let common = {
             case "strategy":
                 title = "蜈支洲岛旅游攻略_三亚蜈支洲岛旅游区";
                 break;
+            case "shop":
+                title = "商品订购_三亚蜈支洲岛旅游区";
+                break;
         }
         return title;
     },
@@ -486,7 +489,7 @@ let common = {
         // }
         if (!req.session.member || !req.session.member.leaguerId || !req.session.member.id || isReLogin) {
             // 判断是get请求，还是post请求
-            if(req.method=="POST"){
+            if(req.method=="POST" || req.headers['x-requested-with']=='XMLHttpRequest'){
                 return res.send([{status:400,message:"登陆过期，请重新登录"}])
             }else{
                 req.session.curUrl = req.originalUrl

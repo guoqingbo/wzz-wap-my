@@ -119,10 +119,18 @@ block content
                 li
                     label.lab-title(for='') 配送方式
                     .order-item
-                        select#get_type(name='')
-                            option(data-index=0, value='0' selected="selected") 快递
+                        div#get_type(style='display:inline-block')
+                            label.express-way
+                                input(type='radio' value=0 name='express' checked)
+                                span 快递
                             if data[3].status === 200
-                                option(data-index=1, value='1') 自提
+                                label.express-way
+                                    input(type='radio' value=1 name='express')
+                                    span 自提
+                        //select#get_type(name='')
+                        //    option(data-index=0, value='0' selected="selected") 快递
+                        //    if data[3].status === 200
+                        //        option(data-index=1, value='1') 自提
                         em.express-price#express_price
         .page-line
         ul.order-list.myorder-list.order-nl
@@ -146,12 +154,12 @@ block content
                         i.font-icon.fr.icon-iconfont-jiantou
                         input.order-text( name='address', type="hidden",value='' )
             li
-                - var _linkName = reObj.module === 'ticket'?'游客1':'游玩人';
-                label.lab-title(for='')="游玩人"
+                - var linkName = reObj.module === 'shop'?'收件人':'游玩人';
+                label.lab-title(for='')=linkName
                 .order-item
                     //-   value=userInfo ? userInfo.realName || userInfo.name : ''
                     input.order-text(type='text', name='linkMans', value='', placeholder='请填写姓名')
-                    a(href="javascript:;").linkManBtn#linkManBtn="选择游玩人"
+                    a(href="javascript:;").linkManBtn#linkManBtn 选择#{linkName}
             li
                 label.lab-title(for='') 手机号
                 .order-item

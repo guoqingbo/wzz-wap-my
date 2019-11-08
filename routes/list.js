@@ -1,9 +1,9 @@
 exports.mainRouter = function (router, common) {
     // 列表页
     router.get('/list/:module', function (req, res, next) {
-        var module = req.params.module,
-            title = common.pageTitle(module) + '_三亚蜈支洲岛旅游区';
-        var businessType  =  module;
+        let module = req.params.module;
+        let title = common.pageTitle(module) + '_三亚蜈支洲岛旅游区';
+        let businessType  =  module;
         switch (module) {
             case 'repast':
                 businessType = 'eatery';
@@ -63,7 +63,7 @@ exports.mainRouter = function (router, common) {
             page: 'list',
             title: title,
             callBack: function (results, reObj) {
-                if(module==="hotel" || module==="repast"||module==="strategy"){
+                if(module==="hotel" || module==="repast"||module==="strategy"||module==="shop"){
                     reObj.title=common.detailSeo(module) ;
                     let pageMeta = common.setPageMeta(module+"Meta",req)
                     Object.assign(reObj, pageMeta);

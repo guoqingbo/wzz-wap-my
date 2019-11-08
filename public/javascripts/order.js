@@ -148,7 +148,8 @@ $(function () {
             _target: $('#target')
         };
 
-        if (orD._getType.val() === '1') {
+        // if (orD._getType.val() === '1')
+        if (orD._getType.find("input[name='express']:checked").val() === '1') {
             orD._user.hide();
             $ord.expressPrice.hide();
             orD._getSelf.show();
@@ -158,15 +159,16 @@ $(function () {
             $ord.expressPrice.show();
         }
 
-        orD._getType.on('change', function () {
+        orD._getType.find("input[name='express']").on('change', function () {
 
-            $(this).find('option').each(function () {
-                var _this = $(this);
-                if (_this.prop('selected')) {
-                    goodsWayType = Number(_this.attr('data-index'));
-                }
-            });
+            // $(this).find('option').each(function () {
+            //     var _this = $(this);
+            //     if (_this.prop('selected')) {
+            //         goodsWayType = Number(_this.attr('data-index'));
+            //     }
+            // });
 
+            goodsWayType = Number($(this).val());
             formValidate(goodsWayType);
             switch (goodsWayType) {
                 case 0:
@@ -776,7 +778,8 @@ $(function () {
     function addPosttagePrice(num) {
         var price = $("#price").text();
         var _expressPrice = parseFloat($ord.expressPrice.find('i').text() || 0);
-        if( orD._getType.val() == '1'){
+        // if( orD._getType.val() == '1')
+        if( orD._getType.find("input[name='express']:checked").val() == '1'){
             _expressPrice=0;
         }
         var _totalPrice = parseFloat(operation.accMul(price, num).toFixed(2) || 0);

@@ -197,7 +197,7 @@ exports.mainRouter = function (router, common) {
                             reObj.xcxInfo= req.session.xcxPay;
                             // let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
                             // 如果存在微信授权支付代理
-                            if(common.envConfig.weixinProxy){
+                            if(common.envConfig.weixinProxy || common.envConfig.weixinProxyPay  ){
                                 handTag.tag = 0
                                 let proxyPayUrl = common.envConfig.weixinProxy+'/weixinProxy/wxPay'
                                 // 拼接参数
