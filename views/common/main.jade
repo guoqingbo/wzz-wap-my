@@ -32,16 +32,20 @@ mixin navList(ticketPark,projectNameCode)
             a(href='/list/repast')
                 img(src='images/index/nav-icon5.png', alt='餐饮预订')
                 p 餐饮预订
-        if projectNameCode == 'wangWang'
-            li
-                a(href='/product/ticket/park2019051216593803881?fromBy=indexicon')
-                    img(src='images/index/nav-icon6.png', alt='海岛玩家')
-                    p 海岛玩家
-        else
-            li
-                a(href='/product/ticket/park2018092913241026745?fromBy=indexicon')
-                    img(src='images/index/nav-icon6.png', alt='海岛玩家')
-                    p 海岛玩家
+        li
+            a(href='/list/shop')
+                img(src='/images/index/nav-icon6.png', alt='海岛玩家')
+                p 电商购物
+        //if projectNameCode == 'wangWang'
+        //    li
+        //        a(href='/product/ticket/park2019051216593803881?fromBy=indexicon')
+        //            img(src='images/index/nav-icon6.png', alt='海岛玩家')
+        //            p 海岛玩家
+        //else
+        //    li
+        //        a(href='/product/ticket/park2018092913241026745?fromBy=indexicon')
+        //            img(src='images/index/nav-icon6.png', alt='海岛玩家')
+        //            p 海岛玩家
         if projectNameCode == 'official'
             if nodeEnv == 'production'
                 li
