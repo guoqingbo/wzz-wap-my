@@ -344,7 +344,12 @@ mixin detailTab(data,module)
         li
             a.active(href='javascript:;', data-div='book') 产品介绍
         li
-            a(href='javascript:;', data-div='scenic')=module === 'combo' ? '费用说明' : '预订须知'
+            if module === 'combo'
+                a(href='javascript:;', data-div='scenic') 费用说明
+            else if module === 'shop'
+                a(href='javascript:;', data-div='scenic') 购买须知
+            else
+                a(href='javascript:;', data-div='scenic') 预订须知
     .details-tab-panel
         #tab-panel.ticket-details-tabs(style='margin-left: 0%;')
             #book.details-tab-item(style='height: auto;')

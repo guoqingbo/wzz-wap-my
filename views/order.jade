@@ -45,7 +45,11 @@ block content
         header.myorder-header.pro-header
             h3.myorder-title=data[0].data.aliasName
             p.myorder-explian
-                a.c-base(href='/orderDetail/orderNotice') 预订须知>
+                a.c-base(href='/orderDetail/orderNotice')
+                    if reObj.module === 'shop'
+                        span 购买须知>
+                    else
+                        span 预订须知>
     .page-line
     form(action="")#form
         if reObj.module === 'traffic'
@@ -120,13 +124,13 @@ block content
                     label.lab-title(for='') 配送方式
                     .order-item
                         div#get_type(style='display:inline-block')
-                            label.express-way
-                                input(type='radio' value=0 name='express' checked)
-                                span 快递
                             if data[3].status === 200
                                 label.express-way
-                                    input(type='radio' value=1 name='express')
+                                    input(type='radio' value=1 name='express' checked)
                                     span 自提
+                            label.express-way
+                                input(type='radio' value=0 name='express' checked=data[3].status!=200)
+                                span 快递
                         //select#get_type(name='')
                         //    option(data-index=0, value='0' selected="selected") 快递
                         //    if data[3].status === 200

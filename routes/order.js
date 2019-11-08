@@ -491,7 +491,7 @@ exports.mainRouter = function (router, common) {
     // 订单详细页
     router.get('/orderDetail/:page', common.isLogin, function (req, res, next) {
         var page = req.params.page;
-        let title = '预定须知'
+        let title = '预订须知'
         res.render('order/' + page, { data: page === 'orderNotice' ? req.session.orderNoticeByTicket : req.session[page], title });
     });
 };
