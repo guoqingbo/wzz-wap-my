@@ -102,7 +102,7 @@ $(function () {
     };
     $ord.formBtn.removeClass('background-gray').on('click', subForm);
     var validator; //申明表单验证函数
-    var goodsWayType = 0; //商品收货方式选择
+    var goodsWayType = $("input[name='express']:checked").val(); //商品收货方式选择
     formValidate(goodsWayType);
 
     /**
