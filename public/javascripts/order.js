@@ -396,14 +396,25 @@ $(function () {
 
     // 加入购物车和立即预定
     function subForm() {
-        if (module === 'shop' && !goodsWayType) {
-            var _a3 = $('select[name=address3]');
+        if (module === 'shop') {
+            if(!goodsWayType){
+                var _a3 = $('select[name=address3]');
 
-            if (!_a3.val()) {
-                $ord.addressError.show();
+                if (!_a3.val()) {
+                    $ord.addressError.show();
+                }
+            }else{
+                // var _a3 = $('input[name=address]');
+                //
+                // if (!_a3.val()) {
+                //     $('#address-error').text("这是必填的!")
+                //     $('#address-error').show();
+                // }else{
+                //     $('#address-error').hide();
+                // }
             }
-        }
 
+        }
         if (validator.form() && ($ord.addressError.is(':hidden') || !$ord.addressError.length)) {
 
             var cardArr = [],
@@ -810,7 +821,7 @@ $(function () {
 
                 },
                 address: {
-                    required: goodsWay
+                    required: !!goodsWay
                 }
             }
         });

@@ -156,7 +156,8 @@ block content
                     #get_self_place.order-item
                         .order-place-text 请选择自提点
                         i.font-icon.fr.icon-iconfont-jiantou
-                        input.order-text( name='address', type="hidden",value='' )
+                        input.order-text( name='address',value='' style='height:0;display:block')
+                        //label(id="address-error" class="error" for="address" style="display:none")
             li
                 - var linkName = reObj.module === 'shop'?'收件人':'游玩人';
                 label.lab-title(for='')=linkName
