@@ -200,22 +200,36 @@ $(function () {
         },
         sendSuccess:function (res) {
             //图片上传
-            getTicketList(res)
+            getTicketListByIDCard(res)
         }
     }
     upload.init()
-    // 获取票型
-    function getTicketList(data) {
+    // 根据身份证获取票型
+    function getTicketListByIDCard(data) {
         $('body').find('.up-loading').remove();
         if(!data || data.error_msg || !data.words_result['公民身份号码'].words){
             return new ErrLayer({message: '无法识别身份证号，请重新上传'})
         }
-        //插入数据
         var params = {
             idCardNo:data.words_result['公民身份号码'].words,
             // leaguerCode:$(".leaguerId").val(),
             projectId:projectId
         }
+        getTickitList(params)
+    }
+    // 根据辅助码获取票型
+    function getTicketListByCode(data) {
+        var params = {
+            idCardNo:data.code,
+            // leaguerCode:$(".leaguerId").val(),
+            projectId:projectId
+        }
+        getTickitList(params)
+    }
+
+    // 获取票型
+    function getTickitList(params){
+        //插入数据
         $.ajax({
             type:"post",
             url:"/appoint/saveLeaguerProject",
@@ -363,9 +377,11 @@ $(function () {
                 var code = $('input[name="code"]').val()
                 if(!code){
                     $(".error-tip").text('无当前辅助码记录，请确认输入正确')
+                    return
                 }else{
                     $(".error-tip").text('')
                 }
+                getTicketListByCode({code:code})
                 // layer.close(index);
             }
         });
