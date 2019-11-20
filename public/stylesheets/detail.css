@@ -111,7 +111,7 @@
 .pro-price a, .room-handle a { display: inline-block; text-align: center; height: 1.25rem; line-height: 1.25rem; font-size: 0.55rem; width: 2.5rem; vertical-align: top; border-radius: 3px; color: #fff; background-color: #f63; }
 .pro-price .gray_btn { background: #ccc;}
 .pro-info { min-height: 1.9rem; height: auto; display: table-cell; vertical-align: middle; }
-.pro-info-title {position: relative; font-size: 0.65rem; color: #333; width: 8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.pro-info-title {position: relative; font-size: 0.65rem; color: #333; width: 8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;display: inline-block}
 .pro-info-explian { font-size: 0.5rem; color: #999; margin-top: 0.25rem; line-height: 0.75rem; }
 .pro-info-explian span { margin-right: 0.5rem; }
 .pro-info-explian .showDetail {color: #15bea1   }

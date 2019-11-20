@@ -37,11 +37,11 @@ let utils = {
         dayObj.today = dayObj.year+'-'+ dayObj.month+'-'+ dayObj.day;
         return dayObj
     },
-    getDayList(req){
+    getDayList(common,req){
         let dayList = []
         let date = new Date();
         // 如果是门店终端，开始日期从第二天开始
-        let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+        let projectNameCode =  common.getProjectNameCode(req)
         if(projectNameCode == 'storeTerminal'){
             date.setTime(date.getTime()+1000*60*60*24)
         }
@@ -71,7 +71,7 @@ exports.mainRouter = function (router, common) {
         let date = req.query.date
         if(!date){
             // 如果是门店终端，开始日期从第二天开始
-            let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+            let projectNameCode =  common.getProjectNameCode(req)
             if(projectNameCode == 'storeTerminal'){
                 date = moment().add(1, 'days').format("YYYY-MM-DD")
             }else{
@@ -114,7 +114,7 @@ exports.mainRouter = function (router, common) {
                         Object.assign(reObj, pageMeta);
                         let {title} = utils.getTicketTitle(req.query.classifyId)
                         reObj.title = title
-                        reObj.dayList = utils.getDayList(req);
+                        reObj.dayList = utils.getDayList(common,req);
 
                         req.session.content = results[0].data.content;
                         req.session.orderNotice = results[0].data.orderNotice;

@@ -49,16 +49,19 @@ if(process.env.projectNameCode){
     // 生产和测试使用该逻辑
     // 如果启动时指定了项目名称
     // 合并配置参数
-    mergeEnvConfig(process.env.projectNameCode)
+    envConfig = mergeEnvConfig(process.env.projectNameCode)
 
     app.use(function (req, res, next) {
+        // 如果路由参数里带有项目编码参数
+
         // 便于在路由或页面获取启动的项目编码
         res.locals.projectNameCode = req.session.projectNameCode = process.env.projectNameCode
         res.locals.nodeEnv = process.env.NODE_ENV || 'develop'
         next()
     });
 
-}else{
+}
+else {
     // 本地开发用到（生产或测试已废弃）
     // 如果启动时没有指定环境变量区分不同的项目
     app.use(function (req, res, next) {
@@ -102,12 +105,51 @@ if(process.env.projectNameCode){
         res.locals.projectNameCode = req.session.projectNameCode
 
         // 合并配置参数
-        mergeEnvConfig(req.session.projectNameCode)
+        envConfig = mergeEnvConfig(req.session.projectNameCode)
 
         next()
     });
 }
 
+app.use(function (req, res, next) {
+    // 如果路由参数中有企业编码
+    let corpCode = req.query.corpCode
+    let oldCorpCode = req.cookies.corpCode
+    if(corpCode && corpCode!=oldCorpCode){
+        res.cookie('corpCode', req.query.corpCode);
+    }
+    next()
+});
+app.use(function (req, res, next) {
+    if(req.method=="GET"){
+        // 全渠道扫码进入(需要登录)
+        if(req.cookies.promoter){
+            res.locals.promoter = JSON.parse(req.cookies.promoter)
+        }
+        if(/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(req.originalUrl)){
+            return next()
+        }
+        // let promoter = JSON.parse(req.cookies.promoter || '{}')
+        let {channelId,promoterId,teamBatchNo,promoteSrcCode,timeTmp,corpCode} = req.query
+        if(promoterId && !timeTmp){
+            // req.cookies.promoter = JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode})
+            // res.cookie.setMaxAge(-10)
+            res.cookie('promoter', JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode}));
+            // res.cookie('ceshi', '123',{expires: false,maxAge:0});
+            // 兼容之前旧的码，判断是否有企业吗（旧的扫码没有企业码，添加默认的企业码）
+            if(!corpCode){
+                res.cookie('corpCode', envConfig.corpCode);
+            }
+            // 添加自定义参数 ,防止重复登陆
+            req.session.curUrl = req.originalUrl +'&timeTmp=1'
+            return res.redirect('/login')
+        }else{
+            next()
+        }
+    }else{
+        next()
+    }
+})
 
 app.use('/', routes);
 

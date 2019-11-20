@@ -48,7 +48,7 @@ exports.mainRouter = function (router, common) {
 
         let title = ''
         // projectNameCode判断所属项目
-        let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+        let projectNameCode =  common.getProjectNameCode(req)
 
 
         if(projectNameCode=='official'){

@@ -368,7 +368,7 @@ $(function () {
             '<input class="code-input" value="" name="code" placeholder="请输入辅助码"/>' +
             '<p class="error-tip"></p>' +
             '</div>'
-        layer.open({
+        var index = layer.open({
             className:'my-layer',
             content: content
             ,btn: ['查询', '取消']
@@ -382,7 +382,7 @@ $(function () {
                     $(".error-tip").text('')
                 }
                 getTicketListByCode({code:code})
-                // layer.close(index);
+                layer.close(index);
             }
         });
 

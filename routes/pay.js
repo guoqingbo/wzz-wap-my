@@ -65,7 +65,7 @@ exports.mainRouter = function (router, common) {
             params.redirectUrl = redirectUrl
             params.subFlag = 'F'
             // 如果是蜈支洲官网
-            let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+            let projectNameCode =  common.getProjectNameCode(req)
             if(projectNameCode == 'official'){
                 params.subFlag = 'T'
             }
@@ -134,7 +134,7 @@ exports.mainRouter = function (router, common) {
             params.redirectUrl = redirectUrl
             params.subFlag = 'F'
             // 如果是蜈支洲官网
-            let projectNameCode =  process.env.projectNameCode || req.session.projectNameCode
+            let projectNameCode =  common.getProjectNameCode(req)
             if(projectNameCode == 'official'){
                 params.subFlag = 'T'
             }

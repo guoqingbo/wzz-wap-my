@@ -47,15 +47,22 @@ let private = {
         }
     },
     nowdDate: Date.now(),
-    getParam: function (item) {
-        _o = item.parameter || {};
+    getParam: function (item,req) {
+        // corpCode参数优先级 接口参数内部>cookies>env>secssion
+        let _o = item.parameter || {};
         if(!_o.corpCode){
             // 传入的接口中没有corpCode参数时
-            _o.corpCode = "cgb2cfxs";
-            if(common.envConfig.corpCode){
-                // 项目中配置了corpCode参数时
-                _o.corpCode = common.envConfig.corpCode
-            }
+            // _o.corpCode = "cgb2cfxs";
+            _o.corpCode =
+                req.query.corpCode ||
+                req.cookies.corpCode ||
+                common.envConfig.corpCode ||
+                "cgb2cfxs"
+            // if(common.envConfig.corpCode){
+            //     // 项目中配置了corpCode参数时
+            //     _o.corpCode = common.envConfig.corpCode
+            // }
+
         }
         _o.wayType = "2";
         return _o;
@@ -109,7 +116,7 @@ let common = {
 
         _p.url.map(function (item, index) {
                 let _u = private.getUrl(item),
-                    _d = item.noLocal ? item.parameter : private.getParam(item),
+                    _d = item.noLocal ? item.parameter : private.getParam(item,_p.req),
                     method = item.method ? item.method : _p.req.method;
                 let option = {
                     method:method,
@@ -509,7 +516,7 @@ let common = {
         let url = common.gul(['main', 'index', 'allInfo'])
         let params = private.getParam({
             parameter: {modelCode:"wapmeta"}
-        })
+        },req)
         common.get(url,params).then(response=>{
             if(response.body && response.body.status == 200){
                 req.session.pageMeta = response.body.data
@@ -572,6 +579,16 @@ let common = {
 
         html =fn(data)
         return html
+    },
+    // 获取项目编码
+    getProjectNameCode(req){
+        let projectNameCode =
+            req.query.projectNameCode ||
+            req.cookies.projectNameCode ||
+            process.env.projectNameCode ||
+            req.session.projectNameCode ||
+            'official'
+       return projectNameCode
     },
     // 合并配置参数
     mergeEnvConfig(projectNameCode){
