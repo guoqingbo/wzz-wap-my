@@ -113,10 +113,12 @@ else {
 
 app.use(function (req, res, next) {
     // 如果路由参数中有企业编码
-    let corpCode = req.query.corpCode
-    let oldCorpCode = req.cookies.corpCode
-    if(corpCode && corpCode!=oldCorpCode){
-        res.cookie('corpCode', req.query.corpCode);
+    if(req.method=="GET" && req.headers['x-requested-with']!=='XMLHttpRequest'){
+        let corpCode = req.query.corpCode
+        let oldCorpCode = req.cookies.corpCode
+        if(corpCode && corpCode!=oldCorpCode){
+            res.cookie('corpCode', req.query.corpCode);
+        }
     }
     next()
 });

@@ -243,8 +243,27 @@ $(function () {
     if(!/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(window.location.pathname)){
         storeQuanQudao()
     }
-
-
+    // 判断是否存储企业吗参数
+    function storeCorpCode(){
+        // 获取url后的参数
+        var query = window.location.search.substring(1);
+        if(query && /corpCode/.test(query)){
+            var vars = query.split("&");
+           var params = {}
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                params[pair[0]] = pair[1]
+            }
+            sessionStorage.setItem('corpCode',params.corpCode)
+        }
+        if(sessionStorage.getItem('corpCode')){
+            delCookie('corpCode')
+            setCookie('corpCode',sessionStorage.getItem('corpCode'))
+        }else{
+            delCookie('corpCode')
+        }
+    }
+    storeCorpCode()
     // 子元素scroll父元素容器不跟随滚动JS实现
     $.fn.uniqueScroll = function () {
         $(this).on('mousewheel', _pc)
