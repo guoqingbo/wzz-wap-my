@@ -263,7 +263,9 @@ $(function () {
             delCookie('corpCode')
         }
     }
-    storeCorpCode()
+    if(!/(^\/login)|(^\/horization)|(^\/weixinProxy)/.test(window.location.pathname)){
+        storeCorpCode()
+    }
     // 子元素scroll父元素容器不跟随滚动JS实现
     $.fn.uniqueScroll = function () {
         $(this).on('mousewheel', _pc)
