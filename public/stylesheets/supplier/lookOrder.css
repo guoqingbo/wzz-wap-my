@@ -1,0 +1,52 @@
+.search-box{
+    padding: .5rem;
+}
+.search-input{
+    box-sizing: border-box;
+    border: 1px solid #e5e5e5;
+    border-radius: .3rem;
+    width: 75%;
+    outline: 0;
+    /*height: 2rem;*/
+    padding: .5rem;
+}
+.search-btn{
+    margin-left: 5%;
+    vertical-align: middle;
+    background-color: #ffc40f;
+    color: #444;
+    width: 20%;
+    padding: .3rem 0;
+    border: 0;
+    font-size: .6rem;
+    border-radius: .3rem;
+}
+.supplier-order-list{
+    padding: 0 .5rem;
+}
+.order-item{
+    background-color: #fff;
+    color: #999;
+    margin-bottom: .5rem;
+    padding: .5rem;
+    border-radius: .3rem;
+}
+.order-info-right{
+    float: right;
+}
+.order-btn-box{
+    text-align: right;
+    margin-top: .5rem;
+    border-top: 1px solid #e5e5e5;
+    padding-top: .5rem;
+}
+.defult-btn{
+    text-align: center;
+    margin-left: .5rem;
+    background-color: #ffc40f;
+    color: #444;
+    padding: .3rem;
+    border: 0;
+    font-size: .6rem;
+    border-radius: .3rem;
+}

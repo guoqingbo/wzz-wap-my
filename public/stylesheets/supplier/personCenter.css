@@ -1,0 +1,9 @@
+.login-out-btn{
+    background-color: #ffc40f;
+    color: #fff;
+    width: 100%;
+    padding: .6rem 0;
+    border: 0;
+    font-size: .7rem;
+    border-radius: .3rem;
+}

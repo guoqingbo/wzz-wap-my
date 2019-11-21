@@ -10,11 +10,15 @@ block content
                 i.icon-saomasoudan
                 p.scan-text 票码核销
         .quick-look-box
-            a.quick-look-btn(href='/supplier/order') 快速查单
+            a.quick-look-btn(href='/supplier/lookOrder') 快速查单
         .nav-box
             ul.nav-list
+                li.nav-item.active
+                    a(href='/supplier/scanCode')
+                        i.icon-nav-home
+                        span.nav-item-name 首页
                 li.nav-item
-                    a(href='/supplier/scanCode') 首页
-                li.nav-item
-                    a(href='/supplier/personCenter') 我的
+                    a(href='/supplier/personCenter')
+                        i.icon-iconfont-geren
+                        span.nav-item-name 我的
 

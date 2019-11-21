@@ -58,5 +58,43 @@ exports.mainRouter = function (router, common) {
         //  });
 
     });
+    // 快速查单
+    router.get('/supplier/lookOrder', function (req, res, next) {
+        res.render('supplier/lookOrder',{title:'查看订单'});
+        //  common.commonRequest({
+        //      url: [{
+        //          urlArr: ['myTrip', 'myTripList', 'list'],
+        //          outApi:common.envConfig.domain1
+        //      }],
+        //      req: req,
+        //      res: res,
+        //      page: 'myTrip',
+        //      title: '行程规划',
+        //      callBack: function (result, reObj) {
+        //          reObj.leaguerId=req.session.member.id;
+        //          reObj.ticketPark = common.envConfig.ticketPark
+        //      }
+        //  });
+
+    });
+    // 我的
+    router.get('/supplier/personCenter', function (req, res, next) {
+        res.render('supplier/personCenter',{title:'个人中心'});
+        //  common.commonRequest({
+        //      url: [{
+        //          urlArr: ['myTrip', 'myTripList', 'list'],
+        //          outApi:common.envConfig.domain1
+        //      }],
+        //      req: req,
+        //      res: res,
+        //      page: 'myTrip',
+        //      title: '行程规划',
+        //      callBack: function (result, reObj) {
+        //          reObj.leaguerId=req.session.member.id;
+        //          reObj.ticketPark = common.envConfig.ticketPark
+        //      }
+        //  });
+
+    });
 
 };

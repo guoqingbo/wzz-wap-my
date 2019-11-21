@@ -6,7 +6,7 @@ label.error {
     font-size: .5rem;
 }
 .body-bg{
-    background: #f4f4f4 url(//altwap.sendinfo.com.cn/vue/static/img/main-head.a0579e5b.jpg) no-repeat;
+    background: #f4f4f4 url(/images/supplier/bg.jpg) no-repeat;
     background-size:100% auto;
 }
 .login-main{
