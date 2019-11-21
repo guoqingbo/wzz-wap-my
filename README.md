@@ -27,6 +27,7 @@
        游玩项目列表 /appoint/gameList  
        手机取号 /appoint/takeNum  
        我的行程 /myTrip
+       供应商手机端 /supplier/login
        
 ## 官网wap
 ### 测试环境

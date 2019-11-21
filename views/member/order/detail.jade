@@ -32,7 +32,7 @@ block content
             //    em.pay-mold.payed.fr
             //        +sendStatus(datas.sendStatus)
     // 检票二维码
-    if datas.checkCode && data[0].sendCodeStatus == 'T'
+    if datas.isSync=='true'&&datas.checkCode && data[0].sendCodeStatus == 'T'
         .qrcode-box
             p.qrcode-tip 检票二维码
             .qrcode(data-checkcode=datas.checkCode)
