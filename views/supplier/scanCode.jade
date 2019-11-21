@@ -1,0 +1,20 @@
+extends ../layout
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/supplier/scanCode.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/supplier/scanCode.js')
+block content
+    body.body-bg
+        .scan-box
+            button.scan-btn
+                i.icon-saomasoudan
+                p.scan-text 票码核销
+        .quick-look-box
+            a.quick-look-btn(href='/supplier/order') 快速查单
+        .nav-box
+            ul.nav-list
+                li.nav-item
+                    a(href='/supplier/scanCode') 首页
+                li.nav-item
+                    a(href='/supplier/personCenter') 我的
+

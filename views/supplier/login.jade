@@ -7,17 +7,18 @@ block javascripts
     script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
     script(type='text/javascript', src='/javascripts/supplier/login.js')
 block content
-    body.login-bg
+    body.body-bg
         .login-main
-            form#submitForm
-                .input-box
-                    label.input-label 账号
-                    input.input-value(type='text', name='loginName' placeholder='请输入手机号码')
-                .input-box
-                    label.input-label 密码
-                    input.input-value(type='password', name='loginPass' placeholder='请输入密码')
-                .input-box.input-button
-                    button#submitBtn 登陆
+            .login-form-box
+                form#submitForm
+                    .input-box
+                        label.input-label 账号
+                        input.input-value(type='text', name='loginName')
+                    .input-box
+                        label.input-label 密码
+                        input.input-value(type='password', name='loginPass')
+                .button-box
+                    button#submitBtn.login-button 登陆
         .mask#mask
             .tips
                 p

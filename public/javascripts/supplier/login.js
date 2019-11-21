@@ -12,50 +12,35 @@ $(function () {
                 required: true,
                 rangelength: [6, 20]
             },
-            password: {
-                required: true,
-                rangelength: [6, 20]
-            },
-            enterpassword: {
-                equalTo: "#password"
-            },
-            checkCode: {
-                required: true
-            }
         }
     });
 
     /**
      * 账号登录
      */
-    var submitForm = $('#submitForm');
-    submitForm.submit(function () {
-        var $this = $(this);
+    var submitForm = $('#submitBtn');
+    submitForm.click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
         // 获取全渠道缓存
         var data = {
             loginName:$('input[name="loginName"]').val(),
             loginPass:$('input[name="loginPass"]').val()
         };
         if (validator.form()) {
-            var url = $this.data('url');
-            $.post('/leaguerLogin', data)
+            $.post('/supplier/login', data)
                 .success(function (data) {
                     var datas = data[0];
                     if (datas.status === 200) {
-                        if (url) {
-                            window.location.href = url;
-                        } else {
-                            window.location.href = '/';
-                        }
+                        window.location.href = '/supplier/scanCode'
                     } else {
                         $('.tips p').text(datas.message);
                         $('.mask,.tips').show();
                     }
                 })
                 .error(function (err) {
-                    window.location.href = '/error';
+                   console.log(err)
                 });
-            return false;
         }
     });
 });

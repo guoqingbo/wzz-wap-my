@@ -1,0 +1,31 @@
+.body-bg{
+    background: #fff url(//altwap.sendinfo.com.cn/vue/static/img/main-head.a0579e5b.jpg) no-repeat;
+    background-size:100% auto;
+}
+.scan-box{
+    margin-top: 11rem;
+    text-align: center;
+}
+.scan-btn{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    background-color: #ffc40f;
+    margin: 0 auto;
+    border: 0;
+    text-align: center;
+    color: #444444;
+    -webkit-box-shadow: 0px 0px 0.4rem rgba(255, 196, 15, 0.7);
+    box-shadow: 0px 0px 0.4rem rgba(255, 196, 15, 0.7);
+}
+.scan-btn i{
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.scan-text{
+    font-size: .65rem;
+}
+.quick-look-box{
+
+}
