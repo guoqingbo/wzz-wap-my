@@ -270,7 +270,8 @@
     "login": "/leaguer/api/agent/leaguerLoginForSupplier",
     "checkOrderH5":"/order/api/checkOrderH5",
     "checkGoods":"/order/api/checkGoods",
-    "searchOrderDetail":"/order/api/searchOrderDetail"
+    "searchOrderDetail":"/order/api/searchOrderDetail",
+    "expressType":"/order/api/getExpressType"
   }
 
 }

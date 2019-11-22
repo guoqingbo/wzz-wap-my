@@ -50,3 +50,65 @@
     font-size: .6rem;
     border-radius: .3rem;
 }
+/*确认发货弹框*/
+.confirm-send-box{
+    display: none;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    padding: .5rem;
+}
+.confirm-send-content{
+    background-color: #fff;
+    border-radius: .5rem;
+    overflow: hidden;
+    padding: .5rem;
+}
+.input-gruop{
+    padding: .5rem;
+    font-size: .6rem;
+}
+.input-gruop-label{
+    display: inline-block;
+    width: 25%;
+    vert-align: middle;
+}
+.input-gruop-value,.input-gruop-select{
+    box-sizing: border-box;
+    display: inline-block;
+    width: 75%;
+    vert-align: middle;
+    border: 1px solid #e5e5e5;
+    background-color: #fff;
+    outline: 0;
+    padding: .5rem;
+}
+.confirm-footer-box{
+    border-top: 1px solid #e5e5e5;
+    text-align: center;
+    padding-top: .5rem;
+}
+.confirm-default-btn{
+    text-align: center;
+    margin-left: .5rem;
+    background-color: #ffc40f;
+    color: #444;
+    padding: .3rem 1rem;
+    border: 0;
+    font-size: .6rem;
+    border-radius: .3rem;
+}
+.confirm-save-btn{
+}
+.cancel-btn{
+    border: 1px solid #e5e5e5;
+    background-color: #fff;
+    color: #999;
+}
+.error-expressNo{
+    color: #f00;
+    display: none;
+}

@@ -94,7 +94,21 @@ exports.mainRouter = function (router, common) {
     });
     // 快速查单
     router.get('/supplier/lookOrder',isLogin, function (req, res, next) {
-        res.render('supplier/lookOrder',{title:'查看订单'});
+        // res.render('supplier/lookOrder',{title:'查看订单'});
+         common.commonRequest({
+             url: [{
+                 urlArr: ['supplier', 'expressType'],
+             }],
+             req: req,
+             res: res,
+             page: 'supplier/lookOrder',
+             title: '查看订单',
+             callBack: function (result, reObj) {
+                if(result[0].status == 200){
+
+                }
+             }
+         });
 
     });
     // 快速查单
@@ -115,11 +129,32 @@ exports.mainRouter = function (router, common) {
                 if(results[0].status == 200){
                     handTag.tag = 0
                     let renderObj = {
-                        data:results[0].data,
+                        data:results[0].data.rows,
                         method:"ajax",
                     }
                     let html = common.jade('supplier/mixin/orderList', renderObj);
-                    res.send([{status:200,html}])
+                    res.send([{status:200,html,pages:results[0].data.pages}])
+                }
+            }
+        });
+
+    });
+    // 确认发货
+    router.post('/supplier/checkGoods',isLogin, function (req, res, next) {
+        let parameter = req.body
+        parameter.corpCode = req.session.supplier.corpCode
+        common.commonRequest({
+            url: [{
+                urlArr: ['supplier', 'checkGoods'],
+                parameter,
+                method: 'get'
+            }],
+            req: req,
+            res: res,
+            isAjax: true,
+            callBack: function (results, reqs, resp, handTag) {
+                if(results[0].status == 200){
+
                 }
             }
         });
