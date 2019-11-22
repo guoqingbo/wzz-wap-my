@@ -31,12 +31,20 @@ label.error {
     margin-bottom: .7rem;
 }
 .input-label{
-    margin-right: .5rem;
+    display: inline-block;
+    width: 20%;
 }
 .input-value{
     border: 0;
     outline: 0;
     background-color: transparent;
+    display: inline-block;
+    width: 50%;
+}
+.input-box label.error{
+    display: inline-block;
+    width: 30%;
+    text-align: right;
 }
 .button-box{
     margin-top: 3rem;

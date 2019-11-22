@@ -70,6 +70,7 @@
 .input-gruop{
     padding: .5rem;
     font-size: .6rem;
+    position: relative;
 }
 .input-gruop-label{
     display: inline-block;
@@ -109,6 +110,9 @@
     color: #999;
 }
 .error-expressNo{
-    color: #f00;
+    color: red;
     display: none;
+    position: absolute;
+    left: 25%;
+    padding-left: .5rem;
 }
