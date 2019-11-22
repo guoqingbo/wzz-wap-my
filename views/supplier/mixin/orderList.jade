@@ -1,0 +1,22 @@
+mixin orderList(data)
+    if data.length
+        each item in [1,2,3,4]
+            li.order-item
+                .order-info
+                    label.order-info-label 订单号：
+                    span.order-info-value 123456789654
+                    .order-info-right 张三
+                .order-info
+                    span.order-info-value 珊瑚宝宝 X 2
+                    .order-info-right 自提
+                .order-info
+                    label.order-info-label 创建时间：
+                    span.order-info-value 2018166655655
+                    .order-info-right 待收货
+                .order-btn-box
+                    button.defult-btn 确认发货
+    else
+        li.no-data 暂无数据
+
+if method === "ajax"
+    +orderList(data)

@@ -5,7 +5,7 @@
        
         测试环境  
         https://wzzfxswap.sendinfo.com.cn        http://192.168.200.152:4029/  官网wap  
-                http://192.168.200.152:4023/  汪汪商城  
+                                                 http://192.168.200.152:4023/  汪汪商城  
         http://wzzfxswap2.sendinfo.com.cn        http://192.168.200.152:5008/  珊瑚酒店  
         http://wzzfxswap3.sendinfo.com.cn(没配)  http://192.168.200.152:3004/  门店终端分销   
        

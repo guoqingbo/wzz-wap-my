@@ -265,5 +265,12 @@
   },
   "uploadfile":{
     "upload":"/static/manage/uiFileUpload/dispatch?action=upload"
+  },
+  "supplier":{
+    "login": "/leaguer/api/agent/leaguerLoginForSupplier",
+    "checkOrderH5":"/order/api/checkOrderH5",
+    "checkGoods":"/order/api/checkGoods",
+    "searchOrderDetail":"/order/api/searchOrderDetail"
   }
+
 }

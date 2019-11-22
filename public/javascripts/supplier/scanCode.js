@@ -22,20 +22,20 @@ $(function () {
             scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
             success: function (res) {// 当needResult 为 1 时，扫码返回的结果
                 // 核销
-                geTicketInfo(res)
+                checkOrderH5(res)
             }
         });
     })
-    function geTicketInfo(res){
+    function checkOrderH5(res){
         if(res){
             var str = res.resultStr
             var params = {
-                ticketNo:str.substring(0,str.length-2),
+                orderDetailNo:str,
             }
-            $.post("/appoint/ticketInfo",params)
+            $.post("/supplier/checkOrderH5",params)
                 .success(function (data) {
                     if(data[0].status===200){
-
+                        new ErrLayer({message: data[0].message||'核销成功'})
                     }else{
                         new ErrLayer({message: data[0].message})
                     }
@@ -44,7 +44,7 @@ $(function () {
                     console.log(error)
                 })
         }else{
-            new ErrLayer({message: "未获取票型码"})
+            new ErrLayer({message: "未获取扫码内容"})
         }
     }
 })
