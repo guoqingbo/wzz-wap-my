@@ -78,6 +78,8 @@ exports.mainRouter = function (router, common) {
                 parameter: {
                     modelCode,
                 }
+            },{
+                urlArr: ['main', 'index', 'getUserDisInfo'],
             }],
             req: req,
             res: res,

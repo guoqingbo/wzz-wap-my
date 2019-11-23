@@ -4,7 +4,8 @@
     "index": {
       "wxlogin":"/leaguer/api/leaguer/fastregByOpenid",
       "allInfo": "/info/api/info/getAllInfo",
-      "listInfo": "/info/api/info/listInfo"
+      "listInfo": "/info/api/info/listInfo",
+      "getUserDisInfo": "/leaguer/api/agent/getUserDisInfo"
     },
     "getInfo": "/info/api/info/getInfo",
     "sort": "/product/api/product/sortCondition",
