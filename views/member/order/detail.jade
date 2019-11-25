@@ -34,14 +34,14 @@ block content
             //        +sendStatus(datas.sendStatus)
     // 检票二维码
     if datas.checkCode && data[0].sendCodeStatus == 'T'
-        p.qrcode-tip 检票二维码
-        .qrcode-box
         if datas.isSync=='true'
+            p.qrcode-tip 检票二维码
+            .qrcode-box
             .qrcode(data-checkcode=datas.checkCode)
-        if datas.isSync=='false'
-            .no-qrcode-box
-                img(src='/images/demo/no-code-img.png')
-                p.qrcode-isSync-tip(data-orderno=datas.orderNo) 订单同步中，正在刷新
+        //if datas.isSync=='false'
+        //    .no-qrcode-box
+        //        img(src='/images/demo/no-code-img.png')
+        //        p.qrcode-isSync-tip(data-orderno=datas.orderNo) 订单同步中，正在刷新
             //span.time-cont 5s
 
 
@@ -58,14 +58,15 @@ block content
                     label.lab-title(for='') 使用日期
                     .order-item
                         span= item.startDate.substring(0,10)
-                if datas.assistCheckNo
+                if datas.assistCheckNo && datas.isSync=='true'
                     li
                         label.lab-title(for='') 辅助码
                         .order-item
-                            if datas.isSync=='true'
-                                span.assistCheckNo= datas.assistCheckNo
-                            else
-                                span.assistCheckNo.assistCheckNoisSync 同步中，正在刷新
+                            span.assistCheckNo= datas.assistCheckNo
+                            //if datas.isSync=='true'
+                            //    span.assistCheckNo= datas.assistCheckNo
+                            //else
+                            //    span.assistCheckNo.assistCheckNoisSync 同步中，正在刷新
 
 
                 li
@@ -248,11 +249,11 @@ block content
                     })
                 }
             }
-            if($(".qrcode-isSync-tip").length){
-                setTimeout(function () {
-                    checkCodeIsisSync()
-                },5000)
-            }
+            // if($(".qrcode-isSync-tip").length){
+            //     setTimeout(function () {
+            //         checkCodeIsisSync()
+            //     },5000)
+            // }
             // 确认收货
             $('#receivedGoodsBtn').click(function () {
                 var confirmReceive = confirm('请确认收货？');

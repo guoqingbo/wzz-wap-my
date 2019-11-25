@@ -88,7 +88,7 @@ $(function () {
             var file = $ele.prop("files")[0];
             var field = $ele.attr("name") || "image";
             // 支持的图片类型（可自定义）
-            if (/\.(jpe?g|png|gif|bmp|tif|jp2|tiff|exif|wbmp|mbm)$/i.test(file.name)) {
+            if (true||/\.(jpe?g|png|gif|bmp|tif|jp2|tiff|exif|wbmp|mbm)$/i.test(file.name)) {
                 // var reader = new FileReader();
                 // reader.addEventListener("load", function () {
                 //     // var image = new Image();
