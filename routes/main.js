@@ -67,7 +67,7 @@ exports.mainRouter = function (router, common) {
             page = 'main/coralHotel'
             modelCode = 'home_page2'
         }else if(projectNameCode=='storeTerminal'){
-            // 珊瑚酒店
+            // 门店终端
             title = '智慧畅玩'
             page = 'main/storeTerminal'
             modelCode = 'home_page'

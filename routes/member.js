@@ -139,6 +139,30 @@ exports.mainRouter = function (router,common){
             }
         });
     });
+
+    // 获取检票二维码
+    router.post('/member/getCheckCode', common.isLogin, function (req,res,next){
+        let orderNo = req.body.orderNo
+        common.commonRequest({
+            url: [{
+                urlArr: ['member','order','detail'],
+                parameter: {
+                    orderNo: orderNo,
+                    leaguerId:req.session.member.id
+                },
+                method:'get'
+            }],
+            req: req,
+            res: res,
+            isAjax: true,
+            callBack: function (results,reObj,resp,handTag){
+                if(results[0].status==200){
+
+                }
+            }
+        });
+    });
+
     // 退单详情
     router.get('/member/refundDetail/:orderNo', common.isLogin, function (req,res,next){
         let refundNo=req.query.refundNo;
