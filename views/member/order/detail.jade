@@ -65,7 +65,7 @@ block content
                             if datas.isSync=='true'
                                 span.assistCheckNo= datas.assistCheckNo
                             else
-                                span.assistCheckNo 同步中
+                                span.assistCheckNo.assistCheckNoisSync 同步中，正在刷新
 
 
                 li
@@ -239,10 +239,10 @@ block content
                                     // 隐藏
                                     $(".no-qrcode-box").hide()
                                     // 创建二维码
-                                    console.log(res[0].data.checkCode)
                                      createQrcode(res[0].data.checkCode)
                                      // 更新辅助码
-                                     $(".assistCheckNo").text(res[0].data.assistCheckNo)
+                                     $(".assistCheckNo").text(res[0].data.assistCheckNo).removeClass('assistCheckNoisSync')
+
                                 }
                             }
                     })

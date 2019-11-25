@@ -371,6 +371,9 @@
     width: 9rem;
     height: 9rem;
 }
+.assistCheckNoisSync{
+   color: #f00;
+}
 /*拍照识别*/
 .camera-text{
     /*width: 3.2rem;*/
