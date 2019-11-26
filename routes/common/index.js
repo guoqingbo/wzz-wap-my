@@ -254,7 +254,7 @@ let common = {
                         body = JSON.parse(body)
                     }
                 }catch (e) {
-                    console.log(e)
+
                 }
                 if(option.url.indexOf(common.envConfig.domain1) == -1 || process.env.NODE_ENV !== 'production'){
                     common.envConfig.debug && console.log(option.url);
