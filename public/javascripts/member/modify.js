@@ -1,9 +1,13 @@
 $(function (){
+    // 表单验证
     var validator = $('#form').validate({
         rules: {
             realName: {
                 required:true,
                 maxlength:8
+            },
+            cardType:{
+                required:true,
             },
             idcard: {
                 required:true,
@@ -49,6 +53,25 @@ $(function (){
         }
     });
 
+    $("#papersType").change( function() {
+        var type = $(this).find("option:selected").text();
+            if(type=="身份证"){
+                $("#papersCode").rules("remove");
+                $("#papersCode").rules("add", { required: true,isIdCardNo: true, messages: { required: "请正确输入您的身份证号码"} });
+            }else if(type == "军官证"){
+                $("#papersCode").rules("remove");
+                $("#papersCode").rules("add", { required: true,stringCheck:true,minlength:6,maxlength:8, messages: { required: "请输入正确的军官证号"} });
+            }else if(type == "护照"){
+                $("#papersCode").rules("remove");
+                $("#papersCode").rules("add", { required: true,isPassport:true, messages: { required: "请正确填写您的护照号"} });
+            }else if(type == "机动车驾驶证"){
+                $("#papersCode").rules("remove");
+                $("#papersCode").rules("add", { required: true,stringCheck:true, messages: { required: "机动车驾驶证是必填"} });
+            }else{
+                $("#papersCode").rules("remove");
+                $("#papersCode").rules("add", { required: true,stringCheck:true, messages: { required: "必填"} });
+            }
+    });
     var submitResult=false;
 
     // 发布评论

@@ -171,6 +171,14 @@ block content
                     input.order-text(type='tel', name='teles',value=userInfo ? userInfo.mobile || userInfo.phone : '', placeholder='请填写手机号')
             if reObj.module !== 'shop' && reObj.module !== 'repast'
                 li
+                    label.lab-title(for='') 证件类型
+                    .order-item
+                        select.card-type(name='cardType')
+                            option(value='1') 身份证
+                            option(value='2') 护照
+                            option(value='3') 港澳通行证
+                            option(value='4') 其他
+                li
                     label.lab-title(for='') 身份证
                     .order-item
                         input.order-text.card_box(type='text', name='idNos', value=(userInfo ? userInfo.idcard || userInfo.charNo : ''), placeholder='请填写身份证')
