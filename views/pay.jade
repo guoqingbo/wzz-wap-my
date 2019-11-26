@@ -69,19 +69,19 @@ block content
   .page-line
   ul#pay-mold.order-list.pay-list
     if is_weixn
-      //li.pay-item.active(data-paytype=32)
-      //  a(href='javascript:;')
-      //    label.lab-title(for='')
-      //      i.font-icon.icon-iconfont-weixin
-      //      | 微信支付
-      //    i.font-icon.fr.icon-iconfont-gougou
-      //银联支付
-      li.pay-item.active(data-paytype=41)
+      li.pay-item.active(data-paytype=32)
         a(href='javascript:;')
           label.lab-title(for='')
             i.font-icon.icon-iconfont-weixin
             | 微信支付
           i.font-icon.fr.icon-iconfont-gougou
+      ////银联支付
+      //li.pay-item.active(data-paytype=41)
+      //  a(href='javascript:;')
+      //    label.lab-title(for='')
+      //      i.font-icon.icon-iconfont-weixin
+      //      | 微信支付
+      //    i.font-icon.fr.icon-iconfont-gougou
     else
       li.pay-item.active(data-paytype=22)
         a(href='javascript:;')

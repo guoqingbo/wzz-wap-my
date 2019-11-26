@@ -1,0 +1,45 @@
+extends ../layout
+block stylesheets
+    link(rel="stylesheet", href="/lib/dropload/dropload.css")
+    link(rel="stylesheet", href="/stylesheets/supplier/lookOrder.css")
+block javascripts
+    script(type='text/javascript', src='/lib/dropload/dropload.min.js')
+    script(type='text/javascript', src='/javascripts/supplier/lookOrder.js')
+block content
+    .search-box
+        input.search-input(value='' name='keyword' placeholder='请输入您的手机号、姓名')
+        button.search-btn 搜索
+    .order-box
+        ul.supplier-order-list
+            // each item in [1,2,3,4]
+            //     li.order-item
+            //          .order-info
+            //              label.order-info-label 订单号：
+            //              span.order-info-value 123456789654
+            //              .order-info-right 张三
+            //          .order-info
+            //              span.order-info-value 珊瑚宝宝 X 2
+            //              .order-info-right 自提
+            //          .order-info
+            //              label.order-info-label 创建时间：
+            //              span.order-info-value 2018166655655
+            //              .order-info-right 待收货
+            //          .order-btn-box
+            //              button.defult-btn 确认发货
+    .mask
+    // 确认发货弹框
+    .confirm-send-box
+        .confirm-send-content
+            .input-gruop
+                label.input-gruop-label 快递单号：
+                input.input-gruop-value(name='expressNo' placeholder='请输入快递单号')
+                .error-expressNo 请输入快递单号
+            .input-gruop
+                label.input-gruop-label 快递公司：
+                select.input-gruop-select(placeholder='请选择快递公司' name='expressType')
+                    each item in data[0].data
+                        option(value=item.key)=item.value
+            .confirm-footer-box
+                button.confirm-default-btn.confirm-save-btn 确认
+                button.confirm-default-btn.cancel-btn 取消
+

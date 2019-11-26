@@ -49,7 +49,8 @@ exports.mainRouter = function (router, common) {
         let title = ''
         // projectNameCode判断所属项目
         let projectNameCode =  common.getProjectNameCode(req)
-
+        // 首页数据不随企业吗动态更新，使用各自的首页
+        let corpCode = common.envConfig.corpCode
 
         if(projectNameCode=='official'){
             // 官网wap
@@ -67,7 +68,7 @@ exports.mainRouter = function (router, common) {
             page = 'main/coralHotel'
             modelCode = 'home_page2'
         }else if(projectNameCode=='storeTerminal'){
-            // 珊瑚酒店
+            // 门店终端
             title = '智慧畅玩'
             page = 'main/storeTerminal'
             modelCode = 'home_page'
@@ -77,6 +78,12 @@ exports.mainRouter = function (router, common) {
                 urlArr: ['main', 'index', 'allInfo'],
                 parameter: {
                     modelCode,
+                    corpCode,
+                }
+            },{
+                urlArr: ['main', 'index', 'getUserDisInfo'],
+                parameter: {
+                    corpCode,
                 }
             }],
             req: req,

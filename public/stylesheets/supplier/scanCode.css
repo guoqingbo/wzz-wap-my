@@ -1,0 +1,65 @@
+.body-bg{
+    background: #fff url(/images/supplier/bg.jpg) no-repeat;
+    background-size:100% auto;
+}
+.scan-box{
+    margin-top: 11rem;
+    text-align: center;
+}
+.scan-btn{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    background-color: #ffc40f;
+    margin: 0 auto;
+    border: 0;
+    text-align: center;
+    color: #444444;
+    -webkit-box-shadow: 0px 0px 0.4rem rgba(255, 196, 15, 0.7);
+    box-shadow: 0px 0px 0.4rem rgba(255, 196, 15, 0.7);
+    outline: 0;
+}
+.scan-btn i{
+    display: inline-block;
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+.scan-text{
+    font-size: .65rem;
+}
+.quick-look-box{
+    text-align: center;
+    padding: 0 .5rem;
+    margin-top: 2rem;
+}
+.quick-look-btn{
+    display: inline-block;
+    background-color: #ffc40f;
+    color: #444;
+    width: 100%;
+    padding: .6rem 0;
+    border: 0;
+    font-size: .7rem;
+    border-radius: .3rem;
+}
+.nav-box{
+    position: fixed;
+    bottom: 0;
+    /*background-color: #6b8fff;*/
+    border-top: 1px solid #e5e5e5;
+    width: 100%;
+}
+.nav-item{
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+}
+.nav-item i{
+    font-size: 1rem;
+}
+.nav-item-name{
+    display: block;
+}
+.nav-item.active a{
+    color: #3b76dd;
+}

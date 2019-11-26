@@ -4,7 +4,8 @@
     "index": {
       "wxlogin":"/leaguer/api/leaguer/fastregByOpenid",
       "allInfo": "/info/api/info/getAllInfo",
-      "listInfo": "/info/api/info/listInfo"
+      "listInfo": "/info/api/info/listInfo",
+      "getUserDisInfo": "/leaguer/api/agent/getUserDisInfo"
     },
     "getInfo": "/info/api/info/getInfo",
     "sort": "/product/api/product/sortCondition",
@@ -265,5 +266,13 @@
   },
   "uploadfile":{
     "upload":"/static/manage/uiFileUpload/dispatch?action=upload"
+  },
+  "supplier":{
+    "login": "/leaguer/api/agent/leaguerLoginForSupplier",
+    "checkOrderH5":"/order/api/checkOrderH5",
+    "checkGoods":"/order/api/checkGoods",
+    "searchOrderDetail":"/order/api/searchOrderDetail",
+    "expressType":"/order/api/getExpressType"
   }
+
 }

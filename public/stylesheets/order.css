@@ -352,9 +352,27 @@
     text-align: center;
 }
 .qrcode-tip{
-    padding-bottom: .5rem;
+    padding-top: .5rem;
     font-size: .6rem;
     color: #000;
+    text-align: center;
+}
+.qrcode-isSync-tip{
+    padding: .5rem 0;
+    font-size: .6rem;
+    color: #f00;
+    text-align: center
+}
+.no-qrcode-box{
+    text-align: center;
+    margin-top: -.5rem;
+}
+.no-qrcode-bo img{
+    width: 9rem;
+    height: 9rem;
+}
+.assistCheckNoisSync{
+   color: #f00;
 }
 /*拍照识别*/
 .camera-text{
@@ -397,4 +415,7 @@
     color:#999;
     outline: 0;
 
+}
+.ssistCheckNo-hide{
+    display: none;
 }

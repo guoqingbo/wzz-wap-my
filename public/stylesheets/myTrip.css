@@ -397,6 +397,7 @@
     border-radius: 0.1rem;
     display: inline-block;
     position: relative;
+    outline: 0;
 }
 
 .scan-box .scan-ewm {

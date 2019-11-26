@@ -1,0 +1,49 @@
+mixin orderList(data)
+    if data.length
+        each item in data
+            li.order-item
+                .order-info
+                    label.order-info-label 订单号：
+                    span.order-info-value=item.orderNo
+                    .order-info-right=item.link_NAME
+                .order-info
+                    span.order-info-value #{item.rateName} X #{item.amount}
+                    .order-info-right
+                        if item.orderType == 'shop'
+                            +checkStatus(item.checkStatus)
+                .order-info
+                    label.order-info-label 创建时间：
+                    span.order-info-value #{item.createTime}
+                    .order-info-right
+                        if item.orderType == 'shop'
+                            +expressType(item.expressType)
+                if item.checkFlag == 'T'
+                    .order-btn-box
+                        if item.orderType == 'shop'
+                            button.defult-btn.confirm-send-btn(data-orderdetailno=item.orderDetailNo) 确认发货
+                        else
+                            button.defult-btn.scan-code-btn(data-orderdetailno=item.orderDetailNo) 核销
+    else
+        li.no-data 暂无数据
+mixin checkStatus(checkStatus)
+    case checkStatus
+        when '0'
+           span 未发货
+        when '1'
+            span 已发货
+        when '2'
+            span 已收货
+        when '3'
+            span 自提
+        default
+            span
+mixin expressType(expressType)
+    case expressType
+        when '0'
+            span 快递
+        when '1'
+            span 自提
+        default
+            span
+if method === "ajax"
+    +orderList(data)

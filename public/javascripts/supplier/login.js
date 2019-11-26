@@ -6,46 +6,37 @@ $(function () {
         rules: {
             loginName: {
                 required: true,
-                isMobile: true
+                // isMobile: true
             },
             loginPass: {
                 required: true,
-                rangelength: [6, 20]
+                // rangelength: [6, 20]
             },
-            password: {
-                required: true,
-                rangelength: [6, 20]
-            },
-            enterpassword: {
-                equalTo: "#password"
-            },
-            checkCode: {
-                required: true
-            }
         }
     });
 
     /**
      * 账号登录
      */
-    var submitForm = $('#submitForm');
-    submitForm.submit(function () {
-        var $this = $(this);
+    var submitForm = $('#submitBtn');
+    submitForm.click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
         // 获取全渠道缓存
         var data = {
             loginName:$('input[name="loginName"]').val(),
             loginPass:$('input[name="loginPass"]').val()
         };
+        var redir = $(this).data('redir');
         if (validator.form()) {
-            var url = $this.data('url');
-            $.post('/leaguerLogin', data)
+            $.post('/supplier/login', data)
                 .success(function (data) {
                     var datas = data[0];
                     if (datas.status === 200) {
-                        if (url) {
-                            window.location.href = url;
+                        if (redir) {
+                            window.location.href = redir;
                         } else {
-                            window.location.href = '/';
+                            window.location.href = '/supplier/scanCode'
                         }
                     } else {
                         $('.tips p').text(datas.message);
@@ -53,9 +44,8 @@ $(function () {
                     }
                 })
                 .error(function (err) {
-                    window.location.href = '/error';
+                   console.log(err)
                 });
-            return false;
         }
     });
 });

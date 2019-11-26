@@ -1,4 +1,16 @@
-body{ background: url(../../images/index/body-img3.png) top no-repeat #004387; background-size: contain;}
+body{
+    background: url(../../images/index/body-img3.png) top no-repeat #004387;
+    /*background: url(../../images/index/body-img7.png) top no-repeat #004387;*/
+    background-size: contain;
+}
+.logo-img{
+    position: absolute;
+    top: -5.6rem;
+    left: 5.2rem;
+    /* width: 4.5rem; */
+    z-index: 10;
+    height: 1.35rem;
+}
 .hs-banner{  position: relative;
     width: 15.25rem;
     height: 8.4rem;
