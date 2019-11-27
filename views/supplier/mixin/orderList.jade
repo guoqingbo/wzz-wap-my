@@ -17,14 +17,14 @@ mixin orderList(data)
                     .order-info-right
                         if item.orderType == 'shop'
                             +expressType(item.expressType)
-                if item.checkFlag == 'T'
+                if item.checkFlag == 'T' && item.checkStatus == '0'
                     .order-btn-box
                         if item.orderType == 'shop'
                             button.defult-btn.confirm-send-btn(data-orderdetailno=item.orderDetailNo) 确认发货
                         else
                             button.defult-btn.scan-code-btn(data-orderdetailno=item.orderDetailNo) 核销
     else
-        li.no-data 暂无数据
+        //li.no-data 暂无数据
 mixin checkStatus(checkStatus)
     case checkStatus
         when '0'

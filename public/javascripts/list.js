@@ -316,9 +316,9 @@ $(function () {
      * 解锁dropload
      */
     function unLockDropload() {
-        //dropload.resetload();
+        dropload.resetload();
         dropload.unlock();
-        //dropload.noData(false);
+        dropload.noData(false);
         dropload.isData = true;
 
     }

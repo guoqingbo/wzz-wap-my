@@ -64,13 +64,18 @@ $(function () {
     //         })
     // }
     // getOrderList()
+    function unLockDropload() {
+        dropload.resetload();
+        dropload.unlock();
+        dropload.noData(false);
+        dropload.isData = true;
 
+    }
     // 搜索
     $(".search-btn").click(function (e) {
         e.preventDefault()
         e.stopPropagation()
-
-        dropload.unlock();
+        unLockDropload()
         filterObj.currPage = 1
         filterFn(dropload, 1)
     })
@@ -104,6 +109,9 @@ $(function () {
                 $(".mask").hide()
                 if(data[0].status===200){
                     new ErrLayer({message: data[0].message})
+                    setTimeout(function () {
+                        window.location.reload()
+                    },500)
                 }else{
                     new ErrLayer({message: data[0].message})
                 }
@@ -137,6 +145,9 @@ $(function () {
                 .success(function (data) {
                     if(data[0].status===200){
                         new ErrLayer({message: data[0].message||'核销成功'})
+                        setTimeout(function () {
+                            window.location.reload()
+                        },500)
                     }else{
                         new ErrLayer({message: data[0].message})
                     }
