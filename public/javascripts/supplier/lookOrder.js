@@ -65,17 +65,17 @@ $(function () {
     // }
     // getOrderList()
     function unLockDropload() {
-        dropload.resetload();
         dropload.unlock();
+        dropload.resetload();
         dropload.noData(false);
-        dropload.isData = true;
-
+        dropload.isData = true
     }
     // 搜索
     $(".search-btn").click(function (e) {
         e.preventDefault()
         e.stopPropagation()
         unLockDropload()
+        // dropBox.find('ul').children().remove()
         filterObj.currPage = 1
         filterFn(dropload, 1)
     })
