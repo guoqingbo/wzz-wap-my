@@ -10,7 +10,7 @@
 .myorder-hotel-explian span{ color: #999;}
 
 /*ÐÔ±ðµ¯³ö²ã*/
-.sex-dialog{ position: fixed; bottom: -7rem; left: 0; width: 100%; z-index: 21; display: none;}
+.sex-dialog{ position: fixed; bottom: -7rem; left: 0; width: 100%; z-index: 21; display: none;background-color: #fff}
 .sex-dialog ul{ background-color: #fff;}
 .sex-dialog ul li{ border-bottom: 1px solid #dcdcdc;}
 .sex-dialog ul li a{ display: block; padding: 0.65rem 0; height: 0.8rem; line-height: 0.8rem; text-align: center; font-size: 0.6rem;}
@@ -317,7 +317,7 @@
 .linkMan-name{ width: 3rem; line-height: 1.5rem; font-size: 0.65rem; text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;}
-.linkMan-center{ border-left: 1px solid #ddd; padding: 0 .75rem; font-size: 0.6rem;}
+.linkMan-center{ border-left: 1px solid #ddd; padding: 0 .75rem; font-size: 0.6rem;width: 9rem}
 .linkMan-check{ width: 1rem; line-height: 1.5rem;cursor: pointer}
 .linkMan-check span{ display:inline-block; width: 0.9rem; height: 0.9rem; line-height: 0.9rem; border: 1px solid #dfdfdf; border-radius: 3px; vertical-align: middle; text-align: center;}
 .linkMan-check span.checked{ border: 1px solid #3b76de; color: #3b76de;}
@@ -381,6 +381,9 @@
     right: 0;
     top: .1rem;
     vertical-align: middle;
+}
+.camera-text.hide{
+    display: none;
 }
 .hide_file {
     left: 0;

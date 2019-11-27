@@ -244,9 +244,11 @@ $(function () {
         $(".ticket-type-box").each(function () {
             var realNames = []
             $(this).find(".person-selected-item").each(function () {
+                var item = $(this).data("item")
                 var realNamesItem = {
-                    idNo:$(this).find(".person-selected-icard").text(),
-                    name:$(this).find(".person-selected-name").text(),
+                    idNo:item.cardNo,
+                    name:item.linkmanName,
+                    certType:item.linkmanType||'01',
                 }
                 realNames.push(realNamesItem)
             })
@@ -263,10 +265,13 @@ $(function () {
             cartOrderDtos.push(orderItem)
         })
 
+        var takePerson = $(".take-ticket-box .take-person-item").data("item")
+
         var params = {
-            linkName:$(".take-ticket-box .take-person-name").text(),//取票人姓名
-            linkMobile:$(".take-ticket-box .take-person-phone").text(),//取票人手机号
-            linkIdcard:$(".take-ticket-box .person-selected-icard").text(),//取票人身份证
+            linkName:takePerson.linkmanName,//取票人姓名
+            linkMobile:takePerson.phoneNo,//取票人手机号
+            linkIdcard:takePerson.cardNo,//取票人身份证
+            certType:takePerson.linkmanType||'01',//取票人身份证
             cartOrderStr:JSON.stringify(cartOrderDtos),//下单参数
             paramExtension:"",//业务拓展参数
         }

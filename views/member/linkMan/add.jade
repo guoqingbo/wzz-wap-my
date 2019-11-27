@@ -23,14 +23,12 @@ block content
           label.lab-title 证件类型
           .order-item
               select.cert-type(name='certType')
-                option(value='1') 身份证
-                option(value='2') 护照
-                option(value='3') 港澳通行证
-                option(value='4') 其他
+                  each item in certType
+                      option(value=item.key selected = item.value=='身份证')=item.value
       li
           label.lab-title 证件号
           .order-item
-              input.order-text.card_box(type='text', name='charNo', placeholder='请填写身份证')
+              input.order-text.card_box(type='text', name='charNo', placeholder='请填写证件号')
               span.c-price.camera-text
                 input(type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)").hide_file
                 i.font-icon.icon-iconfont-camera(style='margin-right:.1rem')

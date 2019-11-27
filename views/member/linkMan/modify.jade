@@ -1,44 +1,42 @@
 extends ../../layout
 
 block stylesheets
-  link(rel="stylesheet", href="/stylesheets/order.css")
+    link(rel="stylesheet", href="/stylesheets/order.css")
 block javascripts
-  script(type='text/javascript', src='/javascripts/validate/jquery.validate.min.js')
-  script(type='text/javascript', src='/javascripts/validate/messages_zh.min.js')
-  script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
-  script(type='text/javascript', src='/javascripts/member/modify.js')
+    script(type='text/javascript', src='/javascripts/validate/jquery.validate.min.js')
+    script(type='text/javascript', src='/javascripts/validate/messages_zh.min.js')
+    script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
+    script(type='text/javascript', src='/javascripts/member/modify.js')
 
 block content
-  form(action="")#form
-    input(type="hidden",name="id",value=data.id)
-    ul.order-list.myorder-list
-      li
-        label.lab-title(for='')="游玩人"
-        .order-item
-            input.order-text(type='text', name='name', value=data.name placeholder='请填写姓名')
-      li
-        label.lab-title(for='') 手机号
-        .order-item
-            input.order-text(type='tel', name='phone', value=data.phone placeholder='请填写手机号')
-      li
-          label.lab-title 证件类型
-          .order-item
-              select.card-type(name='cardType')
-                  option(value='1') 身份证
-                  option(value='2') 护照
-                  option(value='3') 港澳通行证
-                  option(value='4') 其他
-      li
-          label.lab-title(for='') 证件号
-          .order-item
-              input.order-text.card_box(type='text', name='charNo', value=data.charNo placeholder='请填写证件号')
-              span.c-price.camera-text
-                input(type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)").hide_file
-                i.font-icon.icon-iconfont-camera(style='margin-right:.1rem')
-                ="拍照识别"
-    .member-handle.linkMan-modify-btn
-      a.btn(href='javascript:;') 保存
+    form(action="")#form
+        input(type="hidden",name="id",value=data[0].data.id)
+        ul.order-list.myorder-list
+            li
+                label.lab-title="游玩人"
+                .order-item
+                    input.order-text(type='text', name='name', value=data[0].data.linkmanName placeholder='请填写姓名')
+            li
+                label.lab-title 手机号
+                .order-item
+                    input.order-text(type='tel', name='phone', value=data[0].data.phoneNo placeholder='请填写手机号')
+            li
+                label.lab-title 证件类型
+                .order-item
+                    select.cert-type(name='certType')
+                        each item in certType
+                            option(value=item.key selected = item.key == data[0].data.linkmanType)=item.value
+            li
+                label.lab-title 证件号
+                .order-item
+                    input.order-text.card_box(type='text', name='charNo', value=data[0].data.cardNo placeholder='请填写证件号')
+                    span.c-price.camera-text(class=data[0].data.linkmanType != '01' ? 'hide' : '')
+                        input(type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)").hide_file
+                        i.font-icon.icon-iconfont-camera(style='margin-right:.1rem')
+                        ="拍照识别"
+        .member-handle.linkMan-modify-btn
+            a.btn(href='javascript:;') 保存
     .mask#mask
     .tips
-      p
-      a(href="javascript:;").queding 确定
+        p
+        a(href="javascript:;").queding 确定

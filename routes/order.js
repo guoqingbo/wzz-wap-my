@@ -3,9 +3,30 @@ var async = require('async'),
     moment = require('moment');
 
 exports.mainRouter = function (router, common) {
-
+    // 获取证件类型
+    function getCertType(req,res,next){
+        if(req.session.certType){
+            res.locals.certType = req.session.certType
+            next()
+            return
+        }
+        common.commonRequest({
+            url: [{
+                urlArr:['member','linkMan','getCertType']
+            }],
+            req: req,
+            res: res,
+            callBack:function(results, reObj, res, handTag){
+                if(results[0].status == 200){
+                    handTag.tag = 0
+                    res.locals.certType = req.session.certType = results[0].data
+                    next()
+                }
+            }
+        });
+    }
     // 订单页面
-    router.get('/order/:module/:id', common.isLogin, function (req, res, next) {
+    router.get('/order/:module/:id', common.isLogin, getCertType,function (req, res, next) {
         var module = req.params.module,
             handObj = { rateCode: req.params.id };
 

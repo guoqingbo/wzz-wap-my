@@ -150,7 +150,14 @@ let common = {
                                     cb(null, body);
                                 }
                             } else {
-                                let result = body && typeof body === 'string' ? JSON.parse(body) : body;
+                                let result = body;
+                                try {
+                                    if(body && typeof body === 'string'){
+                                        result = JSON.parse(body)
+                                    }
+                                }catch (e) {
+
+                                }
                                 if (result&&result.status == 400) {
                                     _p.req.session.curUrl = _p.originalUrl;
                                     //- _p.res.redirec/appoint/lookGameOrdert('/login');

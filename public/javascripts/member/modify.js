@@ -92,6 +92,7 @@ $(function (){
             charNo:$("input[name='charNo']").val(),
             name:$("input[name='name']").val(),
             phone:$("input[name='phone']").val(),
+            certType:$("select[name='certType']").val(),
         }
         if(type == 'modify'){
             params.id = $("input[name='id']").val()

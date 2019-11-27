@@ -454,7 +454,7 @@ $(function () {
             //     let dqTime=timeHour+":"+timeMinute;
             //     console.log(dqTime.replace(":",""));
             // }
-            carTag && errMsg.push('身份证不能相同');
+            carTag && errMsg.push('证件号不能相同');
             sexErr && errMsg.push('性别不符下单要求');
             ageErr && errMsg.push('年龄不符下单要求');
 
@@ -648,9 +648,9 @@ $(function () {
                 '</div>' +
                 '</li>' +
                 '<li>' +
-                '<label for="" class="lab-title">身份证</label>' +
+                '<label for="" class="lab-title">证件号</label>' +
                 '<div class="order-item">' +
-                '<input id=linkCard' + num + ' type="text" name="idNos" value="" placeholder="请填写身份证" class="order-text card_box" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">' +
+                '<input id=linkCard' + num + ' type="text" name="idNos" value="" placeholder="请填写证件号" class="order-text card_box" onKeypress="javascript:if(event.keyCode == 32)event.returnValue = false;">' +
                 '<span class="c-price camera-text">' +
                 '<input type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)" class="hide_file">' +
                 '<i class="font-icon icon-iconfont-camera" style="margin-right: .1rem"></i>拍照识别</span>' +
@@ -674,9 +674,9 @@ $(function () {
                     '</div>' +
                     '</li>' +
                     '<li>' +
-                    '<label for="" class="lab-title">身份证</label>' +
+                    '<label for="" class="lab-title">证件号</label>' +
                     '<div class="order-item">' +
-                    '<input id=linkCard' + i + ' type="text" name="idNos" value="" placeholder="请填写身份证" class="order-text card_box" onkeyup="this.value=this.value.replace(/\\s+/g,\'\')">' +
+                    '<input id=linkCard' + i + ' type="text" name="idNos" value="" placeholder="请填写证件号" class="order-text card_box" onkeyup="this.value=this.value.replace(/\\s+/g,\'\')">' +
                     '<span class="c-price camera-text">'+
                     '<input type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)" class="hide_file">'+
                     '<i class="font-icon icon-iconfont-camera" style="margin-right: .1rem"></i>拍照识别</span>'+
@@ -703,9 +703,9 @@ $(function () {
     //             '</div>' +
     //             '</li>' +
     //             '<li>' +
-    //             '<label for="" class="lab-title">身份证</label>' +
+    //             '<label for="" class="lab-title">证件号</label>' +
     //             '<div class="order-item">' +
-    //             '<input id=linkCard' + i + ' type="text" name="idNos" value="" placeholder="请填写身份证" class="order-text card_box">' +
+    //             '<input id=linkCard' + i + ' type="text" name="idNos" value="" placeholder="请填写证件号" class="order-text card_box">' +
     //             '<i class="font-icon fr icon-iconfont-xie"></i>' +
     //             '</div>' +
     //             '</li>' +
@@ -798,6 +798,10 @@ $(function () {
     }
 
     function formValidate(goodsWay) {
+        // 获取证件类型
+        var certType = $("select[name='certType']").val()
+        console.log(certType)
+        console.log(isNeedIdcard)
         validator = $ord.form.validate({
             rules: {
                 linkMans: {
@@ -810,8 +814,8 @@ $(function () {
                     isMobile: true
                 },
                 idNos: {
-                    required: isNeedIdcard === 'T'?false:isNeedIdcard === 'T',
-                    isIdCardNo: true
+                    required: isNeedIdcard === 'T'?true:false,
+                    isIdCardNo: certType=='01'?true:false
                 },
                 street: {
                     required: !goodsWay,
@@ -851,10 +855,10 @@ $(function () {
                     if (idtrue[0]) {
                         checkName = ["checked", "icon-checkmark"];
                     }
-                    html += "<li>" +
+                    html += "<li data-item='"+JSON.stringify(res[i])+"'>" +
                         "<div class='linkMan-name'>" + res[i].linkmanName + "</div>" +
                         "<div class='linkMan-center'>" +
-                        "<p>手机号：<span>" + res[i].phoneNo + "</span></p><p>身份证：<span>" + res[i].cardNo + "</span></p>" +
+                        "<p>手机号：<span>" + res[i].phoneNo + "</span></p><p>证件号：<span>" + res[i].cardNo + "</span></p>" +
                         "</div>" +
                         "<div class='linkMan-check'><span data-id=" + res[i].id + " class='checkspan " + checkName[0] + "'><i class='" + checkName[1] + "'></i></span></div>" +
                         "</li>";
@@ -892,25 +896,24 @@ $(function () {
         $('.linkMan-list').find('li').each(function (i,v) {
             if($(v).find('.checkspan').hasClass('checked')){
                 n=n+1;
-                var _id= $(v).find(".checkspan").data("id"),
-                    _linkMans = $(v).find(".linkMan-name").text(),
-                    _teles = $(v).find(".linkMan-center").find("p:first").find("span").text(),
-                    _idNos = $(v).find(".linkMan-center").find("p:last").find("span").text();
+                var item = $(v).data("item")
+                var certType = item.linkmanType||'01'
                 listLinkManChecked.push({
-                    id: _id,
-                    linkMans: _linkMans,
-                    teles: _teles,
-                    idNos: _idNos
+                    id: item.id,
+                    linkMans: item.linkmanName,
+                    teles: item.phoneNo,
+                    idNos: item.cardNo
                 });
                 if(n===1){
-                    $('.order-nl').find('input[name="linkMans"]').val(_linkMans);
-                    $('.order-nl').find('input[name="teles"]').val(_teles);
-                    $('.order-nl').find('input[name="idNos"]').val(_idNos);
+                    $('.order-nl').find('input[name="linkMans"]').val(item.linkmanName);
+                    $('.order-nl').find('input[name="teles"]').val(item.phoneNo);
+                    $('.order-nl').find('input[name="idNos"]').val(item.cardNo);
+                    $('.order-nl').find('option[value="'+certType+'"]').attr("selected",true)
                 }else{
                     $('#userAuth').find('ul').each(function (i,v) {
                         if(n-2 === i){
-                            $(v).find('input[name="linkMans"]').val(_linkMans);
-                            $(v).find('input[name="idNos"]').val(_idNos);
+                            $(v).find('input[name="linkMans"]').val(item.linkmanName);
+                            $(v).find('input[name="idNos"]').val(item.cardNo);
                         }
                     });
                 }
@@ -928,6 +931,18 @@ $(function () {
     $('.linkMan-add').click(function (e) {
          e.preventDefault();
          location.href = this.href + '?originalUrl=' + location.href
+    });
+    $(".cert-type").change( function() {
+        var type = $(this).find("option:selected").text();
+        $("input[name=idNos]").rules("remove");
+        if(type=="身份证"){
+            $("input[name=idNos]").rules("add", {required:true, isIdCardNo: true});
+            $(".camera-text").show()
+        }else{
+            $("input[name=idNos]").rules("add", {required:true});
+            $(".camera-text").hide()
+        }
+        $("input[name=idNos]").focus().blur()
     });
 });
 

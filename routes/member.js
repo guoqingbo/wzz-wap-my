@@ -1,6 +1,26 @@
-// var async = require('async'),
-//     needle = require('needle');
 exports.mainRouter = function (router,common){
+    // 获取证件类型
+    function getCertType(req,res,next){
+        if(req.session.certType){
+            res.locals.certType = req.session.certType
+            next()
+            return
+        }
+        common.commonRequest({
+            url: [{
+                urlArr:['member','linkMan','getCertType']
+            }],
+            req: req,
+            res: res,
+            callBack:function(results, reObj, res, handTag){
+                if(results[0].status == 200){
+                    handTag.tag = 0
+                    res.locals.certType = req.session.certType = results[0].data
+                    next()
+                }
+            }
+        });
+    }
     // 个人中心
     router.get('/member', common.isLogin, function (req,res,next){
         var meb_flag;
@@ -335,9 +355,10 @@ exports.mainRouter = function (router,common){
     });
 
     // 个人中心新增常用常用联系人信息
-    router.get('/member/linkMan/add', common.isLogin, function(req,res,next){
+    router.get('/member/linkMan/add', common.isLogin, getCertType,function(req,res,next){
         res.render('member/linkMan/add',{title:'新增游玩人'});
-    }).post('/member/linkMan/add',function(req,res,next){
+    })
+    router.post('/member/linkMan/add',function(req,res,next){
         req.body.auto="F";
         common.commonRequest({
             url:[{
@@ -354,9 +375,29 @@ exports.mainRouter = function (router,common){
     });
 
     // 个人中心修改常用常用联系人信息
-    router.get('/member/linkMan/modify', common.isLogin, function(req,res,next){
-        res.render('member/linkMan/modify',{title:'修改游玩人',data:req.query});
-    }).post('/member/linkMan/modify',function(req,res,next){
+    router.get(' /modify', common.isLogin,getCertType, function(req,res,next){
+        // res.render('member/linkMan/modify',{title:'修改游玩人',data:req.query});
+        common.commonRequest({
+            url:[{
+                urlArr:['member','linkMan','detail'],
+                parameter:{
+                    id:req.query.id
+                }
+            }],
+            page: 'member/linkMan/modify',
+            title: '修改游玩人',
+            req: req,
+            res: res,
+            callBack: function (result, reObj) {
+                if(result[0].status == 200){
+                    // reObj.originalUrl = req.query.originalUrl || ''
+                    // reObj.comefrom =  req.query.comefrom || ''
+                }
+            }
+        })
+
+    })
+    router.post('/member/linkMan/modify',function(req,res,next){
         common.commonRequest({
         url:[{
             urlArr:['member','linkMan','modify'],

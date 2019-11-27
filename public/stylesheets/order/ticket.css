@@ -176,7 +176,7 @@ body{
 .linkMan-name{ width: 3rem; line-height: 1.5rem; font-size: 0.65rem; text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;}
-.linkMan-center{ border-left: 1px solid #ddd; padding: 0 .75rem; font-size: 0.6rem;}
+.linkMan-center{ border-left: 1px solid #ddd; padding: 0 .75rem; font-size: 0.6rem;width: 9rem}
 .linkMan-check{ width: 1rem; line-height: 1.5rem;cursor: pointer}
 .linkMan-check span{ display:inline-block; width: 0.9rem; height: 0.9rem; line-height: 0.9rem; border: 1px solid #dfdfdf; border-radius: 3px; vertical-align: middle; text-align: center;}
 .linkMan-check span.checked{ border: 1px solid #3b76de; color: #3b76de;}

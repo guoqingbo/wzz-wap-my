@@ -210,10 +210,12 @@
     },
     "integral":"/leaguer/api/point/manage/pointRecord",
     "linkMan":{
+      "getCertType":"/order/api/getCertType",
       "list":"/leaguer/api/linkmanInfo/manage/list",
       "add":"/leaguer/api/linkmanInfo/manage/save",
       "modify":"/leaguer/api/linkmanInfo/manage/update",
-      "del":"/leaguer/api/linkmanInfo/manage/delete"
+      "del":"/leaguer/api/linkmanInfo/manage/delete",
+      "detail":"/leaguer/api/linkmanInfo/manage/get"
     }
   },
   "myTrip":{

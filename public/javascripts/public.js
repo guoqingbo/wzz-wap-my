@@ -234,8 +234,8 @@ $(function () {
         //     sessionStorage.setItem('promoter',getCookie('promoter'))
         // }
         if(sessionStorage.getItem('promoter')){
-            delCookie('promoter')
-            setCookie('promoter',sessionStorage.getItem('promoter'))
+            // delCookie('promoter')
+            // setCookie('promoter',sessionStorage.getItem('promoter'))
         }else{
             delCookie('promoter')
         }
@@ -257,8 +257,8 @@ $(function () {
             sessionStorage.setItem('corpCode',params.corpCode)
         }
         if(sessionStorage.getItem('corpCode')){
-            delCookie('corpCode')
-            setCookie('corpCode',sessionStorage.getItem('corpCode'))
+            // delCookie('corpCode')
+            // setCookie('corpCode',sessionStorage.getItem('corpCode'))
         }else{
             delCookie('corpCode')
         }

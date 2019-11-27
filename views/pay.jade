@@ -50,13 +50,13 @@ block content
                   p 手&ensp;机&ensp;号：  #{_item.telephone}
                 else
                   p 姓&ensp;&ensp;&ensp;&ensp;名：  #{_item.linkMan}
-                p 身份证号： #{_item.idNo}
+                p 证件号： #{_item.idNo}
           else
             .order-item
               p 联 系 人：  #{item.linkName}
               p 手 机 号：  #{item.linkMobile}
               if module !== 'shop' && module !== 'repast'
-                p 身份证号：#{item.linkIdcard}
+                p 证件号：#{item.linkIdcard}
     ul.order-list.account-list.bt
       li.toogleli
         label.lab-title(for='')=_b?'小计':'订单总额'
