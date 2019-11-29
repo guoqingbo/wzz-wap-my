@@ -54,8 +54,8 @@ let private = {
             // 传入的接口中没有corpCode参数时
             // _o.corpCode = "cgb2cfxs";
             _o.corpCode =
-                req.query.corpCode ||
-                req.cookies.corpCode ||
+                // req.query.corpCode ||
+                // req.cookies.corpCode ||
                 common.envConfig.corpCode ||
                 "cgb2cfxs"
             // if(common.envConfig.corpCode){
@@ -150,7 +150,14 @@ let common = {
                                     cb(null, body);
                                 }
                             } else {
-                                let result = body && typeof body === 'string' ? JSON.parse(body) : body;
+                                let result = body;
+                                try {
+                                    if(body && typeof body === 'string'){
+                                        result = JSON.parse(body)
+                                    }
+                                }catch (e) {
+
+                                }
                                 if (result&&result.status == 400) {
                                     _p.req.session.curUrl = _p.originalUrl;
                                     //- _p.res.redirec/appoint/lookGameOrdert('/login');
