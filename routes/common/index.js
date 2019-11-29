@@ -54,8 +54,8 @@ let private = {
             // 传入的接口中没有corpCode参数时
             // _o.corpCode = "cgb2cfxs";
             _o.corpCode =
-                req.query.corpCode ||
-                req.cookies.corpCode ||
+                // req.query.corpCode ||
+                // req.cookies.corpCode ||
                 common.envConfig.corpCode ||
                 "cgb2cfxs"
             // if(common.envConfig.corpCode){

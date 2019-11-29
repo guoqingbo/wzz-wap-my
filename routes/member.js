@@ -375,7 +375,7 @@ exports.mainRouter = function (router,common){
     });
 
     // 个人中心修改常用常用联系人信息
-    router.get(' /modify', common.isLogin,getCertType, function(req,res,next){
+    router.get('/member/linkMan/modify', common.isLogin,getCertType, function(req,res,next){
         // res.render('member/linkMan/modify',{title:'修改游玩人',data:req.query});
         common.commonRequest({
             url:[{

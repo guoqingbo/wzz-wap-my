@@ -325,10 +325,16 @@ $(function () {
     $('.mask').uniqueScroll()
 
 
-    // 响应式布局
-    var winWidth = $(window).width();
-    $("html").css("fontSize", (winWidth / 640) * 40 + "px");
 
+    // 响应式布局
+    function fnResize(){
+        var winWidth = $(window).width();
+        $("html").css("fontSize", (winWidth / 640) * 40 + "px");
+    }
+    fnResize()
+    window.onresize = function () {
+        fnResize()
+    }
     // 不知道什么鬼
     if ($('#details-tab').size() > 0) {
         tab("details-tab");

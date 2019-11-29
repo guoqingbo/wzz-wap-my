@@ -83,7 +83,7 @@ exports.mainRouter = function (router, common) {
             },{
                 urlArr: ['main', 'index', 'getUserDisInfo'],
                 parameter: {
-                    corpCode,
+                    corpCode:req.query.corpCode || req.cookies.corpCode,
                 }
             }],
             req: req,
