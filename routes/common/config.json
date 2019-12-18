@@ -273,6 +273,11 @@
     "checkGoods":"/order/api/checkGoods",
     "searchOrderDetail":"/order/api/searchOrderDetail",
     "expressType":"/order/api/getExpressType"
+  },
+  "manage":{
+    "login": "/leaguer/api/agent/leaguerLoginForAdmin",
+    "changeFlag":"/product/api/product/changeFlag",
+    "rateCodeList":"/product/api/product/pageRateCodeDailyFlag"
   }
 
 }

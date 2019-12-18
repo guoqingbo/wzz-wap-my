@@ -1,0 +1,33 @@
+extends ../layout
+block stylesheets
+    link(rel="stylesheet", href="/lib/dropload/dropload.css")
+    link(rel="stylesheet", href="/stylesheets/manage/ticket.css")
+block javascripts
+    script(type='text/javascript', src='/lib/dropload/dropload.min.js')
+    script(type='text/javascript', src='/javascripts/manage/ticket.js')
+block content
+    .search-box
+        input.search-input(value='' name='keyword' placeholder='请输入渠道码名称')
+        button.search-btn 搜索
+    // 日历
+    .calendar-box
+        ul.calendar-day-list
+            each item,index in dayList
+                li.calendar-day-item(class=index == 0 ? 'active' : '' data-today=item.today)
+                    p.calendar-day-value=item.day
+                    p.calendar-week=item.week
+    .order-box
+        ul.supplier-order-list
+            // each item in [1,2,3,4]
+            //     li.order-item
+            //         .order-info
+            //             span.order-info-value 珊瑚宝宝
+            //         .order-info
+            //             span.order-info-value ￥144
+            //         .order-btn-box
+            //             if item == 1
+            //                 button.defult-btn 上架
+            //             else
+            //                 button.defult-btn 下架
+    .mask
+

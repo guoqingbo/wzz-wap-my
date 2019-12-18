@@ -1,0 +1,180 @@
+.search-box{
+    padding: .5rem;
+}
+.search-input{
+    box-sizing: border-box;
+    border: 1px solid #e5e5e5;
+    border-radius: .3rem;
+    width: 75%;
+    outline: 0;
+    /*height: 2rem;*/
+    padding: .5rem;
+}
+.search-btn{
+    margin-left: 5%;
+    vertical-align: middle;
+    background-color: #ffc40f;
+    color: #444;
+    width: 20%;
+    padding: .3rem 0;
+    border: 0;
+    font-size: .6rem;
+    border-radius: .3rem;
+}
+.supplier-order-list{
+    padding: 0 .5rem;
+}
+.order-item{
+    background-color: #fff;
+    color: #999;
+    margin-bottom: .5rem;
+    padding: .5rem;
+    border-radius: .3rem;
+}
+.order-info-right{
+    float: right;
+}
+.order-btn-box{
+    text-align: right;
+    margin-top: .5rem;
+    border-top: 1px solid #e5e5e5;
+    padding-top: .5rem;
+}
+.defult-btn{
+    text-align: center;
+    margin-left: .5rem;
+    background-color: #ffc40f;
+    color: #444;
+    padding: .3rem;
+    border: 0;
+    font-size: .6rem;
+    border-radius: .3rem;
+}
+/*确认发货弹框*/
+.confirm-send-box{
+    display: none;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    padding: .5rem;
+}
+.confirm-send-content{
+    background-color: #fff;
+    border-radius: .5rem;
+    overflow: hidden;
+    padding: .5rem;
+}
+.input-gruop{
+    padding: .5rem;
+    font-size: .6rem;
+    position: relative;
+}
+.input-gruop-label{
+    display: inline-block;
+    width: 25%;
+    vert-align: middle;
+}
+.input-gruop-value,.input-gruop-select{
+    box-sizing: border-box;
+    display: inline-block;
+    width: 75%;
+    vert-align: middle;
+    border: 1px solid #e5e5e5;
+    background-color: #fff;
+    outline: 0;
+    padding: .5rem;
+}
+.confirm-footer-box{
+    border-top: 1px solid #e5e5e5;
+    text-align: center;
+    padding-top: .5rem;
+}
+.confirm-default-btn{
+    text-align: center;
+    margin-left: .5rem;
+    background-color: #ffc40f;
+    color: #444;
+    padding: .3rem 1rem;
+    border: 0;
+    font-size: .6rem;
+    border-radius: .3rem;
+}
+.confirm-save-btn{
+}
+.cancel-btn{
+    border: 1px solid #e5e5e5;
+    background-color: #fff;
+    color: #999;
+}
+.error-expressNo{
+    color: red;
+    display: none;
+    position: absolute;
+    left: 25%;
+    padding-left: .5rem;
+}
+/*日历*/
+.calendar-box {
+    position: relative;
+    padding: 0 .5rem;
+}
+
+.calendar-day-list {
+    background-color: #fff;
+    padding: .5rem;
+    margin-bottom: .5rem;
+    border-radius: .3rem;
+    margin-left: -1%;
+}
+
+.calendar-day-item {
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: .1rem 0;
+    display: inline-block;
+    width: 19%;
+    /*height: 1.5rem;*/
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: .25rem;
+    position: relative;
+    margin-left: 1%
+}
+
+.calendar-day-value {
+    font-size: .5rem;
+}
+
+.calendar-label {
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    background: #ff7a50;
+    color: #fff;
+    padding: 0 .1rem;
+    font-size: .5rem;
+    border-radius: .1rem;
+}
+
+.calendar-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    line-height: 1.5rem;
+    position: absolute;
+    background-color: #f2f2f2;
+    border-radius: .25rem;
+    font-size: .75rem;
+    right: .5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.calendar-day-item.active {
+    background-color: #cbdeff;
+    color: #3b76de;
+    border: 1px solid #3b76de;
+}
