@@ -2,12 +2,17 @@ mixin goAppointList(data)
     each item in data
         li.project-item
             .project-item-default.project-item-left
-                img.project-item-img(src=item.projectLogo||'/images/demo/no-img.jpg')
+                .project-item-img-box
+                    img.project-item-img(src=item.projectLogo||'/images/demo/no-img.jpg')
             .project-item-default.project-item-center
                 p.project-item-name=item.projectName
-                button.project-item-more 预订须知 >
+                .project-status
+                    span.project-status-in(data-busystatus=item.busyStatus)
+                button.project-item-more 预订须知 >>
             .project-item-default.project-item-right
-                a.default-btn.go-appoint-btn(href='/appoint/gameDetail/'+item.projectId) 去预约
+                a.go-appoint-btn(href='/appoint/gameDetail/'+item.projectId)
+                    span.goAppoint-text 去预约
+                    img.goAppointIcon(src='/images/appoint/goAppointIcon.png')
 
 if method === "ajax"
     +goAppointList(data)

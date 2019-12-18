@@ -8,12 +8,27 @@ block javascripts
     script(type='text/javascript', src='/lib/layer_mobile/layer.js')
     script(type='text/javascript', src='/javascripts/appoint/goAppoint.js')
 block content
+    .appoint-header
+        .appoint-search-box
+            span.go-back(onclick='history.go(-1)')
+                i.icon-changyongtubiao-xianxingdaochu-zhuanqu-
+            i.icon-search
+            input.search-input(placeholder='请输入项目名称')
+            button.search-btn 搜索
+            span.appoint-share
+                i.icon-fenxiang-
+        ul.appoint-type-box
+             each item,index in data[0].data
+                 li.appoint-type-item(class=index == 0 ? 'active' : '' data-key=item.key)=item.value
+            //li.appoint-type-item.active 海上娱乐
+            //li.appoint-type-item 潜水
+            //li.appoint-type-item 陆地玩乐
     .tabAjax-box
-        ul.tabAjax-select-list
-            each item,index in data[0].data
-                li.tabAjax-select-item(class=index==0?'active':'' data-key=item.key style='width:'+(100/data[0].data.length)+'%')
-                    span.tabAjax-select-name=item.value
-                    span.tabAjax-select-line
+        //ul.tabAjax-select-list
+        //    each item,index in data[0].data
+        //        li.tabAjax-select-item(class=index==0?'active':'' data-key=item.key style='width:'+(100/data[0].data.length)+'%')
+        //            span.tabAjax-select-name=item.value
+        //            span.tabAjax-select-line
             //li.tabAjax-select-item
             //    span.tabAjax-select-name 潜水
             //    span.tabAjax-select-line
