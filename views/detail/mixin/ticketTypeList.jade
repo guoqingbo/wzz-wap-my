@@ -23,12 +23,16 @@ mixin ticketTypeList(data)
                                                 span.info-more-default.video-intro(data-video=sitem.voice) 视频介绍
                                     .ticket-type-right
                                         span.sale-num 售量：#{sitem.salesNum}
-                                        .changge-num-box
-                                            button.default-icon.sub-icon
-                                                i.icon-iconfont-jian
-                                            span.buy-num 0
-                                            button.default-icon.add-icon(data-maxorder=sitem.maxOrder||"")
-                                                i.icon-iconfont-jia
+                                        if sitem.soldout
+                                            span.soldout-flag 已售罄
+                                        else
+                                            .changge-num-box
+                                                button.default-icon.sub-icon
+                                                    i.icon-iconfont-jian
+                                                span.buy-num 0
+                                                button.default-icon.add-icon(data-maxorder=sitem.maxOrder||"")
+                                                    i.icon-iconfont-jia
+
                     else
                         li.no-data 暂无数据
 if method === "ajax"

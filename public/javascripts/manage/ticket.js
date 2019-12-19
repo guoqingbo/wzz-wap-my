@@ -64,6 +64,7 @@ $(function () {
     })
     // 上架下架
     $(" .order-box").on('click','.enabled-btn',function () {
+        var rateCode = $(this).data('ratecode')
         var enabled = $(this).data("enabled")
         var message = '确认上架？'
         var flag = 'T'
@@ -75,7 +76,6 @@ $(function () {
             message: message,
             confirmType: 'confirm',
             confirmCallBack: function () {
-                var rateCode = $('.enabled-btn').data('ratecode')
                 changeFlag(rateCode,flag)
             }
         })
@@ -92,7 +92,11 @@ $(function () {
                 .success(function (data) {
                     if(data[0].status===200){
                         new ErrLayer({message: data[0].message||'操作成功'})
-                        window.location.reload()
+                        // window.location.reload()
+
+                        dropload.unlock();
+                        filterObj.currPage = 1
+                        filterFn(dropload, 1)
                     }else{
                         new ErrLayer({message: data[0].message})
                     }

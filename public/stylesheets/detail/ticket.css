@@ -249,6 +249,14 @@ body{
     font-size: .6rem;
     border-radius: .1rem;
 }
+.soldout-flag{
+    background: #ff7a50;
+    color: #fff;
+    padding: .1rem .2rem;
+    font-size: .55rem;
+    border-radius: .3rem;
+    float: right;
+}
 .ticket-price-box{
     color: #f63;
     margin: .2rem 0;
