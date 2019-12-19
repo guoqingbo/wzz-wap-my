@@ -4,13 +4,19 @@ mixin orderList(data)
             li.order-item
                 .order-info
                     span.order-info-value #{item.name}
+                    .order-info-right
+                        if item.enabled == 'T'
+                            span 已上架
+                        else
+                            span 已下架
                 .order-info
                     span.order-info-value ￥#{item.price||0}
-                .order-btn-box
-                    if item.enabled == 'T'
-                        button.defult-btn.enabled-btn(data-enabled=item.enabled data-ratecode=item.rateCode) 下架
-                    else
-                        button.defult-btn.enabled-btn(data-enabled=item.enabled data-ratecode=item.rateCode) 上架
+                    //.order-btn-box
+                    .order-info-right
+                        if item.enabled == 'T'
+                            button.defult-btn.enabled-btn.disabled(data-enabled=item.enabled data-ratecode=item.rateCode) 停售
+                        else
+                            button.defult-btn.enabled-btn.enabled(data-enabled=item.enabled data-ratecode=item.rateCode) 启售
     else
         li.no-data 暂无数据
 //mixin checkStatus(checkStatus)

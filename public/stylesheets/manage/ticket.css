@@ -178,3 +178,14 @@
     color: #3b76de;
     border: 1px solid #3b76de;
 }
+.enabled-btn{
+    color: #fff;
+    padding: .1rem .4rem;
+}
+.enabled-btn.enabled{
+    background-color: #1fc756;
+
+}
+.enabled-btn.disabled{
+    background-color: #f00;
+}

@@ -29,7 +29,7 @@ block content
     include common/footer
     include common/index
     include detail/common
-    if module === 'shop'
+    if module === 'shop' || module === 'booking'
         include order/orderBtn
     //if module !== 'qr'
     //    a.back-bar(href='javascript:window.history.back(-1);' style='top:1.6rem')
@@ -37,7 +37,7 @@ block content
         +detailShow(data[0].data,module)
     else
         if module !== 'ticket'
-            .block_home_slider.details-slider(class= (module==='shop'?'minh2':'') )
+            .block_home_slider.details-slider(class= (module==='shop'||module === 'booking'?'minh2':'') )
                 #home_swiper.swiper-container.detail-container
                     ul.swiper-wrapper
                         each item in data[0].data
@@ -70,10 +70,10 @@ block content
                 -var data3=data[3]?data[3]:""
                 +detailList(data[1].data, data3, module, classifyId, date,productCode)
     .page-line
-    if module === 'shop' || module === 'combo' || module === 'car' || module === 'guide'
+    if module === 'shop' || module === 'combo' || module === 'car' || module === 'guide'|| module === 'booking'
         include order/orderBtn
         +orderBtn({
-            id: data[1].data.modelCode,
+            id: data[1].data.modelCode||data[1].data.rateCode,
             rateCode: data[1].data.rateCode,
             isAble: data[1].data.isAble
         },module,'detail')

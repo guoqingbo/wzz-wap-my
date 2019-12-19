@@ -163,6 +163,15 @@ exports.mainRouter = function (router, common) {
                       }
                       let html = common.jade('list/mixin/list', renderObj);
                       res.send([{status:200,html,pages:results[0].data.pages}])
+                  }else if(module == 'booking'){
+                      handTag.tag = false
+                      let renderObj = {
+                          module,
+                          method:"ajax",
+                          data:results[0].data.rows,
+                      }
+                      let html = common.jade('list/mixin/list', renderObj);
+                      res.send([{status:200,html,pages:results[0].data.pages}])
                   }
               }
             }

@@ -341,6 +341,9 @@ let common = {
             case "refund":
                 title = "退单";
                 break;
+            case "booking":
+                title = "预售券";
+                break;
 
         }
         return title;
@@ -369,6 +372,24 @@ let common = {
     is_weixn: function (req) {
         let ua = req.headers["user-agent"].toLowerCase();
         return ua.match(/MicroMessenger/i) == "micromessenger";
+    },
+    is_zhifubao: function (req) {
+        let ua = req.headers["user-agent"]
+        return /AlipayClient/.test(ua)
+    },
+    // 获取支付宝签名
+    getAlipaySign(params){
+        let url = ''
+        Object.keys(params).sort().forEach(ele=>{
+            if(ele!="sign" && params[ele]!=='' && params[ele]!=='undefined'){
+                url+=ele+'='+params[ele]+"&"
+            }
+        })
+        url = url.replace(/&$/g,'')
+
+        let shaObj = new jsSHA("SHA-1", "TEXT");
+        shaObj.update(url);
+        return shaObj.getHash('HEX');
     },
     // 时间戳产生函数
     createTimeStamp: function () {

@@ -246,6 +246,8 @@ exports.mainRouter = function (router, common) {
                         reObj.title=results[0].data.name+ '_公告_三亚蜈支洲岛旅游区'
                     }else if(module==='strategy'){
                         reObj.title=results[0].data.name+ '_三亚蜈支洲岛旅游区'
+                    }else if(module==='booking'){
+                        reObj.title=results[1].data.name+ '_三亚蜈支洲岛旅游区'
                     }else if(module==='hotel') {
                         reObj.title=results[1].data.aliasName + '_三亚蜈支洲岛旅游区';
                         let pageMeta = common.setPageMeta("hotelDetailMeta",req)
