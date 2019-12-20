@@ -194,6 +194,8 @@ block content
             else
                 if datas.orderStatus != "3"&&datas.orderType==='park'
                     a.btn(href='/appoint/gameList?orderNo='+datas.orderNo+'&isAppoint=1') 查看预约
+        if datas.orderType==='booking'&& datas.orderStatus === "3"
+            a.btn(href='/booking/appoint?orderNo=' + datas.orderNo) 预约
 
     .mask#mask
         .tips

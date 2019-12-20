@@ -1,0 +1,10 @@
+mixin busyStatus(busyStatus)
+    case busyStatus
+        when "0"
+            span.game-status.easy 空闲
+        when "1"
+            span.game-status.normal 正常
+        when "2"
+            span.game-status.busy 繁忙
+if method === "ajax"
+    +recordList(data)

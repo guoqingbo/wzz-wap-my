@@ -1,0 +1,45 @@
+extends ../layout
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/calendar.css")
+    link(rel="stylesheet", href="/stylesheets/booking/appoint.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/validate/jquery.validate.min.js')
+    script(type='text/javascript', src='/javascripts/validate/messages_zh.min.js')
+    script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
+    script(type='text/javascript', src='/javascripts/jquery.calendar.js')
+    script(type='text/javascript', src='/javascripts/booking/appoint.js')
+block content
+    header.myorder-header.pro-header
+        h3.myorder-title=data[0].data.orderInfo
+        //p.myorder-explian
+        //    a.c-base(href='/orderDetail/orderNotice')
+        //        span 购买须知>
+
+    .page-line
+    form(action="")#form
+        input(name='orderNo' value=data[0].data.orderNo hidden)
+        ul.order-list.myorder-list
+            li
+                label.lab-title(for='') 使用日期
+                .order-item
+                    a(href='javascript:;')#calendarTogg
+                        span.order-time=day
+                        i.font-icon.icon-iconfont-jiantou
+            li
+                label.lab-title(for='') 出行人
+                .order-item
+                    input.order-text(type='text', name='linkName', value='', placeholder='请填写姓名')
+            li
+                label.lab-title(for='') 手机号
+                .order-item
+                    input.order-text(type='tel', name='linkMobile',value='', placeholder='请填写手机号')
+
+        .order-footer
+            .order-total.float-layer
+                a.formBtn.fr.btn-order.background-base(href='javascript:;') 预约
+                    //- span.formBtn.fr.btn-order.background-cat(href='javascript:;') 加入购物车
+        #calendar.calendar
+        #mask.mask
+        .tips
+            p
+            a(href="javascript:;").queding 确定

@@ -39,6 +39,21 @@ block content
                 label.lab-title(for='') 手机号
                 .order-item
                     input.order-text(type='tel', name='teles',value=userInfo ? userInfo.mobile || userInfo.phone : '', placeholder='请填写手机号')
+            li
+                label.lab-title(for='') 证件类型
+                .order-item
+                    select.cert-type(name='certType')
+                        each item in certType
+                            option(value=item.key selected = item.value == '身份证')=item.value
+            li
+                label.lab-title(for='') 证件号
+                .order-item
+                    input.order-text.card_box(type='text', name='idNos', value=(userInfo ? userInfo.idcard || userInfo.charNo : ''), placeholder='请填写证件号')
+                    span.c-price.camera-text
+                        input(type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)").hide_file
+                        i.font-icon.icon-iconfont-camera(style='margin-right:.1rem')
+                        ="拍照识别"
+
         .page-line
         ul.order-list.myorder-list
             li
@@ -57,6 +72,9 @@ block content
                         strong#totalprice 0.00
                         em.c-999.couponHandlePrice
                         em.c-price.payPrice
+        .tips
+            p
+            a(href="javascript:;").queding 确定
         #mask.mask
         //- 常用联系人操作
         .linkMan-layer#linkManLayer

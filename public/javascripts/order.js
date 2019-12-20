@@ -799,8 +799,6 @@ $(function () {
     function formValidate(goodsWay) {
         // 获取证件类型
         var certType = $("select[name='certType']").val()
-        console.log(certType)
-        console.log(isNeedIdcard)
         validator = $ord.form.validate({
             rules: {
                 linkMans: {

@@ -1,0 +1,25 @@
+extends ../layout
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/booking/record.css")
+block javascripts
+    //script(type='text/javascript', src='/javascripts/booking/record.js')
+block content
+    include ./mixin/recordList
+    .order-box
+        ul.supplier-order-list
+             each item in [1,2,3,4]
+                 li.order-item
+                     .order-info
+                         label.order-info-label 预约时间：
+                         span.order-info-value=item.createTime
+                         .order-info-right
+                             +busyStatus("0")
+                     .order-info
+                         label.order-info-label 哈哈哈哈哈哈哈哈哈哈哈哈
+                     .order-info
+                         label.order-info-label 游玩日期：
+                         span.order-info-value #{item.createTime}
+                     .order-info
+                         label.order-info-label 驳回原因：
+                         span.order-info-value 122333
+

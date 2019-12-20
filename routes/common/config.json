@@ -294,7 +294,8 @@
       "main": "/product/api/product/bookingInfo"
     },
     "order": {
-
+      "getAppointment":"/order/api/getAppointment",
+      "appointment":"/order/api/appointment"
     }
   }
 
