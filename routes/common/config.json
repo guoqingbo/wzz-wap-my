@@ -285,14 +285,14 @@
   },
   "booking": {
     "list": {
-      "pagelist": "/product/api/product/bookings"
+      "pagelist": "/product/api/product/bookings",
+      "getLabel": "/product/api/product/getLabel"
     },
     "detail": {
       "main": "/product/api/product/bookingInfo"
     },
     "order": {
-      "main": "/product/api/shop/getInterceptorShopMdse",
-      "getStock": "/product/api/shop/getStock"
+
     }
   }
 

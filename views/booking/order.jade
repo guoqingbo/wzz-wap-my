@@ -1,0 +1,62 @@
+extends ../layout
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/booking/order.css")
+block javascripts
+    script(type='text/javascript', src='/templates/order.js')
+    script(type='text/javascript', src='/javascripts/validate/jquery.validate.min.js')
+    script(type='text/javascript', src='/javascripts/validate/messages_zh.min.js')
+    script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
+    script(type='text/javascript', src='/javascripts/booking/order.js')
+block content
+    header.myorder-header.pro-header
+        h3.myorder-title=data[0].data.name
+        //p.myorder-explian
+        //    a.c-base(href='/orderDetail/orderNotice')
+        //        span 购买须知>
+
+    .page-line
+    form(action="")#form
+        input(name='rateCode' hidden value=data[0].data.rateCode)
+        ul.order-list.myorder-list
+            li
+                label.lab-title(for='') 购买份数
+                .order-item
+                    span.price
+                        em ￥
+                        strong#price=data[0].data.price
+                    .changge-num-box
+                        button.default-icon.sub-icon
+                            i.icon-iconfont-jian
+                        span.buy-num 0
+                        button.default-icon.add-icon(data-maxorder="20")
+                            i.icon-iconfont-jia
+            li
+                label.lab-title(for='') 购买人
+                .order-item
+                    input.order-text(type='text', name='linkMans', value='', placeholder='请填写姓名')
+                    a(href="javascript:;").linkManBtn#linkManBtn 选择购买人
+            li
+                label.lab-title(for='') 手机号
+                .order-item
+                    input.order-text(type='tel', name='teles',value=userInfo ? userInfo.mobile || userInfo.phone : '', placeholder='请填写手机号')
+        .page-line
+        ul.order-list.myorder-list
+            li
+                label.lab-title 备注
+                .order-item
+                    textarea(name="remark")
+
+        .order-footer
+            .order-total.float-layer
+                a.formBtn.fr.btn-order.background-base(href='javascript:;') 提交订单
+                    //- span.formBtn.fr.btn-order.background-cat(href='javascript:;') 加入购物车
+                p.total-price
+                    | 总计:
+                    span.price
+                        em ￥
+                        strong#totalprice 0.00
+                        em.c-999.couponHandlePrice
+                        em.c-price.payPrice
+        #mask.mask
+        //- 常用联系人操作
+        .linkMan-layer#linkManLayer

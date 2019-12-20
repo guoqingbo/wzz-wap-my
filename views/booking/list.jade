@@ -1,0 +1,30 @@
+extends ../layout
+block stylesheets
+    link(rel="stylesheet", href="/lib/dropload/dropload.css")
+    link(rel="stylesheet", href="/stylesheets/booking/list.css")
+block javascripts
+    script(type='text/javascript', src='/lib/dropload/dropload.min.js')
+    script(type='text/javascript', src='/javascripts/booking/list.js')
+block content
+    //.search-box
+    //    input.search-input(value='' name='keyword' placeholder='搜索关键字')
+    //    button.search-btn 搜索
+    ul.appoint-type-box
+        li.appoint-type-item.active(data-labelid='') 全部
+        each item,index in data[0].data[0].list
+            li.appoint-type-item(data-labelid=item.id)=item.name
+    .order-box
+        ul.supplier-order-list
+            // each item in [1,2,3,4]
+            //     li.order-item
+            //         .order-info
+            //             span.order-info-value 珊瑚宝宝
+            //         .order-info
+            //             span.order-info-value ￥144
+            //         .order-btn-box
+            //             if item == 1
+            //                 button.defult-btn 上架
+            //             else
+            //                 button.defult-btn 下架
+    .mask
+

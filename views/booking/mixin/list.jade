@@ -1,0 +1,22 @@
+mixin bookingList(data)
+    if data.length
+        each item in data
+            li.page-list-li
+                a.page-list-a.clearfix(href='/booking/detail/?rateCode=' + item.rateCode)
+                    .page-list-left
+                        img.page-list-img(src=item.wapMainPic)
+                    .page-list-right
+                        h3.page-list-title=item.name
+                        p.page-list-explian
+                            span 销量:#{item.saleStock || 0}
+                        p.page-list-explian
+                            span.original-price.fl
+                                em ￥
+                                strong=item.showPrice
+                            span.price.fr
+                                em ￥
+                                strong=item.price
+    else
+        li.no-data 暂无数据
+if method === "ajax"
+    +bookingList(data)

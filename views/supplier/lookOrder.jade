@@ -9,6 +9,9 @@ block content
     .search-box
         input.search-input(value='' name='keyword' placeholder='请输入您的手机号、姓名')
         button.search-btn 搜索
+    ul.appoint-type-box
+        each item,index in data[0].data
+            li.appoint-type-item(class=index == 0 ? 'active' : '' data-key=item.key)=item.value
     .order-box
         ul.supplier-order-list
             // each item in [1,2,3,4]
