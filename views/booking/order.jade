@@ -15,7 +15,7 @@ block content
         //        span 购买须知>
 
     .page-line
-    form(action="")#form
+    form(action="")#form(data-rulebuy=ruleBuy)
         input(name='rateCode' hidden value=data[0].data.rateCode)
         ul.order-list.myorder-list
             li
@@ -28,7 +28,7 @@ block content
                         button.default-icon.sub-icon
                             i.icon-iconfont-jian
                         span.buy-num 0
-                        button.default-icon.add-icon(data-maxorder="20")
+                        button.default-icon.add-icon(data-maxorder=ruleBuy.maxOrder)
                             i.icon-iconfont-jia
             li
                 label.lab-title(for='') 购买人

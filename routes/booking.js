@@ -22,6 +22,7 @@ exports.mainRouter = function (router, common) {
             }
         });
     }
+
     // 预售券列表
     router.get('/booking/list', function (req, res, next) {
         // res.render('booking/list',{title:'预售券列表'});
@@ -103,8 +104,6 @@ exports.mainRouter = function (router, common) {
     });
     // 预售券订单
     router.get('/booking/order',common.isLogin,getCertType, function (req, res, next) {
-        // res.render('booking/order',{title:'预售券订单'});
-
         let rateCode = req.query.rateCode
         // findDate=req.query.date,
         common.commonRequest({
@@ -118,7 +117,26 @@ exports.mainRouter = function (router, common) {
             title: '预售券下单',
             callBack: function (results, reObj, res, handTag) {
                 if(results[0].status==200){
-
+                    let ruleBuyCode = results[0].data.ruleBuyCode
+                    if (ruleBuyCode) {
+                        handTag.tag = 0
+                        common.request({
+                            method:"get",
+                            url: common.gul(['main', 'ratecode', 'ruleBuy']),
+                            qs:{ ruleBuyCode: ruleBuyCode, corpCode: common.envConfig.corpCode,wayType:"2" },//参数
+                            headers: {
+                                'access-token': req.session.token || "",
+                            },
+                            'content-type': 'text/html;charset=utf-8',
+                        }).then(response=>{
+                            let {body} = response
+                            res.render('booking/order',{
+                                title: '预售券下单',
+                                data:results,
+                                ruleBuy:body.data
+                            })
+                        })
+                    }
                 }
             }
         });
@@ -247,4 +265,6 @@ exports.mainRouter = function (router, common) {
             }
         });
     });
+
+
 };

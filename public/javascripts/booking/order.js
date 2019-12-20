@@ -99,6 +99,8 @@ $(function () {
         $("#totalprice").text(totalPrice)
         return totalPrice
     }
+    var ruleBuy = $('#form').data('rulebuy')
+    console.log(ruleBuy)
     var validate = $('#form').validate({
         rules: {
             linkMans: {
@@ -107,9 +109,12 @@ $(function () {
                 han: true
             },
             teles: {
-                required: true, //isNeedMobile === 'T',
+                required: ruleBuy.isNeedMobile == 'T', //isNeedMobile === 'T',
                 isMobile: true
             },
+            idNos:{
+                required: ruleBuy.isNeedIdcard == 'T', //isNeedMobile === 'T',
+            }
         }
     });
     $(".btn-order").click(function (e) {

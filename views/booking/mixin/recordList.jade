@@ -1,10 +1,8 @@
-mixin busyStatus(busyStatus)
-    case busyStatus
-        when "0"
-            span.game-status.easy 空闲
-        when "1"
-            span.game-status.normal 正常
-        when "2"
-            span.game-status.busy 繁忙
-if method === "ajax"
-    +recordList(data)
+mixin auditStatus(auditStatus)
+    case auditStatus
+        when "DDSH"
+            span.game-status.easy 等待审核
+        when "SHCG"
+            span.game-status.normal 审核成功
+        when "SHSB"
+            span.game-status.busy 审核失败
