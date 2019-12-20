@@ -48,8 +48,33 @@ mixin strategyList(data)
                                 span.fr
                                     i.font-icon.icon-views
                                     | #{item.viewNum}
+//- 预售券
+mixin bookingList(data)
+    if data.length
+        each item in data
+            li
+                a.clearfix(href='/detail/booking/'+item.rateCode)
+                    .page-list-img
+                        img(src=item.wapMainPic)
+                    .page-list-info
+                        h3.page-list-title
+                            .list-title-box=item.name
+                        p.goods-list-explian
+                            span 销量:#{item.saleStock||0}
+                        p.page-list-explian
+                            span.original-price.fl
+                                em ￥
+                                strong=item.showPrice
+                            span.price.fr
+                                em ￥
+                                strong=item.price
+
+
+
 if method === "ajax"
     if module == 'commentList'
         +commentList(data)
-    if module == 'strategy'
+    else if module == 'strategy'
         +strategyList(data)
+    else if module == 'booking'
+        +bookingList(data)

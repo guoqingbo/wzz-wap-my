@@ -7,7 +7,7 @@ mixin orderBtn(data,module,page)
         else
           if module === 'combo' || module === 'car'|| module === 'guide'
             a.formBtn.fr.btn-order.background-base(href='/order/'+module+'/'+data.id+'?rateCode='+data.rateCode) 立即预订
-          else if module === 'shop'
+          else if module === 'shop' || module === 'booking'
             ul.nav-pro
               li.nav-lipro
                 a.home.on(href='/')

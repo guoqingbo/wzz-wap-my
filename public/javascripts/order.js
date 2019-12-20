@@ -614,7 +614,6 @@ $(function () {
                 class: 'numbernum'
             })).find('.numbernum').numSpinner(_minx);
 
-
         }
     }
 

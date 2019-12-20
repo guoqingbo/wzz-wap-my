@@ -10,7 +10,8 @@ $(function () {
     });
     // 筛选构造DOM
     function filterFn(dropload, startPage) {
-        filterObj.type = $(".tabAjax-select-item.active").data('key')
+        filterObj.type = $(".appoint-type-item.active").data('key')
+        filterObj.name = $('.search-input').val()||''
         $.ajax({
             type: 'POST',
             url: '/appoint/goAppointList',
@@ -46,7 +47,7 @@ $(function () {
         });
     }
     // tab ajax请求
-    $(".tabAjax-select-item").click(function (e) {
+    $(".appoint-type-item").click(function (e) {
         e.preventDefault()
         e.stopPropagation()
         $(this).addClass('active').siblings().removeClass('active')
@@ -54,9 +55,14 @@ $(function () {
         dropload.unlock();
         filterObj.currPage = 1
         filterFn(dropload, 1)
-
     })
-
+    $(".search-btn").click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        dropload.unlock();
+        filterObj.currPage = 1
+        filterFn(dropload, 1)
+    })
     // 预订须知
     $(".project-list").on("click",".project-item-more ",function (e) {
         e.preventDefault()

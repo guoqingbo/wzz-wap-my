@@ -1,0 +1,43 @@
+mixin orderList(data)
+    if data.length
+        each item in data
+            li.order-item
+                .order-info
+                    span.order-info-value #{item.name}
+                    .order-info-right
+                        if item.enabled == 'T'
+                            span 已上架
+                        else
+                            span 已下架
+                .order-info
+                    span.order-info-value ￥#{item.price||0}
+                    //.order-btn-box
+                    .order-info-right
+                        if item.enabled == 'T'
+                            button.defult-btn.enabled-btn.disabled(data-enabled=item.enabled data-ratecode=item.rateCode) 停售
+                        else
+                            button.defult-btn.enabled-btn.enabled(data-enabled=item.enabled data-ratecode=item.rateCode) 启售
+    else
+        li.no-data 暂无数据
+//mixin checkStatus(checkStatus)
+//    case checkStatus
+//        when '0'
+//           span 未发货
+//        when '1'
+//            span 已发货
+//        when '2'
+//            span 已收货
+//        when '3'
+//            span 自提
+//        default
+//            span
+//mixin expressType(expressType)
+//    case expressType
+//        when '0'
+//            span 快递
+//        when '1'
+//            span 自提
+//        default
+//            span
+if method === "ajax"
+    +orderList(data)

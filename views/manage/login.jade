@@ -1,0 +1,25 @@
+extends ../layout
+block stylesheets
+    link(rel="stylesheet", href="/stylesheets/manage/login.css")
+block javascripts
+    script(type='text/javascript', src='/javascripts/validate/jquery.validate.min.js')
+    script(type='text/javascript', src='/javascripts/validate/messages_zh.min.js')
+    script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
+    script(type='text/javascript', src='/javascripts/manage/login.js')
+block content
+    body.body-bg
+        .login-main
+            .login-form-box
+                form#submitForm
+                    .input-box
+                        label.input-label 账号
+                        input.input-value(type='text', name='loginName')
+                    .input-box
+                        label.input-label 密码
+                        input.input-value(type='password', name='loginPass')
+                .button-box
+                    button#submitBtn.login-button(data-redir=redir) 登陆
+        .mask#mask
+            .tips
+                p
+                a(href="javascript:;").queding 确定

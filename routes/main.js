@@ -19,33 +19,6 @@ exports.mainRouter = function (router, common) {
     // 首页
     router.get(['/', '/main'], function (req, res, next) {
 
-        // 全渠道扫码进入首页需要登录
-        // if(req.query.promoterId){
-        //     // 全渠道参数进入，判断是否要重新登陆，promoterId和之前登陆不一样时，重新登陆
-        //     let isReLogin = false
-        //     if(req.session.promoterId!==req.query.promoterId){
-        //         isReLogin = true
-        //     }
-        //     // 全渠道参数
-        //     // let promoter = req.query.promoter;
-        //     // req.session.channelId=req.query.channelId||"";
-        //     // req.session.promoterId=req.query.promoterId||"";
-        //     // req.session.teamBatchNo=req.query.teamBatchNo||"";
-        //     // req.session.promoteSrcCode=req.query.promoteSrcCode||"";
-        //     if(isReLogin){
-        //         req.session.curUrl = req.originalUrl
-        //         return res.redirect('/login')
-        //     }
-        //     // common.isLogin(req, res)
-        // }else{
-        //     // 全渠道参数
-        //     req.session.channelId="";
-        //     req.session.promoterId="";
-        //     req.session.teamBatchNo="";
-        //     req.session.promoteSrcCode=""
-        // }
-
-
         let title = ''
         // projectNameCode判断所属项目
         let projectNameCode =  common.getProjectNameCode(req)
@@ -109,10 +82,6 @@ exports.mainRouter = function (router, common) {
         let promoter = ''
         req.session.curUrl = redir
 
-        // let {channelId='',promoterId='',teamBatchNo=''} = url.parse(redir,true).query;
-        // if(promoterId){
-        //     promoter = '?channelId='+channelId+'&promoterId='+promoterId+'&teamBatchNo='+teamBatchNo
-        // }
         if (common.is_weixn(req)) {
             // if(req.session.wxTokenObj && req.session.wxTokenObj.expires_Time <= +new Date()) {
             //     return res.redirect('/horization');
@@ -133,6 +102,9 @@ exports.mainRouter = function (router, common) {
             if(common.envConfig.weixinProxy){
                 redirect = common.envConfig.weixinProxy+'/weixinProxy/getCode?redirectUri='+ encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/horization'+promoter)
             }
+            res.redirect(redirect)
+        }else if(common.is_zhifubao(req)){
+            let redirect = 'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id='+common.envConfig.alipay.appId+'&scope=SCOPE&redirect_uri='+encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/alipayHorization')
             res.redirect(redirect)
         } else {
             res.render('login', {

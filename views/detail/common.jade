@@ -1,7 +1,7 @@
 //- 详情介绍
 mixin information(data,module)
     .details-info
-        if module === 'shop' && !data[0].data.length > 0
+        if (module === 'shop'||module === 'booking') && !data[0].data.length > 0
             h3.details-title.c-333=data[1].data.aliasName
         else
             h3.details-title=data[1].data.aliasName
@@ -23,7 +23,7 @@ mixin information(data,module)
                                 | #{data[1].data.price}
                             | 元/日
                         p.car-sales  已售 #{data[1].data.salesNum || 0}
-                else if module === 'combo' ||  module === 'shop'
+                else if module === 'combo' ||  module === 'shop'||module === 'booking'
                     .detail-cnt1.detail-cnt-z
                         p.car-price
                             label
@@ -58,7 +58,7 @@ mixin information(data,module)
 
                       i.font-icon.icon-iconfont-jiantou
             .detail-comment
-                if module === 'ticket' || module === 'hotel' || module === 'route' || module === 'repast' || module === 'shop' || module === 'guide' || module === 'combo' || module === 'car'
+                if module === 'ticket' || module === 'hotel' || module === 'route' || module === 'repast' || module === 'shop' || module === 'guide' || module === 'combo' || module === 'car'||module === 'booking'
                     -
                         var commentUrl = '/list/commentList?modelCode=' + productCode + '&commentLevel=0'
                         if(module === 'ticket'){
@@ -79,7 +79,7 @@ mixin information(data,module)
 
 //- 详情列表
 mixin detailList(data1,data3,module,classifyId,date,productCode)
-    unless module === 'shop'
+    unless (module === 'shop' || module === 'booking')
         ul.order-list.myorder-list
             unless module === 'combo'|| module === 'car'|| module === 'route'|| module === 'ticket'
                 li
@@ -99,7 +99,7 @@ mixin detailList(data1,data3,module,classifyId,date,productCode)
             //                span.jies-txt 景区介绍
             //                i.font-icon.icon-iconfont-jiantou
         .page-line
-    if module === 'combo' || module === 'shop'
+    if module === 'combo' || module === 'shop' || module === 'booking'
         +detailTab(data1,module)
     else if module !== 'guide'&&module !== 'car'
         +ticketList(data3,module,classifyId,date,data1.goodsCode,productCode)
@@ -346,7 +346,7 @@ mixin detailTab(data,module)
         li
             if module === 'combo'
                 a(href='javascript:;', data-div='scenic') 费用说明
-            else if module === 'shop'
+            else if module === 'shop'||module === 'booking'
                 a(href='javascript:;', data-div='scenic') 购买须知
             else
                 a(href='javascript:;', data-div='scenic') 预订须知

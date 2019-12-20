@@ -61,6 +61,10 @@ require('./queueCallNum').mainRouter(router,common);
 require('./weixinProxy').mainRouter(router,common);
 // 供应商
 require('./supplier').mainRouter(router,common);
+// 管控手机端
+require('./manage').mainRouter(router,common);
+// 预售券
+require('./booking').mainRouter(router,common);
 // 组件模板
 require('./demo').mainRouter(router,common);
 module.exports = router;

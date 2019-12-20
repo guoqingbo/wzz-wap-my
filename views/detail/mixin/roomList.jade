@@ -22,13 +22,13 @@ mixin roomList(data,beginDate,endDate,productCode)
                     .pro-img
                         img(alt='', src=item.linkMobileImg)
                     .hotel-info
-                        h4.pro-info-title=item.modelName
-                        p.pro-info-explian
-                            span=bedType(item.bedType)
-                            span #{item.buildingArea}m²
-                            span
-                                i.font-icon
-                                i.font-icon
+                        h4.pro-info-title=item.modelName.replace(/G$/,'')
+                        //p.pro-info-explian
+                        //    span=bedType(item.bedType)
+                        //    span #{item.buildingArea}m²
+                        //    span
+                        //        i.font-icon
+                        //        i.font-icon
                         p.pro-info-explian
                             a.showDetail(href='javascript:;', data-module='hotel', data-modelcode=item.modelCode) 房型介绍>
                 .pro-price.c-base
@@ -50,7 +50,7 @@ mixin roomList(data,beginDate,endDate,productCode)
                             a.gray_btn 预订
                 .ticket-layer
                     a.close-ticket.font-icon.icon-iconfont-pxchaxian(href='javascript:;')
-                    h3.notice-tit=item.modelName
+                    h3.notice-tit=item.modelName.replace(/G$/,'')
                     .ht-pic
                         .home_slider2.swiper-container.detail-container
                             ul.swiper-wrapper
@@ -60,13 +60,13 @@ mixin roomList(data,beginDate,endDate,productCode)
                     .article-info.bgf
                         .article-main
                             ul.order-list.myorder-list
-                                li
-                                    label.lab-title(for='') 床型
-                                    .order-item=bedType(item.bedType)
-                                li
-                                    label.lab-title(for='') 建筑面积
-                                    .order-item
-                                        span #{item.buildingArea}m²
+                                //li
+                                //    label.lab-title(for='') 床型
+                                //    .order-item=bedType(item.bedType)
+                                //li
+                                //    label.lab-title(for='') 建筑面积
+                                //    .order-item
+                                //        span #{item.buildingArea}m²
                                 li
                                     label.lab-title(for='') 房型描述
                                     .order-item=item.modelDetail

@@ -1,5 +1,6 @@
 body{
     font-size: .6rem;
+    background-color: #fff;
 }
 /*选项卡,ajax请求数据*/
 .tabAjax-select-list {
@@ -36,13 +37,14 @@ body{
 }
 /*产品列表*/
 .project-list{
-    padding:0 .5rem;
+    /*padding:0 .5rem;*/
 }
 .project-item{
-    margin-bottom: .5rem;
+    /*margin-bottom: .5rem;*/
     background-color: #fff;
-    border-radius: .3rem;
+    /*border-radius: .3rem;*/
     padding: .5rem;
+    border-bottom: 1px solid #e5e5e5;
 }
 .project-item-default{
     display: inline-block;
@@ -59,10 +61,19 @@ body{
 .project-item-right {
     width: 22%;
 }
+.project-item-img-box{
+    border: 1px dashed #2eb2ed;
+    width: 4.3rem;
+    height: 4.3rem;
+    line-height: 4.3rem;
+    border-radius: 100%;
+    text-align: center;
+}
 .project-item-img{
-    width: 100%;
+    width: 3.7rem;
     height: 3.7rem;
-    border-radius: .5rem;
+    border-radius: 100%;
+    margin-top: -2px;
 }
 .default-btn{
     display: inline-block;
@@ -83,11 +94,44 @@ body{
     background-color: #fff;
     outline: 0;
     border: 0;
-    color: #23c1a8;
+    color: #595757;
     font-size: .5rem;
 }
+.project-status{
+    width: 3rem;
+    height: 3px;
+    background-color: #c9caca;
+    margin-bottom: .5rem;
+}
+.project-status-in{
+    display: block;
+    height: 100%;
+}
+.project-status-in[data-busystatus='0']{
+    width: 40%;
+    background-color: #43cc29;
+}
+.project-status-in[data-busystatus='1']{
+    width: 60%;
+    background-color: #cc9f46;
+}
+.project-status-in[data-busystatus='2']{
+    width: 90%;
+    background-color: #cc662f;
+}
 .go-appoint-btn{
-    margin-top: 1rem;
+    margin-top: 1.5rem;
+    color: #eb6014;
+    display: inline-block;
+}
+.goAppoint-tex{
+    display: inline-block;
+    vertical-align: middle;
+}
+.goAppointIcon{
+    height: .6rem;
+    vertical-align: middle;
+    margin-left: .1rem;
 }
 /*弹出层样式*/
 .layui-m-layerchild.my-layer h3{
@@ -100,4 +144,77 @@ body{
     padding:.5rem;
     max-height: 10rem;
     overflow: auto;
+}
+
+.appoint-header{
+    background: url("../../images/appoint/top-bg.png") no-repeat;
+    background-size: 100% auto;
+    height: 8.5rem;
+}
+.appoint-search-box{
+    padding:.3rem .5rem;
+}
+.go-back{
+    color: #fff;
+    /*padding-left: .5rem;*/
+    margin-right: 1rem;
+}
+.go-back i{
+    font-size: .8rem;
+}
+.search-input{
+    box-sizing: border-box;
+    background-color: rgba(224,224,224,.5);
+    border: 0;
+    outline: 0;
+    padding-left: 1rem;
+    margin-left: -.8rem;
+    border-radius: .3rem 0 0 .3rem;
+    height: 1rem;
+    width: 10rem;
+}
+.icon-search {
+    color: #fff;
+    font-size: .6rem;
+    vertical-align: middle;
+}
+.search-input::placeholder{
+    color: #d98122;
+}
+.appoint-share{
+    float: right;
+    color: #fff;
+    /*margin-top: .1rem;*/
+}
+.appoint-share i{
+    font-size: 1rem;
+}
+.search-btn{
+    border: 0;
+    color: #fff;
+    outline: 0;
+    height: 1rem;
+    line-height: 1rem;
+    vertical-align: middle;
+    border-radius: 0 .3rem .3rem 0;
+    text-align: center;
+    background-image: linear-gradient(to right, #d98122 , #d4453d);
+}
+.appoint-type-box{
+    box-sizing: border-box;
+    margin-top: 3.5rem;
+    padding: 0 .5rem;
+}
+.appoint-type-item{
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    padding: 0 .5rem;
+    margin-right: .3rem;
+    color: #5f6061;
+}
+.appoint-type-item.active{
+    color: #e94709;
 }

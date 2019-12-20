@@ -3,6 +3,7 @@
   "main": {
     "index": {
       "wxlogin":"/leaguer/api/leaguer/fastregByOpenid",
+      "alipaylogin":"/leaguer/api/leaguer/fastregByOpenid",
       "allInfo": "/info/api/info/getAllInfo",
       "listInfo": "/info/api/info/listInfo",
       "getUserDisInfo": "/leaguer/api/agent/getUserDisInfo"
@@ -35,6 +36,9 @@
       "toWxpay": "/pay/api/toWxpay/webPay",
       "tozybwxpay": "/pay/api/toWxpay/zybWebPay",
       "wxPayResult": "/pay/api/toWxpay/payResult"
+    },
+    "alipay":{
+      "accessToken": "https://openapi.alipay.com/gateway.do"
     }
   },
   "order": {
@@ -275,6 +279,23 @@
     "checkGoods":"/order/api/checkGoods",
     "searchOrderDetail":"/order/api/searchOrderDetail",
     "expressType":"/order/api/getExpressType"
+  },
+  "manage":{
+    "login": "/leaguer/api/agent/leaguerLoginForAdmin",
+    "changeFlag":"/product/api/product/changeFlag",
+    "rateCodeList":"/product/api/product/pageRateCodeDailyFlag"
+  },
+  "booking": {
+    "list": {
+      "pagelist": "/product/api/product/bookings",
+      "getLabel": "/product/api/product/getLabel"
+    },
+    "detail": {
+      "main": "/product/api/product/bookingInfo"
+    },
+    "order": {
+
+    }
   }
 
 }

@@ -3,7 +3,7 @@ const userType = 'C'; //用户类型c端
 const WXPAYTYPE = 32; //32:微信公众号支付 34:智游宝微信公众号支付 33:小程序支付
 // const needle = require('needle');
 // const iconv = require('iconv-lite');
-
+const moment = require('moment');
 exports.mainRouter = function (router, common) {
     // 支付确认页面
     router.get('/pay/:module/:orderId', common.isLogin, function (req, res, next) {
@@ -353,7 +353,117 @@ exports.mainRouter = function (router, common) {
             res.redirect(redirectUrl);
         });
     });
+    // 支付宝授权access_token
+    router.get('/alipayHorization', function (req, res, next) {
+        let funArray = [];
+        let {channelId='',promoterId='',teamBatchNo=''} = JSON.parse(req.cookies.promoter || '{}')
+        let {auth_code,app_id,scope} = req.query
+        let commonParams = {
+            app_id: common.envConfig.alipay.appId,
+            format: 'JSON',
+            charset: 'utf-8',
+            sign_type:'RSA2',
+            timestamp:moment().format('yyyy-MM-dd hh:mm:ss'),
+            version:'1.0',
+        }
+        // 获取支付宝accessToken | user_id,
+        let getaccessToken = function (cb) {
+            common.commonRequest({
+                url: [{
+                    urlArr: ['main', 'alipay', 'accessToken'],
+                    parameter: {
+                        ...commonParams,
+                        method: 'alipay.system.oauth.token',
+                        grant_type:'authorization_code',
+                        code:auth_code
+                    },
+                    outApi: true, //外网接口判断 {true:是}
+                    noLocal: true
+                }],
+                req: req,
+                res: res,
+                callBack: function (results, reqs, resp, handTag) {
+                    if(!results[0].openid) {
+                        cb(null, new Error('支付宝授权失败'));
+                        return
+                    }
+                    handTag.tag = 0;
+                    // 缓存授权信息
+                    req.session.alipayTokenObj = {
+                        access_token : results[0].access_token,
+                        refresh_token: results[0].refresh_token,
+                        user_id: results[0].user_id,
+                        expires_in: results[0].expires_in,
+                        re_expires_in: results[0].re_expires_in
+                    };
+                    // 必须要加不加报错
+                    cb(null,results);
+                }
+            });
+        };
 
+        // 获取微信用户信息 params: accessToken | openid
+        let alipayGetUserInfo = (results,cb)=>{
+            let result = req.session.alipayTokenObj;
+            let url = 'https://openapi.alipay.com/gateway.do';
+            let params = {
+                ...commonParams,
+                method:'alipay.user.info.share',
+                auth_token:result.access_token,
+                sign:common.getAlipaySign(params),
+            }
+            common.get(url,params).then(response=>{
+                let {body} = response
+                cb(null, body);
+            })
+        };
+
+        // 后台登录接口
+        let alipaylogin = function (result, cb) {
+            common.commonRequest({
+                url: [{
+                    urlArr: ['main', 'index', 'alipaylogin'],
+                    parameter: {
+                        wayType:'ALI',
+                        accessToken: req.session.alipayTokenObj.access_token,
+                        openid: req.session.alipayTokenObj.user_id,
+                        nickName: result.nick_name,
+                        imgUrl: result.avatar,
+                        sex: result.gender,
+                        channelId,
+                        promoterId,
+                        teamBatchNo
+                    },
+                }],
+                req: req,
+                res: res,
+                callBack: function (results, reqs, resp, handTag) {
+                    handTag.tag = 0;
+                    cb(null,results);
+                }
+            });
+        };
+
+        funArray.push(getaccessToken);
+        funArray.push(alipayGetUserInfo);
+        funArray.push(alipaylogin);
+
+        async.waterfall(funArray, function (err, results) {
+            if (err) {
+                res.redirect('/error');
+                return;
+            }
+
+            // req.session.promoterId = promoterId
+            req.session.leaguerId = results[0].data.leaguerId;
+            // req.session.member = results[0].data
+            req.session.member = results[0].data.leaguer;
+            req.session.member.id = req.session.leaguerId
+            req.session.token = results[0].data.token;
+            let redirectUrl = req.session.urla || req.session.curUrl || req.query.curUrl || "/main";
+            res.redirect(redirectUrl);
+        });
+    });
 
     //微信中转
     router.get('/wechatTransfer', function (req, res, next) {
