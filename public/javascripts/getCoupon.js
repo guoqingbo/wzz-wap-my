@@ -28,7 +28,12 @@ $(function () {
     touch.on($CP.choiceCoupons, 'tap', function () {
         var _price=$('#totalprice').text();
         var _this = $(this);
-        var _type= module==='ticket' ? 'park':module;
+        var _type= module;
+        if(module==='ticket'){
+            _type = 'park'
+        }else if(module==='repast'){
+            _type = 'eatery'
+        }
         $.get('/coupon/useAble', {
             productType: _type,
             productCode: $CP.choiceCoupons.data('code') || ''
