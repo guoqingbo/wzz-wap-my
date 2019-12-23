@@ -28,7 +28,7 @@ module.exports = {
         // userType : 'C'
     },
     alipay:{
-        appId : 'ddddddd',//测试环境
+        appId : '2019111869287081',//测试环境
     },
     // weixinProxy:'https://wzzfxswap1.sendinfo.com.cn',// 微信授权支付代理
     corpCode:'cgb2cfxs',

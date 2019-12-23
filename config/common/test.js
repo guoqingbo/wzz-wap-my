@@ -22,6 +22,9 @@ module.exports = {
         // WXPAYTYPE : 32, //32:微信公众号支付 34:智游宝微信公众号支付
         // userType : 'C'
     },
+    alipay:{
+        appId : '2019111869287081',//测试环境
+    },
     // weixinProxy:'https://wzzfxswap1.sendinfo.com.cn',// 微信授权支付代理
     corpCode:'cgb2cfxs',
     protocol:'https'
