@@ -105,6 +105,7 @@ exports.mainRouter = function (router, common) {
             res.redirect(redirect)
         }else if(common.is_zhifubao(req)){
             let redirect = 'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id='+common.envConfig.alipay.appId+'&scope=SCOPE&redirect_uri='+encodeURIComponent(common.envConfig.protocol+'://' + req.headers.host + '/alipayHorization')
+            console.log(redirect)
             res.redirect(redirect)
         } else {
             res.render('login', {
