@@ -386,9 +386,10 @@ let common = {
             }
         })
         url = url.replace(/&$/g,'')
-
+        console.log(url)
         let shaObj = new jsSHA("SHA-1", "TEXT");
         shaObj.update(url);
+        console.log(shaObj.getHash('HEX'))
         return shaObj.getHash('HEX');
     },
     // 时间戳产生函数

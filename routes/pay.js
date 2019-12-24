@@ -362,47 +362,33 @@ exports.mainRouter = function (router, common) {
             app_id: common.envConfig.alipay.appId,
             format: 'JSON',
             charset: 'utf-8',
-            sign_type:'RSA2',
-            timestamp:moment().format('yyyy-MM-dd hh:mm:ss'),
+            sign_type:'RSA',
+            timestamp:moment().format('YYYY-MM-DD hh:mm:ss'),
             version:'1.0',
         }
         // 获取支付宝accessToken | user_id,
         let getaccessToken = function (cb) {
-            common.commonRequest({
-                url: [{
-                    urlArr: ['main', 'alipay', 'accessToken'],
-                    parameter: {
-                        ...commonParams,
-                        method: 'alipay.system.oauth.token',
-                        grant_type:'authorization_code',
-                        code:auth_code
-                    },
-                    outApi: true, //外网接口判断 {true:是}
-                    noLocal: true
-                }],
-                req: req,
-                res: res,
-                callBack: function (results, reqs, resp, handTag) {
-                    if(!results[0].openid) {
-                        cb(null, new Error('支付宝授权失败'));
-                        return
-                    }
-                    handTag.tag = 0;
-                    // 缓存授权信息
+            let params = {
+                ...commonParams,
+                method: 'alipay.system.oauth.token',
+                grant_type:'authorization_code',
+                code:auth_code,
+            }
+            params.sign = common.getAlipaySign(params)
+            common.get(common.envConfig.alipay.url,params).then(response=>{
+                    let {body} = response
                     req.session.alipayTokenObj = {
-                        access_token : results[0].access_token,
-                        refresh_token: results[0].refresh_token,
-                        user_id: results[0].user_id,
-                        expires_in: results[0].expires_in,
-                        re_expires_in: results[0].re_expires_in
+                        access_token : body.access_token,
+                        refresh_token: body.refresh_token,
+                        user_id: body.user_id,
+                        expires_in: body.expires_in,
+                        re_expires_in: body.re_expires_in
                     };
-                    // 必须要加不加报错
-                    cb(null,results);
-                }
-            });
+                    cb(null, body);
+                })
         };
 
-        // 获取微信用户信息 params: accessToken | openid
+        // 获取支付宝用户信息 params: accessToken | openid
         let alipayGetUserInfo = (results,cb)=>{
             let result = req.session.alipayTokenObj;
             let url = 'https://openapi.alipay.com/gateway.do';
@@ -410,8 +396,8 @@ exports.mainRouter = function (router, common) {
                 ...commonParams,
                 method:'alipay.user.info.share',
                 auth_token:result.access_token,
-                sign:common.getAlipaySign(params),
             }
+            params.sign = common.getAlipaySign(params),
             common.get(url,params).then(response=>{
                 let {body} = response
                 cb(null, body);
