@@ -100,7 +100,6 @@ $(function () {
         return totalPrice
     }
     var ruleBuy = $('#form').data('rulebuy')
-    console.log(ruleBuy)
     var validate = $('#form').validate({
         rules: {
             linkMans: {
@@ -132,6 +131,7 @@ $(function () {
              teles:$("input[name='teles']").val(),
              idNos:$("input[name='idNos']").val(),
              certType:$("select[name='certType']").val(),
+             remark:$("textarea[name='remark']").val(),
              amount:amount
          }
         if(validate.form()){

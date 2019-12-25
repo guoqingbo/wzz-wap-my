@@ -176,9 +176,9 @@ block content
                     a.btn-RP(href='/member/refund/' + datas.orderType + '?orderNo=' + datas.orderNo) 申请退款
             else
                 a.btn-RP(href='/member/refund/' + datas.orderType + '?orderNo=' + datas.orderNo) 申请退款
-        if datas.orderStatus === "2" && datas.comment === false
+        if datas.orderStatus === "2" && datas.comment === false && datas.orderType != 'booking'
             a.btn(href='/member/comment/'+ datas.orderType + '?orderNo=' + datas.orderNo+'&modelCode='+datas.modelCode) 发表评价
-        if datas.orderStatus === "2" && ((datas.applyStatus != 'T' && datas.orderType == 'combo')||(datas.orderDetails[0].checkAmount>0 && datas.orderType != 'combo'))
+        if datas.orderStatus === "2" && ((datas.applyStatus != 'T' && datas.orderType == 'combo')||(datas.orderDetails[0].checkAmount>0 && datas.orderType != 'combo')) && datas.orderType!='booking'
             a.btn(href='/member/saleAfter/'+ datas.orderNo) 申请售后
         if datas.orderStatus === "0"
             - var _t=datas.orderType
@@ -194,7 +194,7 @@ block content
             else
                 if datas.orderStatus != "3"&&datas.orderType==='park'
                     a.btn(href='/appoint/gameList?orderNo='+datas.orderNo+'&isAppoint=1') 查看预约
-        if datas.orderType==='booking'&& datas.orderStatus === "3"
+        if datas.orderType==='booking'&& datas.orderStatus === "1"
             a.btn(href='/booking/appoint?orderNo=' + datas.orderNo) 预约
 
     .mask#mask

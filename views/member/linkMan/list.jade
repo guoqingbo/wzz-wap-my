@@ -6,6 +6,7 @@ block javascripts
     script(type='text/javascript', src='/javascripts/member/order.js')
 block content
     .linkMan-content.linkMan-list-wrap
+        h5.linkMan-title 完善信息
         a(href="/member/linkMan/add?originalUrl="+originalUrl+"&comefrom="+comefrom).linkMan-add="+添加"
         ul.linkMan-list
             each item in data[0].data
@@ -21,6 +22,8 @@ block content
                                 i.icon-iconfont-xie
                         span(data-id=item.id).linkManDel
                             i.icon-iconfont-shanchu
+        if comefrom == 'promoter'
+            button.linkMan-goBuy-ticekt(class=data[0].data.length==0?'gray':'') 去买票
     .mask#mask
     .tips
         p

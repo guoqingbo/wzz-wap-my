@@ -1,7 +1,7 @@
 let async = require('async'),
     // needle = require('needle'),// needle https请求有时会挂掉,废弃needle 换成 request
     // qs = require('querystring'),
-    // crypto = require('crypto'),
+    crypto = require('crypto'),
     jsSHA = require('jssha'),
     conJson = require('./config.json'),
     // fetch = require('node-fetch'),
@@ -72,6 +72,9 @@ let private = {
 let common = {
     viewCase:{},
     envConfig,
+    md5(content){
+        return crypto.createHash('md5').update(content).digest("hex")
+    },
     getUrl: function (url) {
         let config = conJson,
             reUrl = null,
@@ -266,7 +269,7 @@ let common = {
                 if(option.url.indexOf(common.envConfig.domain1) == -1 || process.env.NODE_ENV !== 'production'){
                     common.envConfig.debug && console.log(option.url);
                     console.log("===========请求耗时==============="+(requestEntTime-requestStartTime)+"ms")
-                    common.envConfig.debug && console.log(option.qs||option.form);
+                    common.envConfig.debug && console.log(option.qs||option.form||option.body);
                     common.envConfig.debug && console.log(body);
                 }
                 // if(err){
@@ -293,6 +296,18 @@ let common = {
             method:"post",
             url:url,
             form:params?params:""
+        }
+        return common.request(option)
+    },
+    postJson:function(url,params){
+        let option = {
+            method:"POST",
+            url:url,
+            body: params,
+            json:true,
+            headers:{
+                "content-type": "application/json",
+            }
         }
         return common.request(option)
     },

@@ -41,7 +41,7 @@
 }
 .detail-content .detail-intrd{
     width: 48%;
-    border-right: 1px solid #dddddd;
+    /*border-right: 1px solid #dddddd;*/
     overflow: hidden;
     float: left;
 }
@@ -55,6 +55,7 @@
     float: right;
     margin-top: .15rem;
     margin-right: .15rem;
+
 }
 .detail-content .detail-cnt1 {
     width: 90%;
@@ -94,6 +95,7 @@
 p.car-price{
     font-size: .5rem;
     color: #999;
+
 }
 p.car-price label{
     font-size: .6rem;
@@ -131,6 +133,8 @@ p.car-sales{
     font-style: italic;
 }
 .details-tab-item b { font-size: 0.6rem; margin-top: 0.5rem; display: inline-block; margin-bottom: 0.25rem; }
+.details-tab-panel { overflow: hidden; }
+.details-tab-panel img { max-width: 100% !important;}
 /*详情添加首页和客服导航*/
 .nav-pro{
     display: inline-block;

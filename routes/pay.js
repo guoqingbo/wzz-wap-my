@@ -4,6 +4,7 @@ const WXPAYTYPE = 32; //32:微信公众号支付 34:智游宝微信公众号支�
 // const needle = require('needle');
 // const iconv = require('iconv-lite');
 const moment = require('moment');
+const URL = require('url');
 exports.mainRouter = function (router, common) {
     // 支付确认页面
     router.get('/pay/:module/:orderId', common.isLogin, function (req, res, next) {
@@ -235,6 +236,7 @@ exports.mainRouter = function (router, common) {
     // 授权access_token
     router.get('/horization', function (req, res, next) {
         let funArray = [];
+        let from = req.query.from
         // let {channelId='',promoterId='',teamBatchNo=''} = req.query
         let {channelId='',promoterId='',teamBatchNo=''} = JSON.parse(req.cookies.promoter || '{}')
         // 获取微信accessToken | openid, 获取后存入缓存wxTokenObj
@@ -349,6 +351,36 @@ exports.mainRouter = function (router, common) {
             req.session.member = results[0].data.leaguer;
             req.session.member.id = req.session.leaguerId
             req.session.token = results[0].data.token;
+            // 如果是全渠道扫码进入，则跳转地址由全渠道接口提供
+            if(from=='promoter'){
+                let url = common.envConfig.domain2+'/manage/baseinfo/api/business/notice/secondNotify'
+                let privateKey = 'aeea8760b9fe63eb9c65874e1d75719c'
+                let params = {
+                    scenicCode:'wzz',
+                    sign:common.md5('wzz'+privateKey),
+                    promoterId,
+                    requestType:'ADDRESS_SECOND_NOTIFY',
+                    teamBatchNo,
+                    openId:req.session.wxTokenObj.openid
+                }
+                common.postJson(url,params).then(response=>{
+                    let {body} = response
+                    if(body.success){
+                        let urlObj =  URL.parse(body.data.skipAddress,true)
+                        if(urlObj.query.realName==1){
+                            console.log('==========================originalUrl====================================')
+                            console.log('/member/linkMan/list?originalUrl='+encodeURIComponent(body.data.skipAddress)+"&comefrom=promoter")
+                            res.redirect('/member/linkMan/list?originalUrl='+encodeURIComponent(body.data.skipAddress)+"&comefrom=promoter")
+                        }else{
+                            res.redirect(body.data.skipAddress);
+                        }
+                    }else{
+                        req.flash('message', body.message);
+                        res.redirect('/error');
+                    }
+                })
+                return
+            }
             let redirectUrl = req.session.urla || req.session.curUrl || req.query.curUrl || "/main";
             res.redirect(redirectUrl);
         });

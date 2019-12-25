@@ -18,8 +18,9 @@ block content
             span.appoint-share
                 i.icon-fenxiang-
         ul.appoint-type-box
+            li.appoint-type-item.active(data-key='') 全部
              each item,index in data[0].data
-                 li.appoint-type-item(class=index == 0 ? 'active' : '' data-key=item.key)=item.value
+                 li.appoint-type-item(data-key=item.key)=item.value
             //li.appoint-type-item.active 海上娱乐
             //li.appoint-type-item 潜水
             //li.appoint-type-item 陆地玩乐

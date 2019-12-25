@@ -317,6 +317,27 @@
 .linkMan-name{ width: 3rem; line-height: 1.5rem; font-size: 0.65rem; text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;}
+.linkMan-title{
+    font-size: .6rem;
+    background-color: #fff;
+    padding: .5rem;
+    text-align: center;
+    margin-bottom: .2rem;
+}
+.linkMan-goBuy-ticekt{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    background-color: #3b76de;
+    padding: .3rem 0;
+    font-size: .6rem;
+    border: 0;
+    outline: 0;
+}
+.linkMan-goBuy-ticekt.gray{
+    background-color: #ccc;
+}
 .linkMan-center{ border-left: 1px solid #ddd; padding: 0 .75rem; font-size: 0.6rem;width: 9rem}
 .linkMan-check{ width: 1rem; line-height: 1.5rem;cursor: pointer}
 .linkMan-check span{ display:inline-block; width: 0.9rem; height: 0.9rem; line-height: 0.9rem; border: 1px solid #dfdfdf; border-radius: 3px; vertical-align: middle; text-align: center;}

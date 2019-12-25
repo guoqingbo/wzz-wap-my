@@ -1,4 +1,16 @@
 $(function(){
+        $(".linkMan-goBuy-ticekt").click(function (e) {
+            e.preventDefault()
+            e.stopPropagation()
+            new TipLayer({
+                message: '您确认完善好所有出行人信息吗？',
+                confirmType: 'confirm',
+                confirmCallBack: function () {
+                    var originalUrl = getQueryVariable('originalUrl')
+                    window.location.href=decodeURIComponent(originalUrl)
+                }
+            })
+        })
         $(".tab-search-panel").each(function(){
             var height=$(this).outerHeight(true);
             $(this).css("top",-height+"px");
@@ -63,7 +75,7 @@ $(function(){
                         window.location.href = '/error';
                     });
                 }
-                return false; 
+                return false;
         });
     });
     function dialogclose(div){

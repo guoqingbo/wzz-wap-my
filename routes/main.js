@@ -80,6 +80,9 @@ exports.mainRouter = function (router, common) {
     router.get('/login', function (req, res, next) {
         let redir = req.query.redir || req.session.curUrl || './member'
         let promoter = ''
+        if(req.query.from == 'promoter'){
+            promoter = '?from=promoter'
+        }
         req.session.curUrl = redir
 
         if (common.is_weixn(req)) {
@@ -115,7 +118,14 @@ exports.mainRouter = function (router, common) {
             })
         }
     });
-
+    // 全渠道扫码 页面
+    router.get('/promoterQrcode',function (req, res, next){
+        if(common.is_zhifubao(req) || common.is_weixn(req)){
+            return res.redirect('/login?from=promoter')
+        }else{
+            res.render('promoterQrcodeError', {title: '推广'});
+        }
+    })
     //注册
     router.get('/register', function (req, res, next) {
         res.render('register', {title: '注册', redir: req.session.curUrl || './member'});

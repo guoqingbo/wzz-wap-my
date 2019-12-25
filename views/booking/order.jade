@@ -27,7 +27,7 @@ block content
                     .changge-num-box
                         button.default-icon.sub-icon
                             i.icon-iconfont-jian
-                        span.buy-num 0
+                        span.buy-num 1
                         button.default-icon.add-icon(data-maxorder=ruleBuy.maxOrder)
                             i.icon-iconfont-jia
             li
@@ -69,7 +69,7 @@ block content
                     | 总计:
                     span.price
                         em ￥
-                        strong#totalprice 0.00
+                        strong#totalprice=data[0].data.price
                         em.c-999.couponHandlePrice
                         em.c-price.payPrice
         .tips

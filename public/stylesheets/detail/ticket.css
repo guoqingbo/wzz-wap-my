@@ -322,7 +322,7 @@ body{
 }
 .footer-left{
     display: inline-block;
-    width: 30%;
+    width: 40%;
     vertical-align: middle;
     /*padding-top: .3rem;*/
 }
@@ -332,7 +332,7 @@ body{
     display: inline-block;
     color: #3b76dd;
     font-size: .6rem;
-    width: 50%;
+    width: 33.33%;
     text-align: center;
 }
 .footer-nav i{
@@ -360,7 +360,7 @@ body{
     /*transform: translateX(-.5rem);*/
 }
 .footer-right{
-    width: 70%;
+    width: 60%;
     height: 100%;
     display: inline-block;
     text-align: right;
