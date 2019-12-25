@@ -19,6 +19,7 @@ module.exports = {
     domain: "http://wzz.sendinfo.com.cn",// 测试
     ticketPark:"park2018091313465343855", //测试
     domain1:"http://192.168.200.72:8080", //预约测试
+    domain2:"http://acd.sendinfo.com.cn", // 全渠道测试
     wx:{
         appId : 'wx4855f46c05a8d2b8',//我的测试环境
         appSecret : 'bc3e19c589440fe94a2aed85031806ad',//我的测试环境
@@ -29,6 +30,7 @@ module.exports = {
     },
     alipay:{
         appId : '2019111869287081',//测试环境
+        url:'https://openapi.alipaydev.com/gateway.do'
     },
     // weixinProxy:'https://wzzfxswap1.sendinfo.com.cn',// 微信授权支付代理
     corpCode:'cgb2cfxs',

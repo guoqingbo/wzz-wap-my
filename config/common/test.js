@@ -15,6 +15,7 @@ module.exports = {
     // domain:'http://192.168.201.129:8080',// 测试tesb
     domain: "http://wzz.sendinfo.com.cn",// 测试
     domain1:"http://192.168.200.72:8080", //预约测试
+    domain2:"http://acd.sendinfo.com.cn", // 全渠道测试
     ticketPark:"park2018091313465343855",// 测试
     wx:{
         appId : 'wx37b45b55a30c1726',//测试环境
@@ -23,7 +24,12 @@ module.exports = {
         // userType : 'C'
     },
     alipay:{
-        appId : '2019111869287081',//测试环境
+        // appId : '2016080700188711',//测试环境
+        appId : '2016080700188711',//测试环境
+        url:'https://openapi.alipaydev.com/gateway.do',
+        openAuth:'https://openauth.alipaydev.com/oauth2/appToAppAuth.htm',
+        // openAuth:'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm'
+        // url:'https://openapi.alipay.com/gateway.do',
     },
     // weixinProxy:'https://wzzfxswap1.sendinfo.com.cn',// 微信授权支付代理
     corpCode:'cgb2cfxs',

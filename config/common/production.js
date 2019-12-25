@@ -13,6 +13,7 @@ module.exports = {
     },
     domain: "http://b2b.wuzhizhou.com",//正式环境api
     domain1:"http://coach.wuzhizhou.com", //预约正式
+    domain2:"http://oc.wuzhizhou.com", // 全渠道正式
     // domain:'https://wzz.sendinfo.com.cn',
     ticketPark:"park2018092911074546610",//正式
     wx:{

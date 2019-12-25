@@ -112,6 +112,8 @@ $(function (){
                             // 缓存取票人
                             sessionStorage.setItem('takeTicketLinkMan',JSON.stringify([linkMan]))
 
+                        }else if (comefrom == 'promoter'){
+                            originalUrl = '/member/linkMan/list?originalUrl='+originalUrl+'&comefrom=promoter'
                         }else{
                             // 游玩人
                             // 获取缓存的游玩人

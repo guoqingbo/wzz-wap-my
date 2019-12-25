@@ -1,0 +1,20 @@
+doctype html
+html
+    head
+        script(type='text/javascript', src="/lib/jquery-1.8.3.min.js")
+        script(type='text/javascript', src="/javascripts/public.js")
+        link(rel='stylesheet', href='/stylesheets/reset.css')
+        link(rel='stylesheet', href='/stylesheets/common.css')
+    body
+        .mask
+        .tips
+            p
+            a(href="javascript:;").queding 确定
+        script.
+            $(function () {
+                $('.tips p').text('请使用微信或支付宝扫一扫');
+                $('.mask,.tips').show();
+            })
+            $('.mask').click(function (e) {
+                $('.mask,.tips').hide()
+            })
