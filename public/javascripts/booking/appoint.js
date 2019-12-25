@@ -28,6 +28,7 @@ $(function () {
             linkName: {
                 required: true,
                 maxlength: 8,
+                han: true
             },
             linkMobile: {
                 required: true, //isNeedMobile === 'T',
@@ -50,7 +51,7 @@ $(function () {
                 .success(function (data) {
                     var datas = data[0];
                     if (datas.status === 200) {
-                        window.location.href = 'member/order/' + orderNo;
+                        window.location.href = '/member/order/' + orderNo;
                     } else if(datas.status == 400){
                         window.location.href = '/login?redir='+window.location.href;
                     } else {

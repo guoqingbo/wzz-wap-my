@@ -4,6 +4,7 @@ const WXPAYTYPE = 32; //32:微信公众号支付 34:智游宝微信公众号支�
 // const needle = require('needle');
 // const iconv = require('iconv-lite');
 const moment = require('moment');
+const URL = require('url');
 exports.mainRouter = function (router, common) {
     // 支付确认页面
     router.get('/pay/:module/:orderId', common.isLogin, function (req, res, next) {

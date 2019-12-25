@@ -25,20 +25,20 @@ block content
                             em ￥
                             | #{data[0].data.price || 0}
 
-                    p.car-sales  已售 #{data[0].data.salesNum || 0}
-            .detail-comment
-                    a(href='/list/commentList?modelCode=' + data[0].data.rateCode + '&commentLevel=0')
-                        .det-score.fl
-                            if data[1].data.avgScore
-                                span.comment-score.c-base
-                                    - var starNum = parseInt(data[1].data.avgScore)
-                                    - for (var i=0;i<starNum;i+=1)
-                                        i.font-icon.icon-iconfont-aixin
-                                    - for (var j=0;j<(5-starNum);j++)
-                                        i.font-icon.icon-iconfont-aixin.not-light
-                                    em #{data[1].data.avgScore}分
-                                p #{data[1].data.count}条评论
-                        i.font-icon.fr.icon-iconfont-jiantou.fr
+                    //p.car-sales  已售 #{data[0].data.salesNum || 0}
+            //.detail-comment
+            //        a(href='/list/commentList?modelCode=' + data[0].data.rateCode + '&commentLevel=0')
+            //            .det-score.fl
+            //                if data[1].data.avgScore
+            //                    span.comment-score.c-base
+            //                        - var starNum = parseInt(data[1].data.avgScore)
+            //                        - for (var i=0;i<starNum;i+=1)
+            //                            i.font-icon.icon-iconfont-aixin
+            //                        - for (var j=0;j<(5-starNum);j++)
+            //                            i.font-icon.icon-iconfont-aixin.not-light
+            //                        em #{data[1].data.avgScore}分
+            //                    p #{data[1].data.count}条评论
+            //            i.font-icon.fr.icon-iconfont-jiantou.fr
     .page-line
     // tab选项卡
     ul#details-tab.tours-details-tab.tab.clearfix.details-tab
@@ -49,9 +49,9 @@ block content
     .details-tab-panel
         #tab-panel.ticket-details-tabs(style='margin-left: 0%;')
             #book.details-tab-item(style='height: auto;')
-                .tab-article!=data[0].content
+                .tab-article!=data[0].data.content
             #scenic.details-tab-item
-                .tab-article!= data[0].orderNotice
+                .tab-article!= data[0].data.notice
     .page-line
     .order-footer
         .order-total.float-layer
