@@ -401,11 +401,12 @@ let common = {
             }
         })
         url = url.replace(/&$/g,'')
-        console.log(url)
-        let shaObj = new jsSHA("SHA-1", "TEXT");
-        shaObj.update(url);
-        console.log(shaObj.getHash('HEX'))
-        return shaObj.getHash('HEX');
+         //读取秘钥
+        let private = common.envConfig.alipay.private;
+        var sign = crypto.createSign('RSA-SHA2');
+        sign.update(url);
+        sign = sign.sign(private, 'base64');
+        return encodeURIComponent(sign)
     },
     // 时间戳产生函数
     createTimeStamp: function () {
