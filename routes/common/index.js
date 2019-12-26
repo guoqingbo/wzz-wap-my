@@ -8,6 +8,7 @@ let async = require('async'),
     request = require('request')
     jade = require('jade')
     configLite = require('config-lite');
+    NodeRSA = require('node-rsa');
 
 const envConfig = configLite({
         filename: process.env.NODE_ENV,
@@ -394,6 +395,11 @@ let common = {
     },
     // 获取支付宝签名
     getAlipaySign(params){
+        let  key = new NodeRSA();
+        let userPrivateKey = common.envConfig.alipay.private;
+        key.setOptions({b: 1024, signingScheme: "sha1"})
+        key.importKey(userPrivateKey, 'pkcs8-private');
+
         let url = ''
         Object.keys(params).sort().forEach(ele=>{
             if(ele!="sign" && params[ele]!=='' && params[ele]!=='undefined'){
@@ -401,11 +407,10 @@ let common = {
             }
         })
         url = url.replace(/&$/g,'')
-        console.log(url)
-        let shaObj = new jsSHA("SHA-1", "TEXT");
-        shaObj.update(url);
-        console.log(shaObj.getHash('HEX'))
-        return shaObj.getHash('HEX');
+        let buffer = Buffer.from(url)
+        let signature = key.sign(buffer).toString('base64');
+
+        return signature
     },
     // 时间戳产生函数
     createTimeStamp: function () {

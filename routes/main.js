@@ -80,6 +80,9 @@ exports.mainRouter = function (router, common) {
     router.get('/login', function (req, res, next) {
         let redir = req.query.redir || req.session.curUrl || './member'
         let promoter = ''
+        if(req.query.from == 'promoter'){
+            promoter = '?from=promoter'
+        }
         req.session.curUrl = redir
 
         if (common.is_weixn(req)) {
