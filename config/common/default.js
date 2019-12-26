@@ -29,8 +29,12 @@ module.exports = {
         // userType : 'C'
     },
     alipay:{
-        appId : '2019111869287081',//测试环境
-        url:'https://openapi.alipaydev.com/gateway.do'
+        // appId : '2016080700188711',//测试环境
+        appId : '2017110609768371',//测试环境
+        // url:'https://openapi.alipaydev.com/gateway.do',
+        // openAuth:'https://openauth.alipaydev.com/oauth2/appToAppAuth.htm',
+        openAuth:'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm',
+        url:'https://openapi.alipay.com/gateway.do',
     },
     // weixinProxy:'https://wzzfxswap1.sendinfo.com.cn',// 微信授权支付代理
     corpCode:'cgb2cfxs',

@@ -25,7 +25,7 @@ module.exports = {
     },
     alipay:{
         // appId : '2016080700188711',//测试环境
-        appId : '2016080700188711',//测试环境
+        appId : '2017110609768371',//测试环境
         url:'https://openapi.alipaydev.com/gateway.do',
         openAuth:'https://openauth.alipaydev.com/oauth2/appToAppAuth.htm',
         // openAuth:'https://openauth.alipay.com/oauth2/publicAppAuthorize.htm'
