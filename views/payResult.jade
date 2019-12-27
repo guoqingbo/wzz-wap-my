@@ -50,3 +50,18 @@ block content
         if backDetailUrl
             .btn-handle
                 a.btn-RP(href=backDetailUrl) 继续购买
+        .tips
+            p
+            a(href="javascript:;").queding 确定
+        #mask.mask
+    script.
+        $(function () {
+            var params = {
+                payOrderNo:'#{data[0].data.payOrderNo}',
+                templateType:1
+            }
+            $.post("/getRemindtemplate",params)
+                .success(function (res) {
+                    console.log(res)
+                })
+        })

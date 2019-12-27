@@ -631,4 +631,24 @@ exports.mainRouter = function (router, common) {
             res.redirect(req.session.curUrl)
         })
     })
+
+    // 获取订单成功提示文案
+    router.post('getRemindtemplate', function (req, res, next) {
+        let parameter = req.body
+        common.commonRequest({
+            url: [{
+                urlArr: ['member', 'order', 'detail'],
+                parameter,
+                method:'get'
+            }],
+            req: req,
+            res: res,
+            isAjax:true,
+            callBack: function (results, reObj, resp, handTag) {
+                if(results[0].status == 200){
+
+                }
+            }
+        });
+    });
 };
