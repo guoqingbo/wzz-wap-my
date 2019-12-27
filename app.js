@@ -143,9 +143,8 @@ app.use(function (req, res, next) {
                 res.cookie('corpCode', envConfig.corpCode);
             }
             // 添加自定义参数 ,防止重复登陆
-            // req.session.curUrl = req.originalUrl +'&timeTmp=1'
-            // return res.redirect('/login')
-            next()
+            req.session.curUrl = req.originalUrl +'&timeTmp=1'
+            return res.redirect('/login')
         }else{
             next()
         }
