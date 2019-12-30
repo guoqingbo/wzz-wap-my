@@ -397,7 +397,7 @@ let common = {
     getAlipaySign(params){
         let  key = new NodeRSA();
         let userPrivateKey = common.envConfig.alipay.private;
-        key.setOptions({b: 1024, signingScheme: "sha1"})
+        key.setOptions({b: 2048, signingScheme: "sha1"})
         key.importKey(userPrivateKey, 'pkcs8-private');
 
         let url = ''
