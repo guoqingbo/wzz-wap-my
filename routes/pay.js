@@ -447,7 +447,7 @@ exports.mainRouter = function (router, common) {
                         wayType:'ALI',
                         accessToken: req.session.alipayTokenObj.access_token,
                         openid: req.session.alipayTokenObj.user_id,
-                        nickName: result.nick_name||'没有昵称权限',
+                        nickName: result.nick_name||'',
                         imgUrl: result.avatar,
                         sex: result.gender,
                         channelId,
