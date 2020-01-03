@@ -210,7 +210,8 @@
       "receivedGoods": "/order/api/leaguer/manage/order/receivedGoods",
       "phoneSave":"/leaguer/api/leaguer/manage/phoneSave",
       "getRefundSum":"/order/api/leaguer/manage/order/getRefundSum",
-      "applyOrder":"/order/api/leaguer/manage/order/applyOrder"
+      "applyOrder":"/order/api/leaguer/manage/order/applyOrder",
+      "getRemindtemplate":"/product/api/product/getRemindtemplate"
     },
     "integral":"/leaguer/api/point/manage/pointRecord",
     "linkMan":{

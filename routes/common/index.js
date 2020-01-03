@@ -397,7 +397,7 @@ let common = {
     getAlipaySign(params){
         let  key = new NodeRSA();
         let userPrivateKey = common.envConfig.alipay.private;
-        key.setOptions({b: 1024, signingScheme: "sha1"})
+        key.setOptions({b: 2048, signingScheme: "sha1"})
         key.importKey(userPrivateKey, 'pkcs8-private');
 
         let url = ''
@@ -407,9 +407,10 @@ let common = {
             }
         })
         url = url.replace(/&$/g,'')
+        console.log(url)
         let buffer = Buffer.from(url)
         let signature = key.sign(buffer).toString('base64');
-
+        console.log(signature)
         return signature
     },
     // 时间戳产生函数

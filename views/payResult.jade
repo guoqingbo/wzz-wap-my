@@ -63,5 +63,20 @@ block content
             $.post("/getRemindtemplate",params)
                 .success(function (res) {
                     console.log(res)
+                    if(res[0]&&res[0].data){
+                        var html=''
+                        for(var key in res[0].data){
+                            html+="<div>"+res[0].data[key].templateMsg+"</div>"
+                        }
+                        if(html){
+                            $(".tips").show()
+                            $("#mask").show()
+                            $(".tips p").html(html)
+                        }
+                    }
                 })
+            $("#mask").click(function (e) {
+                $(".tips").hide()
+                $("#mask").hide()
+            })
         })

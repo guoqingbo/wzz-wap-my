@@ -30,7 +30,7 @@ block content
                 label.lab-title 证件号
                 .order-item
                     input.order-text.card_box(type='text', name='charNo', value=data[0].data.cardNo placeholder='请填写证件号')
-                    span.c-price.camera-text(class=data[0].data.linkmanType != '01' ? 'hide' : '')
+                    span.c-price.camera-text(class=data[0].data.linkmanType && data[0].data.linkmanType != '01' ? 'hide' : '')
                         input(type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)").hide_file
                         i.font-icon.icon-iconfont-camera(style='margin-right:.1rem')
                         ="拍照识别"

@@ -23,7 +23,7 @@ block content
                         span(data-id=item.id).linkManDel
                             i.icon-iconfont-shanchu
         if comefrom == 'promoter'
-            button.linkMan-goBuy-ticekt(class=data[0].data.length==0?'gray':'') 去买票
+            button.linkMan-goBuy-ticekt(disabled=data[0].data.length==0) 去买票
     .mask#mask
     .tips
         p

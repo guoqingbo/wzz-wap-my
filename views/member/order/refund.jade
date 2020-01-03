@@ -139,13 +139,13 @@ block content
                         price = $(this).data("price");
                         tp = operation.accAdd(price,tp);
                         refundNums = $(".smzCheck:checked").length;
-                        $("#refundPrice").html(tp);
+                        $("#refundPrice").html(tp.toFixed(2));
                         $("input[name='refundAmount']").val(refundNums)
                     }else{
                         price = $(this).data("price");
                         tp = operation.accSub(price, tp);
                         refundNums = $(".smzCheck:checked").length;
-                        $("#refundPrice").html(tp);
+                        $("#refundPrice").html(tp.toFixed(2));
                         $("input[name='refundAmount']").val(refundNums)
                     }
 

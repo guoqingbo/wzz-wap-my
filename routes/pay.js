@@ -633,11 +633,11 @@ exports.mainRouter = function (router, common) {
     })
 
     // 获取订单成功提示文案
-    router.post('getRemindtemplate', function (req, res, next) {
+    router.post('/getRemindtemplate', function (req, res, next) {
         let parameter = req.body
         common.commonRequest({
             url: [{
-                urlArr: ['member', 'order', 'detail'],
+                urlArr: ['member', 'order', 'getRemindtemplate'],
                 parameter,
                 method:'get'
             }],

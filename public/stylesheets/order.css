@@ -335,7 +335,7 @@
     border: 0;
     outline: 0;
 }
-.linkMan-goBuy-ticekt.gray{
+.linkMan-goBuy-ticekt:disabled{
     background-color: #ccc;
 }
 .linkMan-center{ border-left: 1px solid #ddd; padding: 0 .75rem; font-size: 0.6rem;width: 9rem}

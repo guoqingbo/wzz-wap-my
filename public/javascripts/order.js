@@ -235,6 +235,10 @@ $(function () {
         }
 
         if (module === 'hotel') {
+            console.log(date)
+            if(!date.length){
+                date[0] = {}
+            }
             var _a = date[0].currDate,
                 _b = date[date.length - 1].currDate,
                 _c;
