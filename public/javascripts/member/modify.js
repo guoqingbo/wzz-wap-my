@@ -1,5 +1,6 @@
 $(function (){
     // 表单验证
+    var type = $(".cert-type").find("option:selected").text();
     var validator = $('#form').validate({
         rules: {
             realName: {
@@ -44,7 +45,7 @@ $(function (){
             },
             charNo: {
                 required:true,
-                isIdCardNo: true
+                isIdCardNo: type == '身份证'
             },
             phone: {
                 required:true,

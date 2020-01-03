@@ -394,7 +394,7 @@ exports.mainRouter = function (router, common) {
             app_id: common.envConfig.alipay.appId,
             format: 'JSON',
             charset: 'utf-8',
-            sign_type:'RSA',
+            sign_type:'RSA2',
             timestamp:moment().format('YYYY-MM-DD hh:mm:ss'),
             version:'1.0',
         }
@@ -409,14 +409,16 @@ exports.mainRouter = function (router, common) {
             params.sign = common.getAlipaySign(params)
             common.get(common.envConfig.alipay.url,params).then(response=>{
                     let {body} = response
-                    req.session.alipayTokenObj = {
-                        access_token : body.access_token,
-                        refresh_token: body.refresh_token,
-                        user_id: body.user_id,
-                        expires_in: body.expires_in,
-                        re_expires_in: body.re_expires_in
-                    };
-                    cb(null, body);
+                    console.log('==============获取支付宝token===================')
+                    // req.session.alipayTokenObj = {
+                    //     access_token : body.access_token,
+                    //     refresh_token: body.refresh_token,
+                    //     user_id: body.user_id,
+                    //     expires_in: body.expires_in,
+                    //     re_expires_in: body.re_expires_in
+                    // };
+                    req.session.alipayTokenObj = body.alipay_system_oauth_token_response
+                    cb(null, body.alipay_system_oauth_token_response);
                 })
         };
 
@@ -432,7 +434,7 @@ exports.mainRouter = function (router, common) {
             params.sign = common.getAlipaySign(params),
             common.get(url,params).then(response=>{
                 let {body} = response
-                cb(null, body);
+                cb(null, body.alipay_user_info_share_response);
             })
         };
 
@@ -445,7 +447,7 @@ exports.mainRouter = function (router, common) {
                         wayType:'ALI',
                         accessToken: req.session.alipayTokenObj.access_token,
                         openid: req.session.alipayTokenObj.user_id,
-                        nickName: result.nick_name,
+                        nickName: result.nick_name||'没有昵称权限',
                         imgUrl: result.avatar,
                         sex: result.gender,
                         channelId,
