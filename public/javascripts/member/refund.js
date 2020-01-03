@@ -18,9 +18,9 @@ $(function (){
         data:data,
         success:function(data){
             if(data[0].status===200){
-                $("#refundPrice").html(data[0].data);
+                $("#refundPrice").html(data[0].data.toFixed(2));
             }else{
-                $("#refundPrice").html(0);
+                $("#refundPrice").html(0.00);
             }
 
         }
@@ -128,9 +128,9 @@ $(function (){
                     success:function(data){
                         var price = data[0].data;
                         if(data[0].status===200){
-                            $('#refundPrice').text(price)
+                            $('#refundPrice').text(price.toFixed(2))
                         }else{
-                            $('#refundPrice').text(0)
+                            $('#refundPrice').text(0.00)
                         }
                     }
                 });

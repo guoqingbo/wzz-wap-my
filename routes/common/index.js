@@ -407,9 +407,10 @@ let common = {
             }
         })
         url = url.replace(/&$/g,'')
+        console.log(url)
         let buffer = Buffer.from(url)
         let signature = key.sign(buffer).toString('base64');
-
+        console.log(signature)
         return signature
     },
     // 时间戳产生函数
