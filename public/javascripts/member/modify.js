@@ -39,9 +39,9 @@ $(function (){
                 email:true
             },
             name: {
-                han:true,
                 required:true,
-                maxlength:8
+                han:type == '身份证',
+                // maxlength:8
             },
             charNo: {
                 required:true,
@@ -57,14 +57,18 @@ $(function (){
     $(".cert-type").change( function() {
         var type = $(this).find("option:selected").text();
         $("input[name=charNo]").rules("remove");
+        $("input[name='name']").rules("remove");
         if(type=="身份证"){
             $("input[name=charNo]").rules("add", {required:true, isIdCardNo: true});
             $(".camera-text").show()
+            $("input[name=name]").rules("add", {required:true, han: true});
         }else{
             $("input[name=charNo]").rules("add", {required:true});
             $(".camera-text").hide()
+            $("input[name=name]").rules("add", {required:true});
         }
         $("input[name=charNo]").focus().blur()
+        $("input[name='name']").focus().blur()
     });
     var submitResult=false;
 
