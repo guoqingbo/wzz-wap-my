@@ -258,7 +258,8 @@ $(function () {
                 endDate:$(".play-day").text(),
                 bnsType:"park",
                 rateCode:$(this).data("ratecode"),
-                realNames:realNames
+                recommendFlag:$(this).data("recommendflag"),
+                realNames:realNames,
                 // couponCheckCode:"",
                 // couponCode:"",
             }
@@ -453,6 +454,7 @@ $(function () {
                 var item = $(this).data('item')
                 // 修改item字段和门票一致
                 item.buyNum = buyNum
+                item.recommendFlag = 'T'
                 // item.rateCode=item.code
                 list.push(item)
                 hasAccountMoney+=Number(buyNum*(priceOld-priceUnit))
