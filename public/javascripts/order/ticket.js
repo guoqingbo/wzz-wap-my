@@ -259,6 +259,7 @@ $(function () {
                 bnsType:"park",
                 rateCode:$(this).data("ratecode"),
                 recommendFlag:$(this).data("recommendflag"),
+                packageId:$(this).data("packageid"),
                 realNames:realNames,
                 // couponCheckCode:"",
                 // couponCode:"",

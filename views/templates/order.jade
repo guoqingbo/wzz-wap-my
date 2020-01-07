@@ -2,7 +2,11 @@
 mixin shopCarList(data)
     if data&&data.list.length
         each item in data.list
-            .ticket-type-box(data-real=item.isRealName data-ratecode=item.rateCode data-recommendflag=item.recommendFlag||"F")
+            .ticket-type-box(
+            data-real=item.isRealName
+            data-ratecode=item.rateCode
+            data-recommendflag=item.recommendFlag||"F"
+            data-packageid = item.packageId||'')
                 .ticket-type-header
                     span.ticket-name=item.aliasName || item.name
                     .ticket-amount
