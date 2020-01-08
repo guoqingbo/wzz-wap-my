@@ -209,7 +209,11 @@ function appendCoupons(list,_price) {
                 _productFlag = '通用';
                 break;
             case '1':
-                _productFlag = '指定产品类别';
+                if(list[len].productValue){
+                    _productFlag = '指定产品类别(' + getModule(list[len].productValue) + ')';
+                }else{
+                    _productFlag = '指定产品类别';
+                }
                 break;
             case '2':
                 _productFlag = '指定产品';
