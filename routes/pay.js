@@ -372,7 +372,7 @@ exports.mainRouter = function (router, common) {
                             console.log('/member/linkMan/list?originalUrl='+encodeURIComponent(body.data.skipAddress)+"&comefrom=promoter")
                             res.redirect('/member/linkMan/list?originalUrl='+encodeURIComponent(body.data.skipAddress)+"&comefrom=promoter")
                         }else{
-                            res.redirect(body.data.skipAddress);
+                            res.redirect(body.data.skipAddress+"&from=new");
                         }
                     }else{
                         req.flash('message', body.message);

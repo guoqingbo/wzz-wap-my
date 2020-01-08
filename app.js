@@ -132,8 +132,8 @@ app.use(function (req, res, next) {
             return next()
         }
         // let promoter = JSON.parse(req.cookies.promoter || '{}')
-        let {channelId,promoterId,teamBatchNo,promoteSrcCode,timeTmp,corpCode} = req.query
-        if(promoterId && !timeTmp){
+        let {channelId,promoterId,teamBatchNo,promoteSrcCode,timeTmp,corpCode,from} = req.query
+        if(promoterId && promoteSrcCode && !timeTmp){
             // req.cookies.promoter = JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode})
             // res.cookie.setMaxAge(-10)
             res.cookie('promoter', JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode}));
@@ -142,10 +142,14 @@ app.use(function (req, res, next) {
             if(!corpCode){
                 res.cookie('corpCode', envConfig.corpCode);
             }
-            // 添加自定义参数 ,防止重复登陆
-            // req.session.curUrl = req.originalUrl +'&timeTmp=1'
-            // return res.redirect('/login')
-            next()
+            // 新的全渠道扫码不需要再登陆
+            if(from=='new'){
+                next()
+            }else{
+                // 添加自定义参数 ,防止重复登陆
+                req.session.curUrl = req.originalUrl +'&timeTmp=1'
+                return res.redirect('/login')
+            }
         }else{
             next()
         }

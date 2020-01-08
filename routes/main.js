@@ -121,6 +121,8 @@ exports.mainRouter = function (router, common) {
     // 全渠道扫码 页面
     router.get('/promoterQrcode',function (req, res, next){
         if(common.is_zhifubao(req) || common.is_weixn(req)){
+            let {promoterId} = req.query
+            res.cookie('promoter', JSON.stringify({promoterId}));
             return res.redirect('/login?from=promoter')
         }else{
             res.render('promoterQrcodeError', {title: '推广'});
