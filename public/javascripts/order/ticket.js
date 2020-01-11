@@ -442,16 +442,14 @@ $(function () {
         // 获取原产品购买数量
         var originNum = $(".ticket-type-box[data-ratecode="+item.associatedCode+"]").find('.ticket-amount-value').text()
         // 推荐产品购买数量之和小于等于原产品购买数量
-        var recomentTotalNum = 0
-        console.log(".ticket-recommend-item[data-associatedcode="+item.associatedCode+"]")
-        console.log($(".ticket-recommend-item[data-associatedcode="+item.associatedCode+"]"))
-        $(".ticket-recommend-item[data-associatedcode="+item.associatedCode+"]").each(function () {
-            recomentTotalNum+=Number($(this).find('.buy-num').text())
-        })
-        recomentTotalNum++
+        var recomentTotalNum = buyNum
+        // $(".ticket-recommend-item[data-associatedcode="+item.associatedCode+"]").each(function () {
+        //     recomentTotalNum+=Number($(this).find('.buy-num').text())
+        // })
+        // recomentTotalNum++
         if(recomentTotalNum>Number(originNum)){
             buyNum--
-            new ErrLayer({message:'推荐产品购买总数量不得大于关联商品数量'})
+            new ErrLayer({message:'推荐产品数量不能超过购买产品数量'})
         }
         return buyNum
     }
