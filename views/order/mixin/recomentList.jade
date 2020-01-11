@@ -1,7 +1,7 @@
 mixin recomentList(data)
     if data.length
         each item in data
-            li.ticket-type-item(data-item=JSON.stringify(item))
+            li.ticket-type-item.ticket-recommend-item(data-item=JSON.stringify(item) data-associatedcode=item.associatedCode)
                 .ticket-info-name=item.name
                 .ticket-type-left
                     //.sale-num 售量：1000

@@ -410,7 +410,7 @@ $(function () {
         var productEle = $(this).parents('.ticket-type-item')
         var buyNumEle = productEle.find('.buy-num')
         // 订单信息
-        // var item = productEle.data("item")
+        var item = productEle.data("item")
 
         var buyNum = Number(buyNumEle.text())
         var maxNum = productEle.find(".add-icon").data("maxorder")
@@ -421,6 +421,10 @@ $(function () {
         }else{
             // 如果是+
             buyNum++
+            // 如果是推荐产品加减
+            if(item.associatedCode){
+                buyNum = recommentBuyNumLimit(item,buyNum)
+            }
         }
         if(buyNum<=0){
             buyNum = 0
@@ -433,6 +437,24 @@ $(function () {
         // 计算价格和数量
         computePrice()
     })
+    // 推荐产品购买数量限制
+    function recommentBuyNumLimit(item,buyNum) {
+        // 获取原产品购买数量
+        var originNum = $(".ticket-type-box[data-ratecode="+item.associatedCode+"]").find('.ticket-amount-value').text()
+        // 推荐产品购买数量之和小于等于原产品购买数量
+        var recomentTotalNum = 0
+        console.log(".ticket-recommend-item[data-associatedcode="+item.associatedCode+"]")
+        console.log($(".ticket-recommend-item[data-associatedcode="+item.associatedCode+"]"))
+        $(".ticket-recommend-item[data-associatedcode="+item.associatedCode+"]").each(function () {
+            recomentTotalNum+=Number($(this).find('.buy-num').text())
+        })
+        recomentTotalNum++
+        if(recomentTotalNum>Number(originNum)){
+            buyNum--
+            new ErrLayer({message:'推荐产品购买总数量不得大于关联商品数量'})
+        }
+        return buyNum
+    }
     // 计算价格
     function computePrice() {
         // 已经优惠的
