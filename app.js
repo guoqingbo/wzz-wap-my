@@ -134,9 +134,14 @@ app.use(function (req, res, next) {
         // let promoter = JSON.parse(req.cookies.promoter || '{}')
         let {channelId,promoterId,teamBatchNo,promoteSrcCode,timeTmp,corpCode,from} = req.query
         if(promoterId && promoteSrcCode && !timeTmp){
+            console.log("promoterquery==========================================================================")
+            console.log(req.query)
             // req.cookies.promoter = JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode})
             // res.cookie.setMaxAge(-10)
             res.cookie('promoter', JSON.stringify({channelId,promoterId,teamBatchNo,promoteSrcCode}));
+            res.locals.promoter = {channelId,promoterId,teamBatchNo,promoteSrcCode}
+            // console.log("promoter=======srdgsdfgdsfgdsgsdfgsdfgdgf===================================================================")
+            // console.log(req.cookies.promoter)
             // res.cookie('ceshi', '123',{expires: false,maxAge:0});
             // 兼容之前旧的码，判断是否有企业吗（旧的扫码没有企业码，添加默认的企业码）
             if(!corpCode){
@@ -157,7 +162,17 @@ app.use(function (req, res, next) {
         next()
     }
 })
-
+// app.use(function (req, res, next) {
+//     if(req.method=="GET") {
+//         // 全渠道扫码进入(需要登录)
+//         if (req.cookies.promoter) {
+//             console.log("promoter==========================================================================")
+//             console.log(req.cookies.promoter)
+//             res.locals.promoter = JSON.parse(req.cookies.promoter)
+//         }
+//     }
+//     next()
+// })
 app.use('/', routes);
 
 
