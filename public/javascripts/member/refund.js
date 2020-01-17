@@ -7,10 +7,12 @@ $(function (){
       }
        refundSumArr.push(refundSumId);
    }
+
    var data={
        ids:refundSumArr.join(","),
        nums:refundNums
    };
+    console.log(data)
    //退款金额
     $.ajax({
         url:'/member/refundSum',
@@ -20,6 +22,8 @@ $(function (){
             if(data[0].status===200){
                 $("#refundPrice").html(data[0].data.toFixed(2));
             }else{
+                $('.tips p').text(data[0].message);
+                $('.mask,.tips').show();
                 $("#refundPrice").html(0.00);
             }
 
@@ -130,6 +134,8 @@ $(function (){
                         if(data[0].status===200){
                             $('#refundPrice').text(price.toFixed(2))
                         }else{
+                            $('.tips p').text(data[0].message);
+                            $('.mask,.tips').show();
                             $('#refundPrice').text(0.00)
                         }
                     }

@@ -3,7 +3,11 @@ module.exports = {
         host: "192.168.200.50",
         port: 6379,
         ttl: 30 * 60,
-        db:2
+        db:2,
+        // host: "sendinfo.redis.com",
+        // port: 6379,
+        // ttl: 30 * 60,
+        // db:2
     },
     debug:true,
     idCard:{
@@ -17,6 +21,10 @@ module.exports = {
     domain1:"http://192.168.200.72:8080", //预约测试
     domain2:"http://acd.sendinfo.com.cn", // 全渠道测试
     ticketPark:"park2018091313465343855",// 测试
+    // domain: "http://b2b.wuzhizhou.com",//正式环境api
+    // domain1:"http://coach.wuzhizhou.com", //预约正式
+    // domain2:"http://oc.wuzhizhou.com", // 全渠道正式
+    // ticketPark:"park2018092911074546610",//正式
     wx:{
         appId : 'wx37b45b55a30c1726',//测试环境
         appSecret : 'e7560178d2dcfc37e0c9d14eb8ae9a49',//测试环境
