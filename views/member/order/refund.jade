@@ -131,23 +131,51 @@ block content
         //@ sourceURL=111
         $(function () {
             if(module!="combo"){
-                var tp = $("input[name='refundAmount']").data('max') * $('#refundPrice').data('price');
+                // var tp = $("input[name='refundAmount']").data('max') * $('#refundPrice').data('price');
                // $('.refund-price').html('最多可退 ￥' + tp.toFixed(2));
                 $(".smzCheck").click(function(){
                     var price,refundNums;
                     if($(this).is(":checked")){
-                        price = $(this).data("price");
-                        tp = operation.accAdd(price,tp);
+                        // price = $(this).data("price");
+                        // tp = operation.accAdd(price,tp);
                         refundNums = $(".smzCheck:checked").length;
-                        $("#refundPrice").html(tp);
+                        // $("#refundPrice").html(tp);
                         $("input[name='refundAmount']").val(refundNums)
                     }else{
-                        price = $(this).data("price");
-                        tp = operation.accSub(price, tp);
+                        // price = $(this).data("price");
+                        // tp = operation.accSub(price, tp);
                         refundNums = $(".smzCheck:checked").length;
-                        $("#refundPrice").html(tp);
+                        // $("#refundPrice").html(tp);
                         $("input[name='refundAmount']").val(refundNums)
                     }
+                    var refundSum = JSON.parse($(".refundSum").val()),
+                        refundSumArr = [], refundSumId;
+                    var refundNums = $("input[name='refundAmount']").val();
+                    if (refundSum) {
+                        for (var i = 0; i < refundSum.length; i++) {
+                            refundSumId = refundSum[i].id;
+                        }
+                        refundSumArr.push(refundSumId);
+                    }
+                    //退款金额
+                    $.ajax({
+                        url: '/member/refundSum',
+                        type: "post",
+                        data: {
+                            ids: refundSumArr.join(","),
+                            nums: refundNums
+                        },
+                        success: function (data) {
+                            var price = data[0].data;
+                            if (data[0].status === 200) {
+                                $('#refundPrice').text(price.toFixed(2))
+                            } else {
+                                $('.tips p').text(data[0].message);
+                                $('.mask,.tips').show();
+                                $('#refundPrice').text(0.00)
+                            }
+                        }
+                    });
 
                 })
             }
