@@ -2,13 +2,13 @@ let moment = require('moment');
 let url = require("url");
 
 let utils = {
-    //  是否加载国庆风格
-    isGuoQing(){
+    //  是否加载节日风格
+    isholeday(){
         let flag = false
         let nowDay = moment().format('YYYY-MM-DD hh:mm:ss')
-        if(nowDay>='2019-09-30 23:59:59' && nowDay<='2019-10-07 23:59:59'){
+        if(nowDay>='2020-01-24 23:59:59' && nowDay<='2020-02-01 23:59:59'){
             flag = true
-        }else if(process.env.NODE_ENV !='production' && (nowDay>='09-24 23:59:59' && nowDay<='10-07 23:59:59')){
+        }else if(process.env.NODE_ENV !='production'){
             // 非生产环境
             flag = true
         }
@@ -69,7 +69,7 @@ exports.mainRouter = function (router, common) {
                     Object.assign(reObj, pageMeta);
                     reObj.module = 'index';
                     reObj.ticketPark = common.envConfig.ticketPark
-                    reObj.isGuoQing = utils.isGuoQing()
+                    reObj.isholeday = utils.isholeday()
                 }
             }
         });

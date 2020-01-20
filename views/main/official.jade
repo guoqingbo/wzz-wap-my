@@ -3,7 +3,7 @@ extends ../layout
 block stylesheets
     link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
     link(rel="stylesheet", href="/stylesheets/main/official.css")
-    if isGuoQing
+    if isholeday
         // 国庆风格
         link(rel="stylesheet", href="/stylesheets/main/index.css")
 block javascripts
@@ -15,6 +15,7 @@ block content
     body(class=projectNameCode)
         include ../common/footer
         include ../common/main
+        .logo-img-default
         if data[1] && data[1].data.logo
             img.logo-img(src=data[1].data.logo)
         //-顶部搜索

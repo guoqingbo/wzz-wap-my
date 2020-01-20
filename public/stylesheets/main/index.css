@@ -4,9 +4,56 @@
     /*background-size: contain;*/
 /*}*/
 /*官网国庆风格2*/
+/*body.official{*/
+/*    background: url(../../images/index/body-img6.png) top no-repeat #ab2526;*/
+/*    background-size: contain;*/
+/*}*/
+
+/*春节风格公共*/
+.hs-nav ul{
+    background-color: #f7e6da;
+    padding-top: .8rem;
+    border-radius: 1rem;
+}
+.hs-nav ul p{
+    color: #d8413e;
+}
+.index-title{
+    color: #fff;
+}
+h4.index-title .index-title-line{
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    vertical-align: middle;
+    padding: 0;
+    margin-right:.3rem;
+}
+h4.index-title:nth-of-type(1) .index-title-line{
+     background: url(../../images/index/title-icon1.png) no-repeat center center;
+     background-size: 100%;
+ }
+h4.index-title:nth-of-type(2) .index-title-line{
+    background: url(../../images/index/title-icon2.png) no-repeat center center;
+    background-size: 100%;
+}
+h4.index-title:nth-of-type(3) .index-title-line{
+    background: url(../../images/index/title-icon3.png) no-repeat center center;
+    background-size: 100%;
+}
+/*春节风格*/
 body.official{
-    background: url(../../images/index/body-img6.png) top no-repeat #ab2526;
+    background: url(../../images/index/body-img8.png) top no-repeat #c63334;
     background-size: contain;
+}
+body.official .logo-img-default{
+    left: .5rem;
+    position: absolute;
+    width: 2.5rem;
+    top: -5.5rem;
+    height: 2rem;
+    background: url(../../images/index/callLogo.png) top no-repeat;
+    background-size: 100%;
 }
 /*汪汪国庆风格1*/
 /*body.wangWang{*/
@@ -14,7 +61,21 @@ body.official{
     /*background-size: contain;*/
 /*}*/
 /*汪汪国庆风格2*/
+/*body.wangWang{*/
+/*    background: url(../../images/wangWang/index/body-img5.png) top no-repeat #ac2527;*/
+/*    background-size: contain;*/
+/*}*/
+/*春节风格*/
 body.wangWang{
-    background: url(../../images/wangWang/index/body-img5.png) top no-repeat #ac2527;
+    background: url(../../images/index/body-img8.png) top no-repeat #c63334;
     background-size: contain;
+}
+body.wangWang .logo-img-default{
+    left: .5rem;
+    position: absolute;
+    width: 2rem;
+    top: -5.5rem;
+    height: 2rem;
+    background: url(../../images/index/wangWangLogo.png) top no-repeat;
+    background-size: 100%;
 }

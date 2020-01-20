@@ -3,7 +3,7 @@ extends ../layout
 block stylesheets
   link(rel="stylesheet", href="/lib/swiper/swiper-3.4.2.min.css")
   link(rel="stylesheet", href="/stylesheets/main/wangWang.css")
-  if isGuoQing
+  if isholeday
     // 国庆风格
     link(rel="stylesheet", href="/stylesheets/main/index.css")
 block javascripts
@@ -15,6 +15,7 @@ block content
     include ../common/main
     //-input.promoteSrcCode(type="hidden" value=promoteSrcCode)
     //- 头部轮播
+    .logo-img-default
     .hs-banner
       .bg-banner
         #banner_swiper.swiper-container
