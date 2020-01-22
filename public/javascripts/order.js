@@ -803,12 +803,13 @@ $(function () {
     function formValidate(goodsWay) {
         // 获取证件类型
         var certType = $("select[name='certType']").val()
+        //
         validator = $ord.form.validate({
             rules: {
                 linkMans: {
                     required: true,
-                    maxlength: 8,
-                    han: true
+                    // maxlength: 8,
+                    han: certType=='01'?true:false
                 },
                 teles: {
                     required: true, //isNeedMobile === 'T',
@@ -936,14 +937,23 @@ $(function () {
     $(".cert-type").change( function() {
         var type = $(this).find("option:selected").text();
         $("input[name=idNos]").rules("remove");
+        $("input[name=linkMans]").rules("remove");
         if(type=="身份证"){
             $("input[name=idNos]").rules("add", {required:true, isIdCardNo: true});
+            $("input[name=linkMans]").rules("add", {
+                required: true,
+                maxlength: 8,
+                han: true});
             $(".camera-text").show()
         }else{
             $("input[name=idNos]").rules("add", {required:true});
+            $("input[name=linkMans]").rules("add", {
+                required: true,
+            });
             $(".camera-text").hide()
         }
         $("input[name=idNos]").focus().blur()
+        $("input[name=linkMans]").focus().blur()
     });
 });
 

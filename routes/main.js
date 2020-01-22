@@ -6,7 +6,7 @@ let utils = {
     isholeday(){
         let flag = false
         let nowDay = moment().format('YYYY-MM-DD hh:mm:ss')
-        if(nowDay>='2020-01-24 23:59:59' && nowDay<='2020-02-01 23:59:59'){
+        if(nowDay>='2020-01-19 23:59:59' && nowDay<='2020-02-06 23:59:59'){
             flag = true
         }else if(process.env.NODE_ENV !='production'){
             // 非生产环境

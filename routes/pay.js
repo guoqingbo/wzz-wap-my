@@ -398,6 +398,9 @@ exports.mainRouter = function (router, common) {
             timestamp:moment().format('YYYY-MM-DD hh:mm:ss'),
             version:'1.0',
         }
+        if(process.env.NODE_ENV =='production'){
+            commonParams.sign_type = 'RSA'
+        }
         // 获取支付宝accessToken | user_id,
         let getaccessToken = function (cb) {
             let params = {

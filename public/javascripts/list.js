@@ -562,7 +562,7 @@ function listDom(list, module) {
                         '</div></a></li>';
                     break;
                 case 'shop':
-                    var _price = list[len].currentPrice ? '<span class="price"><em>￥</em><strong>' + (list[len].priceShow).toFixed(2) + '</strong></span>' : '';
+                    var _price = list[len].priceShow ? '<span class="price"><em>￥</em><strong>' + (list[len].priceShow).toFixed(2) + '</strong>起</span>' : '';
                     dom += '<h3 class="goods-list-title"><div class="list-title-box">' + eN(list[len].aliasName) + '</div></h3>' +
                         '<p class="goods-list-article">' + eN(list[len].subtitle) + '</p>' +
                         '<p class="goods-list-explian">' +
