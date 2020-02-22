@@ -273,6 +273,7 @@ $(function () {
             linkName:takePerson.linkmanName,//取票人姓名
             linkMobile:takePerson.phoneNo,//取票人手机号
             linkIdcard:takePerson.cardNo,//取票人身份证
+            linkManId:takePerson.id,
             certType:takePerson.linkmanType||'01',//取票人身份证
             cartOrderStr:JSON.stringify(cartOrderDtos),//下单参数
             paramExtension:"",//业务拓展参数

@@ -33,14 +33,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 设置 Session
-app.use(session({
-    resave: true,
-    saveUninitialized: false,
-    store: new RedisStore(envConfig.redis),
-    rolling:true,// 是否自动更新过期时间
-    secret: 'wzzwap'
-}));
+
+if(process.env.NODE_ENV){
+    // 设置 Session
+    app.use(session({
+        resave: true,
+        saveUninitialized: false,
+        store: new RedisStore(envConfig.redis),
+        rolling:true,// 是否自动更新过期时间
+        secret: 'wzzwap'
+    }));
+}else{
+    // 本地开发
+    app.use(session({
+        secret: 'keyboard cat',
+        resave: true,
+        saveUninitialized: true
+    }));
+}
+
+
 app.use(flash());
 
 

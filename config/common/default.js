@@ -1,6 +1,7 @@
 module.exports = {
     redis: {
         host: "192.168.200.50",
+        // host: "sendinfo.redis.com",
         port: 6379,
         ttl: 30 * 60,
         db:2

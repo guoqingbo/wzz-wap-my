@@ -303,7 +303,7 @@
             var _this = this;
             var width = obj.width() / opts.multipleMonth < myprivate.sideWidth ? '100%' : 100 / opts.multipleMonth + '%';
             var firstMonth = null, // 切换月都应该是单月切换，即使是多月选择也如此，默认以第一个月为基数做切换
-                monthTag = 0; // 一个标识，用于确定当前的表格头是否需要切换按钮
+                monthTag = opts.monthTag || 0; // 一个标识，用于确定当前的表格头是否需要切换按钮
 
             obj.empty();
             obj.append(_this.getWeekDom(opts));
@@ -314,17 +314,17 @@
                 if (i === 0 && opts.multipleMonth !== 1){
                     // 多月第一个月
                     firstMonth = opts.selecteday;
-                    monthTag = -1;
+                    // monthTag = -1;
                 }else if (i !== opts.multipleMonth - 1 && opts.multipleMonth !== 1){
                     // 多用中间月份
-                    monthTag = 0;
+                    // monthTag = 0;
                 }else if (i === opts.multipleMonth - 1 && opts.multipleMonth !== 1){
                     // 多月最后一个月
-                    monthTag = 1;
+                    // monthTag = 1;
                 }else{
                     // 单月
                     firstMonth = opts.selecteday;
-                    monthTag = 2;
+                    // monthTag = 2;
                 }
                 opts.selecteday = new Date(operation[0],operation[1],1);
                 obj
@@ -348,6 +348,7 @@
         selecteday: new Date(),
         settingdata: [],
         multipleMonth: 1,
+        monthTag:0,
         multipleSelect: false,
         showMonth: false,
         click: function (date){

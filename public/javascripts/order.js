@@ -857,12 +857,18 @@ $(function () {
                     if (idtrue[0]) {
                         checkName = ["checked", "icon-checkmark"];
                     }
+                    var isCanhtml = ''
+                    if(res[i].isHealth == 'T'){
+                        isCanhtml = "<div class='linkMan-check'><span data-id=" + res[i].id + " class='checkspan " + checkName[0] + "'><i class='" + checkName[1] + "'></i></span></div>"
+                    }else{
+                        isCanhtml = '<div><p>不能</p><p>购票</p></div>'
+                    }
                     html += "<li data-item='"+JSON.stringify(res[i])+"'>" +
                         "<div class='linkMan-name'>" + res[i].linkmanName + "</div>" +
                         "<div class='linkMan-center'>" +
                         "<p>手机号：<span>" + res[i].phoneNo + "</span></p><p>证件号：<span>" + res[i].cardNo + "</span></p>" +
                         "</div>" +
-                        "<div class='linkMan-check'><span data-id=" + res[i].id + " class='checkspan " + checkName[0] + "'><i class='" + checkName[1] + "'></i></span></div>" +
+                         isCanhtml +
                         "</li>";
                 });
                 $(".linkMan-list").html(html)
@@ -910,6 +916,8 @@ $(function () {
                     $('.order-nl').find('input[name="linkMans"]').val(item.linkmanName);
                     $('.order-nl').find('input[name="teles"]').val(item.phoneNo);
                     $('.order-nl').find('input[name="idNos"]').val(item.cardNo);
+                    $('.order-nl').find('input[name="linkManId"]').val(item.id);
+
                     $('.order-nl').find('option[value="'+certType+'"]').attr("selected",true)
                 }else{
                     $('#userAuth').find('ul').each(function (i,v) {

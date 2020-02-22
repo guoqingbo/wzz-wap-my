@@ -67,7 +67,7 @@ $(function (){
             $(".camera-text").hide()
             $("input[name=name]").rules("add", {required:true});
         }
-        $("input[name=charNo]").focus().blur()
+        $("input[name='charNo']").focus().blur()
         $("input[name='name']").focus().blur()
     });
     var submitResult=false;
@@ -90,18 +90,42 @@ $(function (){
                 });
         }
     });
+    var temperatureUrl = ''
+    if($(".linkMan-modify-btn").length){
+        temperatureUrl= $(".temperatureUrl").attr('src') || ''
+    }
     // 新增或修改联系人
     function addOrModifyLinkMan(type){
+        console.log(type)
         var url = '/member/linkMan/add'
+        var healthStr = {
+            // 健康信息
+            origin:$("select[name='origin']").val(),
+            habitation:$("select[name='habitation1']").val()+"-"+$("select[name='habitation2']").val()+"-"+$("select[name='habitation3']").val(),
+            address:$("input[name='address']").val(),
+            goHainanTime:$(".come-time").data('date'),
+            temperature:$("input[name='temperature']").val(),
+            temperatureUrl:temperatureUrl,
+            health:$("select[name='health']").val(),
+            contactHubei:$("input[name='contactHubei']:checked").val()
+        }
         var params = {
             charNo:$("input[name='charNo']").val(),
             name:$("input[name='name']").val(),
             phone:$("input[name='phone']").val(),
             certType:$("select[name='certType']").val(),
+
+            healthStr:JSON.stringify([healthStr])
         }
         if(type == 'modify'){
             params.id = $("input[name='id']").val()
             url = "/member/linkMan/modify"
+        }else{
+            if(!$("input[name='isReal']").is(':checked')){
+                return new ErrLayer({
+                    message:"未保证以上所填写内容真实有效"
+                });
+            }
         }
         if (validator.form()){
             $.post(url, params)
@@ -125,7 +149,6 @@ $(function (){
                             var ticketLinkMan = JSON.parse(sessionStorage.getItem("ticketLinkMan") || '{}')
                             ticketLinkMan[comefrom] = [linkMan]
                             // 缓存游玩人
-                            console.log(ticketLinkMan)
                             sessionStorage.setItem('ticketLinkMan',JSON.stringify(ticketLinkMan))
                         }
                         window.location.href = originalUrl || '/member/linkMan/list';
@@ -143,6 +166,221 @@ $(function (){
     //新增常用联系人
     $(".linkMan-btn .submit-btn").click(function(){
         addOrModifyLinkMan()
+    })
+
+
+    // 获取省市区
+    function getAddress(parentCode,cb){
+        $.get('/order/getAdress',{parentCode:parentCode||''})
+            .success(function (data) {
+                cb(data)
+            })
+            .error(function (err) {
+
+            });
+    }
+    getAddress('',function (data) {
+        data[0].data.map(function (item, index) {
+            // 如果是修改页面
+            var selected = ''
+            if($(".linkMan-modify-btn").length){
+                var origin = $(".come-from").data('origin')
+                var value = item.areaCode + ',' + item.areaName
+                if(origin == value){
+                    selected = 'selected'
+                }
+            }
+            var _o = '<option value="' + value + '" '+selected+'>' + item.areaName + '</option>';
+            if (index === 0) {
+                $('.come-from').html('<option value="">选择</option>' + _o);
+            } else {
+                $('.come-from').append(_o);
+            }
+        });
+    })
+    getAddress(460000,function (data){
+        data[0].data.map(function (item, index) {
+            // 如果是修改页面
+            var selected = ''
+            if($(".linkMan-modify-btn").length){
+                var habitation = $(".habitation").data('habitation')
+                var habitationArr = []
+                if(habitation){
+                    habitationArr = habitation.split("-")
+                }
+                var value = item.areaCode + ',' + item.areaName
+                if(habitationArr[1] == value){
+                    selected = 'selected'
+                }
+            }
+            var _o = '<option value="' + value + '"'+selected+'>' + item.areaName + '</option>';
+            if (index === 0) {
+                $('.city-select').html('<option value="">选择</option>' + _o);
+            } else {
+                $('.city-select').append(_o);
+            }
+            if($(".linkMan-modify-btn").length){
+                $('.city-select').trigger('change')
+            }
+        });
+
+    })
+
+    // 城市选择更改
+    $('.city-select').on('change', function () {
+        var parentCode = $('.city-select').val().split(',')[0]
+        getAddress(parentCode,function (data){
+            data[0].data.map(function (item, index) {
+                var selected = ''
+                if($(".linkMan-modify-btn").length){
+                    var habitation = $(".habitation").data('habitation')
+                    var habitationArr = []
+                    if(habitation){
+                        habitationArr = habitation.split("-")
+                    }
+                    var value = item.areaCode + ',' + item.areaName
+                    if(habitationArr[2] == value){
+                        selected = 'selected'
+                    }
+                }
+                var _o = '<option value="' + value + '" '+selected+'>' + item.areaName + '</option>';
+                if (index === 0) {
+                    $('.district-select').html('<option value="">选择</option>' + _o);
+                } else {
+                    $('.district-select').append(_o);
+                }
+            });
+
+        })
+    });
+    $("#calendar").calendar({
+        multipleMonth: 1,
+        monthTag:2,
+        multipleSelect: false,
+        click: function (dates, dom) {
+            $('#mask').hide()
+            $('#calendar').removeClass('show');
+            console.log(dates)
+            $(".come-time").data('date',dates[0]).html(dates[0])
+        }
+    });
+    $('#mask').click(function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+        $("#mask").hide()
+        if($("#calendar").length){
+            $("#calendar").removeClass('show');
+        }
+    })
+    $(".come-time").click(function (e) {
+        $("#mask").show()
+        $('#calendar').addClass('show');
+    })
+
+    var upload = {
+        init:function () {
+            $(".upload-btn").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if(temperatureUrl){
+                    return new ErrLayer({
+                        message:"只能上传一张图片"
+                    });
+                }
+                $(this).next().trigger("click")
+            })
+            $(".ipnut-file").change(function () {
+                var file = $(this).prop("files")[0];
+                var field = $(this).attr("name") || "image";
+                if(!file){
+                    return
+                }
+                if(upload.checkFileSize(file)){
+                    upload.readAndPreview($(this))
+                    upload.sendFiles().done(function (imgs) {
+                        if(!imgs){
+                            return new ErrLayer({
+                                message:"图片上传失败"
+                            });
+                        }
+                        // var imgsArr = []
+                        for(var i=0;i<imgs.length;i++){
+                            var url = imgs[i].prefix+imgs[i].url
+                            // imgsArr.push(url)
+                            temperatureUrl = url
+                        }
+                    })
+                }
+            })
+        },
+        files:{},
+        checkFileSize:function(file){
+            var checkRes = true
+            var fileSize = file.size/1024/1024
+            var maxFileSize = 10
+            if(fileSize>maxFileSize){
+                new ErrLayer({
+                    message: '您上传的身份证图片大小为'+fileSize.toFixed(2)+'M，请选择小于'+maxFileSize+'M的图片'
+                })
+                checkRes = false
+            }
+            return checkRes
+        },
+        readAndPreview: function ($ele) {
+            // 图片预览
+            var file = $ele.prop("files")[0];
+            var field = $(".preview-box img").length;
+            // 支持的图片类型（可自定义）
+            console.log(file)
+            if (true||/\.(jpe?g|png|gif|bmp|tif|jp2|tiff|exif|wbmp|mbm)$/i.test(file.name)) {
+                var reader = new FileReader();
+                reader.addEventListener("load", function () {
+                    var deleteHtml='<div class="deleteImg"><image src="'+this.result+'"></image><span>删除</span></div>';
+                    $ele.parent().find(".upload-btn").before(deleteHtml);
+                }, false);
+                reader.readAsDataURL(file);
+                // 上传图片
+                upload.files[field] = file
+            }else{
+                new ErrLayer({
+                    message:"请选择正确的图片格式"
+                });
+            }
+
+        },
+        sendFiles:function () {
+            if(Object.keys(upload.files).length<=0){
+                new ErrLayer({
+                    message:"请先上传凭证"
+                });
+                return false
+            }
+            // 上传图片
+            var formData = new FormData()
+            for(var key in upload.files){
+                formData.append(key, upload.files[key])
+            }
+            return $.ajax({
+                url: '/upload/filesList',
+                type: 'post',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: "JSON",
+            });
+        },
+        sendSuccess:function (res) {
+            //图片上传
+        }
+    }
+    upload.init()
+    $(".preview-box").on('click','.deleteImg span',function(){
+        var index  = $(this).parent().index();
+        $(this).parent().remove();
+        $(".ipnut-file").val('');
+        temperatureUrl = ''
+        delete upload.files[index]
     })
 
     //修改常用联系人

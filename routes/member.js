@@ -363,6 +363,7 @@ exports.mainRouter = function (router,common){
         common.commonRequest({
             url:[{
                 urlArr:['member','linkMan','add'],
+                // urlArr:['member','linkMan','saveHealth'],
                 parameter: req.body
             }],
             isAjax: true,
@@ -380,6 +381,7 @@ exports.mainRouter = function (router,common){
         common.commonRequest({
             url:[{
                 urlArr:['member','linkMan','detail'],
+                // urlArr:['member','linkMan','getInfoHealth'],
                 parameter:{
                     id:req.query.id
                 }

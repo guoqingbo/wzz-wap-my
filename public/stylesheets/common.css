@@ -1785,6 +1785,7 @@ footer a.check-all {
 #calendar.show{
     display: block;
     top: 4rem;
+    width: 100%;
 }
 /*#calendar.show, #ticketcalendar.show {
     left: 0;

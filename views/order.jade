@@ -164,6 +164,7 @@ block content
                 .order-item
                     //-   value=userInfo ? userInfo.realName || userInfo.name : ''
                     input.order-text(type='text', name='linkMans', value='', placeholder='请填写姓名')
+                    input.order-text(type='hide', name='linkManId', value='')
                     a(href="javascript:;").linkManBtn#linkManBtn 选择#{linkName}
             li
                 label.lab-title(for='') 手机号

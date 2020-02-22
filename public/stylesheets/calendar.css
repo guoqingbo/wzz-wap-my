@@ -4,7 +4,9 @@
     line-height: 20px; }
 
 .calendar_head { position: relative; }
-.calendar_head .prev, .calendar_head .next { position: absolute; top: 0; left: 0; display: none; }
+.calendar_head .prev, .calendar_head .next { position: absolute; top: 0; left: 0;
+    /*display: none; */
+}
 .calendar_head .next { left: auto; right: 0; }
 .calendar_head span { margin: 0 10px; cursor: pointer; }
 .calendar_week{ background: #3b76dd; height:40px; line-height: 40px; color: #fff; font-size: 16px; }

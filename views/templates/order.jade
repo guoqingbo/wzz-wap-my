@@ -58,9 +58,15 @@ mixin linkManList(data)
                     .linkMan-center
                         p 手机号：#{item.phoneNo}
                         p 证件号：#{item.cardNo}
-                    .linkMan-check
-                        span.checkspan(class=data.linkManChecked.indexOf(item.id)>-1?'checked':'')
-                            i.icon-checkmark
+                    if item.isHealth == 'T'
+                        .linkMan-check
+                            span.checkspan(class=data.linkManChecked.indexOf(item.id)>-1?'checked':'')
+                                i.icon-checkmark
+                    else
+                        span
+                            p 不能
+                            p 购票
+
 
 // 游玩人
 mixin ticketLinkMan(data)

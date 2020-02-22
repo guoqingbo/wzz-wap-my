@@ -1,8 +1,10 @@
 extends ../../layout
 
 block stylesheets
+    link(rel="stylesheet", href="/stylesheets/calendar.css")
     link(rel="stylesheet", href="/stylesheets/order.css")
 block javascripts
+    script(type='text/javascript', src='/javascripts/jquery.calendar.js')
     script(type='text/javascript', src='/javascripts/validate/jquery.validate.min.js')
     script(type='text/javascript', src='/javascripts/validate/messages_zh.min.js')
     script(type='text/javascript', src='/javascripts/validate/additional-methods.js')
@@ -34,9 +36,59 @@ block content
                         input(type="file" name="file" capture="camera" accept="image/*" onchange="imgUpload(this)").hide_file
                         i.font-icon.icon-iconfont-camera(style='margin-right:.1rem')
                         ="拍照识别"
+            li
+                label.lab-title 来源
+                .order-item
+                    select.come-from(name='origin' data-origin=data[0].data.origin)
+            li
+                label.lab-title 在琼居住地
+                .order-item.habitation(data-habitation=data[0].data.habitation)
+                    select.select-addr.province-select(name='habitation1')
+                        option(value="460000,海南省") 海南省
+                    select.select-addr.city-select(name='habitation2')
+                    select.select-addr.district-select(name='habitation3')
+                        option(value="") 请选择
+            li
+                label.lab-title 详细地址
+                .order-item
+                    input.order-text(type='text', name='address', placeholder='请填详细地址' value=data[0].data.address)
+            li
+                label.lab-title 入琼时间
+                .order-item
+                    span.come-time(data-date=data[0].data.goHainanTime) #{data[0].data.goHainanTime||'请输入琼时间'}
+            li
+                label.lab-title 体温测试
+                .order-item
+                    input.order-text(type='text', name='temperature', placeholder='请输入体温测试' value=data[0].data.temperature)
+            li
+                label.lab-title 体温凭证
+                .order-item
+                    .preview-box
+                        if data[0].data.temperatureUrl
+                            .deleteImg
+                                img.temperatureUrl(src=data[0].data.temperatureUrl)
+                                span 删除
+                        button.upload-btn
+                            i.iconfont.icon-iconfont-jia
+                        input.ipnut-file(type="file" name="image" accept="image/*" hidden)
+            li
+                label.lab-title 目前健康状况
+                .order-item
+                    select(name='health')
+                        option(value='1' selected=data[0].data.health == "1") 健康
+                        option(value='2' selected=data[0].data.health == "2") 发烧咳嗽等症状
+                        option(value='3' selected=data[0].data.health == "3") 其他
+            li
+                p(style='color:#000') 15天内，是否在湖北停留或路过，或是否与确诊或疑似病例有过接触。
+                input(type='radio' name='contactHubei' value='T' checked=data[0].data.contactHubei == "T")
+                span 是
+                input(type='radio' name='contactHubei' value='F' checked=data[0].data.contactHubei == "F")
+                span 否
         .member-handle.linkMan-modify-btn
             a.btn(href='javascript:;') 保存
     .mask#mask
     .tips
         p
         a(href="javascript:;").queding 确定
+    // 日历选择
+    #calendar.calendar
